@@ -120,7 +120,9 @@ class PopulateWorkout { // TODO: will have to make this sotrable so that we can 
     
     /// Returns a struct outlining what the user should currently be doing.
     func current() -> Activity {
-        return Activity(title: "", subtitle: "", amount: "", details: "", buttonName: "", showStartButton: false, color: "black")
+        // TODO: Probably will need to get some sort of iterator object from the subtype, or maybe track an index and pass it into subtype
+        // can't we just use stand-alone functions for all of these?
+        return Activity(title: "", subtitle: "", amount: "", details: "", buttonName: "", showStartButton: false, color: nil)
     }
     
     /// How long for the user to rest after completing whatever current told him to do.
