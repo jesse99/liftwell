@@ -26,6 +26,8 @@
 		37286863216A6C42005F6FD0 /* RepsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286862216A6C42005F6FD0 /* RepsParser.swift */; };
 		37286865216A83A5005F6FD0 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286864216A83A5005F6FD0 /* Either.swift */; };
 		37286867216D90DD005F6FD0 /* PopulateWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286866216D90DD005F6FD0 /* PopulateWorkout.swift */; };
+		37EFD6D22172C54500F60880 /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D12172C54500F60880 /* Weight.swift */; };
+		37EFD6D42172C60A00F60880 /* WeightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D32172C60A00F60880 /* WeightsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		37286862216A6C42005F6FD0 /* RepsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsParser.swift; sourceTree = "<group>"; };
 		37286864216A83A5005F6FD0 /* Either.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
 		37286866216D90DD005F6FD0 /* PopulateWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateWorkout.swift; sourceTree = "<group>"; };
+		37EFD6D12172C54500F60880 /* Weight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weight.swift; sourceTree = "<group>"; };
+		37EFD6D32172C60A00F60880 /* WeightsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,7 @@
 				3728686021699CC7005F6FD0 /* SubTypes.swift */,
 				3728684721630030005F6FD0 /* Tabs */,
 				3728685E21699C17005F6FD0 /* Types.swift */,
+				37EFD6D12172C54500F60880 /* Weight.swift */,
 				3728682E216259B0005F6FD0 /* Assets.xcassets */,
 				37286833216259B0005F6FD0 /* Info.plist */,
 				37286830216259B0005F6FD0 /* LaunchScreen.storyboard */,
@@ -129,6 +134,7 @@
 			children = (
 				3728683C216259B0005F6FD0 /* liftwellTests.swift */,
 				3707B8D42172C1D200DF43B2 /* ParserTests.swift */,
+				37EFD6D32172C60A00F60880 /* WeightsTests.swift */,
 				3728683E216259B0005F6FD0 /* Info.plist */,
 			);
 			path = liftwellTests;
@@ -265,6 +271,7 @@
 				3728684B21631202005F6FD0 /* Store.swift in Sources */,
 				37286849216311D3005F6FD0 /* Program.swift in Sources */,
 				3728682A216259AE005F6FD0 /* ProgramsTabController.swift in Sources */,
+				37EFD6D22172C54500F60880 /* Weight.swift in Sources */,
 				37286867216D90DD005F6FD0 /* PopulateWorkout.swift in Sources */,
 				3728685421644C0C005F6FD0 /* Apparatus.swift in Sources */,
 				37286826216259AE005F6FD0 /* AppDelegate.swift in Sources */,
@@ -283,6 +290,7 @@
 			files = (
 				3707B8D52172C1D200DF43B2 /* ParserTests.swift in Sources */,
 				3728683D216259B0005F6FD0 /* liftwellTests.swift in Sources */,
+				37EFD6D42172C60A00F60880 /* WeightsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
