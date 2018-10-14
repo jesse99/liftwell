@@ -76,7 +76,7 @@ class Parser {
         return .right(result)
     }
 
-    // Reps := Int ('-' Int)? '+'? ('@' Int '%')? 'R'?
+    // Reps := Int ('-' Int)? '+'? ('@' Int '%')? 'R'? 
     private func parseReps() -> Either<Parser.Error, Reps> {
         // Int
         let minOffset = lexer.tokenOffset()
