@@ -9,10 +9,10 @@ struct Reps: Storable {
     let amrap: Bool
     let rest: Bool
     
-    init(reps: Int, amrap: Bool = false, rest: Bool = false) {
+    init(reps: Int, percent: Double = 1.0, amrap: Bool = false, rest: Bool = false) {
         self.minReps = reps
         self.maxReps = reps
-        self.percent = 1.0
+        self.percent = percent
         self.amrap = amrap
         self.rest = rest
     }
@@ -64,6 +64,53 @@ struct Reps: Storable {
     }
 }
 
+fileprivate func repsErrors(_ sets: [Reps]) -> [String] {
+    var problems: [String] = []
+    var minReps: Int? = nil
+    var maxReps: Int? = nil
+    for r in sets {
+        problems += r.errors()
+        
+        if r.minReps < r.maxReps {
+            if minReps == nil {
+                minReps = r.minReps
+                maxReps = r.maxReps
+            } else {
+                if minReps! != r.minReps || maxReps! != r.maxReps {
+                    problems += ["Rep ranges should be the same."]
+                }
+            }
+        }
+    }
+    return problems
+}
+
+/// "3x5-10 @ 100 lbs".
+func repsSublabel(_ apparatus: Apparatus?, _ sets: [Reps], _ targetWeight: Double, _ currentReps: Int) -> String { // not fileprivate so we can use it with unit test
+    if let max = sets.max(by: {(lhs, rhs) -> Bool in lhs.percent < rhs.percent}) {
+        let worksets = sets.filter({(reps) -> Bool in reps.percent == max.percent})
+        let labels = worksets.map({ (reps) -> String in
+            if reps.minReps < reps.maxReps {
+                return "\(currentReps)-\(reps.maxReps)"
+            } else {
+                return "\(reps.minReps)"
+            }
+        })
+        if let first = labels.first, labels.all({(label) -> Bool in label == first}) {
+            var weight = ""
+            if targetWeight > 0.0 {
+                if let apparatus = apparatus {
+                    weight = " @ \(Weight(targetWeight, apparatus).closest().text)"
+                } else {
+                    weight = " @ \(Weight.friendlyUnitsStr(targetWeight))"
+                }
+            }
+            return "\(labels.count)x\(first)\(weight)"
+        }
+    }
+    return ""
+}
+
 class CyclicRepsSubtype: Storable {
     init(cycles: [[Reps]], reps: Int, restSecs: Int, advance: String?, advance2: String?) {
         self.cycles = cycles
@@ -111,16 +158,13 @@ class CyclicRepsSubtype: Storable {
     public func errors() -> [String] {
         var problems: [String] = []
         for cycle in cycles {
-            for r in cycle {
-                problems += r.errors()
-            }
+            problems += repsErrors(cycle)
         }
         return problems
     }
     
-    /// "3x5-10 @ 100 lbs".
-    func sublabel() -> String {
-        return ""
+    func sublabel(_ apparatus: Apparatus) -> String {
+        return repsSublabel(apparatus, cycles[cycleIndex], weight, reps)
     }
 
     var cycles: [[Reps]]
@@ -130,7 +174,7 @@ class CyclicRepsSubtype: Storable {
     var weight: Double         // starts out at 0.0
     var cycleIndex: Int
     var restSecs: Int
-    var reps: Int              // can be less than minReps
+    var reps: Int           // this only applies when minReps < maxReps, also this can be less than minReps
 }
 
 // As many reps as possible for each set.
@@ -168,6 +212,10 @@ class MaxRepsSubType: Storable {
             problems += ["subtype.goalReps should be greater than zero."]
         }
         return problems
+    }
+    
+    func sublabel() -> String {
+        return "\(numSets) sets"    // TODO: use last result to compute number of reps, include weight
     }
     
     var numSets: Int
@@ -212,45 +260,11 @@ class RepsSubType: Storable {
     }
     
     public func errors() -> [String] {
-        var problems: [String] = []
-        
-        var minReps: Int? = nil
-        var maxReps: Int? = nil
-        for r in sets {
-            problems += r.errors()
-            
-            if r.minReps < r.maxReps {
-                if minReps == nil {
-                    minReps = r.minReps
-                    maxReps = r.maxReps
-                } else {
-                    if minReps! != r.minReps || maxReps! != r.maxReps {
-                        problems += ["Rep ranges should be the same."]
-                    }
-                }
-            }
-        }
-        return problems
+        return repsErrors(sets)
     }
     
-    /// "3x5-10 @ 0 lbs".       TODO: probably should have a test for this
-    func sublabel() -> String {
-        if let max = sets.max(by: {(lhs, rhs) -> Bool in lhs.percent < rhs.percent}) {
-            let worksets = sets.filter({(reps) -> Bool in reps.percent == max.percent})
-            let labels = worksets.map({ (reps) -> String in
-                if reps.minReps < reps.maxReps {
-                    return "\(self.reps)-\(reps.maxReps)"
-                } else {
-                    return "\(reps.minReps)"
-                }
-            })
-            if let first = labels.first, labels.all({(label) -> Bool in label == first}) {
-                return "\(labels.count)x\(first)"
-            }
-        }
-        return ""
-                // if variable reps then use reps-maxReps
-            // else use minReps
+    func sublabel(_ apparatus: Apparatus?) -> String {
+        return repsSublabel(apparatus, sets, weight, reps)
     }
 
     var sets: [Reps]
@@ -305,6 +319,11 @@ class TimedSubType: Storable {
             problems += ["subtype.numSets should be greater than zero."]
         }
         return problems
+    }
+    
+    func sublabel() -> String {
+        let weightStr = weight > 0.0 ? " @ \(Weight.friendlyUnitsStr(weight, plural: true))" : ""
+        return "\(numSets)x\(secsToStr(currentTime))\(weightStr)"
     }
     
     var numSets: Int

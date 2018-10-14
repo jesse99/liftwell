@@ -95,30 +95,26 @@ class PopulateWorkout { // TODO: will have to make this sotrable so that we can 
         switch exercise.type {
         case .body(let type):
             switch type.subtype {
-            case .maxReps(let subtype): return "\(subtype.numSets) sets"   // TODO: need to use latest history value to figure out total reps
-            case .reps(let subtype):
-                // figure out which sets use the maximum percent
-                // if variable reps then use reps-maxReps
-                // else use minReps
-                return "\(subtype.sets.count) sets"
-            case .timed(let subtype): return "\(subtype.numSets) sets"
+            case .maxReps(let subtype): return subtype.sublabel()
+            case .reps(let subtype): return subtype.sublabel(nil)
+            case .timed(let subtype): return subtype.sublabel()
             }
         case .weights(let type):
             switch type.subtype {
-            case .cyclic(let subtype): return "\(subtype.reps) reps"
-            case .reps(let subtype): return "\(subtype.reps) reps"
-            case .timed(let subtype): return "\(subtype.numSets) sets"
+            case .cyclic(let subtype): return subtype.sublabel(type.apparatus)
+            case .reps(let subtype): return subtype.sublabel(type.apparatus)
+            case .timed(let subtype): return subtype.sublabel()
             }
         }
     }
     
     /// "Previous was 125 lbs"
     func prevLabel() -> (String, UIColor) {
-        return ("", UIColor.black)
+        return ("", UIColor.black)  // TODO: implement
     }
     
     /// "+5 lbs, same x3, +5 lbs x4"
-    func historyLabel() -> String {
+    func historyLabel() -> String {  // TODO: implement
         return ""
     }
     
@@ -129,7 +125,20 @@ class PopulateWorkout { // TODO: will have to make this sotrable so that we can 
     
     /// How long for the user to rest after completing whatever current told him to do.
     func restSecs() -> RestTime {
-        return RestTime(autoStart: true, secs: 60)
+        switch exercise.type {
+        case .body(let type):
+            switch type.subtype {
+            case .maxReps(let subtype): return RestTime(autoStart: true, secs: subtype.restSecs)
+            case .reps(let subtype): return RestTime(autoStart: true, secs: subtype.restSecs)
+            case .timed(let subtype): return RestTime(autoStart: true, secs: subtype.restSecs)
+            }
+        case .weights(let type):
+            switch type.subtype {
+            case .cyclic(let subtype): return RestTime(autoStart: true, secs: subtype.restSecs)
+            case .reps(let subtype): return RestTime(autoStart: true, secs: subtype.restSecs)
+            case .timed(let subtype): return RestTime(autoStart: true, secs: subtype.restSecs)
+            }
+        }
     }
     
     /// Which sound to play when done resting. Usually kSystemSoundID_Vibrate.

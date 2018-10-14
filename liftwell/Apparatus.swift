@@ -159,6 +159,14 @@ func zeroMachine() -> MachineRange {
     return MachineRange(min: 0, max: 0, step: 0)
 }
 
+func secsToStr(_ secs: Int) -> String {
+    if secs <= 60 {
+        return "\(secs)s"
+    } else {
+        return String(format: "%0.1fm", arguments: [Double(secs)/60.0])
+    }
+}
+
 extension Apparatus: Storable {
     public init(from store: Store) {
         let tname = store.getStr("type")
