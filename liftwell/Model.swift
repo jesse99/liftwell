@@ -72,7 +72,7 @@ enum PopulateState {
 }
 
 /// Used to populate the workout view.
-class PopulateWorkout { // TODO: will have to make this sotrable so that we can resume it after an exit
+class Model { // TODO: will have to make this storable so that we can resume it after an exit
     init(_ exercise: Exercise) {
         self.exercise = exercise
     }
