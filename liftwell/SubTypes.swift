@@ -2,7 +2,7 @@
 //  Copyright © 2018 MushinApps. All rights reserved.
 import Foundation
 
-struct Reps: Storable {
+struct Reps: Storable, CustomStringConvertible {
     let minReps: Int
     let maxReps: Int
     let percent: Double
@@ -49,7 +49,7 @@ struct Reps: Storable {
         store.addBool("rest", rest)
     }
     
-    public func errors() -> [String] {
+    func errors() -> [String] {
         var problems: [String] = []
         if minReps > maxReps {
             problems += ["reps.minReps is greater than maxReps."]
@@ -61,6 +61,20 @@ struct Reps: Storable {
             problems += ["reps.percent is greater than one."]
         }
         return problems
+    }
+
+    var description: String {
+        get {
+            if minReps < maxReps {
+                return amrap ? "\(minReps)-\(maxReps)+ reps" : "\(minReps)-\(maxReps) reps"
+            } else {
+                if minReps == 1 {
+                    return amrap ? "1+ reps" : "1 rep"
+                } else {
+                    return amrap ? "\(minReps)+ reps" : "\(minReps) reps"
+                }
+            }
+        }
     }
 }
 
@@ -86,7 +100,7 @@ fileprivate func repsErrors(_ sets: [Reps]) -> [String] {
 }
 
 /// "3x5-10 @ 100 lbs".
-func repsSublabel(_ apparatus: Apparatus?, _ sets: [Reps], _ targetWeight: Double, _ currentReps: Int) -> String { // not fileprivate so we can use it with unit test
+func setsSublabel(_ apparatus: Apparatus?, _ sets: [Reps], _ targetWeight: Double, _ currentReps: Int) -> String { // not fileprivate so we can use it with unit test
     if let max = sets.max(by: {(lhs, rhs) -> Bool in lhs.percent < rhs.percent}) {
         let worksets = sets.filter({(reps) -> Bool in reps.percent == max.percent})
         let labels = worksets.map({ (reps) -> String in
@@ -109,6 +123,60 @@ func repsSublabel(_ apparatus: Apparatus?, _ sets: [Reps], _ targetWeight: Doubl
         }
     }
     return ""
+}
+
+func setsActivities(_ sets: [Reps], _ weight: Double, _ apparatus: Apparatus) -> [Activity] {
+    var result: [Activity] = []
+    if let max = sets.max(by: {(lhs, rhs) -> Bool in lhs.percent < rhs.percent}) {
+        var warmups: [Reps] = []
+        var worksets: [Reps] = []
+        var backoff: [Reps] = []
+        for reps in sets {
+            if reps.percent == max.percent {
+                worksets.append(reps)
+            } else if reps.percent < max.percent {
+                if worksets.isEmpty {
+                    warmups.append(reps)
+                } else {
+                    backoff.append(reps)
+                }
+            }
+        }
+        for (i, reps) in warmups.enumerated() {
+            let w = Weight(reps.percent*weight, apparatus).closest(below: weight)
+            result.append(Activity(
+                title: "Warmup \(i+1) of \(warmups.count)",
+                subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
+                amount: "\(reps) @ \(w.text)",
+                details: w.plates,
+                buttonName: "Next",
+                showStartButton: true,
+                color: nil))
+        }
+        for (i, reps) in worksets.enumerated() {
+            let w = Weight(reps.percent*weight, apparatus).closest()
+            result.append(Activity(
+                title: "Workset \(i+1) of \(worksets.count)",
+                subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
+                amount: "\(reps) @ \(w.text)",
+                details: w.plates,
+                buttonName: i+1 == worksets.count && backoff.isEmpty ? "Done" : "Next",
+                showStartButton: true,
+                color: nil))
+        }
+        for (i, reps) in backoff.enumerated() {
+            let w = Weight(reps.percent*weight, apparatus).closest(below: weight)
+            result.append(Activity(
+                title: "Backoff \(i+1) of \(backoff.count)",
+                subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
+                amount: "\(reps) @ \(w.text)",
+                details: w.plates,
+                buttonName: i+1 == backoff.count ? "Done" : "Next",
+                showStartButton: true,
+                color: nil))
+        }
+    }
+    return result
 }
 
 class CyclicRepsSubtype: Storable {
@@ -164,7 +232,11 @@ class CyclicRepsSubtype: Storable {
     }
     
     func sublabel(_ apparatus: Apparatus) -> String {
-        return repsSublabel(apparatus, cycles[cycleIndex], weight, reps)
+        return setsSublabel(apparatus, cycles[cycleIndex], weight, reps)
+    }
+    
+    func activities(_ apparatus: Apparatus) -> [Activity] {
+        return setsActivities(cycles[cycleIndex], weight, apparatus)
     }
 
     var cycles: [[Reps]]
@@ -218,6 +290,24 @@ class MaxRepsSubType: Storable {
         return "\(numSets) sets"    // TODO: use last result to compute number of reps, include weight
     }
     
+    // TODO: add a reps field
+    // use that for activities
+    func activities() -> [Activity] {
+        var result: [Activity] = []
+        for i in 1...numSets {
+            let w = weight > 0.0 ? Weight.friendlyUnitsStr(weight) : ""
+            result.append(Activity(
+                title: "Set \(i+1) of \(numSets)",
+                subtitle: "",
+                amount: w,  // TODO: use history to figure how what to say here
+                details: "",
+                buttonName: i+1 == numSets ? "Done" : "Next",
+                showStartButton: true,
+                color: nil))
+        }
+        return result
+    }
+    
     var numSets: Int
     var goalReps: Int       // typically user would then switch to a harder version of the exercise or add weights
     var restAtEnd: Bool
@@ -264,9 +354,13 @@ class RepsSubType: Storable {
     }
     
     func sublabel(_ apparatus: Apparatus?) -> String {
-        return repsSublabel(apparatus, sets, weight, reps)
+        return setsSublabel(apparatus, sets, weight, reps)
     }
 
+    func activities(_ apparatus: Apparatus) -> [Activity] {
+        return setsActivities(sets, weight, apparatus)
+    }
+    
     var sets: [Reps]
     var advance: String?    // prompt that allows the user to advance reps or weight
     var advance2: String?   // allows the user to advance by twice as much
@@ -324,6 +418,22 @@ class TimedSubType: Storable {
     func sublabel() -> String {
         let weightStr = weight > 0.0 ? " @ \(Weight.friendlyUnitsStr(weight, plural: true))" : ""
         return "\(numSets)x\(secsToStr(currentTime))\(weightStr)"
+    }
+    
+    func activities() -> [Activity] {
+        var result: [Activity] = []
+        for i in 1...numSets {
+            let w = weight > 0.0 ? Weight.friendlyUnitsStr(weight) : ""
+            result.append(Activity(
+                title: "Set \(i+1) of \(numSets)",
+                subtitle: "",
+                amount: w,  // TODO: use history to figure how what to say here
+                details: "",
+                buttonName: "",
+                showStartButton: true,
+                color: nil))
+        }
+        return result
     }
     
     var numSets: Int

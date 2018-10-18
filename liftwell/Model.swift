@@ -79,7 +79,7 @@ class Model { // TODO: will have to make this storable so that we can resume it 
     
     /// If the exercise requires another exercise to be executed then a new PopulateWorkout will be returned
     /// and state will be set to blocked.
-    func start() -> PopulateWorkout? {
+    func start() -> Model? {
         return nil
     }
     
@@ -120,8 +120,7 @@ class Model { // TODO: will have to make this storable so that we can resume it 
     
     /// Returns a struct outlining what the user should currently be doing.
     func current() -> Activity {
-        // TODO: Probably will need to get some sort of iterator object from the subtype, or maybe track an index and pass it into subtype
-        // can't we just use stand-alone functions for all of these?
+        // TODO: get a list of Activity from subtype
         return Activity(title: "", subtitle: "", amount: "", details: "", buttonName: "", showStartButton: false, color: nil)
     }
     

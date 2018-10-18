@@ -240,10 +240,10 @@ class Program: Storable {
         return workouts.first {$0.name == name}
     }
     
-//    func findExercise(_ name: String) -> Exercise? {
-//        return exercises.first {$0.name == name}
-//    }
-//
+    func findExercise(_ name: String) -> Exercise? {
+        return exercises.first {$0.name == name}
+    }
+
 //    func setExercise(_ exercise: Exercise) {
 //        if let index = exercises.index(where: {$0.name == exercise.name}) {
 //            exercises[index] = exercise

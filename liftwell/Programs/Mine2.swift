@@ -63,8 +63,9 @@ fileprivate func barbell(_ name: String, _ formalName: String, _ reps: String, s
 
 func Mine2() -> Program {
     let dbReps = "5@50% 5@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R"
-    let squatReps = "5@50% 5@50% 3@70% 1@90% 4-8@100% R 4-18@100% R 4-8@100% R"
+    let squatReps = "5@50% 3@70% 1@90% 4-8@100% R 4-18@100% R 4-8@100% R"
     let deadReps = "5@0% 5@0% 5@60% 5@70% 3@80% 1@90% 5@100% R"
+    let extReps = "5@50% 3@75% 6-12@100% R 6-12@100% R 6-12@100%"
     let twoReps = "1@100% R 1@100%"
     let threeReps = "1@100% R 1@100% R 1@100%"
 
@@ -74,17 +75,19 @@ func Mine2() -> Program {
         dumbbell("Split Squat",    "Dumbbell Single Leg Split Squat", squatReps, startReps: 4, restMins: 4.0),
         dumbbell("Dumbbell Flyes", "Dumbbell Flyes", dbReps, startReps: 5, restMins: 3.0),
         barbell("Deadlift",        "Deadlift", deadReps, startReps: 5, restMins: 4.0),
-        
+
         // Light
-        dumbbell("Dumbbell OHP",  "Dumbbell Shoulder Press", dbReps, startReps: 5, restMins: 3.5),
-        bodyweight("Chinups",     "Chinup", numSets: 4, goalReps: 25, restMins: 3.5),
-        dumbbell("Farmer's Walk", "Farmer's Walk", twoReps, startReps: 1, restMins: 3.0),
-        barbell("Static Hold",    "Static Hold", threeReps, startReps: 1, restMins: 3.0),
-        
+        dumbbell("Dumbbell OHP",    "Dumbbell Shoulder Press", dbReps, startReps: 5, restMins: 3.5),
+        bodyweight("Chinups",       "Chinup", numSets: 4, goalReps: 25, restMins: 3.5),
+        dumbbell("Farmer's Walk",   "Farmer's Walk", twoReps, startReps: 1, restMins: 3.0),
+        barbell("Static Hold",      "Static Hold", threeReps, startReps: 1, restMins: 3.0),
+        dumbbell("Back Extensions", "Back Extensions", extReps, startReps: 6, restMins: 3.0),
+
         // Medium
         // Dumbbell Bench
         // Split Squat
         // Chinups
+        bodyweight("Dips",       "Dips", numSets: 3, goalReps: 30, restMins: 3.5),
         
         bodyweight("Foam Rolling",            "IT-Band Foam Roll",         1, by: 15),
         bodyweight("Shoulder Dislocates",     "Shoulder Dislocate",        1, by: 12),
@@ -99,8 +102,8 @@ func Mine2() -> Program {
     ]
     
     let workouts = [
-        Workout("Light", ["Dumbbell OHP", "Chinups", "Farmer's Walk", "Static Hold"], scheduled: true, optional: ["Static Hold"]),
-        Workout("Medium", ["Dumbbell Bench", "Split Squat", "Chinups", "Farmer's Walk", "Static Hold"], scheduled: true, optional: ["Static Hold"]),
+        Workout("Light", ["Dumbbell OHP", "Back Extensions", "Chinups", "Farmer's Walk", "Static Hold"], scheduled: true, optional: ["Static Hold", "Back Extensions"]),
+        Workout("Medium", ["Dumbbell Bench", "Split Squat", "Chinups", "Farmer's Walk", "Static Hold", "Dips"], scheduled: true, optional: ["Static Hold", "Dips"]),
         Workout("Heavy", ["Split Squat", "Dumbbell Bench", "Deadlift", "Dumbbell Flyes"], scheduled: true),
         
         Workout("Mobility", ["Foam Rolling", "Shoulder Dislocates", "Bent-knee Iron Cross", "Roll-over into V-sit", "Rocking Frog Stretch", "Fire Hydrant Hip Circle", "Mountain Climber", "Cossack Squat", "Piriformis Stretch", "Hip Flexor Stretch"], scheduled: false),

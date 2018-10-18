@@ -103,15 +103,3 @@ class Exercise: Storable {
     }
 }
 
-internal func repsStr(_ reps: Int, amrap: Bool = false) -> String {
-    if amrap {
-        return "\(reps)+ reps"
-        
-    } else {
-        if reps == 1 {
-            return "1 rep"
-        } else {
-            return "\(reps) reps"
-        }
-    }
-}

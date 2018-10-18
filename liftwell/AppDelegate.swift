@@ -52,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     var window: UIWindow?
+    let program = Mine2()
 }
 
 func assert(_ predicate: Bool, _ message: String) {

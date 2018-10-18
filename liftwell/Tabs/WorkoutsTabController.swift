@@ -45,7 +45,7 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         //dismissTooltip()  // TODO
         statusLabel.text = "Worked out 1000 times over six months."
-//        statusLabel.text = WorkoutsTabController.getWorkoutSummary()
+        //        statusLabel.text = WorkoutsTabController.getWorkoutSummary()  // TODO: add a real workout summary
         tableView.reloadData()
     }
     
@@ -111,20 +111,19 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-//        let app = UIApplication.shared.delegate as! AppDelegate
-//        return app.program.workouts.count
+        let app = UIApplication.shared.delegate as! AppDelegate
+        return app.program.workouts.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt path: IndexPath) {
-//        let index = path.item
-//        let app = UIApplication.shared.delegate as! AppDelegate
-//        let workout = app.program.workouts[index]
-//
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let view = storyboard.instantiateViewController(withIdentifier: "WorkoutID") as! WorkoutController
-//        view.initialize(workout, "Workouts")
-//        present(view, animated: true, completion: nil)
+        let index = path.item
+        let app = UIApplication.shared.delegate as! AppDelegate
+        let workout = app.program.workouts[index]
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let view = storyboard.instantiateViewController(withIdentifier: "WorkoutID") as! WorkoutController
+        view.initialize(workout, "Workouts")
+        present(view, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt path: IndexPath) -> UITableViewCell {
@@ -132,23 +131,10 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
         cell.backgroundColor = tableView.backgroundColor
         
         let index = path.item
-        if index == 0 {
-            cell.textLabel!.text = "Light"
-            cell.detailTextLabel!.text = "in progress"
-        } else if index == 1 {
-            cell.textLabel!.text = "Medium"
-            cell.detailTextLabel!.text = ""
-        } else {
-            cell.textLabel!.text = "Heavy"
-            cell.detailTextLabel!.text = ""
-        }
+        let app = UIApplication.shared.delegate as! AppDelegate
+        let workout = app.program.workouts[index]
+        cell.textLabel!.text = workout.name
 
-        
-//        let index = path.item
-//        let app = UIApplication.shared.delegate as! AppDelegate
-//        let workout = app.program.workouts[index]
-//        cell.textLabel!.text = workout.name
-//
 //        if !hasActiveExercise(workout) {
 //            cell.detailTextLabel!.text = "inactive"
 //            //        } else if allCardio(workout) { // TODO
@@ -159,7 +145,7 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
 //            cell.detailTextLabel!.text = ""
 //        }
 //
-//        let todays = findTodaysWorkouts()
+        //        let todays = findTodaysWorkouts() // TODO: highlight the upcoming workout
 //        if todays.contains(index) {
 //            // Highlight any workouts the user is currently performing (can be multiple if he is switching between
 //            // something like mobility and a lifting workout).
