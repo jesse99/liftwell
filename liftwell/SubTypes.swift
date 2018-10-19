@@ -2,183 +2,6 @@
 //  Copyright © 2018 MushinApps. All rights reserved.
 import Foundation
 
-struct Reps: Storable, CustomStringConvertible {
-    let minReps: Int
-    let maxReps: Int
-    let percent: Double
-    let amrap: Bool
-    let rest: Bool
-    
-    init(reps: Int, percent: Double = 1.0, amrap: Bool = false, rest: Bool = false) {
-        self.minReps = reps
-        self.maxReps = reps
-        self.percent = percent
-        self.amrap = amrap
-        self.rest = rest
-    }
-
-    init(minReps: Int, maxReps: Int, amrap: Bool = false, rest: Bool = false) {
-        self.minReps = minReps
-        self.maxReps = maxReps
-        self.percent = 1.0
-        self.amrap = amrap
-        self.rest = rest
-    }
-    
-    init(minReps: Int, maxReps: Int, percent: Double, amrap: Bool = false, rest: Bool = false) {
-        self.minReps = minReps
-        self.maxReps = maxReps
-        self.percent = percent
-        self.amrap = amrap
-        self.rest = rest
-    }
-    
-    init(from store: Store) {
-        self.minReps = store.getInt("minReps")
-        self.maxReps = store.getInt("maxReps")
-        self.percent = store.getDbl("percent")
-        self.amrap = store.getBool("amrap")
-        self.rest = store.getBool("rest")
-    }
-    
-    func save(_ store: Store) {
-        store.addInt("minReps", minReps)
-        store.addInt("maxReps", maxReps)
-        store.addDbl("percent", percent)
-        store.addBool("amrap", amrap)
-        store.addBool("rest", rest)
-    }
-    
-    func errors() -> [String] {
-        var problems: [String] = []
-        if minReps > maxReps {
-            problems += ["reps.minReps is greater than maxReps."]
-        }
-        if percent < 0.0 {
-            problems += ["reps.percent is less than zero."]
-        }
-        if percent > 1.0 {
-            problems += ["reps.percent is greater than one."]
-        }
-        return problems
-    }
-
-    var description: String {
-        get {
-            if minReps < maxReps {
-                return amrap ? "\(minReps)-\(maxReps)+ reps" : "\(minReps)-\(maxReps) reps"
-            } else {
-                if minReps == 1 {
-                    return amrap ? "1+ reps" : "1 rep"
-                } else {
-                    return amrap ? "\(minReps)+ reps" : "\(minReps) reps"
-                }
-            }
-        }
-    }
-}
-
-fileprivate func repsErrors(_ sets: [Reps]) -> [String] {
-    var problems: [String] = []
-    var minReps: Int? = nil
-    var maxReps: Int? = nil
-    for r in sets {
-        problems += r.errors()
-        
-        if r.minReps < r.maxReps {
-            if minReps == nil {
-                minReps = r.minReps
-                maxReps = r.maxReps
-            } else {
-                if minReps! != r.minReps || maxReps! != r.maxReps {
-                    problems += ["Rep ranges should be the same."]
-                }
-            }
-        }
-    }
-    return problems
-}
-
-/// "3x5-10 @ 100 lbs".
-func setsSublabel(_ apparatus: Apparatus?, _ sets: [Reps], _ targetWeight: Double, _ currentReps: Int) -> String { // not fileprivate so we can use it with unit test
-    if let max = sets.max(by: {(lhs, rhs) -> Bool in lhs.percent < rhs.percent}) {
-        let worksets = sets.filter({(reps) -> Bool in reps.percent == max.percent})
-        let labels = worksets.map({ (reps) -> String in
-            if reps.minReps < reps.maxReps {
-                return "\(currentReps)-\(reps.maxReps)"
-            } else {
-                return "\(reps.minReps)"
-            }
-        })
-        if let first = labels.first, labels.all({(label) -> Bool in label == first}) {
-            var weight = ""
-            if targetWeight > 0.0 {
-                if let apparatus = apparatus {
-                    weight = " @ \(Weight(targetWeight, apparatus).closest().text)"
-                } else {
-                    weight = " @ \(Weight.friendlyUnitsStr(targetWeight))"
-                }
-            }
-            return "\(labels.count)x\(first)\(weight)"
-        }
-    }
-    return ""
-}
-
-func setsActivities(_ sets: [Reps], _ weight: Double, _ apparatus: Apparatus) -> [Activity] {
-    var result: [Activity] = []
-    if let max = sets.max(by: {(lhs, rhs) -> Bool in lhs.percent < rhs.percent}) {
-        var warmups: [Reps] = []
-        var worksets: [Reps] = []
-        var backoff: [Reps] = []
-        for reps in sets {
-            if reps.percent == max.percent {
-                worksets.append(reps)
-            } else if reps.percent < max.percent {
-                if worksets.isEmpty {
-                    warmups.append(reps)
-                } else {
-                    backoff.append(reps)
-                }
-            }
-        }
-        for (i, reps) in warmups.enumerated() {
-            let w = Weight(reps.percent*weight, apparatus).closest(below: weight)
-            result.append(Activity(
-                title: "Warmup \(i+1) of \(warmups.count)",
-                subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
-                amount: "\(reps) @ \(w.text)",
-                details: w.plates,
-                buttonName: "Next",
-                showStartButton: true,
-                color: nil))
-        }
-        for (i, reps) in worksets.enumerated() {
-            let w = Weight(reps.percent*weight, apparatus).closest()
-            result.append(Activity(
-                title: "Workset \(i+1) of \(worksets.count)",
-                subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
-                amount: "\(reps) @ \(w.text)",
-                details: w.plates,
-                buttonName: i+1 == worksets.count && backoff.isEmpty ? "Done" : "Next",
-                showStartButton: true,
-                color: nil))
-        }
-        for (i, reps) in backoff.enumerated() {
-            let w = Weight(reps.percent*weight, apparatus).closest(below: weight)
-            result.append(Activity(
-                title: "Backoff \(i+1) of \(backoff.count)",
-                subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
-                amount: "\(reps) @ \(w.text)",
-                details: w.plates,
-                buttonName: i+1 == backoff.count ? "Done" : "Next",
-                showStartButton: true,
-                color: nil))
-        }
-    }
-    return result
-}
-
 class CyclicRepsSubtype: Storable {
     init(cycles: [[Reps]], reps: Int, restSecs: Int, advance: String?, advance2: String?) {
         self.cycles = cycles
@@ -239,6 +62,28 @@ class CyclicRepsSubtype: Storable {
         return setsActivities(cycles[cycleIndex], weight, apparatus)
     }
 
+    func completions() -> [Completion] {
+        var result: [Completion] = []
+        
+        if let advance2 = advance2 {
+            result.append(Completion(title: "Advance x2", info: advance2, callback: {() -> Void in self.doAdvance(2)}))
+        }
+        if let advance = advance {
+            result.append(Completion(title: "Advance", info: advance, callback: {() -> Void in self.doAdvance(1)}))
+        }
+        result.append(Completion(title: "Maintain", info: "", callback: {() -> Void in self.doMaintain()}))
+
+        return result
+    }
+    
+    private func doAdvance(_ by: Int) {
+        
+    }
+    
+    private func doMaintain() {
+        // TODO: update history
+    }
+    
     var cycles: [[Reps]]
     var advance: String?    // prompt that allows the user to advance reps or weight, note that deloads are handled at the program level
     var advance2: String?   // allows the user to advance by twice as much
@@ -299,13 +144,35 @@ class MaxRepsSubType: Storable {
             result.append(Activity(
                 title: "Set \(i+1) of \(numSets)",
                 subtitle: "",
-                amount: w,  // TODO: use history to figure how what to say here
+                amount: w,  // TODO: use history to figure how what to say here, note that history should be keyed by formalName not program/workout
                 details: "",
                 buttonName: i+1 == numSets ? "Done" : "Next",
                 showStartButton: true,
                 color: nil))
         }
         return result
+    }
+    
+    func completions() -> [Completion] {
+        var result: [Completion] = []
+        
+        if let advance2 = advance2 {
+            result.append(Completion(title: "Advance x2", info: advance2, callback: {() -> Void in self.doAdvance(2)}))
+        }
+        if let advance = advance {
+            result.append(Completion(title: "Advance", info: advance, callback: {() -> Void in self.doAdvance(1)}))
+        }
+        result.append(Completion(title: "Maintain", info: "", callback: {() -> Void in self.doMaintain()}))
+        
+        return result
+    }
+    
+    private func doAdvance(_ by: Int) {
+        
+    }
+    
+    private func doMaintain() {
+        // TODO: update history
     }
     
     var numSets: Int
@@ -357,8 +224,34 @@ class RepsSubType: Storable {
         return setsSublabel(apparatus, sets, weight, reps)
     }
 
-    func activities(_ apparatus: Apparatus) -> [Activity] {
-        return setsActivities(sets, weight, apparatus)
+    func activities(_ apparatus: Apparatus?) -> [Activity] {
+        if let apparatus = apparatus {
+            return setsActivities(sets, weight, apparatus)
+        } else {
+            return setsActivities(sets, weight)
+        }
+    }
+    
+    func completions() -> [Completion] {
+        var result: [Completion] = []
+        
+        if let advance2 = advance2 {
+            result.append(Completion(title: "Advance x2", info: advance2, callback: {() -> Void in self.doAdvance(2)}))
+        }
+        if let advance = advance {
+            result.append(Completion(title: "Advance", info: advance, callback: {() -> Void in self.doAdvance(1)}))
+        }
+        result.append(Completion(title: "Maintain", info: "", callback: {() -> Void in self.doMaintain()}))
+        
+        return result
+    }
+    
+    private func doAdvance(_ by: Int) {
+        
+    }
+    
+    private func doMaintain() {
+        // TODO: update history
     }
     
     var sets: [Reps]
@@ -436,6 +329,28 @@ class TimedSubType: Storable {
         return result
     }
     
+    func completions() -> [Completion] {
+        var result: [Completion] = []
+        
+        if let advance2 = advance2 {
+            result.append(Completion(title: "Advance x2", info: advance2, callback: {() -> Void in self.doAdvance(2)}))
+        }
+        if let advance = advance {
+            result.append(Completion(title: "Advance", info: advance, callback: {() -> Void in self.doAdvance(1)}))
+        }
+        result.append(Completion(title: "Maintain", info: "", callback: {() -> Void in self.doMaintain()}))
+        
+        return result
+    }
+    
+    private func doAdvance(_ by: Int) {
+        
+    }
+    
+    private func doMaintain() {
+        // TODO: update history
+    }
+    
     var numSets: Int
     var targetTime: Int?
     var advance: String?    // prompt that allows the user to advance reps or weight
@@ -444,4 +359,25 @@ class TimedSubType: Storable {
     var weight: Double         // starts out at 0.0
     var currentTime: Int
     var restSecs: Int
+}
+
+fileprivate func repsErrors(_ sets: [Reps]) -> [String] {
+    var problems: [String] = []
+    var minReps: Int? = nil
+    var maxReps: Int? = nil
+    for r in sets {
+        problems += r.errors()
+        
+        if r.minReps < r.maxReps {
+            if minReps == nil {
+                minReps = r.minReps
+                maxReps = r.maxReps
+            } else {
+                if minReps! != r.minReps || maxReps! != r.maxReps {
+                    problems += ["Rep ranges should be the same."]
+                }
+            }
+        }
+    }
+    return problems
 }

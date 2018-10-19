@@ -59,7 +59,6 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear")
         super.viewDidAppear(animated)
         
         breadcrumbLabel.text = breadcrumb
@@ -104,24 +103,23 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
         let name = filtered[index]
         let app = UIApplication.shared.delegate as! AppDelegate
         if let exercise = app.program.findExercise(name) {
-            if case .underway = exercise.plan.state, exercise.plan.on(workout) {
-                cell.textLabel!.text = exercise.plan.label()
-                cell.detailTextLabel!.text = exercise.plan.sublabel()
+            if case .underway = exercise.state(), exercise.on(workout) {
+                cell.textLabel!.text = exercise.label()
+                cell.detailTextLabel!.text = exercise.sublabel()
                 cell.textLabel?.setColor(.red)
                 cell.detailTextLabel?.setColor(.red)    // TODO: use targetColor
                 
             } else {
-                let cloned = exercise.plan.clone()
-                if cloned.start(workout, name) == nil {
-                    if case let .error(err) = cloned.state {
+                if exercise.start(workout) == nil {
+                    if case let .error(err) = exercise.state() {
                         cell.textLabel!.text = name
                         cell.detailTextLabel!.text = err
                         cell.textLabel?.setColor(.black)
                         cell.detailTextLabel?.setColor(.black)
                         
                     } else {
-                        cell.textLabel!.text = cloned.label()
-                        cell.detailTextLabel!.text = cloned.sublabel()
+                        cell.textLabel!.text = exercise.label()
+                        cell.detailTextLabel!.text = exercise.sublabel()
                         let calendar = Calendar.current
                         if let completed = exercise.completed[workout.name], calendar.isDate(completed, inSameDayAs: Date()) {
                             cell.textLabel?.setColor(.lightGray)
@@ -133,7 +131,7 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
                     }
                     
                 } else {
-                    cell.textLabel!.text = cloned.label()
+                    cell.textLabel!.text = exercise.label()
                     cell.detailTextLabel!.text = "Not completed"
                     cell.textLabel?.setColor(.black)
                     cell.detailTextLabel?.setColor(.black)
@@ -174,10 +172,10 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
     @IBAction func optionsPressed(_ sender: Any) {
         //        dismissTooltip()
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let view = storyboard.instantiateViewController(withIdentifier: "WorkoutOptionsID") as! WorkoutOptionsController
-        view.initialize(workout, breadcrumbLabel.text!)
-        present(view, animated: true, completion: nil)
+        //        let storyboard = UIStoryboard(name: "Main", bundle: nil)  // TODO: implement
+//        let view = storyboard.instantiateViewController(withIdentifier: "WorkoutOptionsID") as! WorkoutOptionsController
+//        view.initialize(workout, breadcrumbLabel.text!)
+//        present(view, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt path: IndexPath) {
@@ -188,30 +186,31 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
         let name = filtered[index]
         let app = UIApplication.shared.delegate as! AppDelegate
         if let exercise = app.program.findExercise(name) {
-            if case .underway = exercise.plan.state, exercise.plan.on(workout) {
+            if case .underway = exercise.state(), exercise.on(workout) {
                 presentExercise(exercise)
                 
             } else {
                 // If we're started but not underway we want to re-start to ensure that we pickup
                 // on any changes from a base exercise.
-                if let newPlan = exercise.plan.start(workout, name) {
-                    let newName = exercise.name + "-" + newPlan.planName
-                    let newExercise = exercise.withPlan(newName, newPlan)
-                    app.program.setExercise(newExercise)
-                    
-                    if let newerPlan = newPlan.start(workout, newName) {
-                        err = "Plan \(exercise.plan.planName) started plan \(newPlan.planName) which started \(newerPlan.planName)"
-                    } else {
-                        switch newPlan.state {
-                        case .error(let mesg):
-                            err = mesg
-                        default:
-                            presentExercise(newExercise)
-                        }
-                    }
+                if exercise.start(workout) != nil {
+//                if let newPlan = exercise.start(workout) {
+                    //                    let newName = exercise.name + "-" + newPlan.planName  // TODO: something here
+//                    let newExercise = exercise.withPlan(newName, newPlan)
+//                    app.program.setExercise(newExercise)
+//
+//                    if let newerPlan = newPlan.start(workout, newName) {
+//                        err = "Plan \(exercise.planName) started plan \(newPlan.planName) which started \(newerPlan.planName)"
+//                    } else {
+//                        switch newPlan.state {
+//                        case .error(let mesg):
+//                            err = mesg
+//                        default:
+//                            presentExercise(newExercise)
+//                        }
+//                    }
                     
                 } else {
-                    switch exercise.plan.state {
+                    switch exercise.state() {
                     case .error(let mesg):
                         err = mesg
                     default:
@@ -230,10 +229,10 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     private func presentExercise(_ exercise: Exercise) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let view = storyboard.instantiateViewController(withIdentifier: "ExerciseID") as! ExerciseController
-        view.initialize(workout, exercise, breadcrumbLabel.text!, "unwindToWorkoutID")
-        self.present(view, animated: true, completion: nil)
+        //        let storyboard = UIStoryboard(name: "Main", bundle: nil)  // TODO: implement
+//        let view = storyboard.instantiateViewController(withIdentifier: "ExerciseID") as! ExerciseController
+//        view.initialize(workout, exercise, breadcrumbLabel.text!, "unwindToWorkoutID")
+//        self.present(view, animated: true, completion: nil)
     }
     
     //    private func isSkipped(_ workout: Workout, _ exerciseName: String) -> Bool

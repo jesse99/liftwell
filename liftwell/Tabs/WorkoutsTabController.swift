@@ -134,6 +134,7 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
         let app = UIApplication.shared.delegate as! AppDelegate
         let workout = app.program.workouts[index]
         cell.textLabel!.text = workout.name
+        cell.detailTextLabel!.text = ""
 
 //        if !hasActiveExercise(workout) {
 //            cell.detailTextLabel!.text = "inactive"
