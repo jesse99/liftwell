@@ -35,9 +35,9 @@ struct RestTime {
     let secs: Int
 }
 
-/// Used to inform an Exercise instance of the result of an activity.
+/// Used to inform an Exercise instance of the result of a sequence of activities.
 struct Completion {
-    /// If the activity has more than one Completion then apps will typically use title to populate a popup menu or list view.
+    /// If the activity has more than one Completion then Exercise will use title to populate a popup menu or list view.
     let title: String
     
     /// This will normally be why or when the user would pick this completion.
@@ -46,7 +46,7 @@ struct Completion {
     /// Set if the Completion is the one the user is expected to select.
     //let isDefault: Bool
     
-    /// Called by apps so that the Plan can move on to whatever the user should do next.
+    /// Called by Exercise to do things like maintain or advance reps/weight.
     let callback: () -> Void
 }
 
@@ -292,7 +292,7 @@ class Exercise: Storable {
             }
         case .weights(let type):
             switch type.subtype {
-            case .cyclic(let subtype): return subtype.completions()
+            case .cyclic(let subtype): return subtype.completions(type.apparatus)
             case .reps(let subtype): return subtype.completions()
             case .timed(let subtype): return subtype.completions()
             }

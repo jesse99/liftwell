@@ -30,7 +30,8 @@
 		37EFD6D62172CA6700F60880 /* PopulateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D52172CA6700F60880 /* PopulateTests.swift */; };
 		37EFD6D82176C69900F60880 /* WorkoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D72176C69900F60880 /* WorkoutController.swift */; };
 		37EFD6DA21780EDC00F60880 /* LabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D921780EDC00F60880 /* LabelExtensions.swift */; };
-		37EFD6DC217A2D9000F60880 /* Reps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6DB217A2D9000F60880 /* Reps.swift */; };
+		37EFD6DC217A2D9000F60880 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6DB217A2D9000F60880 /* Set.swift */; };
+		37EFD6DE217A679F00F60880 /* Sets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6DD217A679F00F60880 /* Sets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +72,8 @@
 		37EFD6D52172CA6700F60880 /* PopulateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateTests.swift; sourceTree = "<group>"; };
 		37EFD6D72176C69900F60880 /* WorkoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutController.swift; sourceTree = "<group>"; };
 		37EFD6D921780EDC00F60880 /* LabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtensions.swift; sourceTree = "<group>"; };
-		37EFD6DB217A2D9000F60880 /* Reps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reps.swift; sourceTree = "<group>"; };
+		37EFD6DB217A2D9000F60880 /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
+		37EFD6DD217A679F00F60880 /* Sets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,8 +122,9 @@
 				3728684C21631302005F6FD0 /* Extensions */,
 				37286848216311D3005F6FD0 /* Program.swift */,
 				3728685721684231005F6FD0 /* Programs */,
-				37EFD6DB217A2D9000F60880 /* Reps.swift */,
 				37286862216A6C42005F6FD0 /* RepsParser.swift */,
+				37EFD6DB217A2D9000F60880 /* Set.swift */,
+				37EFD6DD217A679F00F60880 /* Sets.swift */,
 				3728684A21631202005F6FD0 /* Store.swift */,
 				3728686021699CC7005F6FD0 /* SubTypes.swift */,
 				3728684721630030005F6FD0 /* Tabs */,
@@ -276,7 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3728686121699CC7005F6FD0 /* SubTypes.swift in Sources */,
-				37EFD6DC217A2D9000F60880 /* Reps.swift in Sources */,
+				37EFD6DC217A2D9000F60880 /* Set.swift in Sources */,
 				37EFD6D82176C69900F60880 /* WorkoutController.swift in Sources */,
 				37286859216842C8005F6FD0 /* Mine2.swift in Sources */,
 				3728684B21631202005F6FD0 /* Store.swift in Sources */,
@@ -291,6 +294,7 @@
 				37286865216A83A5005F6FD0 /* Either.swift in Sources */,
 				3728685021631462005F6FD0 /* Exercise.swift in Sources */,
 				37286863216A6C42005F6FD0 /* RepsParser.swift in Sources */,
+				37EFD6DE217A679F00F60880 /* Sets.swift in Sources */,
 				37286828216259AE005F6FD0 /* WorkoutsTabController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

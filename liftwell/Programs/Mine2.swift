@@ -4,7 +4,7 @@ import Foundation
 
 // TODO:
 // move these functions into a helpers file
-func parseCycles(_ text: String) -> [[Reps]] {
+func parseCycles(_ text: String) -> [Sets] {
     let parser = Parser(text: text)
     switch parser.parseCycles() {
         case .left(let err): assert(false, err.mesg); abort()
@@ -12,7 +12,7 @@ func parseCycles(_ text: String) -> [[Reps]] {
     }
 }
 
-func parseSets(_ text: String) -> [Reps] {
+func parseSets(_ text: String) -> Sets {
     let parser = Parser(text: text)
     switch parser.parseSets() {
     case .left(let err): assert(false, err.mesg); abort()
@@ -27,8 +27,8 @@ fileprivate func bodyweight(_ name: String, _ formalName: String, _ numSets: Int
 }
 
 fileprivate func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, by: Int) -> Exercise {
-    let reps = Reps(reps: by)
-    let sets = Array(repeating: reps, count: numSets)
+    let reps = Set(reps: by)
+    let sets = Sets(Array(repeating: reps, count: numSets))
     let subtype = RepsSubType(sets: sets, reps: by, restSecs: 0, advance: nil, advance2: nil)
     let type = BodyType(.reps(subtype))
     return Exercise(name, formalName, .body(type))

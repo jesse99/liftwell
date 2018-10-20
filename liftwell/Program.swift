@@ -39,19 +39,19 @@ class Workout: Storable {
     func errors(_ program: Program) -> [String] {
         var problems: [String] = []
         
-        for n in Set(exercises) {
+        for n in Swift.Set(exercises) {
             if exercises.count({$0 == n}) > 1 {
                 problems += ["workout \(name) exercise (\(n)) appears more than once"]
             }
         }
         
-        for n in Set(optional) {
+        for n in Swift.Set(optional) {
             if optional.count({$0 == n}) > 1 {
                 problems += ["workout \(name) optional (\(n)) appears more than once"]
             }
         }
         
-        for n in Set(optional) {
+        for n in Swift.Set(optional) {
             if !exercises.contains(n) {
                 problems += ["workout \(name) optional (\(n)) isn't in exercises"]
             }
@@ -99,7 +99,7 @@ class Program: Storable {
         self.name = name
         self.workouts = workouts
         self.exercises = exercises
-        self.tags = Set(tags)
+        self.tags = Swift.Set(tags)
         self.description = description
         self.customNotes = [:]
         self.maxWorkouts = maxWorkouts
@@ -215,7 +215,7 @@ class Program: Storable {
         self.name = store.getStr("name")
         self.workouts = store.getObjArray("workouts")
         self.exercises = store.getObjArray("exercises")
-        self.tags = Set(store.getObjArray("tags"))
+        self.tags = Swift.Set(store.getObjArray("tags"))
         self.description = store.getStr("description")
         
         self.customNotes = [:]
@@ -317,7 +317,7 @@ class Program: Storable {
     var name: String             // "Mad Cow"
     var workouts: [Workout]
     var exercises: [Exercise]
-    var tags: Set<Tags>
+    var tags: Swift.Set<Tags>
     var description: String
     var customNotes: [String: String]    // formal name => markdown
     

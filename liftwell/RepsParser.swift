@@ -27,8 +27,8 @@ class Parser {
     }
     
     // Cycles := Sets ('/' Sets)*
-    func parseCycles() -> Either<Parser.Error, [[Reps]]> {
-        var result: [[Reps]] = []
+    func parseCycles() -> Either<Parser.Error, [Sets]> {
+        var result: [Sets] = []
         
         switch parseSets() {
         case .left(let m): return .left(m)
@@ -54,8 +54,8 @@ class Parser {
     }
     
     // Sets := Reps+
-    func parseSets() -> Either<Parser.Error, [Reps]> {
-        var result: [Reps] = []
+    func parseSets() -> Either<Parser.Error, Sets> {
+        var result: [Set] = []
         while true {
             if case .eof = lexer.token() {
                 break
@@ -73,11 +73,11 @@ class Parser {
             return .left(Error("There are no reps", 0))
         }
         
-        return .right(result)
+        return .right(Sets(result))
     }
 
     // Reps := Int ('-' Int)? '+'? ('@' Int '%')? 'R'? 
-    private func parseReps() -> Either<Parser.Error, Reps> {
+    private func parseReps() -> Either<Parser.Error, Set> {
         // Int
         let minOffset = lexer.tokenOffset()
         if case .number(let minReps) = lexer.token() {
@@ -142,7 +142,7 @@ class Parser {
             if percent > 100 {
                 return .left(Error("percentage should be less than or equal to 100", percentOffset))
             }
-            return .right(Reps(minReps: minReps, maxReps: maxReps, percent: Double(percent)/100.0, amrap: amrap, rest: rest))
+            return .right(Set(minReps: minReps, maxReps: maxReps, percent: Double(percent)/100.0, amrap: amrap, rest: rest))
 
         } else {
             return .left(Error(expected: "minReps", lexer))

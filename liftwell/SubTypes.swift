@@ -3,7 +3,7 @@
 import Foundation
 
 class CyclicRepsSubtype: Storable {
-    init(cycles: [[Reps]], reps: Int, restSecs: Int, advance: String?, advance2: String?) {
+    init(cycles: [Sets], reps: Int, restSecs: Int, advance: String?, advance2: String?) {
         self.cycles = cycles
         self.advance = advance
         self.advance2 = advance2
@@ -18,7 +18,7 @@ class CyclicRepsSubtype: Storable {
         cycles = []
         let count = store.getInt("cyclesCount")
         for i in 0..<count {
-            let cycle: [Reps] = store.getObjArray("cycle\(i)")
+            let cycle: Sets = store.getObj("cycle\(i)")
             cycles.append(cycle)
         }
         let a = store.getStr("advance")
@@ -35,7 +35,7 @@ class CyclicRepsSubtype: Storable {
     func save(_ store: Store) {
         store.addInt("cyclesCount", cycles.count)
         for (i, cycle) in cycles.enumerated() {
-            store.addObjArray("cycle\(i)", cycle)
+            store.addObj("cycle\(i)", cycle)
         }
         store.addStr("advance", advance ?? "")
         store.addStr("advanc2", advance2 ?? "")
@@ -48,43 +48,51 @@ class CyclicRepsSubtype: Storable {
     
     public func errors() -> [String] {
         var problems: [String] = []
-        for cycle in cycles {
-            problems += repsErrors(cycle)
+        for sets in cycles {
+            problems += sets.errors()
         }
         return problems
     }
     
     func sublabel(_ apparatus: Apparatus) -> String {
-        return setsSublabel(apparatus, cycles[cycleIndex], weight, reps)
+        return cycles[cycleIndex].sublabel(apparatus, weight, reps)
     }
     
     func activities(_ apparatus: Apparatus) -> [Activity] {
-        return setsActivities(cycles[cycleIndex], weight, apparatus)
+        return cycles[cycleIndex].activities(weight, apparatus)
     }
 
-    func completions() -> [Completion] {
+    func completions(_ apparatus: Apparatus) -> [Completion] {
         var result: [Completion] = []
         
         if let advance2 = advance2 {
-            result.append(Completion(title: "Advance x2", info: advance2, callback: {() -> Void in self.doAdvance(2)}))
+            result.append(Completion(title: "Advance x2", info: advance2, callback: {() -> Void in self.doAdvance(apparatus, 2)}))
         }
         if let advance = advance {
-            result.append(Completion(title: "Advance", info: advance, callback: {() -> Void in self.doAdvance(1)}))
+            result.append(Completion(title: "Advance", info: advance, callback: {() -> Void in self.doAdvance(apparatus, 1)}))
         }
         result.append(Completion(title: "Maintain", info: "", callback: {() -> Void in self.doMaintain()}))
 
         return result
     }
     
-    private func doAdvance(_ by: Int) {
-        
+    private func doAdvance(_ apparatus: Apparatus, _ by: Int) {
+        // TODO: update history
+        let (min, max) = cycles[cycleIndex].repRange()
+        if reps + 1 > max {
+            let w = Weight(weight, apparatus)
+            reps = min
+            weight = w.nextWeight()
+        } else {
+            reps += 1
+        }
     }
     
     private func doMaintain() {
         // TODO: update history
     }
     
-    var cycles: [[Reps]]
+    var cycles: [Sets]
     var advance: String?    // prompt that allows the user to advance reps or weight, note that deloads are handled at the program level
     var advance2: String?   // allows the user to advance by twice as much
     
@@ -153,38 +161,40 @@ class MaxRepsSubType: Storable {
         return result
     }
     
+    // TODO: should we have methods to return number of activities and the nth activity?
+    // TODO: Exercise could update activity per completed (or maybe call an updateActivity method)
+    // TODO: Exercise could reset completed
+    
+    // TODO: these are called after each set (and normally just skip to next, which could update currentActivity)
     func completions() -> [Completion] {
-        var result: [Completion] = []
+        let result: [Completion] = []
         
-        if let advance2 = advance2 {
-            result.append(Completion(title: "Advance x2", info: advance2, callback: {() -> Void in self.doAdvance(2)}))
-        }
-        if let advance = advance {
-            result.append(Completion(title: "Advance", info: advance, callback: {() -> Void in self.doAdvance(1)}))
-        }
-        result.append(Completion(title: "Maintain", info: "", callback: {() -> Void in self.doMaintain()}))
+//        if let advance2 = advance2 {
+//            result.append(Completion(title: "Advance x2", info: advance2, callback: {() -> Void in self.doAdvance(2)}))
+//        }
+//        if let advance = advance {
+//            result.append(Completion(title: "Advance", info: advance, callback: {() -> Void in self.doAdvance(1)}))
+//        }
+//        result.append(Completion(title: "Maintain", info: "", callback: {() -> Void in self.doMaintain()}))
         
         return result
     }
     
-    private func doAdvance(_ by: Int) {
-        
-    }
-    
-    private func doMaintain() {
-        // TODO: update history
+    private func completedSet(_ reps: Int) {
+        completed.append(reps)
     }
     
     var numSets: Int
     var goalReps: Int       // typically user would then switch to a harder version of the exercise or add weights
     var restAtEnd: Bool
 
-    var weight: Double         // starts out at 0.0
+    var weight: Double      // starts out at 0.0
     var restSecs: Int
+    var completed: [Int] = []
 }
 
 class RepsSubType: Storable {
-    init(sets: [Reps], reps: Int, restSecs: Int, advance: String?, advance2: String?) {
+    init(sets: Sets, reps: Int, restSecs: Int, advance: String?, advance2: String?) {
         self.sets = sets
         self.advance = advance
         self.advance2 = advance2
@@ -195,7 +205,7 @@ class RepsSubType: Storable {
     }
     
     required init(from store: Store) {
-        self.sets = store.getObjArray("sets")
+        self.sets = store.getObj("sets")
         let a = store.getStr("advance")
         self.advance = a != "" ? a : nil
         let a2 = store.getStr("advance2")
@@ -207,7 +217,7 @@ class RepsSubType: Storable {
     }
     
     func save(_ store: Store) {
-        store.addObjArray("sets", sets)
+        store.addObj("sets", sets)
         store.addStr("advance", advance ?? "")
         store.addStr("advanc2", advance2 ?? "")
         
@@ -217,18 +227,18 @@ class RepsSubType: Storable {
     }
     
     public func errors() -> [String] {
-        return repsErrors(sets)
+        return sets.errors()
     }
     
     func sublabel(_ apparatus: Apparatus?) -> String {
-        return setsSublabel(apparatus, sets, weight, reps)
+        return sets.sublabel(apparatus, weight, reps)
     }
 
     func activities(_ apparatus: Apparatus?) -> [Activity] {
         if let apparatus = apparatus {
-            return setsActivities(sets, weight, apparatus)
+            return sets.activities(weight, apparatus)
         } else {
-            return setsActivities(sets, weight)
+            return sets.activities(weight)
         }
     }
     
@@ -254,7 +264,7 @@ class RepsSubType: Storable {
         // TODO: update history
     }
     
-    var sets: [Reps]
+    var sets: Sets
     var advance: String?    // prompt that allows the user to advance reps or weight
     var advance2: String?   // allows the user to advance by twice as much
     
@@ -359,25 +369,4 @@ class TimedSubType: Storable {
     var weight: Double         // starts out at 0.0
     var currentTime: Int
     var restSecs: Int
-}
-
-fileprivate func repsErrors(_ sets: [Reps]) -> [String] {
-    var problems: [String] = []
-    var minReps: Int? = nil
-    var maxReps: Int? = nil
-    for r in sets {
-        problems += r.errors()
-        
-        if r.minReps < r.maxReps {
-            if minReps == nil {
-                minReps = r.minReps
-                maxReps = r.maxReps
-            } else {
-                if minReps! != r.minReps || maxReps! != r.maxReps {
-                    problems += ["Rep ranges should be the same."]
-                }
-            }
-        }
-    }
-    return problems
 }
