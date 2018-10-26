@@ -242,18 +242,19 @@ class ExerciseController: UIViewController {
     
     private func setTag(_ info: ExerciseInfo) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        let completion: () -> Void = {self.performSegue(withIdentifier: self.unwindTo, sender: self)}
         
-        var action = UIAlertAction(title: "Easy", style: .default) {_ in info.finalize("easy"); self.performSegue(withIdentifier: self.unwindTo, sender: self)}
+        var action = UIAlertAction(title: "Easy", style: .default) {_ in info.finalize(self.exercise, .easy, self, completion)}
         alert.addAction(action)
         
-        action = UIAlertAction(title: "Normal", style: .default) {_ in info.finalize("normal"); self.performSegue(withIdentifier: self.unwindTo, sender: self)}
+        action = UIAlertAction(title: "Normal", style: .default) {_ in info.finalize(self.exercise, .normal, self, completion)}
         alert.addAction(action)
         alert.preferredAction = action
         
-        action = UIAlertAction(title: "Hard", style: .default) {_ in info.finalize("hard"); self.performSegue(withIdentifier: self.unwindTo, sender: self)}
+        action = UIAlertAction(title: "Hard", style: .default) {_ in info.finalize(self.exercise, .hard, self, completion)}
         alert.addAction(action)
         
-        action = UIAlertAction(title: "Failed", style: .default) {_ in info.finalize("failed"); self.performSegue(withIdentifier: self.unwindTo, sender: self)}
+        action = UIAlertAction(title: "Failed", style: .default) {_ in info.finalize(self.exercise, .failed, self, completion)}
         alert.addAction(action)
 
         self.present(alert, animated: true, completion: nil)

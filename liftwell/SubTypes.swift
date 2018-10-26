@@ -11,7 +11,7 @@ class CyclicRepsSubtype: ExerciseInfo {
         self.advance = advance
         self.advance2 = advance2
         
-        self.weight = 0.0
+        self.weight = 100.0     // TODO: start at 0.0
         self.cycleIndex = 0
         self.restTime = restSecs
         self.reps = reps
@@ -76,8 +76,8 @@ class CyclicRepsSubtype: ExerciseInfo {
 
     func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
         switch exercise.type {
-        case .body(_): activities = cycles[cycleIndex].activities(weight)
-        case .weights(let type): activities = cycles[cycleIndex].activities(weight, type.apparatus)
+        case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight)
+        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus)
         }
         index = 0
         currentWorkout = workout.name
@@ -108,11 +108,11 @@ class CyclicRepsSubtype: ExerciseInfo {
     }
     
     func current(_ exercise: Exercise) -> Activity {
-        return activities[index]
+        return index < activities.count ? activities[index] : activities.last!
     }
     
     func restSecs() -> RestTime {
-        return RestTime(autoStart: true, secs: restTime)
+        return RestTime(autoStart: index > numWarmups, secs: restTime)
     }
     
     func restSound() -> UInt32 {
@@ -121,36 +121,57 @@ class CyclicRepsSubtype: ExerciseInfo {
     
     func completions(_ exercise: Exercise) -> [Completion] {
         if index+1 < activities.count {
-            return [Completion(title: "", info: "", callback: {() -> Void in self.doNext()})]
+            return [Completion(title: "", info: "", callback: {self.index += 1})]
         } else {
-            switch exercise.type {
-            case .body(_): return [Completion(title: "", info: "", callback: {() -> Void in self.doMaintain()})]
-            case .weights(let type):
-                var result: [Completion] = []
-                
-                if let advance2 = advance2 {
-                    result.append(Completion(title: "Advance x2", info: advance2, callback: {() -> Void in self.doAdvance(type.apparatus, 2)}))
-                }
-                if let advance = advance {
-                    result.append(Completion(title: "Advance", info: advance, callback: {() -> Void in self.doAdvance(type.apparatus, 1)}))
-                }
-                result.append(Completion(title: "Maintain", info: "", callback: {() -> Void in self.doMaintain()}))
-                
-                return result
-            }
+            return [Completion(title: "", info: "", callback: {self.index = self.activities.count})]
         }
     }
     
-    func finalize(_ tag: String) {
+    func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
         // TODO: append results
+        switch exercise.type {
+        case .body(_): completion()
+        case .weights(let type):
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            
+            let advance2 = UIAlertAction(title: "Advance x2", style: .default) {_ in self.doAdvance(type.apparatus, 2); completion()}
+            let advance = UIAlertAction(title: "Advance", style: .default) {_ in self.doAdvance(type.apparatus, 1); completion()}
+            let maintain = UIAlertAction(title: "Maintain", style: .default) {_ in self.doMaintain(); completion()}
+            let deload = UIAlertAction(title: "Deload", style: .default) {_ in self.doAdvance(type.apparatus, -1); completion()}
+            let deload2 = UIAlertAction(title: "Deload x2", style: .default) {_ in self.doAdvance(type.apparatus, -2); completion()}
+
+            switch tag {
+            case .easy:
+                alert.addAction(advance2)
+                alert.addAction(advance)
+                alert.addAction(maintain)
+                alert.preferredAction = advance2
+                
+            case .normal:
+                alert.addAction(advance)
+                alert.addAction(maintain)
+                alert.preferredAction = advance
+                
+            case .hard:
+                alert.addAction(advance)
+                alert.addAction(maintain)
+                alert.addAction(deload)
+                alert.preferredAction = maintain
+                
+            case .failed:
+                alert.addAction(advance)
+                alert.addAction(maintain)
+                alert.addAction(deload)
+                alert.addAction(deload2)
+                alert.preferredAction = deload
+            }
+            
+            view.present(alert, animated: true, completion: nil)
+        }
     }
     
     func reset() {
         index = 0
-    }
-    
-    private func doNext() {
-        index += 1
     }
     
     private func doAdvance(_ apparatus: Apparatus, _ by: Int) {
@@ -180,6 +201,7 @@ class CyclicRepsSubtype: ExerciseInfo {
     
     private var currentWorkout = ""
     private var activities: [Activity] = []
+    private var numWarmups: Int = 0
     private var index: Int = 0
 }
 
@@ -326,8 +348,9 @@ class MaxRepsSubType: ExerciseInfo {
         return result
     }
     
-    func finalize(_ tag: String) {
-        // TODO: append results
+    func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
+        // TODO: append result
+        completion()
     }
     
     func reset() {
@@ -374,7 +397,7 @@ class RepsSubType: ExerciseInfo {
         self.advance = advance
         self.advance2 = advance2
         
-        self.weight = 0.0
+        self.weight = 100.0     // TODO: start at 0.0
         self.restTime = restSecs
         self.reps = reps
     }
@@ -424,8 +447,8 @@ class RepsSubType: ExerciseInfo {
     
     func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
         switch exercise.type {
-        case .body(_): activities = sets.activities(weight)
-        case .weights(let type): activities = sets.activities(weight, type.apparatus)
+        case .body(_): (numWarmups, activities) = sets.activities(weight)
+        case .weights(let type): (numWarmups, activities) = sets.activities(weight, type.apparatus)
         }
         index = 0
         currentWorkout = workout.name
@@ -456,11 +479,11 @@ class RepsSubType: ExerciseInfo {
     }
     
     func current(_ exercise: Exercise) -> Activity {
-        return activities[index]
+        return index < activities.count ? activities[index] : activities.last!
     }
     
     func restSecs() -> RestTime {
-        return RestTime(autoStart: true, secs: restTime)
+        return RestTime(autoStart: index > numWarmups, secs: restTime)
     }
     
     func restSound() -> UInt32 {
@@ -469,36 +492,57 @@ class RepsSubType: ExerciseInfo {
     
     func completions(_ exercise: Exercise) -> [Completion] {
         if index+1 < activities.count {
-            return [Completion(title: "", info: "", callback: {() -> Void in self.doNext()})]
+            return [Completion(title: "", info: "", callback: {self.index += 1})]
         } else {
-            switch exercise.type {
-            case .body(_): return [Completion(title: "", info: "", callback: {() -> Void in self.doMaintain()})]
-            case .weights(let type):
-                var result: [Completion] = []
-                
-                if let advance2 = advance2 {
-                    result.append(Completion(title: "Advance x2", info: advance2, callback: {() -> Void in self.doAdvance(type.apparatus, 2)}))
-                }
-                if let advance = advance {
-                    result.append(Completion(title: "Advance", info: advance, callback: {() -> Void in self.doAdvance(type.apparatus, 1)}))
-                }
-                result.append(Completion(title: "Maintain", info: "", callback: {() -> Void in self.doMaintain()}))
-                
-                return result
-            }
+            return [Completion(title: "", info: "", callback: {self.index = self.activities.count})]
         }
     }
     
-    func finalize(_ tag: String) {
+    func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
         // TODO: append results
+        switch exercise.type {
+        case .body(_): completion()
+        case .weights(let type):
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            
+            let advance2 = UIAlertAction(title: "Advance x2", style: .default) {_ in self.doAdvance(type.apparatus, 2); completion()}
+            let advance = UIAlertAction(title: "Advance", style: .default) {_ in self.doAdvance(type.apparatus, 1); completion()}
+            let maintain = UIAlertAction(title: "Maintain", style: .default) {_ in self.doMaintain(); completion()}
+            let deload = UIAlertAction(title: "Deload", style: .default) {_ in self.doAdvance(type.apparatus, -1); completion()}
+            let deload2 = UIAlertAction(title: "Deload x2", style: .default) {_ in self.doAdvance(type.apparatus, -2); completion()}
+            
+            switch tag {
+            case .easy:
+                alert.addAction(advance2)
+                alert.addAction(advance)
+                alert.addAction(maintain)
+                alert.preferredAction = advance2
+                
+            case .normal:
+                alert.addAction(advance)
+                alert.addAction(maintain)
+                alert.preferredAction = advance
+                
+            case .hard:
+                alert.addAction(advance)
+                alert.addAction(maintain)
+                alert.addAction(deload)
+                alert.preferredAction = maintain
+                
+            case .failed:
+                alert.addAction(advance)
+                alert.addAction(maintain)
+                alert.addAction(deload)
+                alert.addAction(deload2)
+                alert.preferredAction = deload
+            }
+            
+            view.present(alert, animated: true, completion: nil)
+        }
     }
     
     func reset() {
         index = 0
-    }
-    
-    private func doNext() {
-        index += 1
     }
     
     private func doAdvance(_ apparatus: Apparatus, _ by: Int) {
@@ -527,6 +571,7 @@ class RepsSubType: ExerciseInfo {
     
     private var currentWorkout = ""
     private var activities: [Activity] = []
+    private var numWarmups: Int = 0
     private var index: Int = 0
 }
 
@@ -659,8 +704,9 @@ class TimedSubType: ExerciseInfo {
         return [Completion(title: "", info: "", callback: {() -> Void in self.doMaintain()})]
     }
     
-    func finalize(_ tag: String) {
+    func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
         // TODO: append results
+        completion()
     }
     
     func reset() {

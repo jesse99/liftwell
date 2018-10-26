@@ -74,6 +74,13 @@ enum ExerciseState {
     case error(String)
 }
 
+enum ResultTag {
+    case easy
+    case normal
+    case hard
+    case failed
+}
+
 /// Implemented by SubTypes and used to perform an Exercise.
 protocol ExerciseInfo: Storable {
     var state: ExerciseState {get}
@@ -114,7 +121,7 @@ protocol ExerciseInfo: Storable {
     func completions(_ exercise: Exercise) -> [Completion]
     
     /// Called once the exercise is all finished. Tag is an arbitrary string.
-    func finalize(_ tag: String)
+    func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void)
     
     /// Start over from the beginning.
     func reset()

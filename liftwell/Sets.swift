@@ -106,7 +106,7 @@ struct Sets: Storable {
         return ""
     }
 
-    func activities(_ weight: Double, _ apparatus: Apparatus) -> [Activity] {
+    func activities(_ weight: Double, _ apparatus: Apparatus) -> (Int, [Activity]) {
         var result: [Activity] = []
         let (warmups, worksets, backoff) = partition()
         for (i, reps) in warmups.sets.enumerated() {
@@ -142,10 +142,10 @@ struct Sets: Storable {
                 showStartButton: true,
                 color: nil))
         }
-        return result
+        return (warmups.sets.count, result)
     }
     
-    func activities(_ weight: Double) -> [Activity] {
+    func activities(_ weight: Double) -> (Int, [Activity]) {
         var result: [Activity] = []
         let (warmups, worksets, backoff) = partition()
         for (i, reps) in warmups.sets.enumerated() {
@@ -181,7 +181,7 @@ struct Sets: Storable {
                 showStartButton: true,
                 color: nil))
         }
-        return result
+        return (warmups.sets.count, result)
     }
 }
 
