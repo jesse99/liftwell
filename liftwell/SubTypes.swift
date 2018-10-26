@@ -141,6 +141,10 @@ class CyclicRepsSubtype: ExerciseInfo {
         }
     }
     
+    func finalize(_ tag: String) {
+        // TODO: append results
+    }
+    
     func reset() {
         index = 0
     }
@@ -274,12 +278,14 @@ class MaxRepsSubType: ExerciseInfo {
         let currentTotal = completed.reduce(0, {$0 + $1})
         let expected = completed.count < numSets ? (currentReps - currentTotal)/(numSets - completed.count) : 0
         let st = (setIndex+1 <= numSets ? "\(expected > 0 ? expected : 1)+ " : "") + "(\(currentReps)) reps"
+
+        let tt = setIndex+1 <= numSets ? "Set \(setIndex+1) of \(numSets)" : "Set \(numSets) of \(numSets)"
         
         let wt = weightStr(exercise)
         let r = completed.map({"\($0)"})
         let dt = (!completed.isEmpty ? r.joined(separator: ", ") + "" : "") + " (\(currentTotal)) reps"
         return Activity(
-            title: "Set \(setIndex+1) of \(numSets)",
+            title: tt,
             subtitle: st,
             amount: wt,
             details: dt,
@@ -318,6 +324,10 @@ class MaxRepsSubType: ExerciseInfo {
         }
         
         return result
+    }
+    
+    func finalize(_ tag: String) {
+        // TODO: append results
     }
     
     func reset() {
@@ -477,6 +487,10 @@ class RepsSubType: ExerciseInfo {
                 return result
             }
         }
+    }
+    
+    func finalize(_ tag: String) {
+        // TODO: append results
     }
     
     func reset() {
@@ -643,6 +657,10 @@ class TimedSubType: ExerciseInfo {
     
     func completions(_ exercise: Exercise) -> [Completion] {
         return [Completion(title: "", info: "", callback: {() -> Void in self.doMaintain()})]
+    }
+    
+    func finalize(_ tag: String) {
+        // TODO: append results
     }
     
     func reset() {

@@ -209,7 +209,7 @@ class ExerciseController: UIViewController {
         
         let info = exercise.getInfo()
         if case .finished = info.state {
-            self.performSegue(withIdentifier: unwindTo, sender: self)
+            setTag(info)
         } else {
             let results = info.completions(exercise)
 //            switch info.completions(exercise) {
@@ -238,6 +238,25 @@ class ExerciseController: UIViewController {
 //                present(view, animated: true, completion: nil)
 //            }
         }
+    }
+    
+    private func setTag(_ info: ExerciseInfo) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        
+        var action = UIAlertAction(title: "Easy", style: .default) {_ in info.finalize("easy"); self.performSegue(withIdentifier: self.unwindTo, sender: self)}
+        alert.addAction(action)
+        
+        action = UIAlertAction(title: "Normal", style: .default) {_ in info.finalize("normal"); self.performSegue(withIdentifier: self.unwindTo, sender: self)}
+        alert.addAction(action)
+        alert.preferredAction = action
+        
+        action = UIAlertAction(title: "Hard", style: .default) {_ in info.finalize("hard"); self.performSegue(withIdentifier: self.unwindTo, sender: self)}
+        alert.addAction(action)
+        
+        action = UIAlertAction(title: "Failed", style: .default) {_ in info.finalize("failed"); self.performSegue(withIdentifier: self.unwindTo, sender: self)}
+        alert.addAction(action)
+
+        self.present(alert, animated: true, completion: nil)
     }
     
     private func handleNext(_ action: String) {

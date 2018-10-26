@@ -113,6 +113,9 @@ protocol ExerciseInfo: Storable {
     /// completion the user chose.
     func completions(_ exercise: Exercise) -> [Completion]
     
+    /// Called once the exercise is all finished. Tag is an arbitrary string.
+    func finalize(_ tag: String)
+    
     /// Start over from the beginning.
     func reset()
 }
