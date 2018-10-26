@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -72,9 +71,11 @@
                     <connections>
                         <outlet property="statusLabel" destination="A5M-7J-77L" id="Aox-i4-scX"/>
                         <outlet property="tableView" destination="Hb0-Ir-RUO" id="4DZ-LO-Lat"/>
+                        <segue destination="39b-17-RdA" kind="unwind" identifier="unwindToWorkoutsID" unwindAction="unwindToWorkouts:" id="U9Y-Oq-pnC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
+                <exit id="39b-17-RdA" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
         </scene>
@@ -165,11 +166,167 @@
                         <outlet property="breadcrumbLabel" destination="GO9-P3-HPY" id="C74-Jf-NOx"/>
                         <outlet property="optionsButton" destination="l8t-K9-pgm" id="xFg-s8-dfh"/>
                         <outlet property="tableView" destination="4kl-UO-h8K" id="SMZ-mC-kq6"/>
+                        <segue destination="Wj8-6r-Fp4" kind="unwind" identifier="unwindToWorkoutID" unwindAction="unwindToWorkout:" id="CRC-Cf-po7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HNS-Dv-PHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Wj8-6r-Fp4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1408.8" y="-323.38830584707648"/>
+        </scene>
+        <!--Exercise Controller-->
+        <scene sceneID="3M1-3X-D37">
+            <objects>
+                <viewController storyboardIdentifier="ExerciseID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="azc-Pf-KwC" customClass="ExerciseController" customModule="liftwell" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sNZ-lx-K7l">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nzS-zf-kph">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <navigationItem id="YjX-gf-jOL">
+                                        <leftBarButtonItems>
+                                            <barButtonItem title="Exit" id="EXX-Wt-07Y"/>
+                                            <barButtonItem title="Reset" id="rEm-Xo-GSW">
+                                                <connections>
+                                                    <action selector="resetPressed:" destination="azc-Pf-KwC" id="STZ-rX-q4a"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </leftBarButtonItems>
+                                        <rightBarButtonItems>
+                                            <barButtonItem title="Options" id="Ts1-lU-gxi">
+                                                <connections>
+                                                    <action selector="optionsPressed:" destination="azc-Pf-KwC" id="iox-2e-uVg"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Notes" id="6rp-q4-K90">
+                                                <connections>
+                                                    <action selector="notesPressed:" destination="azc-Pf-KwC" id="s6h-uM-Y4F"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Progression" id="bGd-Ik-Uh2"/>
+                                        </rightBarButtonItems>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pnk-XS-S5O">
+                                <rect key="frame" x="16" y="604" width="359" height="15"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Previous" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7C-eH-pU8">
+                                <rect key="frame" x="16" y="581" width="359" height="15"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IjC-7l-K3s">
+                                <rect key="frame" x="130.5" y="454" width="114" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Start Timer"/>
+                                <connections>
+                                    <action selector="startTimerPressed:" destination="azc-Pf-KwC" eventType="touchUpInside" id="9R1-aJ-sOg"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Secs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Eb-wS-mrZ">
+                                <rect key="frame" x="112.5" y="348" width="150" height="86"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7x-k3-tuh">
+                                <rect key="frame" x="141" y="261" width="93" height="67"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="46"/>
+                                <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="nextPressed:" destination="azc-Pf-KwC" eventType="touchUpInside" id="TKk-QD-1ZD"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breadcrumb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJu-qR-FnF">
+                                <rect key="frame" x="150" y="20" width="75" height="16"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DgG-FG-T6Z">
+                                <rect key="frame" x="169.5" y="76" width="36" height="21"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ovb-O3-BcK">
+                                <rect key="frame" x="160.5" y="165" width="54" height="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9P2-zN-a6p">
+                                <rect key="frame" x="164" y="193" width="47" height="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ZL-Bg-JJ6">
+                                <rect key="frame" x="161" y="107" width="53" height="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="nzS-zf-kph" firstAttribute="top" secondItem="Pnk-XS-S5O" secondAttribute="bottom" constant="4" id="0vU-bg-hbT"/>
+                            <constraint firstItem="DgG-FG-T6Z" firstAttribute="top" secondItem="OJu-qR-FnF" secondAttribute="bottom" constant="40" id="1XQ-yT-vhx"/>
+                            <constraint firstItem="nzS-zf-kph" firstAttribute="leading" secondItem="4oK-7w-oh4" secondAttribute="leading" id="2lk-6j-18d"/>
+                            <constraint firstItem="OJu-qR-FnF" firstAttribute="top" secondItem="4oK-7w-oh4" secondAttribute="top" id="3r4-op-Pvi"/>
+                            <constraint firstItem="4Eb-wS-mrZ" firstAttribute="top" secondItem="V7x-k3-tuh" secondAttribute="bottom" constant="20" id="4zZ-cc-BjX"/>
+                            <constraint firstItem="Pnk-XS-S5O" firstAttribute="top" secondItem="d7C-eH-pU8" secondAttribute="bottom" constant="8" id="AYc-Ma-6x5"/>
+                            <constraint firstItem="3ZL-Bg-JJ6" firstAttribute="top" secondItem="DgG-FG-T6Z" secondAttribute="bottom" constant="10" id="ErN-gy-kgg"/>
+                            <constraint firstItem="Pnk-XS-S5O" firstAttribute="leading" secondItem="sNZ-lx-K7l" secondAttribute="leadingMargin" id="Fna-r5-Nun"/>
+                            <constraint firstItem="9P2-zN-a6p" firstAttribute="centerX" secondItem="sNZ-lx-K7l" secondAttribute="centerX" id="Fqg-be-tD1"/>
+                            <constraint firstItem="9P2-zN-a6p" firstAttribute="top" secondItem="ovb-O3-BcK" secondAttribute="bottom" constant="10" id="Gys-rh-wFz"/>
+                            <constraint firstItem="DgG-FG-T6Z" firstAttribute="centerX" secondItem="sNZ-lx-K7l" secondAttribute="centerX" id="KcY-KA-XUL"/>
+                            <constraint firstItem="3ZL-Bg-JJ6" firstAttribute="centerX" secondItem="sNZ-lx-K7l" secondAttribute="centerX" id="NAL-Y5-n0q"/>
+                            <constraint firstItem="V7x-k3-tuh" firstAttribute="top" secondItem="9P2-zN-a6p" secondAttribute="bottom" constant="50" id="O42-Jw-CKU"/>
+                            <constraint firstItem="OJu-qR-FnF" firstAttribute="centerX" secondItem="sNZ-lx-K7l" secondAttribute="centerX" id="QZC-pB-phI"/>
+                            <constraint firstItem="IjC-7l-K3s" firstAttribute="top" secondItem="4Eb-wS-mrZ" secondAttribute="bottom" constant="20" id="RkX-4k-7Bw"/>
+                            <constraint firstItem="ovb-O3-BcK" firstAttribute="centerX" secondItem="sNZ-lx-K7l" secondAttribute="centerX" id="Xcy-zq-FF4"/>
+                            <constraint firstItem="IjC-7l-K3s" firstAttribute="centerX" secondItem="sNZ-lx-K7l" secondAttribute="centerX" id="aEs-Iz-1Nb"/>
+                            <constraint firstItem="V7x-k3-tuh" firstAttribute="centerX" secondItem="sNZ-lx-K7l" secondAttribute="centerX" id="eEa-Fs-KWe"/>
+                            <constraint firstItem="d7C-eH-pU8" firstAttribute="leading" secondItem="sNZ-lx-K7l" secondAttribute="leadingMargin" id="jah-YJ-b0Z"/>
+                            <constraint firstItem="4oK-7w-oh4" firstAttribute="trailing" secondItem="d7C-eH-pU8" secondAttribute="trailing" id="mRv-6G-OOR"/>
+                            <constraint firstItem="ovb-O3-BcK" firstAttribute="top" secondItem="3ZL-Bg-JJ6" secondAttribute="bottom" constant="40" id="mUx-rK-cTZ"/>
+                            <constraint firstItem="4Eb-wS-mrZ" firstAttribute="centerX" secondItem="sNZ-lx-K7l" secondAttribute="centerX" id="p9Q-ML-hKM"/>
+                            <constraint firstItem="nzS-zf-kph" firstAttribute="bottom" secondItem="4oK-7w-oh4" secondAttribute="bottom" id="pWp-pu-sNY"/>
+                            <constraint firstItem="nzS-zf-kph" firstAttribute="trailing" secondItem="4oK-7w-oh4" secondAttribute="trailing" id="qm6-o3-iFC"/>
+                            <constraint firstItem="4oK-7w-oh4" firstAttribute="trailing" secondItem="Pnk-XS-S5O" secondAttribute="trailing" id="z9e-m0-G33"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4oK-7w-oh4"/>
+                    </view>
+                    <connections>
+                        <outlet property="amountLabel" destination="ovb-O3-BcK" id="4Rf-Fd-NNK"/>
+                        <outlet property="breadcrumbLabel" destination="OJu-qR-FnF" id="vLX-9z-bv7"/>
+                        <outlet property="detailsLabel" destination="9P2-zN-a6p" id="v9J-lZ-gsA"/>
+                        <outlet property="historyLabel" destination="Pnk-XS-S5O" id="Wbl-Y6-WBt"/>
+                        <outlet property="nextButton" destination="V7x-k3-tuh" id="J4i-VJ-Siz"/>
+                        <outlet property="notesButton" destination="6rp-q4-K90" id="tsy-CT-fJA"/>
+                        <outlet property="previousLabel" destination="d7C-eH-pU8" id="zQO-h9-Up5"/>
+                        <outlet property="progressionButton" destination="bGd-Ik-Uh2" id="qBL-2H-LPp"/>
+                        <outlet property="resetButton" destination="rEm-Xo-GSW" id="uNP-GM-bzX"/>
+                        <outlet property="secsLabel" destination="4Eb-wS-mrZ" id="s2e-Zo-LTF"/>
+                        <outlet property="startTimerButton" destination="IjC-7l-K3s" id="GMB-QH-qYc"/>
+                        <outlet property="subtitleLabel" destination="3ZL-Bg-JJ6" id="ede-TD-w2J"/>
+                        <outlet property="titleLabel" destination="DgG-FG-T6Z" id="Vnq-mf-hf1"/>
+                        <segue destination="BHy-YD-KHy" kind="unwind" identifier="unwindToExerciseID" unwindAction="unwindToExercise:" id="mBq-TZ-sbZ"/>
+                        <segue destination="BHy-YD-KHy" kind="unwind" identifier="unwindToWorkoutID" unwindAction="unwindToWorkout:" id="w4N-q2-XJI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5wG-xa-Thj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="BHy-YD-KHy" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2055" y="-320"/>
         </scene>
         <!--Programs-->
         <scene sceneID="wg7-f3-ORb">

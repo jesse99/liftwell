@@ -17,7 +17,7 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
         view.setNeedsDisplay()
         
         let notify = NotificationCenter.default
-        notify.addObserver(self, selector: #selector(WorkoutsTabController.enteringForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        notify.addObserver(self, selector: #selector(WorkoutsTabController.enteringForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {

@@ -36,7 +36,7 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     override func decodeRestorableState(with coder: NSCoder) {
-        breadcrumb = coder.decodeObject(forKey: "breadcrumb") as! String
+        breadcrumb = (coder.decodeObject(forKey: "breadcrumb") as! String)
         
         let name = coder.decodeObject(forKey: "workout.name") as! String
         let app = UIApplication.shared.delegate as! AppDelegate
@@ -84,8 +84,7 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
         //        }
     }
     
-    @IBAction func unwindToWorkout(_ segue:UIStoryboardSegue)
-    {
+    @IBAction func unwindToWorkout(_ segue:UIStoryboardSegue) {
         tableView.reloadData()
     }
     
@@ -103,35 +102,36 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
         let name = filtered[index]
         let app = UIApplication.shared.delegate as! AppDelegate
         if let exercise = app.program.findExercise(name) {
-            if case .underway = exercise.state(), exercise.on(workout) {
-                cell.textLabel!.text = exercise.label()
-                cell.detailTextLabel!.text = exercise.sublabel()
+            let info = exercise.getInfo()
+            if case .underway = info.state, info.on(workout) {
+                cell.textLabel!.text = info.label(exercise)
+                cell.detailTextLabel!.text = info.sublabel(exercise)
                 cell.textLabel?.setColor(.red)
                 cell.detailTextLabel?.setColor(.red)    // TODO: use targetColor
                 
             } else {
-                if exercise.start(workout) == nil {
-                    if case let .error(err) = exercise.state() {
+                if info.start(workout, exercise) == nil {
+                    if case let .error(err) = info.state {
                         cell.textLabel!.text = name
                         cell.detailTextLabel!.text = err
                         cell.textLabel?.setColor(.black)
                         cell.detailTextLabel?.setColor(.black)
                         
                     } else {
-                        cell.textLabel!.text = exercise.label()
-                        cell.detailTextLabel!.text = exercise.sublabel()
-                        let calendar = Calendar.current
-                        if let completed = exercise.completed[workout.name], calendar.isDate(completed, inSameDayAs: Date()) {
-                            cell.textLabel?.setColor(.lightGray)
-                            cell.detailTextLabel?.setColor(.lightGray)
-                        } else {
-                            cell.textLabel?.setColor(.black)
-                            cell.detailTextLabel?.setColor(.black)
-                        }
+                        cell.textLabel!.text = info.label(exercise)
+                        cell.detailTextLabel!.text = info.sublabel(exercise)
+                        //                        let calendar = Calendar.current       // TODO: implement this
+//                        if let completed = info.completed[workout.name], calendar.isDate(completed, inSameDayAs: Date()) {
+//                            cell.textLabel?.setColor(.lightGray)
+//                            cell.detailTextLabel?.setColor(.lightGray)
+//                        } else {
+//                            cell.textLabel?.setColor(.black)
+//                            cell.detailTextLabel?.setColor(.black)
+//                        }
                     }
                     
                 } else {
-                    cell.textLabel!.text = exercise.label()
+                    cell.textLabel!.text = info.label(exercise)
                     cell.detailTextLabel!.text = "Not completed"
                     cell.textLabel?.setColor(.black)
                     cell.detailTextLabel?.setColor(.black)
@@ -186,13 +186,14 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
         let name = filtered[index]
         let app = UIApplication.shared.delegate as! AppDelegate
         if let exercise = app.program.findExercise(name) {
-            if case .underway = exercise.state(), exercise.on(workout) {
+            let info = exercise.getInfo()
+            if case .underway = info.state, info.on(workout) {
                 presentExercise(exercise)
                 
             } else {
                 // If we're started but not underway we want to re-start to ensure that we pickup
                 // on any changes from a base exercise.
-                if exercise.start(workout) != nil {
+                if info.start(workout, exercise) != nil {
 //                if let newPlan = exercise.start(workout) {
                     //                    let newName = exercise.name + "-" + newPlan.planName  // TODO: something here
 //                    let newExercise = exercise.withPlan(newName, newPlan)
@@ -208,9 +209,10 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
 //                            presentExercise(newExercise)
 //                        }
 //                    }
+                    assert(false, "not implemented")
                     
                 } else {
-                    switch exercise.state() {
+                    switch info.state {
                     case .error(let mesg):
                         err = mesg
                     default:
@@ -229,10 +231,10 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     private func presentExercise(_ exercise: Exercise) {
-        //        let storyboard = UIStoryboard(name: "Main", bundle: nil)  // TODO: implement
-//        let view = storyboard.instantiateViewController(withIdentifier: "ExerciseID") as! ExerciseController
-//        view.initialize(workout, exercise, breadcrumbLabel.text!, "unwindToWorkoutID")
-//        self.present(view, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let view = storyboard.instantiateViewController(withIdentifier: "ExerciseID") as! ExerciseController
+        view.initialize(workout, exercise, breadcrumbLabel.text!, "unwindToWorkoutID")
+        self.present(view, animated: true, completion: nil)
     }
     
     //    private func isSkipped(_ workout: Workout, _ exerciseName: String) -> Bool

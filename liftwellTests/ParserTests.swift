@@ -69,18 +69,18 @@ class ParserTests: XCTestCase {
         switch parser.parseSets() {
         case .left(let err): XCTAssert(false, "\(err.mesg) at \(err.offset)")
         case .right(let sets):
-            XCTAssertEqual(sets.count, 2)
-            XCTAssertEqual(sets[0].minReps, 5)
-            XCTAssertEqual(sets[0].maxReps, 5)
-            XCTAssertEqual(sets[0].percent, 1.0)
-            XCTAssertEqual(sets[0].amrap, false)
-            XCTAssertEqual(sets[0].rest, true)
+            XCTAssertEqual(sets.sets.count, 2)
+            XCTAssertEqual(sets.sets[0].minReps, 5)
+            XCTAssertEqual(sets.sets[0].maxReps, 5)
+            XCTAssertEqual(sets.sets[0].percent, 1.0)
+            XCTAssertEqual(sets.sets[0].amrap, false)
+            XCTAssertEqual(sets.sets[0].rest, true)
             
-            XCTAssertEqual(sets[1].minReps, 3)
-            XCTAssertEqual(sets[1].maxReps, 3)
-            XCTAssertEqual(sets[1].percent, 1.0)
-            XCTAssertEqual(sets[1].amrap, false)
-            XCTAssertEqual(sets[1].rest, false)
+            XCTAssertEqual(sets.sets[1].minReps, 3)
+            XCTAssertEqual(sets.sets[1].maxReps, 3)
+            XCTAssertEqual(sets.sets[1].percent, 1.0)
+            XCTAssertEqual(sets.sets[1].amrap, false)
+            XCTAssertEqual(sets.sets[1].rest, false)
         }
     }
     
@@ -89,24 +89,24 @@ class ParserTests: XCTestCase {
         switch parser.parseSets() {
         case .left(let err): XCTAssert(false, "\(err.mesg) at \(err.offset)")
         case .right(let sets):
-            XCTAssertEqual(sets.count, 3)
-            XCTAssertEqual(sets[0].minReps, 5)
-            XCTAssertEqual(sets[0].maxReps, 5)
-            XCTAssertEqual(sets[0].percent, 0.5)
-            XCTAssertEqual(sets[0].amrap, false)
-            XCTAssertEqual(sets[0].rest, true)
+            XCTAssertEqual(sets.sets.count, 3)
+            XCTAssertEqual(sets.sets[0].minReps, 5)
+            XCTAssertEqual(sets.sets[0].maxReps, 5)
+            XCTAssertEqual(sets.sets[0].percent, 0.5)
+            XCTAssertEqual(sets.sets[0].amrap, false)
+            XCTAssertEqual(sets.sets[0].rest, true)
             
-            XCTAssertEqual(sets[1].minReps, 4)
-            XCTAssertEqual(sets[1].maxReps, 8)
-            XCTAssertEqual(sets[1].percent, 1.0)
-            XCTAssertEqual(sets[1].amrap, false)
-            XCTAssertEqual(sets[1].rest, true)
+            XCTAssertEqual(sets.sets[1].minReps, 4)
+            XCTAssertEqual(sets.sets[1].maxReps, 8)
+            XCTAssertEqual(sets.sets[1].percent, 1.0)
+            XCTAssertEqual(sets.sets[1].amrap, false)
+            XCTAssertEqual(sets.sets[1].rest, true)
             
-            XCTAssertEqual(sets[2].minReps, 4)
-            XCTAssertEqual(sets[2].maxReps, 4)
-            XCTAssertEqual(sets[2].percent, 1.0)
-            XCTAssertEqual(sets[2].amrap, true)
-            XCTAssertEqual(sets[2].rest, false)
+            XCTAssertEqual(sets.sets[2].minReps, 4)
+            XCTAssertEqual(sets.sets[2].maxReps, 4)
+            XCTAssertEqual(sets.sets[2].percent, 1.0)
+            XCTAssertEqual(sets.sets[2].amrap, true)
+            XCTAssertEqual(sets.sets[2].rest, false)
         }
     }
     
@@ -151,16 +151,16 @@ class ParserTests: XCTestCase {
             XCTAssertEqual(cycles.count, 2)
             
             let cycle1 = cycles[0]
-            XCTAssertEqual(cycle1.count, 3)
-            XCTAssertEqual(cycle1[0].minReps, 5)
-            XCTAssertEqual(cycle1[1].minReps, 3)
-            XCTAssertEqual(cycle1[2].minReps, 5)
+            XCTAssertEqual(cycle1.sets.count, 3)
+            XCTAssertEqual(cycle1.sets[0].minReps, 5)
+            XCTAssertEqual(cycle1.sets[1].minReps, 3)
+            XCTAssertEqual(cycle1.sets[2].minReps, 5)
             
             let cycle2 = cycles[1]
-            XCTAssertEqual(cycle2.count, 3)
-            XCTAssertEqual(cycle2[0].minReps, 5)
-            XCTAssertEqual(cycle2[1].minReps, 3)
-            XCTAssertEqual(cycle2[2].minReps, 3)
+            XCTAssertEqual(cycle2.sets.count, 3)
+            XCTAssertEqual(cycle2.sets[0].minReps, 5)
+            XCTAssertEqual(cycle2.sets[1].minReps, 3)
+            XCTAssertEqual(cycle2.sets[2].minReps, 3)
         }
     }
 }

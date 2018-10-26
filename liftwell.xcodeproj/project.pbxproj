@@ -25,6 +25,10 @@
 		3728686121699CC7005F6FD0 /* SubTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728686021699CC7005F6FD0 /* SubTypes.swift */; };
 		37286863216A6C42005F6FD0 /* RepsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286862216A6C42005F6FD0 /* RepsParser.swift */; };
 		37286865216A83A5005F6FD0 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286864216A83A5005F6FD0 /* Either.swift */; };
+		374D3EDA217BFBD100AC828D /* DateExtensionw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3ED9217BFBD100AC828D /* DateExtensionw.swift */; };
+		374D3EDC217D4F4E00AC828D /* ExerciseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3EDB217D4F4E00AC828D /* ExerciseController.swift */; };
+		374D3EDE217D50EF00AC828D /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3EDD217D50EF00AC828D /* ColorExtensions.swift */; };
+		374D3EE0217D510E00AC828D /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3EDF217D510E00AC828D /* FontExtensions.swift */; };
 		37EFD6D22172C54500F60880 /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D12172C54500F60880 /* Weight.swift */; };
 		37EFD6D42172C60A00F60880 /* WeightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D32172C60A00F60880 /* WeightsTests.swift */; };
 		37EFD6D62172CA6700F60880 /* PopulateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D52172CA6700F60880 /* PopulateTests.swift */; };
@@ -32,6 +36,7 @@
 		37EFD6DA21780EDC00F60880 /* LabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D921780EDC00F60880 /* LabelExtensions.swift */; };
 		37EFD6DC217A2D9000F60880 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6DB217A2D9000F60880 /* Set.swift */; };
 		37EFD6DE217A679F00F60880 /* Sets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6DD217A679F00F60880 /* Sets.swift */; };
+		37EFD6E0217B710A00F60880 /* ExerciseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6DF217B710A00F60880 /* ExerciseInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +72,10 @@
 		3728686021699CC7005F6FD0 /* SubTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTypes.swift; sourceTree = "<group>"; };
 		37286862216A6C42005F6FD0 /* RepsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsParser.swift; sourceTree = "<group>"; };
 		37286864216A83A5005F6FD0 /* Either.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
+		374D3ED9217BFBD100AC828D /* DateExtensionw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionw.swift; sourceTree = "<group>"; };
+		374D3EDB217D4F4E00AC828D /* ExerciseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseController.swift; sourceTree = "<group>"; };
+		374D3EDD217D50EF00AC828D /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		374D3EDF217D510E00AC828D /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		37EFD6D12172C54500F60880 /* Weight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weight.swift; sourceTree = "<group>"; };
 		37EFD6D32172C60A00F60880 /* WeightsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsTests.swift; sourceTree = "<group>"; };
 		37EFD6D52172CA6700F60880 /* PopulateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateTests.swift; sourceTree = "<group>"; };
@@ -74,6 +83,7 @@
 		37EFD6D921780EDC00F60880 /* LabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtensions.swift; sourceTree = "<group>"; };
 		37EFD6DB217A2D9000F60880 /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		37EFD6DD217A679F00F60880 /* Sets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sets.swift; sourceTree = "<group>"; };
+		37EFD6DF217B710A00F60880 /* ExerciseInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +129,8 @@
 				37286825216259AE005F6FD0 /* AppDelegate.swift */,
 				37286864216A83A5005F6FD0 /* Either.swift */,
 				3728684F21631462005F6FD0 /* Exercise.swift */,
+				37EFD6DF217B710A00F60880 /* ExerciseInfo.swift */,
+				374D3EDB217D4F4E00AC828D /* ExerciseController.swift */,
 				3728684C21631302005F6FD0 /* Extensions */,
 				37286848216311D3005F6FD0 /* Program.swift */,
 				3728685721684231005F6FD0 /* Programs */,
@@ -163,8 +175,11 @@
 		3728684C21631302005F6FD0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				3728684D21631314005F6FD0 /* SequenceExtensions.swift */,
+				374D3EDD217D50EF00AC828D /* ColorExtensions.swift */,
+				374D3ED9217BFBD100AC828D /* DateExtensionw.swift */,
 				37EFD6D921780EDC00F60880 /* LabelExtensions.swift */,
+				3728684D21631314005F6FD0 /* SequenceExtensions.swift */,
+				374D3EDF217D510E00AC828D /* FontExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -227,9 +242,11 @@
 				TargetAttributes = {
 					37286821216259AE005F6FD0 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					37286837216259B0005F6FD0 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 37286821216259AE005F6FD0;
 					};
 				};
@@ -283,18 +300,23 @@
 				37EFD6D82176C69900F60880 /* WorkoutController.swift in Sources */,
 				37286859216842C8005F6FD0 /* Mine2.swift in Sources */,
 				3728684B21631202005F6FD0 /* Store.swift in Sources */,
+				374D3EDA217BFBD100AC828D /* DateExtensionw.swift in Sources */,
 				37286849216311D3005F6FD0 /* Program.swift in Sources */,
 				3728682A216259AE005F6FD0 /* ProgramsTabController.swift in Sources */,
 				37EFD6D22172C54500F60880 /* Weight.swift in Sources */,
 				3728685421644C0C005F6FD0 /* Apparatus.swift in Sources */,
 				37286826216259AE005F6FD0 /* AppDelegate.swift in Sources */,
+				374D3EDE217D50EF00AC828D /* ColorExtensions.swift in Sources */,
 				3728685F21699C17005F6FD0 /* Types.swift in Sources */,
 				37EFD6DA21780EDC00F60880 /* LabelExtensions.swift in Sources */,
+				37EFD6E0217B710A00F60880 /* ExerciseInfo.swift in Sources */,
 				3728684E21631314005F6FD0 /* SequenceExtensions.swift in Sources */,
 				37286865216A83A5005F6FD0 /* Either.swift in Sources */,
 				3728685021631462005F6FD0 /* Exercise.swift in Sources */,
 				37286863216A6C42005F6FD0 /* RepsParser.swift in Sources */,
 				37EFD6DE217A679F00F60880 /* Sets.swift in Sources */,
+				374D3EDC217D4F4E00AC828D /* ExerciseController.swift in Sources */,
+				374D3EE0217D510E00AC828D /* FontExtensions.swift in Sources */,
 				37286828216259AE005F6FD0 /* WorkoutsTabController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -468,7 +490,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.mushin.liftwell;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -487,7 +509,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.mushin.liftwell;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -507,7 +529,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.mushin.liftwellTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/liftwell.app/liftwell";
 			};
@@ -528,7 +550,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.mushin.liftwellTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/liftwell.app/liftwell";
 			};

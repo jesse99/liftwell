@@ -1,14 +1,19 @@
 //  Created by Jesse Jones on 10/1/18.
 //  Copyright © 2018 MushinApps. All rights reserved.
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            self.notificationsAreEnabled = granted
+        }
+
         return true
     }
-
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -29,6 +34,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func scheduleTimerNotification(_ fireDate: Date) {
+        let content = UNMutableNotificationContent()
+        content.title = "Finished resting."
+        content.body = ""
+        content.sound = UNNotificationSound.default
+        
+        let time = fireDate.timeIntervalSinceNow
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: time, repeats: false)
+        let request = UNNotificationRequest(identifier: "FinishedResting", content: content, trigger: trigger)
+        let center = UNUserNotificationCenter.current()
+        center.add(request, withCompletionHandler: nil)
     }
     
     func _assert(_ predicate: Bool, _ message: String) {
@@ -53,6 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let program = Mine2()
+    var notificationsAreEnabled = false
 }
 
 func assert(_ predicate: Bool, _ message: String) {

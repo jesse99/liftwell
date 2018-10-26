@@ -35,14 +35,14 @@ fileprivate func bodyweight(_ name: String, _ formalName: String, _ numSets: Int
 }
 
 fileprivate func bodyweight(_ name: String, _ formalName: String, numSets: Int, goalReps: Int, restMins: Double) -> Exercise {
-    let rest = Int(restMins/60.0)
+    let rest = Int(restMins*60.0)
     let subtype = MaxRepsSubType(numSets: numSets, goalReps: goalReps, restSecs: rest, restAtEnd: true)
     let type = BodyType(.maxReps(subtype))
     return Exercise(name, formalName, .body(type))
 }
 
 fileprivate func dumbbell(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
-    let rest = Int(restMins/60.0)
+    let rest = Int(restMins*60.0)
     let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest, advance: "If form was solid and you think you could have done another rep or two.", advance2: nil)
 
     let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: availableMagnets())
@@ -52,7 +52,7 @@ fileprivate func dumbbell(_ name: String, _ formalName: String, _ reps: String, 
 }
 
 fileprivate func barbell(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
-    let rest = Int(restMins/60.0)
+    let rest = Int(restMins*60.0)
     let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest, advance: "If form was solid and you think you could have done another rep or two.", advance2: nil)
     
     let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: defaultBumpers(), magnets: [])
