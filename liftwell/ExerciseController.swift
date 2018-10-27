@@ -198,7 +198,7 @@ class ExerciseController: UIViewController {
         updateUI()
         
         let app = UIApplication.shared.delegate as! AppDelegate
-        app.saveResults()
+        app.saveState()
     }
     
     @IBAction func nextPressed(_ sender: Any) {
@@ -262,7 +262,7 @@ class ExerciseController: UIViewController {
     
     private func finish() {
         let app = UIApplication.shared.delegate as! AppDelegate
-        app.saveResults()
+        app.saveState()
         
         performSegue(withIdentifier: unwindTo, sender: self)
     }
@@ -410,7 +410,7 @@ class ExerciseController: UIViewController {
 //                breadcrumbLabel.text = breadcrumb
 //            }
 //        }
-//        frontend.saveResults()
+//        app.saveState()
 //
 //        resetPressed(self)
 //    }

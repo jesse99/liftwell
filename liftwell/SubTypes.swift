@@ -34,7 +34,7 @@ class ApparatusSubtype {
     
     func save(_ store: Store) {
         store.addStr("advance", advance ?? "")
-        store.addStr("advanc2", advance2 ?? "")
+        store.addStr("advance2", advance2 ?? "")
         
         store.addDbl("weight", weight)
         store.addInt("reps", reps)
@@ -137,19 +137,26 @@ class ApparatusSubtype {
         index = 0
     }
     
-    fileprivate func getRepRange() -> (Int, Int) {
+    fileprivate func getBaseRepRange() -> (Int, Int) {
         assert(false)   // subclasses implement this
         return (0, 0)
     }
     
-    private func doAdvance(_ apparatus: Apparatus, _ by: Int) {
-        let (min, max) = getRepRange()
-        if reps + 1 > max {
-            let w = Weight(weight, apparatus)
-            reps = min
-            weight = w.nextWeight()
-        } else {
-            reps += 1
+    private func doAdvance(_ apparatus: Apparatus, _ amount: Int) {
+        let (min, max) = getBaseRepRange()
+        let delta = amount.signum()
+        for _ in 0..<abs(amount) {
+            if reps + delta > max {
+                let w = Weight(weight, apparatus)
+                reps = min
+                weight = w.nextWeight()
+            } else if reps + delta < min {
+                let w = Weight(weight, apparatus)
+                reps = max
+                weight = w.prevWeight()
+            } else {
+                reps += delta
+            }
         }
     }
     
@@ -268,8 +275,8 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
         super.finalize(exercise, tag, view, completion)
     }
     
-    fileprivate override func getRepRange() -> (Int, Int) {
-        return cycles[cycleIndex].repRange(minimum: reps)
+    fileprivate override func getBaseRepRange() -> (Int, Int) {
+        return cycles[cycleIndex].repRange(minimum: nil)
     }
     
     var cycles: [Sets]
@@ -496,7 +503,7 @@ class MaxRepsSubType: ExerciseInfo {
     private var setIndex: Int = 0
 }
 
-/// Simple scheme where number of sets if fixed.
+/// Simple scheme where number of sets is fixed.
 class RepsSubType: ApparatusSubtype, ExerciseInfo {
     class Result: BaseResult, Storable {
         init(_ tag: ResultTag, weight: Double, reps: Int) {
@@ -578,8 +585,8 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
         super.finalize(exercise, tag, view, completion )
     }
     
-    fileprivate override func getRepRange() -> (Int, Int) {
-        return sets.repRange(minimum: reps)
+    fileprivate override func getBaseRepRange() -> (Int, Int) {
+        return sets.repRange(minimum: nil)
     }
 
     var sets: Sets
@@ -644,7 +651,7 @@ class TimedSubType: ExerciseInfo {
         store.addInt("numSets", numSets)
         store.addInt("targetTime", targetTime ?? 0)
         store.addStr("advance", advance ?? "")
-        store.addStr("advanc2", advance2 ?? "")
+        store.addStr("advance2", advance2 ?? "")
         
         store.addDbl("weight", weight)
         store.addInt("currentTime", currentTime)
