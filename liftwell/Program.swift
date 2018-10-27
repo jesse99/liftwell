@@ -224,6 +224,18 @@ class Program: Storable {
         for (i, name) in customNames.enumerated() {
             customNotes[name] = customText[i]
         }
+        
+        if store.hasKey("maxWorkouts") {
+            self.maxWorkouts = store.getInt("maxWorkouts")
+        } else {
+            self.maxWorkouts = nil
+        }
+        
+        if store.hasKey("nextProgram") {
+            self.nextProgram = store.getStr("nextProgram")
+        } else {
+            self.nextProgram = nil
+        }
     }
     
     func save(_ store: Store) {
@@ -234,6 +246,13 @@ class Program: Storable {
         store.addStr("description", description)
         store.addStrArray("custom-names", Array(customNotes.keys))
         store.addStrArray("custom-text", Array(customNotes.values))
+
+        if let maxWorkouts = self.maxWorkouts {
+            store.addInt("maxWorkouts", maxWorkouts)
+        }
+        if let nextProgram = self.nextProgram {
+            store.addStr("nextProgram", nextProgram)
+        }
     }
     
     func findWorkout(_ name: String) -> Workout? {

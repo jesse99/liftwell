@@ -3,9 +3,37 @@
 import AVFoundation // for kSystemSoundID_Vibrate
 import Foundation
 import UIKit           // for UIColor
+import os.log
 
 /// Sets vary (typically each week).
 class CyclicRepsSubtype: ExerciseInfo {
+    class Result: BaseResult, Storable {
+        init(_ tag: ResultTag, weight: Double, cycleIndex: Int, reps: Int) {
+            self.weight = weight
+            self.cycleIndex = cycleIndex
+            self.reps = reps
+            super.init(tag)
+        }
+        
+        required init(from store: Store) {
+            self.weight = store.getDbl("weight")
+            self.cycleIndex = store.getInt("cycleIndex")
+            self.reps = store.getInt("reps")
+            super.init(from: store)
+        }
+
+        override func save(_ store: Store) {
+            store.addDbl("weight", weight)
+            store.addInt("cycleIndex", cycleIndex)
+            store.addInt("reps", reps)
+            super.save(store)
+        }
+
+        var weight: Double
+        var cycleIndex: Int
+        var reps: Int
+    }
+
     init(cycles: [Sets], reps: Int, restSecs: Int, advance: String?, advance2: String?) {
         self.cycles = cycles
         self.advance = advance
@@ -31,8 +59,13 @@ class CyclicRepsSubtype: ExerciseInfo {
         
         self.weight = store.getDbl("weight")
         self.cycleIndex = store.getInt("cycleIndex")
-        self.restTime = store.getInt("restTime")
         self.reps = store.getInt("reps")
+        self.restTime = store.getInt("restTime")
+
+        self.currentWorkout = store.getStr("currentWorkout")
+        self.activities = store.getObjArray("activities")
+        self.numWarmups = store.getInt("numWarmups")
+        self.index = store.getInt("index")
     }
     
     func save(_ store: Store) {
@@ -45,8 +78,13 @@ class CyclicRepsSubtype: ExerciseInfo {
         
         store.addDbl("weight", weight)
         store.addInt("cycleIndex", cycleIndex)
-        store.addInt("restTime", restTime)
         store.addInt("reps", reps)
+        store.addInt("restTime", restTime)
+
+        store.addStr("currentWorkout", currentWorkout)
+        store.addObjArray("activities", activities) // TODO: generate
+        store.addInt("numWarmups", numWarmups)
+        store.addInt("index", index)
     }
     
     public func errors() -> [String] {
@@ -76,8 +114,8 @@ class CyclicRepsSubtype: ExerciseInfo {
 
     func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
         switch exercise.type {
-        case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight)
-        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus)
+        case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight, minimum: reps)
+        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, minimum: reps)
         }
         index = 0
         currentWorkout = workout.name
@@ -100,7 +138,11 @@ class CyclicRepsSubtype: ExerciseInfo {
     }
     
     func prevLabel() -> (String, UIColor) {
-        return ("", UIColor.black)  // TODO: implement this
+        if let last = CyclicRepsSubtype.results.last {
+            return ("\(last.tag) \(last.reps) reps @ \(last.weight)", UIColor.black)  // TODO: implement this
+        } else {
+            return ("", UIColor.black)  // TODO: implement this
+        }
     }
     
     func historyLabel() -> String {
@@ -128,7 +170,9 @@ class CyclicRepsSubtype: ExerciseInfo {
     }
     
     func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        // TODO: append results
+        let result = Result(tag, weight: weight, cycleIndex: cycleIndex, reps: reps)
+        CyclicRepsSubtype.results.append(result)
+
         switch exercise.type {
         case .body(_): completion()
         case .weights(let type):
@@ -175,8 +219,7 @@ class CyclicRepsSubtype: ExerciseInfo {
     }
     
     private func doAdvance(_ apparatus: Apparatus, _ by: Int) {
-        // TODO: update history
-        let (min, max) = cycles[cycleIndex].repRange()
+        let (min, max) = cycles[cycleIndex].repRange(minimum: reps)
         if reps + 1 > max {
             let w = Weight(weight, apparatus)
             reps = min
@@ -194,10 +237,11 @@ class CyclicRepsSubtype: ExerciseInfo {
     var advance: String?    // prompt that allows the user to advance reps or weight, note that deloads are handled at the program level
     var advance2: String?   // allows the user to advance by twice as much
     
-    var weight: Double         // starts out at 0.0
+    var weight: Double      // starts out at 0.0
     var cycleIndex: Int
-    var restTime: Int
     var reps: Int           // this only applies when minReps < maxReps, also this can be less than minReps
+    var restTime: Int
+    static var results: [Result] = []
     
     private var currentWorkout = ""
     private var activities: [Activity] = []
@@ -207,6 +251,33 @@ class CyclicRepsSubtype: ExerciseInfo {
 
 /// As many reps as possible for each set.
 class MaxRepsSubType: ExerciseInfo {
+    class Result: BaseResult, Storable {
+        init(_ tag: ResultTag, weight: Double, currentReps: Int, completed: [Int]) {
+            self.weight = weight
+            self.currentReps = currentReps
+            self.completed = completed
+            super.init(tag)
+        }
+        
+        required init(from store: Store) {
+            self.weight = store.getDbl("weight")
+            self.currentReps = store.getInt("currentReps")
+            self.completed = store.getIntArray("completed")
+            super.init(from: store)
+        }
+        
+        override func save(_ store: Store) {
+            store.addDbl("weight", weight)
+            store.addInt("currentReps", currentReps)
+            store.addIntArray("completed", completed)
+            super.save(store)
+        }
+        
+        var weight: Double
+        var currentReps: Int
+        var completed: [Int] = []
+    }
+    
     init(numSets: Int, goalReps: Int, restSecs: Int, restAtEnd: Bool) {
         self.numSets = numSets
         self.currentReps = 5*numSets
@@ -219,22 +290,30 @@ class MaxRepsSubType: ExerciseInfo {
     
     required init(from store: Store) {
         self.numSets = store.getInt("numSets")
-        self.currentReps = store.getInt("currentReps")
         self.goalReps = store.getInt("goalReps")
         self.restAtEnd = store.getBool("restAtEnd")
 
         self.weight = store.getDbl("weight")
+        self.currentReps = store.getInt("currentReps")
+        self.completed = store.getIntArray("completed")
         self.restTime = store.getInt("restTime")
+
+        self.currentWorkout = store.getStr("currentWorkout")
+        self.setIndex = store.getInt("setIndex")
     }
     
     func save(_ store: Store) {
         store.addInt("numSets", numSets)
-        store.addInt("currentReps", currentReps)
         store.addInt("goalReps", goalReps)
         store.addBool("restAtEnd", restAtEnd)
 
         store.addDbl("weight", weight)
+        store.addInt("currentReps", currentReps)
+        store.addIntArray("completed", completed)
         store.addInt("restTime", restTime)
+
+        store.addStr("currentWorkout", currentWorkout)
+        store.addInt("setIndex", setIndex)
     }
     
     public func errors() -> [String] {
@@ -244,10 +323,6 @@ class MaxRepsSubType: ExerciseInfo {
         }
         return problems
     }
-    
-    // TODO: should we have methods to return number of activities and the nth activity?
-    // TODO: Exercise could update activity per completed (or maybe call an updateActivity method)
-    // TODO: Exercise could reset completed
     
     // ---- ExerciseInfo ----------------------------------------------------------------------
     var state: ExerciseState {
@@ -349,7 +424,9 @@ class MaxRepsSubType: ExerciseInfo {
     }
     
     func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        // TODO: append result
+        let result = Result(tag, weight: weight, currentReps: currentReps, completed: completed)
+        MaxRepsSubType.results.append(result)
+        
         completion()
     }
     
@@ -378,20 +455,44 @@ class MaxRepsSubType: ExerciseInfo {
     }
 
     var numSets: Int
-    var currentReps: Int
     var goalReps: Int       // typically user would then switch to a harder version of the exercise or add weights
     var restAtEnd: Bool
 
     var weight: Double      // starts out at 0.0
+    var currentReps: Int
+    var completed: [Int] = []
     var restTime: Int
-    
+    static var results: [Result] = []
+
     private var currentWorkout = ""
     private var setIndex: Int = 0
-    private var completed: [Int] = []
 }
 
 /// Simple scheme where number of sets if fixed.
 class RepsSubType: ExerciseInfo {
+    class Result: BaseResult, Storable {
+        init(_ tag: ResultTag, weight: Double, reps: Int) {
+            self.weight = weight
+            self.reps = reps
+            super.init(tag)
+        }
+        
+        required init(from store: Store) {
+            self.weight = store.getDbl("weight")
+            self.reps = store.getInt("reps")
+            super.init(from: store)
+        }
+        
+        override func save(_ store: Store) {
+            store.addDbl("weight", weight)
+            store.addInt("reps", reps)
+            super.save(store)
+        }
+        
+        var weight: Double
+        var reps: Int
+    }
+    
     init(sets: Sets, reps: Int, restSecs: Int, advance: String?, advance2: String?) {
         self.sets = sets
         self.advance = advance
@@ -410,8 +511,13 @@ class RepsSubType: ExerciseInfo {
         self.advance2 = a2 != "" ? a2 : nil
         
         self.weight = store.getDbl("weight")
-        self.restTime = store.getInt("restTime")
         self.reps = store.getInt("reps")
+        self.restTime = store.getInt("restTime")
+
+        self.currentWorkout = store.getStr("currentWorkout")
+        self.activities = store.getObjArray("activities")
+        self.numWarmups = store.getInt("numWarmups")
+        self.index = store.getInt("index")
     }
     
     func save(_ store: Store) {
@@ -420,8 +526,13 @@ class RepsSubType: ExerciseInfo {
         store.addStr("advanc2", advance2 ?? "")
         
         store.addDbl("weight", weight)
-        store.addInt("restTime", restTime)
         store.addInt("reps", reps)
+        store.addInt("restTime", restTime)
+
+        store.addStr("currentWorkout", currentWorkout)
+        store.addObjArray("activities", activities)
+        store.addInt("numWarmups", numWarmups)
+        store.addInt("index", index)
     }
     
     public func errors() -> [String] {
@@ -447,8 +558,8 @@ class RepsSubType: ExerciseInfo {
     
     func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
         switch exercise.type {
-        case .body(_): (numWarmups, activities) = sets.activities(weight)
-        case .weights(let type): (numWarmups, activities) = sets.activities(weight, type.apparatus)
+        case .body(_): (numWarmups, activities) = sets.activities(weight, minimum: reps)
+        case .weights(let type): (numWarmups, activities) = sets.activities(weight, type.apparatus, minimum: reps)
         }
         index = 0
         currentWorkout = workout.name
@@ -471,11 +582,16 @@ class RepsSubType: ExerciseInfo {
     }
     
     func prevLabel() -> (String, UIColor) {
-        return ("", UIColor.black)  // TODO: implement this
+        if let last = RepsSubType.results.last {
+            return ("\(last.tag) \(last.reps) reps @ \(last.weight)", UIColor.black)  // TODO: implement this
+        } else {
+            return ("", UIColor.black)  // TODO: implement this
+        }
     }
     
     func historyLabel() -> String {
-        return ""  // TODO: implement this
+        let a = RepsSubType.results.map {"\($0.reps)"}
+        return a.joined(separator: ", ")  // TODO: implement this
     }
     
     func current(_ exercise: Exercise) -> Activity {
@@ -499,7 +615,9 @@ class RepsSubType: ExerciseInfo {
     }
     
     func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        // TODO: append results
+        let result = Result(tag, weight: weight, reps: reps)
+        RepsSubType.results.append(result)
+        
         switch exercise.type {
         case .body(_): completion()
         case .weights(let type):
@@ -546,8 +664,7 @@ class RepsSubType: ExerciseInfo {
     }
     
     private func doAdvance(_ apparatus: Apparatus, _ by: Int) {
-        // TODO: update history
-        let (min, max) = sets.repRange()
+        let (min, max) = sets.repRange(minimum: reps)
         if reps + 1 > max {
             let w = Weight(weight, apparatus)
             reps = min
@@ -566,9 +683,10 @@ class RepsSubType: ExerciseInfo {
     var advance2: String?   // allows the user to advance by twice as much
     
     var weight: Double      // starts out at 0.0
-    var restTime: Int
     var reps: Int           // this only applies when minReps < maxReps, also this can be less than minReps
-    
+    var restTime: Int
+    static var results: [Result] = []
+
     private var currentWorkout = ""
     private var activities: [Activity] = []
     private var numWarmups: Int = 0
@@ -577,6 +695,29 @@ class RepsSubType: ExerciseInfo {
 
 // Exercise is performed for a specified duration.
 class TimedSubType: ExerciseInfo {
+    class Result: BaseResult, Storable {
+        init(_ tag: ResultTag, weight: Double, currentTime: Int) {
+            self.weight = weight
+            self.currentTime = currentTime
+            super.init(tag)
+        }
+        
+        required init(from store: Store) {
+            self.weight = store.getDbl("weight")
+            self.currentTime = store.getInt("currentTime")
+            super.init(from: store)
+        }
+        
+        override func save(_ store: Store) {
+            store.addDbl("weight", weight)
+            store.addInt("currentTime", currentTime)
+            super.save(store)
+        }
+        
+        var weight: Double
+        var currentTime: Int
+    }
+    
     init(numSets: Int, currentTime: Int, targetTime: Int?, restSecs: Int, advance: String?, advance2: String?) {
         self.numSets = numSets
         self.currentTime = currentTime
@@ -600,6 +741,10 @@ class TimedSubType: ExerciseInfo {
         self.weight = store.getDbl("weight")
         self.currentTime = store.getInt("currentTime")
         self.restTime = store.getInt("restTime")
+
+        self.currentWorkout = store.getStr("currentWorkout")
+        self.activities = store.getObjArray("activities")
+        self.index = store.getInt("index")
     }
     
     func save(_ store: Store) {
@@ -611,6 +756,10 @@ class TimedSubType: ExerciseInfo {
         store.addDbl("weight", weight)
         store.addInt("currentTime", currentTime)
         store.addInt("restTime", restTime)
+
+        store.addStr("currentWorkout", currentWorkout)
+        store.addObjArray("activities", activities)
+        store.addInt("index", index)
     }
     
     public func errors() -> [String] {
@@ -705,7 +854,9 @@ class TimedSubType: ExerciseInfo {
     }
     
     func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        // TODO: append results
+        let result = Result(tag, weight: weight, currentTime: currentTime)
+        TimedSubType.results.append(result)
+        
         completion()
     }
     
@@ -725,7 +876,8 @@ class TimedSubType: ExerciseInfo {
     var weight: Double         // starts out at 0.0
     var currentTime: Int
     var restTime: Int
-    
+    static var results: [Result] = []
+
     private var currentWorkout = ""
     private var activities: [Activity] = []
     private var index: Int = 0

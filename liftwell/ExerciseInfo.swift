@@ -5,7 +5,7 @@ import UIKit           // for UIColor
 //import os.log
 
 /// Generic description of what the user needs to do for a particular activity within an ExerciseController.
-struct Activity {
+struct Activity: Storable {
     /// "Warmup 3 of 6"
     let title: String
     
@@ -26,6 +26,38 @@ struct Activity {
     
     /// X11 background color name. Note that case is ignored.
     let color: String?
+    
+    init(title: String, subtitle: String, amount: String, details: String, buttonName: String, showStartButton: Bool, color: String?) {
+        self.title = title
+        self.subtitle = subtitle
+        self.amount = amount
+        self.details = details
+        self.buttonName = buttonName
+        self.showStartButton = showStartButton
+        self.color = color
+    }
+
+    init(from store: Store) {
+        self.title = store.getStr("title")
+        self.subtitle = store.getStr("subtitle")
+        self.amount = store.getStr("amount")
+        self.details = store.getStr("details")
+        self.buttonName = store.getStr("buttonName")
+        self.showStartButton = store.getBool("showStartButton")
+
+        let c = store.getStr("color")
+        self.color = c != "" ? c : nil
+    }
+    
+    func save(_ store: Store) {
+        store.addStr("title", title)
+        store.addStr("subtitle", subtitle)
+        store.addStr("amount", amount)
+        store.addStr("details", details)
+        store.addStr("buttonName", buttonName)
+        store.addBool("showStartButton", showStartButton)
+        store.addStr("color", color ?? "")
+    }
 }
 
 struct RestTime {
@@ -72,13 +104,6 @@ enum ExerciseState {
     /// Start was called but there was some fatal error that prevents the exercise from executing. For example,
     /// PercentOfPlan cannot find the base plan.  TODO: fix name
     case error(String)
-}
-
-enum ResultTag {
-    case easy
-    case normal
-    case hard
-    case failed
 }
 
 /// Implemented by SubTypes and used to perform an Exercise.

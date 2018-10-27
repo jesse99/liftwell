@@ -67,17 +67,28 @@ struct Sets: Storable {
         }
     }
     
-    func repRange() -> (Int, Int) {
+    // So here we need to return the minimum and maximum we're supposed to use for worksets.
+    // In general, we can't really do this but hopefully there are no programs that do stuff
+    // like have worksets at [4-8, 3-5]. TODO: should we warn for that?
+    func repRange(minimum: Int?) -> (Int, Int) {
+        var minReps = 1
+        var maxReps = 1
+        
         let (_, worksets, _) = partition()
-        if let max = worksets.sets.max(by: {(lhs, rhs) -> Bool in lhs.maxReps < rhs.maxReps}) {
-            if let min = worksets.sets.min(by: {(lhs, rhs) -> Bool in lhs.minReps < rhs.minReps}) {
-                return (min.minReps, max.maxReps)
+        if let set = worksets.sets.first(where: {$0.minReps < $0.maxReps}) {
+            if let min = minimum {            // minimum only applies if set.minReps < set.maxReps
+                minReps = min
             } else {
-                return (0, max.maxReps)
+                minReps = set.minReps
             }
-        } else {
-            return (0, 0)
+            maxReps = set.maxReps
+
+        } else if !worksets.sets.isEmpty {
+            minReps = worksets.sets[0].minReps
+            maxReps = worksets.sets[0].maxReps
         }
+        
+        return (minReps, maxReps)
     }
     
     /// "3x5-10 @ 100 lbs".
@@ -106,7 +117,7 @@ struct Sets: Storable {
         return ""
     }
 
-    func activities(_ weight: Double, _ apparatus: Apparatus) -> (Int, [Activity]) {
+    func activities(_ weight: Double, _ apparatus: Apparatus, minimum: Int) -> (Int, [Activity]) {
         var result: [Activity] = []
         let (warmups, worksets, backoff) = partition()
         for (i, reps) in warmups.sets.enumerated() {
@@ -125,7 +136,7 @@ struct Sets: Storable {
             result.append(Activity(
                 title: "Workset \(i+1) of \(worksets.sets.count)",
                 subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
-                amount: "\(reps) @ \(w.text)",
+                amount: "\(reps.label(minimum: minimum)) @ \(w.text)",
                 details: w.plates,
                 buttonName: i+1 == worksets.sets.count && backoff.sets.isEmpty ? "Done" : "Next",
                 showStartButton: true,
@@ -136,7 +147,7 @@ struct Sets: Storable {
             result.append(Activity(
                 title: "Backoff \(i+1) of \(backoff.sets.count)",
                 subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
-                amount: "\(reps) @ \(w.text)",
+                amount: "\(reps) @ \(w.text)",  // TODO: should probably check that variable reps is only used with worksets
                 details: w.plates,
                 buttonName: i+1 == backoff.sets.count ? "Done" : "Next",
                 showStartButton: true,
@@ -145,7 +156,7 @@ struct Sets: Storable {
         return (warmups.sets.count, result)
     }
     
-    func activities(_ weight: Double) -> (Int, [Activity]) {
+    func activities(_ weight: Double, minimum: Int) -> (Int, [Activity]) {
         var result: [Activity] = []
         let (warmups, worksets, backoff) = partition()
         for (i, reps) in warmups.sets.enumerated() {
@@ -164,7 +175,7 @@ struct Sets: Storable {
             result.append(Activity(
                 title: "Workset \(i+1) of \(worksets.sets.count)",
                 subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
-                amount: "\(reps) @ \(w)",
+                amount: "\(reps.label(minimum: minimum)) @ \(w)",
                 details: "",
                 buttonName: i+1 == worksets.sets.count && backoff.sets.isEmpty ? "Done" : "Next",
                 showStartButton: true,

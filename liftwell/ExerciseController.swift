@@ -197,8 +197,8 @@ class ExerciseController: UIViewController {
         //        info.refresh()    // TODO: do we need this?
         updateUI()
         
-//        let app = UIApplication.shared.delegate as! AppDelegate
-//        app.saveExercise(exercise.name)
+        let app = UIApplication.shared.delegate as! AppDelegate
+        app.saveResults()
     }
     
     @IBAction func nextPressed(_ sender: Any) {
@@ -242,7 +242,7 @@ class ExerciseController: UIViewController {
     
     private func setTag(_ info: ExerciseInfo) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        let completion: () -> Void = {self.performSegue(withIdentifier: self.unwindTo, sender: self)}
+        let completion: () -> Void = {self.finish()}
         
         var action = UIAlertAction(title: "Easy", style: .default) {_ in info.finalize(self.exercise, .easy, self, completion)}
         alert.addAction(action)
@@ -258,6 +258,13 @@ class ExerciseController: UIViewController {
         alert.addAction(action)
 
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func finish() {
+        let app = UIApplication.shared.delegate as! AppDelegate
+        app.saveResults()
+        
+        performSegue(withIdentifier: unwindTo, sender: self)
     }
     
     private func handleNext(_ action: String) {
@@ -403,7 +410,7 @@ class ExerciseController: UIViewController {
 //                breadcrumbLabel.text = breadcrumb
 //            }
 //        }
-//        frontend.saveExercise(exercise.name)
+//        frontend.saveResults()
 //
 //        resetPressed(self)
 //    }
