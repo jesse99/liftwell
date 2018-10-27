@@ -187,7 +187,11 @@
                                 <items>
                                     <navigationItem id="YjX-gf-jOL">
                                         <leftBarButtonItems>
-                                            <barButtonItem title="Exit" id="EXX-Wt-07Y"/>
+                                            <barButtonItem title="Exit" id="EXX-Wt-07Y">
+                                                <connections>
+                                                    <segue destination="BHy-YD-KHy" kind="unwind" unwindAction="unwindToWorkout:" id="KXD-ct-Zqw"/>
+                                                </connections>
+                                            </barButtonItem>
                                             <barButtonItem title="Reset" id="rEm-Xo-GSW">
                                                 <connections>
                                                     <action selector="resetPressed:" destination="azc-Pf-KwC" id="STZ-rX-q4a"/>
