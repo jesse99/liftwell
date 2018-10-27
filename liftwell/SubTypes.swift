@@ -5,63 +5,27 @@ import Foundation
 import UIKit           // for UIColor
 import os.log
 
-/// Sets vary (typically each week).
-class CyclicRepsSubtype: ExerciseInfo {
-    class Result: BaseResult, Storable {
-        init(_ tag: ResultTag, weight: Double, cycleIndex: Int, reps: Int) {
-            self.weight = weight
-            self.cycleIndex = cycleIndex
-            self.reps = reps
-            super.init(tag)
-        }
-        
-        required init(from store: Store) {
-            self.weight = store.getDbl("weight")
-            self.cycleIndex = store.getInt("cycleIndex")
-            self.reps = store.getInt("reps")
-            super.init(from: store)
-        }
-
-        override func save(_ store: Store) {
-            store.addDbl("weight", weight)
-            store.addInt("cycleIndex", cycleIndex)
-            store.addInt("reps", reps)
-            super.save(store)
-        }
-
-        var weight: Double
-        var cycleIndex: Int
-        var reps: Int
-    }
-
-    init(cycles: [Sets], reps: Int, restSecs: Int, advance: String?, advance2: String?) {
-        self.cycles = cycles
+/// Base class for Subtypes that use an apparatus.
+class ApparatusSubtype {
+    init(reps: Int, restSecs: Int, advance: String?, advance2: String?) {
         self.advance = advance
         self.advance2 = advance2
         
         self.weight = 100.0     // TODO: start at 0.0
-        self.cycleIndex = 0
         self.restTime = restSecs
         self.reps = reps
     }
     
     required init(from store: Store) {
-        cycles = []
-        let count = store.getInt("cyclesCount")
-        for i in 0..<count {
-            let cycle: Sets = store.getObj("cycle\(i)")
-            cycles.append(cycle)
-        }
         let a = store.getStr("advance")
         self.advance = a != "" ? a : nil
         let a2 = store.getStr("advance2")
         self.advance2 = a2 != "" ? a2 : nil
         
         self.weight = store.getDbl("weight")
-        self.cycleIndex = store.getInt("cycleIndex")
         self.reps = store.getInt("reps")
         self.restTime = store.getInt("restTime")
-
+        
         self.currentWorkout = store.getStr("currentWorkout")
         self.activities = store.getObjArray("activities")
         self.numWarmups = store.getInt("numWarmups")
@@ -69,32 +33,19 @@ class CyclicRepsSubtype: ExerciseInfo {
     }
     
     func save(_ store: Store) {
-        store.addInt("cyclesCount", cycles.count)
-        for (i, cycle) in cycles.enumerated() {
-            store.addObj("cycle\(i)", cycle)
-        }
         store.addStr("advance", advance ?? "")
         store.addStr("advanc2", advance2 ?? "")
         
         store.addDbl("weight", weight)
-        store.addInt("cycleIndex", cycleIndex)
         store.addInt("reps", reps)
         store.addInt("restTime", restTime)
-
+        
         store.addStr("currentWorkout", currentWorkout)
         store.addObjArray("activities", activities) // TODO: generate
         store.addInt("numWarmups", numWarmups)
         store.addInt("index", index)
     }
     
-    public func errors() -> [String] {
-        var problems: [String] = []
-        for sets in cycles {
-            problems += sets.errors()
-        }
-        return problems
-    }
-
     // ---- ExerciseInfo ----------------------------------------------------------------------
     var state: ExerciseState {
         get {
@@ -111,16 +62,6 @@ class CyclicRepsSubtype: ExerciseInfo {
             }
         }
     }
-
-    func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
-        switch exercise.type {
-        case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight, minimum: reps)
-        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, minimum: reps)
-        }
-        index = 0
-        currentWorkout = workout.name
-        return nil
-    }
     
     func on(_ workout: Workout) -> Bool {
         return currentWorkout == workout.name
@@ -128,25 +69,6 @@ class CyclicRepsSubtype: ExerciseInfo {
     
     func label(_ exercise: Exercise) -> String {
         return exercise.name
-    }
-    
-    func sublabel(_ exercise: Exercise) -> String {
-        switch exercise.type {
-        case .body(_): return cycles[cycleIndex].sublabel(nil, weight, reps)
-        case .weights(let type): return cycles[cycleIndex].sublabel(type.apparatus, weight, reps)
-        }
-    }
-    
-    func prevLabel() -> (String, UIColor) {
-        if let last = CyclicRepsSubtype.results.last {
-            return ("\(last.tag) \(last.reps) reps @ \(last.weight)", UIColor.black)  // TODO: implement this
-        } else {
-            return ("", UIColor.black)  // TODO: implement this
-        }
-    }
-    
-    func historyLabel() -> String {
-        return ""  // TODO: implement this
     }
     
     func current(_ exercise: Exercise) -> Activity {
@@ -170,9 +92,6 @@ class CyclicRepsSubtype: ExerciseInfo {
     }
     
     func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        let result = Result(tag, weight: weight, cycleIndex: cycleIndex, reps: reps)
-        CyclicRepsSubtype.results.append(result)
-
         switch exercise.type {
         case .body(_): completion()
         case .weights(let type):
@@ -180,10 +99,10 @@ class CyclicRepsSubtype: ExerciseInfo {
             
             let advance2 = UIAlertAction(title: "Advance x2", style: .default) {_ in self.doAdvance(type.apparatus, 2); completion()}
             let advance = UIAlertAction(title: "Advance", style: .default) {_ in self.doAdvance(type.apparatus, 1); completion()}
-            let maintain = UIAlertAction(title: "Maintain", style: .default) {_ in self.doMaintain(); completion()}
+            let maintain = UIAlertAction(title: "Maintain", style: .default) {_ in completion()}
             let deload = UIAlertAction(title: "Deload", style: .default) {_ in self.doAdvance(type.apparatus, -1); completion()}
             let deload2 = UIAlertAction(title: "Deload x2", style: .default) {_ in self.doAdvance(type.apparatus, -2); completion()}
-
+            
             switch tag {
             case .easy:
                 alert.addAction(advance2)
@@ -218,8 +137,13 @@ class CyclicRepsSubtype: ExerciseInfo {
         index = 0
     }
     
+    fileprivate func getRepRange() -> (Int, Int) {
+        assert(false)   // subclasses implement this
+        return (0, 0)
+    }
+    
     private func doAdvance(_ apparatus: Apparatus, _ by: Int) {
-        let (min, max) = cycles[cycleIndex].repRange(minimum: reps)
+        let (min, max) = getRepRange()
         if reps + 1 > max {
             let w = Weight(weight, apparatus)
             reps = min
@@ -229,24 +153,128 @@ class CyclicRepsSubtype: ExerciseInfo {
         }
     }
     
-    private func doMaintain() {
-        // TODO: update history
-    }
-
-    var cycles: [Sets]
     var advance: String?    // prompt that allows the user to advance reps or weight, note that deloads are handled at the program level
     var advance2: String?   // allows the user to advance by twice as much
     
     var weight: Double      // starts out at 0.0
-    var cycleIndex: Int
     var reps: Int           // this only applies when minReps < maxReps, also this can be less than minReps
     var restTime: Int
-    static var results: [Result] = []
     
-    private var currentWorkout = ""
-    private var activities: [Activity] = []
-    private var numWarmups: Int = 0
-    private var index: Int = 0
+    fileprivate var currentWorkout = ""
+    fileprivate var activities: [Activity] = []
+    fileprivate var numWarmups: Int = 0
+    fileprivate var index: Int = 0
+}
+
+class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
+    class Result: BaseResult, Storable {
+        init(_ tag: ResultTag, weight: Double, cycleIndex: Int, reps: Int) {
+            self.weight = weight
+            self.cycleIndex = cycleIndex
+            self.reps = reps
+            super.init(tag)
+        }
+        
+        required init(from store: Store) {
+            self.weight = store.getDbl("weight")
+            self.cycleIndex = store.getInt("cycleIndex")
+            self.reps = store.getInt("reps")
+            super.init(from: store)
+        }
+
+        override func save(_ store: Store) {
+            store.addDbl("weight", weight)
+            store.addInt("cycleIndex", cycleIndex)
+            store.addInt("reps", reps)
+            super.save(store)
+        }
+
+        var weight: Double
+        var cycleIndex: Int
+        var reps: Int
+    }
+
+    init(cycles: [Sets], reps: Int, restSecs: Int, advance: String?, advance2: String?) {
+        self.cycles = cycles
+        self.cycleIndex = 0
+        
+        super.init(reps: reps, restSecs: restSecs, advance: advance, advance2: advance2)
+    }
+    
+    required init(from store: Store) {
+        cycles = []
+        let count = store.getInt("cyclesCount")
+        for i in 0..<count {
+            let cycle: Sets = store.getObj("cycle\(i)")
+            cycles.append(cycle)
+        }
+        self.cycleIndex = store.getInt("cycleIndex")
+        
+        super.init(from: store)
+    }
+    
+    override func save(_ store: Store) {
+        store.addInt("cyclesCount", cycles.count)
+        for (i, cycle) in cycles.enumerated() {
+            store.addObj("cycle\(i)", cycle)
+        }
+        store.addInt("cycleIndex", cycleIndex)
+        
+        super.save(store)
+    }
+    
+    public func errors() -> [String] {
+        var problems: [String] = []
+        for sets in cycles {
+            problems += sets.errors()
+        }
+        return problems
+    }
+
+    // ---- ExerciseInfo ----------------------------------------------------------------------
+    func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
+        switch exercise.type {
+        case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight, minimum: reps)
+        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, minimum: reps)
+        }
+        index = 0
+        currentWorkout = workout.name
+        return nil
+    }
+    
+    func sublabel(_ exercise: Exercise) -> String {
+        switch exercise.type {
+        case .body(_): return cycles[cycleIndex].sublabel(nil, weight, reps)
+        case .weights(let type): return cycles[cycleIndex].sublabel(type.apparatus, weight, reps)
+        }
+    }
+    
+    func prevLabel() -> (String, UIColor) {
+        if let last = CyclicRepsSubtype.results.last {
+            return ("\(last.tag) \(last.reps) reps @ \(last.weight)", UIColor.black)  // TODO: implement this
+        } else {
+            return ("", UIColor.black)  // TODO: implement this
+        }
+    }
+    
+    func historyLabel() -> String {
+        return ""  // TODO: implement this
+    }
+    
+    override func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
+        let result = Result(tag, weight: weight, cycleIndex: cycleIndex, reps: reps)
+        CyclicRepsSubtype.results.append(result)
+        
+        super.finalize(exercise, tag, view, completion)
+    }
+    
+    fileprivate override func getRepRange() -> (Int, Int) {
+        return cycles[cycleIndex].repRange(minimum: reps)
+    }
+    
+    var cycles: [Sets]
+    var cycleIndex: Int
+    static var results: [Result] = []
 }
 
 /// As many reps as possible for each set.
@@ -469,7 +497,7 @@ class MaxRepsSubType: ExerciseInfo {
 }
 
 /// Simple scheme where number of sets if fixed.
-class RepsSubType: ExerciseInfo {
+class RepsSubType: ApparatusSubtype, ExerciseInfo {
     class Result: BaseResult, Storable {
         init(_ tag: ResultTag, weight: Double, reps: Int) {
             self.weight = weight
@@ -495,44 +523,17 @@ class RepsSubType: ExerciseInfo {
     
     init(sets: Sets, reps: Int, restSecs: Int, advance: String?, advance2: String?) {
         self.sets = sets
-        self.advance = advance
-        self.advance2 = advance2
-        
-        self.weight = 100.0     // TODO: start at 0.0
-        self.restTime = restSecs
-        self.reps = reps
+        super.init(reps: reps, restSecs: restSecs, advance: advance, advance2: advance2)
     }
     
     required init(from store: Store) {
         self.sets = store.getObj("sets")
-        let a = store.getStr("advance")
-        self.advance = a != "" ? a : nil
-        let a2 = store.getStr("advance2")
-        self.advance2 = a2 != "" ? a2 : nil
-        
-        self.weight = store.getDbl("weight")
-        self.reps = store.getInt("reps")
-        self.restTime = store.getInt("restTime")
-
-        self.currentWorkout = store.getStr("currentWorkout")
-        self.activities = store.getObjArray("activities")
-        self.numWarmups = store.getInt("numWarmups")
-        self.index = store.getInt("index")
+        super.init(from: store)
     }
     
-    func save(_ store: Store) {
+    override func save(_ store: Store) {
         store.addObj("sets", sets)
-        store.addStr("advance", advance ?? "")
-        store.addStr("advanc2", advance2 ?? "")
-        
-        store.addDbl("weight", weight)
-        store.addInt("reps", reps)
-        store.addInt("restTime", restTime)
-
-        store.addStr("currentWorkout", currentWorkout)
-        store.addObjArray("activities", activities)
-        store.addInt("numWarmups", numWarmups)
-        store.addInt("index", index)
+        super.save(store)
     }
     
     public func errors() -> [String] {
@@ -540,22 +541,6 @@ class RepsSubType: ExerciseInfo {
     }
     
     // ---- ExerciseInfo ----------------------------------------------------------------------
-    var state: ExerciseState {
-        get {
-            if activities.isEmpty {
-                return .waiting
-            } else if activities.count == 0 {
-                return .error("There is nothing to do")
-            } else if index == 0 {
-                return .started
-            } else if index == activities.count {
-                return .finished
-            } else {
-                return .underway
-            }
-        }
-    }
-    
     func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
         switch exercise.type {
         case .body(_): (numWarmups, activities) = sets.activities(weight, minimum: reps)
@@ -564,14 +549,6 @@ class RepsSubType: ExerciseInfo {
         index = 0
         currentWorkout = workout.name
         return nil
-    }
-    
-    func on(_ workout: Workout) -> Bool {
-        return currentWorkout == workout.name
-    }
-    
-    func label(_ exercise: Exercise) -> String {
-        return exercise.name
     }
     
     func sublabel(_ exercise: Exercise) -> String {
@@ -594,103 +571,19 @@ class RepsSubType: ExerciseInfo {
         return a.joined(separator: ", ")  // TODO: implement this
     }
     
-    func current(_ exercise: Exercise) -> Activity {
-        return index < activities.count ? activities[index] : activities.last!
-    }
-    
-    func restSecs() -> RestTime {
-        return RestTime(autoStart: index > numWarmups, secs: restTime)
-    }
-    
-    func restSound() -> UInt32 {
-        return kSystemSoundID_Vibrate
-    }
-    
-    func completions(_ exercise: Exercise) -> [Completion] {
-        if index+1 < activities.count {
-            return [Completion(title: "", info: "", callback: {self.index += 1})]
-        } else {
-            return [Completion(title: "", info: "", callback: {self.index = self.activities.count})]
-        }
-    }
-    
-    func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
+    override func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let result = Result(tag, weight: weight, reps: reps)
         RepsSubType.results.append(result)
         
-        switch exercise.type {
-        case .body(_): completion()
-        case .weights(let type):
-            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-            
-            let advance2 = UIAlertAction(title: "Advance x2", style: .default) {_ in self.doAdvance(type.apparatus, 2); completion()}
-            let advance = UIAlertAction(title: "Advance", style: .default) {_ in self.doAdvance(type.apparatus, 1); completion()}
-            let maintain = UIAlertAction(title: "Maintain", style: .default) {_ in self.doMaintain(); completion()}
-            let deload = UIAlertAction(title: "Deload", style: .default) {_ in self.doAdvance(type.apparatus, -1); completion()}
-            let deload2 = UIAlertAction(title: "Deload x2", style: .default) {_ in self.doAdvance(type.apparatus, -2); completion()}
-            
-            switch tag {
-            case .easy:
-                alert.addAction(advance2)
-                alert.addAction(advance)
-                alert.addAction(maintain)
-                alert.preferredAction = advance2
-                
-            case .normal:
-                alert.addAction(advance)
-                alert.addAction(maintain)
-                alert.preferredAction = advance
-                
-            case .hard:
-                alert.addAction(advance)
-                alert.addAction(maintain)
-                alert.addAction(deload)
-                alert.preferredAction = maintain
-                
-            case .failed:
-                alert.addAction(advance)
-                alert.addAction(maintain)
-                alert.addAction(deload)
-                alert.addAction(deload2)
-                alert.preferredAction = deload
-            }
-            
-            view.present(alert, animated: true, completion: nil)
-        }
+        super.finalize(exercise, tag, view, completion )
     }
     
-    func reset() {
-        index = 0
+    fileprivate override func getRepRange() -> (Int, Int) {
+        return sets.repRange(minimum: reps)
     }
-    
-    private func doAdvance(_ apparatus: Apparatus, _ by: Int) {
-        let (min, max) = sets.repRange(minimum: reps)
-        if reps + 1 > max {
-            let w = Weight(weight, apparatus)
-            reps = min
-            weight = w.nextWeight()
-        } else {
-            reps += 1
-        }
-    }
-    
-    private func doMaintain() {
-        // TODO: update history
-    }
-    
-    var sets: Sets
-    var advance: String?    // prompt that allows the user to advance reps or weight
-    var advance2: String?   // allows the user to advance by twice as much
-    
-    var weight: Double      // starts out at 0.0
-    var reps: Int           // this only applies when minReps < maxReps, also this can be less than minReps
-    var restTime: Int
-    static var results: [Result] = []
 
-    private var currentWorkout = ""
-    private var activities: [Activity] = []
-    private var numWarmups: Int = 0
-    private var index: Int = 0
+    var sets: Sets
+    static var results: [Result] = []
 }
 
 // Exercise is performed for a specified duration.
@@ -865,7 +758,6 @@ class TimedSubType: ExerciseInfo {
     }
     
     private func doMaintain() {
-        // TODO: update history
     }
     
     var numSets: Int
