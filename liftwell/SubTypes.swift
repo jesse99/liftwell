@@ -867,11 +867,28 @@ class TimedSubType: ExerciseInfo {
     }
     
     func prevLabel() -> (String, UIColor) {
-        return ("", UIColor.black)  // TODO: implement this, use secsToStr
+        if let last = TimedSubType.results.last {
+            var count = 0
+            for result in TimedSubType.results.reversed() {
+                if result.tag == TimedSubType.results.last!.tag {
+                    count += 1
+                } else {
+                    break
+                }
+            }
+            if count > 1 {
+                return ("Previous was \(last.tag) x\(count)", UIColor.black)
+            } else {
+                return ("Previous was \(last.tag)", UIColor.black)
+            }
+        } else {
+            return ("", UIColor.black)
+        }
     }
     
     func historyLabel() -> String {
-        return ""  // TODO: implement this
+        let labels = TimedSubType.results.map {($0.weight > 0.0 ? secsToStr($0.currentTime) + " @ " + Weight.friendlyUnitsStr($0.weight) : secsToStr($0.currentTime))}
+        return makeHistoryFromLabels(labels)
     }
     
     func current(_ exercise: Exercise) -> Activity {

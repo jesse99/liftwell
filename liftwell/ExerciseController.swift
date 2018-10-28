@@ -113,7 +113,8 @@ class ExerciseController: UIViewController {
 //        } else {
 //            progressionButton.title = ""
 //        }
-        
+        progressionButton.title = ""
+
         let (label, color) = info.prevLabel()
         previousLabel.text = label
         previousLabel.textColor = color
