@@ -275,13 +275,17 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
 
     // ---- ExerciseInfo ----------------------------------------------------------------------
     func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
+        index = 0
+        currentWorkout = workout.name
+        updated(exercise)
+        return nil
+    }
+    
+    func updated(_ exercise: Exercise) {
         switch exercise.type {
         case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight, minimum: reps)
         case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, minimum: reps)
         }
-        index = 0
-        currentWorkout = workout.name
-        return nil
     }
     
     func sublabel(_ exercise: Exercise) -> String {
@@ -429,6 +433,9 @@ class MaxRepsSubType: ExerciseInfo {
         return nil
     }
     
+    func updated(_ exercise: Exercise) {
+    }
+
     func on(_ workout: Workout) -> Bool {
         return currentWorkout == workout.name
     }
@@ -658,13 +665,17 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     
     // ---- ExerciseInfo ----------------------------------------------------------------------
     func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
+        index = 0
+        currentWorkout = workout.name
+        updated(exercise)
+        return nil
+    }
+    
+    func updated(_ exercise: Exercise) {
         switch exercise.type {
         case .body(_): (numWarmups, activities) = sets.activities(weight, minimum: reps)
         case .weights(let type): (numWarmups, activities) = sets.activities(weight, type.apparatus, minimum: reps)
         }
-        index = 0
-        currentWorkout = workout.name
-        return nil
     }
     
     func sublabel(_ exercise: Exercise) -> String {
@@ -809,6 +820,13 @@ class TimedSubType: ExerciseInfo {
     }
     
     func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
+        index = 0
+        currentWorkout = workout.name
+        updated(exercise)
+        return nil
+    }
+    
+    func updated(_ exercise: Exercise) {
         var w = ""
         var p = ""
         if weight > 0 {
@@ -820,7 +838,7 @@ class TimedSubType: ExerciseInfo {
                 p = c.plates
             }
         }
-
+        
         activities = []
         for i in 0..<numSets {
             activities.append(Activity(
@@ -832,12 +850,8 @@ class TimedSubType: ExerciseInfo {
                 showStartButton: true,
                 color: nil))
         }
-
-        index = 0
-        currentWorkout = workout.name
-        return nil
     }
-    
+
     func on(_ workout: Workout) -> Bool {
         return currentWorkout == workout.name
     }

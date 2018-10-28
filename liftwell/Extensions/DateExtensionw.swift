@@ -33,6 +33,26 @@ func minsToStr(_ mins: Int) -> String {
     }
 }
 
+func strToSecs(_ inText: String) -> Int? {
+    var multiplier = 1.0
+    
+    var text = inText.trimmingCharacters(in: CharacterSet.whitespaces)
+    if text.hasSuffix("s") {
+        text.remove(at: text.index(before: text.endIndex))
+    } else if text.hasSuffix("m") {
+        multiplier = 60.0
+        text.remove(at: text.index(before: text.endIndex))
+    } else if text.hasSuffix("h") {
+        multiplier = 60.0*60.0
+        text.remove(at: text.index(before: text.endIndex))
+    }
+    
+    if let value = Double(text) {
+        return Int(multiplier*value)
+    }
+    return nil
+}
+
 extension Date {
     func minsSinceDate(_ rhs: Date) -> Double {
         let secs = self.timeIntervalSince(rhs)

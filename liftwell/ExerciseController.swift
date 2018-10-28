@@ -418,38 +418,62 @@ class ExerciseController: UIViewController {
     @IBAction func optionsPressed(_ sender: Any) {
         //        dismissTooltip()
         
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        switch exercise.settings {
-//        case .derivedWeight(let setting):
-//            let view = storyboard.instantiateViewController(withIdentifier: "DerivedWeightID") as! DerivedWeightController
-//            view.initialize(exercise, setting, breadcrumbLabel.text!)
-//            present(view, animated: true, completion: nil)
-//
-//        case .fixedWeight(let setting):
-//            let view = storyboard.instantiateViewController(withIdentifier: "FixedWeightID") as! FixedWeightController
-//            view.initialize(exercise, setting, breadcrumbLabel.text!)
-//            present(view, animated: true, completion: nil)
-//
-//        case .variableReps(let setting):
-//            let view = storyboard.instantiateViewController(withIdentifier: "VariableRepsID") as! VariableRepsController
-//            view.initialize(exercise, setting, breadcrumbLabel.text!)
-//            present(view, animated: true, completion: nil)
-//
-//        case .variableWeight(let setting):
-//            let view = storyboard.instantiateViewController(withIdentifier: "VariableWeightID") as! VariableWeightController
-//            view.initialize(exercise, setting, breadcrumbLabel.text!)
-//            present(view, animated: true, completion: nil)
-//
-//        case .intensity(let setting):
-//            let view = storyboard.instantiateViewController(withIdentifier: "IntensityID") as! IntensityController
-//            view.initialize(exercise, setting, breadcrumbLabel.text!)
-//            present(view, animated: true, completion: nil)
-//
-//        case .hiit(let setting):
-//            let view = storyboard.instantiateViewController(withIdentifier: "HIITID") as! HIITController
-//            view.initialize(exercise, setting, breadcrumbLabel.text!)
-//            present(view, animated: true, completion: nil)
-//        }
+        switch exercise.type {
+        case .body(let type):
+            switch type.subtype {
+            case .maxReps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, weight: subtype.weight, reps: subtype.currentReps, cycleIndex: nil, apparatus: nil))
+            case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, weight: subtype.weight, reps: subtype.reps, cycleIndex: nil, apparatus: nil))
+            case .timed(_): assert(false)
+            }
+        case .weights(let type):
+            switch type.subtype {
+            case .cyclic(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, weight: subtype.weight, reps: subtype.reps, cycleIndex: subtype.cycleIndex, apparatus: type.apparatus))
+            case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, weight: subtype.weight, reps: subtype.reps, cycleIndex: nil, apparatus: type.apparatus))
+            case .timed(_): assert(false)
+            }
+        }
+    }
+    
+    private func setRepsOptions(_ options: RepsOptions) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let view = storyboard.instantiateViewController(withIdentifier: "RepsOptionsID") as! RepsOptionController
+        view.initialize(options, completion: self.updateRepsOptions, breadcrumb)
+        present(view, animated: true, completion: nil)
+    }
+    
+    private func updateRepsOptions(_ options: RepsOptions) {
+        switch exercise.type {
+        case .body(let type):
+            switch type.subtype {
+            case .maxReps(let subtype):
+                subtype.restTime = options.rest
+                subtype.weight = options.weight
+                subtype.currentReps = options.reps!
+                subtype.updated(exercise)
+            case .reps(let subtype):
+                subtype.restTime = options.rest
+                subtype.weight = options.weight
+                subtype.reps = options.reps!
+                subtype.updated(exercise)
+            case .timed(_): assert(false)
+            }
+        case .weights(let type):
+            switch type.subtype {
+            case .cyclic(let subtype):
+                subtype.restTime = options.rest
+                subtype.weight = options.weight
+                subtype.reps = options.reps!
+                subtype.cycleIndex = options.cycleIndex!
+                subtype.updated(exercise)
+            case .reps(let subtype):
+                subtype.restTime = options.rest
+                subtype.weight = options.weight
+                subtype.reps = options.reps!
+                subtype.updated(exercise)
+            case .timed(_): assert(false)
+            }
+        }
+        updateUI()
     }
     
     private func startTimer(force: Bool) {

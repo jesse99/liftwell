@@ -114,6 +114,9 @@ protocol ExerciseInfo: Storable {
     /// and state will be set to blocked.
     func start(_ workout: Workout, _ exercise: Exercise) -> Exercise?
     
+    /// Options screen updated state.
+    func updated(_ exercise: Exercise)
+    
     /// Returns true if the plan was started for workout.
     func on(_ workout: Workout) -> Bool
     

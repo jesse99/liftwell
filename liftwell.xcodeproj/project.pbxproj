@@ -30,6 +30,7 @@
 		374D3EDE217D50EF00AC828D /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3EDD217D50EF00AC828D /* ColorExtensions.swift */; };
 		374D3EE0217D510E00AC828D /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3EDF217D510E00AC828D /* FontExtensions.swift */; };
 		374FE9402183D10700CFC284 /* BaseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FE93F2183D10700CFC284 /* BaseResult.swift */; };
+		374FE943218536F500CFC284 /* RepsOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FE942218536F500CFC284 /* RepsOptionsController.swift */; };
 		37EFD6D22172C54500F60880 /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D12172C54500F60880 /* Weight.swift */; };
 		37EFD6D42172C60A00F60880 /* WeightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D32172C60A00F60880 /* WeightsTests.swift */; };
 		37EFD6D62172CA6700F60880 /* PopulateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D52172CA6700F60880 /* PopulateTests.swift */; };
@@ -78,6 +79,7 @@
 		374D3EDD217D50EF00AC828D /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		374D3EDF217D510E00AC828D /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		374FE93F2183D10700CFC284 /* BaseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResult.swift; sourceTree = "<group>"; };
+		374FE942218536F500CFC284 /* RepsOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsOptionsController.swift; sourceTree = "<group>"; };
 		37EFD6D12172C54500F60880 /* Weight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weight.swift; sourceTree = "<group>"; };
 		37EFD6D32172C60A00F60880 /* WeightsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsTests.swift; sourceTree = "<group>"; };
 		37EFD6D52172CA6700F60880 /* PopulateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateTests.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				37EFD6DF217B710A00F60880 /* ExerciseInfo.swift */,
 				374D3EDB217D4F4E00AC828D /* ExerciseController.swift */,
 				3728684C21631302005F6FD0 /* Extensions */,
+				374FE941218536CD00CFC284 /* Options */,
 				37286848216311D3005F6FD0 /* Program.swift */,
 				3728685721684231005F6FD0 /* Programs */,
 				37286862216A6C42005F6FD0 /* RepsParser.swift */,
@@ -193,6 +196,14 @@
 				37286858216842C8005F6FD0 /* Mine2.swift */,
 			);
 			path = Programs;
+			sourceTree = "<group>";
+		};
+		374FE941218536CD00CFC284 /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				374FE942218536F500CFC284 /* RepsOptionsController.swift */,
+			);
+			path = Options;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3728686121699CC7005F6FD0 /* SubTypes.swift in Sources */,
+				374FE943218536F500CFC284 /* RepsOptionsController.swift in Sources */,
 				37EFD6DC217A2D9000F60880 /* Set.swift in Sources */,
 				37EFD6D82176C69900F60880 /* WorkoutController.swift in Sources */,
 				37286859216842C8005F6FD0 /* Mine2.swift in Sources */,
