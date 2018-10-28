@@ -48,25 +48,25 @@ class DumbbellController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @IBAction func magnetsPressed(_ sender: Any) {
-//        var usedMagnets: [Double]
-//        switch apparatus! {
-//        case .dumbbells(weights: _, magnets: let magnets):
-//            usedMagnets = magnets
-//        default:
-//            assert(false, "DumbbellController was called without a dumbbell")
-//            abort()
-//        }
+        var usedMagnets: [Double]
+        switch apparatus! {
+        case .dumbbells(weights: _, magnets: let magnets):
+            usedMagnets = magnets
+        default:
+            assert(false, "DumbbellController was called without a dumbbell")
+            abort()
+        }
         
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let view = storyboard.instantiateViewController(withIdentifier: "WeightsID") as! WeightsController
-//        view.initialize(
-//            available: availableMagnets(),
-//            used: usedMagnets,
-//            emptyOK: true,
-//            self.updateMagnets,
-//            breadcrumbLabel.text! + " • Magnets",
-//            "unwindToDumbbellID")
-//        present(view, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let view = storyboard.instantiateViewController(withIdentifier: "WeightsControllerID") as! WeightsController
+        view.initialize(
+            available: defaultMagnets(),
+            used: usedMagnets,
+            emptyOK: true,
+            self.updateMagnets,
+            breadcrumbLabel.text! + " • Magnets",
+            "unwindToDumbbellID")
+        present(view, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

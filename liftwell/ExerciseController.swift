@@ -459,6 +459,7 @@ class ExerciseController: UIViewController {
             case .timed(_): assert(false)
             }
         case .weights(let type):
+            type.apparatus = options.apparatus!
             switch type.subtype {
             case .cyclic(let subtype):
                 subtype.restTime = options.rest
@@ -473,7 +474,6 @@ class ExerciseController: UIViewController {
                 subtype.updated(exercise)
             case .timed(_): assert(false)
             }
-            type.apparatus = options.apparatus!
         }
         updateUI()
     }
@@ -494,12 +494,12 @@ class ExerciseController: UIViewController {
                 subtype.updated(exercise)
             }
         case .weights(let type):
+            type.apparatus = options.apparatus!
             if case let .timed(subtype) = type.subtype {
                 subtype.currentTime = options.time
                 subtype.weight = options.weight
                 subtype.updated(exercise)
             }
-            type.apparatus = options.apparatus!
         }
         updateUI()
     }

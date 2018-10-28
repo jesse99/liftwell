@@ -109,6 +109,10 @@ func defaultDumbbells() -> [Double] {
     //    }
 }
 
+func defaultMagnets() -> [Double] {
+    return []
+}
+
 func availableMagnets() -> [Double] {
     //    let app = UIApplication.shared.delegate as! AppDelegate
     //    switch app.units() {
