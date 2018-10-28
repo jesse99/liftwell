@@ -59,10 +59,21 @@ class TimedOptionController: UIViewController {
         self.performSegue(withIdentifier: "unwindToExerciseID", sender: self)
     }
     
-    // TODO: look at VariableWeightController
     @IBAction func apparatusPressed(_ sender: Any) {
+        if let apparatus = options.apparatus {
+            if case .dumbbells(_, _) = apparatus {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let view = storyboard.instantiateViewController(withIdentifier: "DumbbellControllerID") as! DumbbellController
+                view.initialize(apparatus, self.updateApparatus, breadcrumb, "unwindToTimedOptionsID")
+                present(view, animated: true, completion: nil)
+            }
+        }
     }
     
+    private func updateApparatus(_ apparatus: Apparatus) {
+        options.apparatus = apparatus
+    }
+
     @IBAction func adjustPressed(_ sender: Any) {
         RepsOptionController.adjustWeight(self, self.adjustWeight)
     }

@@ -88,8 +88,19 @@ class RepsOptionController: UIViewController {
         self.performSegue(withIdentifier: "unwindToExerciseID", sender: self)
     }
     
-    // TODO: look at VariableWeightController
     @IBAction func apparatusPressed(_ sender: Any) {
+        if let apparatus = options.apparatus {
+            if case .dumbbells(_, _) = apparatus {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let view = storyboard.instantiateViewController(withIdentifier: "DumbbellControllerID") as! DumbbellController
+                view.initialize(apparatus, self.updateApparatus, breadcrumb, "unwindToRepsOptionsID")
+                present(view, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    private func updateApparatus(_ apparatus: Apparatus) {
+        options.apparatus = apparatus
     }
     
     static func adjustWeight(_ view: UIViewController, _ adjust: @escaping (Double) -> Void) {

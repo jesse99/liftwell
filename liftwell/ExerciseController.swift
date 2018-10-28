@@ -473,6 +473,7 @@ class ExerciseController: UIViewController {
                 subtype.updated(exercise)
             case .timed(_): assert(false)
             }
+            type.apparatus = options.apparatus!
         }
         updateUI()
     }
@@ -498,6 +499,7 @@ class ExerciseController: UIViewController {
                 subtype.weight = options.weight
                 subtype.updated(exercise)
             }
+            type.apparatus = options.apparatus!
         }
         updateUI()
     }
