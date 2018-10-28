@@ -21,7 +21,7 @@ func parseSets(_ text: String) -> Sets {
 }
 
 fileprivate func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, secs: Int) -> Exercise {
-    let subtype = TimedSubType(numSets: numSets, currentTime: secs, targetTime: nil, restSecs: 0, advance: nil, advance2: nil)
+    let subtype = TimedSubType(numSets: numSets, currentTime: secs, targetTime: nil, advance: nil, advance2: nil)
     let type = BodyType(.timed(subtype))
     return Exercise(name, formalName, .body(type))
 }

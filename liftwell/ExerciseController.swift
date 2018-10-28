@@ -423,17 +423,17 @@ class ExerciseController: UIViewController {
             switch type.subtype {
             case .maxReps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, weight: subtype.weight, reps: subtype.currentReps, cycleIndex: nil, apparatus: nil))
             case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, weight: subtype.weight, reps: subtype.reps, cycleIndex: nil, apparatus: nil))
-            case .timed(_): assert(false)
+            case .timed(let subtype): setTimedOptions(TimedOptions(time: subtype.currentTime, weight: subtype.weight, apparatus: nil))
             }
         case .weights(let type):
             switch type.subtype {
             case .cyclic(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, weight: subtype.weight, reps: subtype.reps, cycleIndex: subtype.cycleIndex, apparatus: type.apparatus))
             case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, weight: subtype.weight, reps: subtype.reps, cycleIndex: nil, apparatus: type.apparatus))
-            case .timed(_): assert(false)
+            case .timed(let subtype): setTimedOptions(TimedOptions(time: subtype.currentTime, weight: subtype.weight, apparatus: type.apparatus))
             }
         }
     }
-    
+
     private func setRepsOptions(_ options: RepsOptions) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let view = storyboard.instantiateViewController(withIdentifier: "RepsOptionsID") as! RepsOptionController
@@ -476,6 +476,31 @@ class ExerciseController: UIViewController {
         updateUI()
     }
     
+    private func setTimedOptions(_ options: TimedOptions) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let view = storyboard.instantiateViewController(withIdentifier: "TimedOptionID") as! TimedOptionController
+        view.initialize(options, completion: self.updateTimedOptions, breadcrumb)
+        present(view, animated: true, completion: nil)
+    }
+    
+    private func updateTimedOptions(_ options: TimedOptions) {
+        switch exercise.type {
+        case .body(let type):
+            if case let .timed(subtype) = type.subtype {
+                subtype.currentTime = options.time
+                subtype.weight = options.weight
+                subtype.updated(exercise)
+            }
+        case .weights(let type):
+            if case let .timed(subtype) = type.subtype {
+                subtype.currentTime = options.time
+                subtype.weight = options.weight
+                subtype.updated(exercise)
+            }
+        }
+        updateUI()
+    }
+
     private func startTimer(force: Bool) {
         let info = exercise.getInfo()
         let restSecs = info.restSecs().secs

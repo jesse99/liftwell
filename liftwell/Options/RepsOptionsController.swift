@@ -92,58 +92,62 @@ class RepsOptionController: UIViewController {
     @IBAction func apparatusPressed(_ sender: Any) {
     }
     
-    @IBAction func adjustPressed(_ sender: Any) {
+    static func adjustWeight(_ view: UIViewController, _ adjust: @escaping (Double) -> Void) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         
         var action = UIAlertAction(title: "+ 20%", style: .default) {_ in
-            self.adjustWeight(0.2)
+            adjust(0.2)
         }
         alert.addAction(action)
         
         action = UIAlertAction(title: "+ 15%", style: .default) {_ in
-            self.adjustWeight(0.15)
+            adjust(0.15)
         }
         alert.addAction(action)
         
         action = UIAlertAction(title: "+ 10%", style: .default) {_ in
-            self.adjustWeight(0.1)
+            adjust(0.1)
         }
         alert.addAction(action)
         
         action = UIAlertAction(title: "+ 5%", style: .default) {_ in
-            self.adjustWeight(0.05)
+            adjust(0.05)
         }
         alert.addAction(action)
         
         action = UIAlertAction(title: "0%", style: .default) {_ in
-            self.adjustWeight(0.0)
+            adjust(0.0)
         }
         alert.addAction(action)
         
         action = UIAlertAction(title: "- 5%", style: .default) {_ in
-            self.adjustWeight(-0.05)
+            adjust(-0.05)
         }
         alert.addAction(action)
         
         action = UIAlertAction(title: "- 10%", style: .default) {_ in
-            self.adjustWeight(-0.1)
+            adjust(-0.1)
         }
         alert.addAction(action)
         
         action = UIAlertAction(title: "- 15%", style: .default) {_ in
-            self.adjustWeight(-0.15)
+            adjust(-0.15)
         }
         alert.addAction(action)
         
         action = UIAlertAction(title: "- 20%", style: .default) {_ in
-            self.adjustWeight(-0.2)
+            adjust(-0.2)
         }
         alert.addAction(action)
         
         action = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(action)
         
-        self.present(alert, animated: true, completion: nil)
+        view.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func adjustPressed(_ sender: Any) {
+        RepsOptionController.adjustWeight(self, self.adjustWeight)
     }
     
     private func adjustWeight(_ percent: Double) {

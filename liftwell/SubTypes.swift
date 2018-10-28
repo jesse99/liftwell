@@ -750,7 +750,7 @@ class TimedSubType: ExerciseInfo {
         var currentTime: Int
     }
     
-    init(numSets: Int, currentTime: Int, targetTime: Int?, restSecs: Int, advance: String?, advance2: String?) {
+    init(numSets: Int, currentTime: Int, targetTime: Int?, advance: String?, advance2: String?) {
         self.numSets = numSets
         self.currentTime = currentTime
         self.targetTime = targetTime
@@ -758,7 +758,6 @@ class TimedSubType: ExerciseInfo {
         self.advance2 = advance2
         
         self.weight = 0.0
-        self.restTime = restSecs
     }
     
     required init(from store: Store) {
@@ -772,7 +771,6 @@ class TimedSubType: ExerciseInfo {
         
         self.weight = store.getDbl("weight")
         self.currentTime = store.getInt("currentTime")
-        self.restTime = store.getInt("restTime")
 
         self.currentWorkout = store.getStr("currentWorkout")
         self.activities = store.getObjArray("activities")
@@ -787,7 +785,6 @@ class TimedSubType: ExerciseInfo {
         
         store.addDbl("weight", weight)
         store.addInt("currentTime", currentTime)
-        store.addInt("restTime", restTime)
 
         store.addStr("currentWorkout", currentWorkout)
         store.addObjArray("activities", activities)
@@ -827,15 +824,20 @@ class TimedSubType: ExerciseInfo {
     }
     
     func updated(_ exercise: Exercise) {
+        var subtitle = ""
+        if let target = targetTime {
+            subtitle = "Target is \(secsToStr(target))"
+        }
+        
         var w = ""
-        var p = ""
+        var d = ""
         if weight > 0 {
             switch exercise.type {
             case .body(_): w = Weight.friendlyUnitsStr(weight)
             case .weights(let type):
                 let c = Weight(weight, type.apparatus).closest()
                 w = c.text
-                p = c.plates
+                d = c.plates
             }
         }
         
@@ -843,10 +845,10 @@ class TimedSubType: ExerciseInfo {
         for i in 0..<numSets {
             activities.append(Activity(
                 title: "Set \(i+1) of \(numSets)",
-                subtitle: "",
+                subtitle: subtitle,
                 amount: w,
-                details: p,
-                buttonName: "Next",
+                details: d,
+                buttonName: "Start",
                 showStartButton: true,
                 color: nil))
         }
@@ -861,11 +863,11 @@ class TimedSubType: ExerciseInfo {
     }
     
     func sublabel(_ exercise: Exercise) -> String {
-        return secsToShortDurationName(Double(currentTime))
+        return secsToStr(currentTime)
     }
     
     func prevLabel() -> (String, UIColor) {
-        return ("", UIColor.black)  // TODO: implement this
+        return ("", UIColor.black)  // TODO: implement this, use secsToStr
     }
     
     func historyLabel() -> String {
@@ -873,19 +875,23 @@ class TimedSubType: ExerciseInfo {
     }
     
     func current(_ exercise: Exercise) -> Activity {
-        return activities[index]
+        return index < activities.count ? activities[index] : activities.last!
     }
     
     func restSecs() -> RestTime {
-        return RestTime(autoStart: true, secs: restTime)
+        return RestTime(autoStart: true, secs: currentTime)
     }
     
     func restSound() -> UInt32 {
-        return kSystemSoundID_Vibrate
+        return 1007       // see http://iphonedevwiki.net/index.php/AudioServices
     }
     
     func completions(_ exercise: Exercise) -> [Completion] {
-        return [Completion(title: "", info: "", callback: {() -> Void in self.doMaintain()})]
+        if index+1 < activities.count {
+            return [Completion(title: "", info: "", callback: {self.index += 1})]
+        } else {
+            return [Completion(title: "", info: "", callback: {self.index = self.activities.count})]
+        }
     }
     
     func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
@@ -896,10 +902,7 @@ class TimedSubType: ExerciseInfo {
     }
     
     func reset() {
-        index = 0
-    }
-    
-    private func doMaintain() {
+        index = 0   // TODO: probably want some sort of modifiedOn field somewhere
     }
     
     var numSets: Int
@@ -909,7 +912,6 @@ class TimedSubType: ExerciseInfo {
     
     var weight: Double         // starts out at 0.0
     var currentTime: Int
-    var restTime: Int
     static var results: [Result] = []
 
     private var currentWorkout = ""
