@@ -682,12 +682,128 @@
                         <outlet property="doneButton" destination="p6s-d3-uU7" id="YzE-wK-J0X"/>
                         <outlet property="tableView" destination="NRR-Py-zl0" id="tCJ-Xa-g7r"/>
                         <segue destination="HWo-Dd-KBP" kind="unwind" identifier="unwindToDumbbellID" unwindAction="unwindToDumbbell:" id="WqW-sg-a1E"/>
+                        <segue destination="HWo-Dd-KBP" kind="unwind" identifier="unwindToBarbellID" unwindAction="unwindToBarbell:" id="lF5-Nf-jVM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xCZ-Qt-gxx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="HWo-Dd-KBP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2057" y="1038"/>
+        </scene>
+        <!--Barbell Controller-->
+        <scene sceneID="qyk-n5-OfQ">
+            <objects>
+                <viewController storyboardIdentifier="BarbellControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Vzm-6U-66D" customClass="BarbellController" customModule="liftwell" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eH5-Lo-7y4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cgz-5z-zY6">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <navigationItem id="oUp-v1-730">
+                                        <barButtonItem key="leftBarButtonItem" title="Done" id="sWH-B6-2yx">
+                                            <connections>
+                                                <action selector="donePressed:" destination="Vzm-6U-66D" id="iVL-DP-qJ7"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <rightBarButtonItems>
+                                            <barButtonItem title="Magnets" id="qrp-mr-K3Q">
+                                                <connections>
+                                                    <action selector="magnetsPressed:" destination="Vzm-6U-66D" id="xK6-BJ-Lfv"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Bumpers" id="S5w-YY-2u6">
+                                                <connections>
+                                                    <action selector="bumpersPressed:" destination="Vzm-6U-66D" id="zNU-aC-gB0"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Plates" id="LEu-sb-M1q">
+                                                <connections>
+                                                    <action selector="platesPressed:" destination="Vzm-6U-66D" id="8Y2-dD-ghE"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breadcrumb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5l-X7-Sgc">
+                                <rect key="frame" x="150" y="20" width="75" height="16"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collar Weight:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAM-hU-vEm">
+                                <rect key="frame" x="21" y="80.5" width="108" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bar Weight:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Beg-jS-g51">
+                                <rect key="frame" x="21" y="140.5" width="108" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rso-6n-c0G">
+                                <rect key="frame" x="139" y="76" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="EPk-do-Qah"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HZ8-IA-vUy">
+                                <rect key="frame" x="139" y="136" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="y7m-u6-kd2"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="HZ8-IA-vUy" firstAttribute="top" secondItem="Rso-6n-c0G" secondAttribute="bottom" constant="30" id="3WT-U8-QAf"/>
+                            <constraint firstItem="q5l-X7-Sgc" firstAttribute="centerX" secondItem="eH5-Lo-7y4" secondAttribute="centerX" id="3eV-73-nup"/>
+                            <constraint firstItem="HZ8-IA-vUy" firstAttribute="leading" secondItem="Rso-6n-c0G" secondAttribute="leading" id="7o9-dF-Mm0"/>
+                            <constraint firstItem="Beg-jS-g51" firstAttribute="leading" secondItem="TAM-hU-vEm" secondAttribute="leading" id="A7L-pf-Gsr"/>
+                            <constraint firstItem="HZ8-IA-vUy" firstAttribute="centerY" secondItem="Beg-jS-g51" secondAttribute="centerY" id="FG4-rZ-3i7"/>
+                            <constraint firstItem="Rso-6n-c0G" firstAttribute="centerY" secondItem="TAM-hU-vEm" secondAttribute="centerY" id="JI1-Eb-Gf5"/>
+                            <constraint firstItem="q5l-X7-Sgc" firstAttribute="top" secondItem="cXR-br-PXi" secondAttribute="top" id="ThW-l3-X9s"/>
+                            <constraint firstItem="Beg-jS-g51" firstAttribute="trailing" secondItem="TAM-hU-vEm" secondAttribute="trailing" id="ZLW-RI-Ucb"/>
+                            <constraint firstItem="Cgz-5z-zY6" firstAttribute="bottom" secondItem="cXR-br-PXi" secondAttribute="bottom" id="daN-gg-qCG"/>
+                            <constraint firstItem="TAM-hU-vEm" firstAttribute="leading" secondItem="eH5-Lo-7y4" secondAttribute="leadingMargin" constant="5" id="lrc-2v-hJC"/>
+                            <constraint firstItem="Cgz-5z-zY6" firstAttribute="trailing" secondItem="cXR-br-PXi" secondAttribute="trailing" id="n8f-zh-n86"/>
+                            <constraint firstItem="Cgz-5z-zY6" firstAttribute="leading" secondItem="cXR-br-PXi" secondAttribute="leading" id="p5s-7X-m8d"/>
+                            <constraint firstItem="Rso-6n-c0G" firstAttribute="top" secondItem="q5l-X7-Sgc" secondAttribute="bottom" constant="40" id="pqL-aK-uJm"/>
+                            <constraint firstItem="Rso-6n-c0G" firstAttribute="leading" secondItem="TAM-hU-vEm" secondAttribute="trailing" constant="10" id="tvn-UA-NZu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cXR-br-PXi"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="MUX-5e-EpO" appends="YES" id="xgk-6C-rVq"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="barTextbox" destination="HZ8-IA-vUy" id="Mb8-22-uex"/>
+                        <outlet property="breadcrumbLabel" destination="q5l-X7-Sgc" id="VTg-A7-od2"/>
+                        <outlet property="collarTextbox" destination="Rso-6n-c0G" id="j7O-6J-lBa"/>
+                        <segue destination="xeQ-MT-gwD" kind="unwind" identifier="unwindToRepsOptionsID" unwindAction="unwindToRepsOptions:" id="FMf-oM-zKR"/>
+                        <segue destination="xeQ-MT-gwD" kind="unwind" identifier="unwindToTimedOptionsID" unwindAction="unwindToTimedOptions:" id="pyH-1f-69b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ndQ-AQ-1dD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="xeQ-MT-gwD" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="MUX-5e-EpO">
+                    <connections>
+                        <action selector="viewTapped:" destination="Vzm-6U-66D" id="ZfF-vm-PgM"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="2689" y="1041"/>
         </scene>
         <!--Timed Option Controller-->
         <scene sceneID="QhA-Fi-4Uj">

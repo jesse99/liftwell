@@ -90,11 +90,25 @@ class RepsOptionController: UIViewController {
     
     @IBAction func apparatusPressed(_ sender: Any) {
         if let apparatus = options.apparatus {
-            if case .dumbbells(_, _) = apparatus {
+            switch apparatus {
+            case .dumbbells(weights: _, magnets: _):
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let view = storyboard.instantiateViewController(withIdentifier: "DumbbellControllerID") as! DumbbellController
                 view.initialize(apparatus, self.updateApparatus, breadcrumb, "unwindToRepsOptionsID")
                 present(view, animated: true, completion: nil)
+
+            case .barbell(bar: _, collar: _, plates: _, bumpers: _, magnets: _):
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let view = storyboard.instantiateViewController(withIdentifier: "BarbellControllerID") as! BarbellController
+                view.initialize(apparatus, self.updateApparatus, breadcrumb, "unwindToRepsOptionsID")
+                present(view, animated: true, completion: nil)
+
+            case .machine(range1: _, range2: _, extra: _):
+                assert(false)
+            case .pairedPlates(plates: _):
+                assert(false)
+            case .singlePlates(plates: _):
+                assert(false)
             }
         }
     }
