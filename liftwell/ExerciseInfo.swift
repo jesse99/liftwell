@@ -129,10 +129,10 @@ protocol ExerciseInfo: Storable {
     func sublabel(_ exercise: Exercise) -> String
     
     /// "Previous was 125 lbs"
-    func prevLabel() -> (String, UIColor)
+    func prevLabel(_ exercise: Exercise) -> (String, UIColor)
     
     /// "+5 lbs, same x3, +5 lbs x4"
-    func historyLabel() -> String
+    func historyLabel(_ exercise: Exercise) -> String
     
     /// Returns a struct outlining what the user should currently be doing.
     func current(_ exercise: Exercise) -> Activity

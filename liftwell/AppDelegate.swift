@@ -88,10 +88,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func saveResults() {
         let path = getPath(fileName: "results")
         let store = Store()
-        store.addObjArray("cyclic-results", CyclicRepsSubtype.results)
-        store.addObjArray("max-reps-results", MaxRepsSubType.results)
-        store.addObjArray("reps-results", RepsSubType.results)
-        store.addObjArray("timed-results", TimedSubType.results)
+        addResults(store, "cyclic-results", CyclicRepsSubtype.results)
+        addResults(store, "max-reps-results", MaxRepsSubType.results)
+        addResults(store, "reps-results", RepsSubType.results)
+        addResults(store, "timed-results", TimedSubType.results)
         
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .secondsSince1970
@@ -221,10 +221,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 decoder.dateDecodingStrategy = .secondsSince1970
                 let store = try decoder.decode(Store.self, from: data)
                 
-                CyclicRepsSubtype.results = store.getObjArray("cyclic-results")
-                MaxRepsSubType.results = store.getObjArray("max-reps-results")
-                RepsSubType.results = store.getObjArray("reps-results")
-                TimedSubType.results = store.getObjArray("timed-results")
+                CyclicRepsSubtype.results = getResults(store, "cyclic-results")
+                MaxRepsSubType.results = getResults(store, "max-reps-results")
+                RepsSubType.results = getResults(store, "reps-results")
+                TimedSubType.results = getResults(store, "timed-results")
                 
             } catch {
                 os_log("failed to decode results from %@: %@", type: .error, path, error.localizedDescription)

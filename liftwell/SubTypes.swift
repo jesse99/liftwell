@@ -5,6 +5,44 @@ import Foundation
 import UIKit           // for UIColor
 import os.log
 
+func addResults(_ store: Store, _ key: String, _ value: [String: [Storable]]) {
+    store.addStrArray(key + "-keys", Array(value.keys))
+    store.addIntArray(key + "-counts", Array(value.keys.map {value[$0]?.count ?? 0}))
+    
+    var entries: [Storable] = []
+    let count = value.keys.reduce(0, {$0 + (value[$1]?.count ?? 0)})
+    entries.reserveCapacity(count)
+    
+    for (_, items) in value {
+        entries.append(contentsOf: items)
+    }
+    
+    store.addObjArray(key + "-values", entries)
+}
+
+func getResults<T: Storable>(_ store: Store, _ key: String) -> [String: [T]] {
+    let keys = store.getStrArray(key + "-keys")
+    let counts = store.getIntArray(key + "-counts")
+    let entries: [T] = store.getObjArray(key + "-values")
+    var index = 0
+
+    var results: [String: [T]] = [:]
+    for (i, k) in keys.enumerated() {
+        let count = counts[i]
+        
+        var items: [T] = []
+        items.reserveCapacity(count)
+        for _ in 0..<count {
+            items.append(entries[index])
+            index += 1
+        }
+        
+        results[k] = items
+    }
+    
+    return results
+}
+
 fileprivate func makeHistoryFromLabels(_ labels: [String]) -> String {
     var entries: [String] = []
     var i = labels.count - 1
@@ -209,6 +247,8 @@ class ApparatusSubtype {
 }
 
 class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
+    private typealias `Self` = CyclicRepsSubtype
+
     class Result: BaseResult, Storable {
         init(_ tag: ResultTag, weight: Double, cycleIndex: Int, reps: Int) {
             self.weight = weight
@@ -295,11 +335,11 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
         }
     }
     
-    func prevLabel() -> (String, UIColor) {
-        if let last = CyclicRepsSubtype.results.last {
+    func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
+        if let myResults = Self.results[exercise.formalName], let last = myResults.last {
             var count = 0
-            for result in CyclicRepsSubtype.results.reversed() {
-                if result.tag == CyclicRepsSubtype.results.last!.tag {
+            for result in myResults.reversed() {
+                if result.tag == last.tag {
                     count += 1
                 } else {
                     break
@@ -315,14 +355,20 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
         }
     }
     
-    func historyLabel() -> String {
-        let history = CyclicRepsSubtype.results.map {($0.reps, $0.weight)}
-        return historyLabel(history)
+    func historyLabel(_ exercise: Exercise) -> String {
+        if let myResults = Self.results[exercise.formalName] {
+            let history = myResults.map {($0.reps, $0.weight)}
+            return historyLabel(history)
+        }
+        return ""
     }
     
     override func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let result = Result(tag, weight: weight, cycleIndex: cycleIndex, reps: reps)
-        CyclicRepsSubtype.results.append(result)
+        
+        var myResults = Self.results[exercise.formalName] ?? []
+        myResults.append(result)
+        Self.results[exercise.formalName] = myResults
         
         super.finalize(exercise, tag, view, completion)
     }
@@ -333,11 +379,13 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
     
     var cycles: [Sets]
     var cycleIndex: Int
-    static var results: [Result] = []
+    static var results: [String: [Result]] = [:]
 }
 
 /// As many reps as possible for each set.
 class MaxRepsSubType: ExerciseInfo {
+    private typealias `Self` = MaxRepsSubType
+    
     class Result: BaseResult, Storable {
         init(_ tag: ResultTag, weight: Double, currentReps: Int, completed: [Int]) {
             self.weight = weight
@@ -453,11 +501,11 @@ class MaxRepsSubType: ExerciseInfo {
         }
     }
     
-    func prevLabel() -> (String, UIColor) {
-        if let last = MaxRepsSubType.results.last {
+    func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
+        if let myResults = Self.results[exercise.formalName], let last = myResults.last {
             var count = 0
-            for result in MaxRepsSubType.results.reversed() {
-                if result.tag == MaxRepsSubType.results.last!.tag {
+            for result in myResults.reversed() {
+                if result.tag == last.tag {
                     count += 1
                 } else {
                     break
@@ -473,7 +521,7 @@ class MaxRepsSubType: ExerciseInfo {
         }
     }
     
-    func historyLabel() -> String {
+    func historyLabel(_ exercise: Exercise) -> String {
         func makeLabel(_ result: Result) -> String {
             let reps = result.completed.map {"\($0)"}
             let sum = result.completed.reduce(0, {$0 + $1})
@@ -487,16 +535,19 @@ class MaxRepsSubType: ExerciseInfo {
         
         var label = ""
         
-        let count = MaxRepsSubType.results.count
-        if count >= 1 {
-            label = makeLabel(MaxRepsSubType.results[count - 1])
+        if let myResults = Self.results[exercise.formalName] {
+            let count = myResults.count
+            if count >= 1 {
+                label = makeLabel(myResults[count - 1])
+            }
+            if count >= 2 {
+                label += " and " + makeLabel(myResults[count - 2])
+            }
+            if count >= 3 {
+                label += " and " + makeLabel(myResults[count - 3])
+            }
         }
-        if count >= 2 {
-            label += " and " + makeLabel(MaxRepsSubType.results[count - 2])
-        }
-        if count >= 3 {
-            label += " and " + makeLabel(MaxRepsSubType.results[count - 3])
-        }
+        
         return label
     }
     
@@ -554,8 +605,11 @@ class MaxRepsSubType: ExerciseInfo {
     
     func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let result = Result(tag, weight: weight, currentReps: currentReps, completed: completed)
-        MaxRepsSubType.results.append(result)
-        
+
+        var myResults = Self.results[exercise.formalName] ?? []
+        myResults.append(result)
+        Self.results[exercise.formalName] = myResults
+
         let sum = completed.reduce(0, {$0 + $1})
         if sum > currentReps {
             switch tag {
@@ -613,7 +667,7 @@ class MaxRepsSubType: ExerciseInfo {
     var currentReps: Int
     var completed: [Int] = []
     var restTime: Int
-    static var results: [Result] = []
+    static var results: [String: [Result]] = [:]
 
     private var currentWorkout = ""
     private var setIndex: Int = 0
@@ -621,6 +675,8 @@ class MaxRepsSubType: ExerciseInfo {
 
 /// Simple scheme where number of sets is fixed.
 class RepsSubType: ApparatusSubtype, ExerciseInfo {
+    private typealias `Self` = RepsSubType
+    
     class Result: BaseResult, Storable {
         init(_ tag: ResultTag, weight: Double, reps: Int) {
             self.weight = weight
@@ -685,11 +741,11 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
         }
     }
     
-    func prevLabel() -> (String, UIColor) {
-        if let last = RepsSubType.results.last {
+    func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
+        if let myResults = Self.results[exercise.formalName], let last = myResults.last {
             var count = 0
-            for result in RepsSubType.results.reversed() {
-                if result.tag == RepsSubType.results.last!.tag {
+            for result in myResults.reversed() {
+                if result.tag == last.tag {
                     count += 1
                 } else {
                     break
@@ -705,15 +761,21 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
         }
     }
     
-    func historyLabel() -> String {
-        let history = RepsSubType.results.map {($0.reps, $0.weight)}
-        return historyLabel(history)
+    func historyLabel(_ exercise: Exercise) -> String {
+        if let myResults = Self.results[exercise.formalName] {
+            let history = myResults.map {($0.reps, $0.weight)}
+            return historyLabel(history)
+        }
+        return ""
     }
     
     override func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let result = Result(tag, weight: weight, reps: reps)
-        RepsSubType.results.append(result)
         
+        var myResults = Self.results[exercise.formalName] ?? []
+        myResults.append(result)
+        Self.results[exercise.formalName] = myResults
+
         super.finalize(exercise, tag, view, completion )
     }
     
@@ -722,11 +784,13 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     }
 
     var sets: Sets
-    static var results: [Result] = []
+    static var results: [String: [Result]] = [:]
 }
 
 // Exercise is performed for a specified duration.
 class TimedSubType: ExerciseInfo {
+    private typealias `Self` = TimedSubType
+    
     class Result: BaseResult, Storable {
         init(_ tag: ResultTag, weight: Double, currentTime: Int) {
             self.weight = weight
@@ -866,11 +930,11 @@ class TimedSubType: ExerciseInfo {
         return secsToStr(currentTime)
     }
     
-    func prevLabel() -> (String, UIColor) {
-        if let last = TimedSubType.results.last {
+    func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
+        if let myResults = Self.results[exercise.formalName], let last = myResults.last {
             var count = 0
-            for result in TimedSubType.results.reversed() {
-                if result.tag == TimedSubType.results.last!.tag {
+            for result in myResults.reversed() {
+                if result.tag == last.tag {
                     count += 1
                 } else {
                     break
@@ -886,9 +950,12 @@ class TimedSubType: ExerciseInfo {
         }
     }
     
-    func historyLabel() -> String {
-        let labels = TimedSubType.results.map {($0.weight > 0.0 ? secsToStr($0.currentTime) + " @ " + Weight.friendlyUnitsStr($0.weight) : secsToStr($0.currentTime))}
-        return makeHistoryFromLabels(labels)
+    func historyLabel(_ exercise: Exercise) -> String {
+        if let myResults = Self.results[exercise.formalName] {
+            let labels = myResults.map {($0.weight > 0.0 ? secsToStr($0.currentTime) + " @ " + Weight.friendlyUnitsStr($0.weight) : secsToStr($0.currentTime))}
+            return makeHistoryFromLabels(labels)
+        }
+        return ""
     }
     
     func current(_ exercise: Exercise) -> Activity {
@@ -913,8 +980,11 @@ class TimedSubType: ExerciseInfo {
     
     func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let result = Result(tag, weight: weight, currentTime: currentTime)
-        TimedSubType.results.append(result)
         
+        var myResults = Self.results[exercise.formalName] ?? []
+        myResults.append(result)
+        Self.results[exercise.formalName] = myResults
+
         completion()
     }
     
@@ -929,7 +999,7 @@ class TimedSubType: ExerciseInfo {
     
     var weight: Double         // starts out at 0.0
     var currentTime: Int
-    static var results: [Result] = []
+    static var results: [String: [Result]] = [:]
 
     private var currentWorkout = ""
     private var activities: [Activity] = []

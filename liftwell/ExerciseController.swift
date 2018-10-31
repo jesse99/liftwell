@@ -115,10 +115,10 @@ class ExerciseController: UIViewController {
 //        }
         progressionButton.title = ""
 
-        let (label, color) = info.prevLabel()
+        let (label, color) = info.prevLabel(exercise)
         previousLabel.text = label
         previousLabel.textColor = color
-        historyLabel.text = info.historyLabel()
+        historyLabel.text = info.historyLabel(exercise)
         
         if case .underway = info.state {
             resetButton.isEnabled = true

@@ -35,6 +35,7 @@
 		374FE947218627AC00CFC284 /* DumbbellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FE946218627AC00CFC284 /* DumbbellController.swift */; };
 		374FE94921867C4100CFC284 /* WeightsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FE94821867C4100CFC284 /* WeightsController.swift */; };
 		374FE94B21869E1C00CFC284 /* BarbellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FE94A21869E1C00CFC284 /* BarbellController.swift */; };
+		374FE94D218A3F4100CFC284 /* MachineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FE94C218A3F4100CFC284 /* MachineController.swift */; };
 		37EFD6D22172C54500F60880 /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D12172C54500F60880 /* Weight.swift */; };
 		37EFD6D42172C60A00F60880 /* WeightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D32172C60A00F60880 /* WeightsTests.swift */; };
 		37EFD6D62172CA6700F60880 /* PopulateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D52172CA6700F60880 /* PopulateTests.swift */; };
@@ -88,6 +89,7 @@
 		374FE946218627AC00CFC284 /* DumbbellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DumbbellController.swift; sourceTree = "<group>"; };
 		374FE94821867C4100CFC284 /* WeightsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsController.swift; sourceTree = "<group>"; };
 		374FE94A21869E1C00CFC284 /* BarbellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarbellController.swift; sourceTree = "<group>"; };
+		374FE94C218A3F4100CFC284 /* MachineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineController.swift; sourceTree = "<group>"; };
 		37EFD6D12172C54500F60880 /* Weight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weight.swift; sourceTree = "<group>"; };
 		37EFD6D32172C60A00F60880 /* WeightsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsTests.swift; sourceTree = "<group>"; };
 		37EFD6D52172CA6700F60880 /* PopulateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateTests.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 			children = (
 				374FE94A21869E1C00CFC284 /* BarbellController.swift */,
 				374FE946218627AC00CFC284 /* DumbbellController.swift */,
+				374FE94C218A3F4100CFC284 /* MachineController.swift */,
 				374FE942218536F500CFC284 /* RepsOptionsController.swift */,
 				374FE9442185FE3C00CFC284 /* TimedOptionsController.swift */,
 				374FE94821867C4100CFC284 /* WeightsController.swift */,
@@ -324,6 +327,7 @@
 				3728686121699CC7005F6FD0 /* SubTypes.swift in Sources */,
 				374FE943218536F500CFC284 /* RepsOptionsController.swift in Sources */,
 				37EFD6DC217A2D9000F60880 /* Set.swift in Sources */,
+				374FE94D218A3F4100CFC284 /* MachineController.swift in Sources */,
 				37EFD6D82176C69900F60880 /* WorkoutController.swift in Sources */,
 				374FE9452185FE3C00CFC284 /* TimedOptionsController.swift in Sources */,
 				37286859216842C8005F6FD0 /* Mine2.swift in Sources */,

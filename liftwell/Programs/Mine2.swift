@@ -41,6 +41,16 @@ fileprivate func bodyweight(_ name: String, _ formalName: String, numSets: Int, 
     return Exercise(name, formalName, .body(type))
 }
 
+fileprivate func cable(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
+    let rest = Int(restMins*60.0)
+    let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest, advance: "If form was solid and you think you could have done another rep or two.", advance2: nil)
+    
+    let apparatus = Apparatus.machine(range1: defaultMachine(), range2: zeroMachine(), extra: [])
+    let type = WeightsType(apparatus, .reps(subtype))
+    
+    return Exercise(name, formalName, .weights(type))
+}
+
 fileprivate func dumbbell(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
     let rest = Int(restMins*60.0)
     let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest, advance: "If form was solid and you think you could have done another rep or two.", advance2: nil)
@@ -68,6 +78,7 @@ func Mine2() -> Program {
     let extReps = "5@50% 3@75% 6-12@100% R 6-12@100% R 6-12@100%"
     let twoReps = "1@100% R 1@100%"
     let threeReps = "1@100% R 1@100% R 1@100%"
+    let crunchReps = "6-12@100% R 6-12@100% R 6-12@100%"
 
     let exercises = [
         // Heavy
@@ -82,6 +93,7 @@ func Mine2() -> Program {
         dumbbell("Farmer's Walk",   "Farmer's Walk", twoReps, startReps: 1, restMins: 3.0),
         barbell("Static Hold",      "Static Hold", threeReps, startReps: 1, restMins: 3.0),
         dumbbell("Back Extensions", "Back Extensions", extReps, startReps: 6, restMins: 3.0),
+        cable("Cable Crunches",     "Cable Crunch", crunchReps, startReps: 5, restMins: 3.0),
 
         // Medium
         // Dumbbell Bench
@@ -102,7 +114,7 @@ func Mine2() -> Program {
     ]
     
     let workouts = [
-        Workout("Light", ["Dumbbell OHP", "Back Extensions", "Chinups", "Farmer's Walk", "Static Hold"], scheduled: true, optional: ["Static Hold", "Back Extensions"]),
+        Workout("Light", ["Dumbbell OHP", "Back Extensions", "Chinups", "Farmer's Walk", "Static Hold", "Cable Crunches"], scheduled: true, optional: ["Static Hold", "Back Extensions"]),
         Workout("Medium", ["Dumbbell Bench", "Split Squat", "Chinups", "Farmer's Walk", "Static Hold", "Dips"], scheduled: true, optional: ["Static Hold", "Dips"]),
         Workout("Heavy", ["Split Squat", "Dumbbell Bench", "Deadlift", "Dumbbell Flyes"], scheduled: true),
         
