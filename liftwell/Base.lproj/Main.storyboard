@@ -1035,6 +1035,88 @@
             </objects>
             <point key="canvasLocation" x="3298" y="1040"/>
         </scene>
+        <!--Plates Controller-->
+        <scene sceneID="RDz-uQ-ocG">
+            <objects>
+                <viewController storyboardIdentifier="PlatesControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SCK-I3-4NX" customClass="PlatesController" customModule="liftwell" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YeF-I3-xMq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aOd-UM-7XZ">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <navigationItem id="aeO-n2-6oa">
+                                        <barButtonItem key="leftBarButtonItem" title="Done" id="kkt-sb-d6F">
+                                            <connections>
+                                                <action selector="donePressed:" destination="SCK-I3-4NX" id="3tc-9B-3yc"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="7xM-9f-wGS">
+                                            <connections>
+                                                <action selector="cancelPressed:" destination="SCK-I3-4NX" id="4AN-a8-KPD"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breadcrumb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fq-Vb-hyN">
+                                <rect key="frame" x="150" y="20" width="75" height="16"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gva-cM-8WF">
+                                <rect key="frame" x="0.0" y="56" width="375" height="567"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SinglePlatesCellID" textLabel="9Mb-SO-8SA" style="IBUITableViewCellStyleDefault" id="wEY-IT-Ufj">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wEY-IT-Ufj" id="tnD-aW-BhK">
+                                            <rect key="frame" x="0.0" y="0.0" width="336" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9Mb-SO-8SA">
+                                                    <rect key="frame" x="15" y="0.0" width="321" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Gva-cM-8WF" firstAttribute="leading" secondItem="3lA-9w-quE" secondAttribute="leading" id="4GK-dS-slX"/>
+                            <constraint firstItem="aOd-UM-7XZ" firstAttribute="trailing" secondItem="3lA-9w-quE" secondAttribute="trailing" id="EEy-Sb-pwC"/>
+                            <constraint firstItem="5fq-Vb-hyN" firstAttribute="centerX" secondItem="YeF-I3-xMq" secondAttribute="centerX" id="MW2-Si-MLY"/>
+                            <constraint firstItem="3lA-9w-quE" firstAttribute="trailing" secondItem="Gva-cM-8WF" secondAttribute="trailing" id="NHx-M5-4Au"/>
+                            <constraint firstItem="Gva-cM-8WF" firstAttribute="top" secondItem="5fq-Vb-hyN" secondAttribute="bottom" constant="20" id="acG-A0-lxJ"/>
+                            <constraint firstItem="aOd-UM-7XZ" firstAttribute="bottom" secondItem="3lA-9w-quE" secondAttribute="bottom" id="bLX-2a-hgq"/>
+                            <constraint firstItem="5fq-Vb-hyN" firstAttribute="top" secondItem="3lA-9w-quE" secondAttribute="top" id="cOE-B0-rfg"/>
+                            <constraint firstItem="aOd-UM-7XZ" firstAttribute="top" secondItem="Gva-cM-8WF" secondAttribute="bottom" id="pU6-og-ulN"/>
+                            <constraint firstItem="aOd-UM-7XZ" firstAttribute="leading" secondItem="3lA-9w-quE" secondAttribute="leading" id="viM-sK-a0E"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3lA-9w-quE"/>
+                    </view>
+                    <connections>
+                        <outlet property="breadcrumbLabel" destination="5fq-Vb-hyN" id="nZf-UR-Up2"/>
+                        <outlet property="doneButton" destination="kkt-sb-d6F" id="Ffo-WP-RgN"/>
+                        <outlet property="tableView" destination="Gva-cM-8WF" id="UlH-PI-fjl"/>
+                        <segue destination="dcW-aO-DQp" kind="unwind" identifier="unwindToTimedOptionsID" unwindAction="unwindToTimedOptions:" id="RU4-6C-IXF"/>
+                        <segue destination="dcW-aO-DQp" kind="unwind" identifier="unwindToRepsOptionsID" unwindAction="unwindToRepsOptions:" id="geH-tc-04I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HGo-1W-xtY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="dcW-aO-DQp" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3938" y="1039"/>
+        </scene>
         <!--Timed Option Controller-->
         <scene sceneID="QhA-Fi-4Uj">
             <objects>

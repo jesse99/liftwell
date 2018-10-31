@@ -41,6 +41,16 @@ fileprivate func bodyweight(_ name: String, _ formalName: String, numSets: Int, 
     return Exercise(name, formalName, .body(type))
 }
 
+fileprivate func pairedPlates(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
+    let rest = Int(restMins*60.0)
+    let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest, advance: "If form was solid and you think you could have done another rep or two.", advance2: nil)
+    
+    let apparatus = Apparatus.pairedPlates(plates: defaultPlates())
+    let type = WeightsType(apparatus, .reps(subtype))
+    
+    return Exercise(name, formalName, .weights(type))
+}
+
 fileprivate func cable(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
     let rest = Int(restMins*60.0)
     let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest, advance: "If form was solid and you think you could have done another rep or two.", advance2: nil)
@@ -94,6 +104,7 @@ func Mine2() -> Program {
         barbell("Static Hold",      "Static Hold", threeReps, startReps: 1, restMins: 3.0),
         dumbbell("Back Extensions", "Back Extensions", extReps, startReps: 6, restMins: 3.0),
         cable("Cable Crunches",     "Cable Crunch", crunchReps, startReps: 5, restMins: 3.0),
+        pairedPlates("Calf Raises", "Standing Calf Raises", crunchReps, startReps: 5, restMins: 3.0),
 
         // Medium
         // Dumbbell Bench
@@ -114,7 +125,7 @@ func Mine2() -> Program {
     ]
     
     let workouts = [
-        Workout("Light", ["Dumbbell OHP", "Back Extensions", "Chinups", "Farmer's Walk", "Static Hold", "Cable Crunches"], scheduled: true, optional: ["Static Hold", "Back Extensions"]),
+        Workout("Light", ["Dumbbell OHP", "Back Extensions", "Chinups", "Farmer's Walk", "Static Hold", "Cable Crunches", "Calf Raises"], scheduled: true, optional: ["Static Hold", "Back Extensions"]),
         Workout("Medium", ["Dumbbell Bench", "Split Squat", "Chinups", "Farmer's Walk", "Static Hold", "Dips"], scheduled: true, optional: ["Static Hold", "Dips"]),
         Workout("Heavy", ["Split Squat", "Dumbbell Bench", "Deadlift", "Dumbbell Flyes"], scheduled: true),
         

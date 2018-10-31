@@ -108,10 +108,10 @@ class RepsOptionController: UIViewController {
                 view.initialize(apparatus, self.updateApparatus, breadcrumb, "unwindToRepsOptionsID")
                 present(view, animated: true, completion: nil)
 
-            case .pairedPlates(plates: _):
-                assert(false)
-            case .singlePlates(plates: _):
-                assert(false)
+            case .pairedPlates(plates: _), .singlePlates(plates: _):
+                let view = storyboard.instantiateViewController(withIdentifier: "PlatesControllerID") as! PlatesController
+                view.initialize(apparatus, self.updateApparatus, breadcrumb, "unwindToRepsOptionsID")
+                present(view, animated: true, completion: nil)
             }
         }
     }
