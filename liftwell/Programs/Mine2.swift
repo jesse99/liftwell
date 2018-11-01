@@ -21,7 +21,7 @@ func parseSets(_ text: String) -> Sets {
 }
 
 fileprivate func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, secs: Int) -> Exercise {
-    let subtype = TimedSubType(numSets: numSets, currentTime: secs, targetTime: nil, advance: nil, advance2: nil)
+    let subtype = TimedSubType(numSets: numSets, currentTime: secs, targetTime: nil)
     let type = BodyType(.timed(subtype))
     return Exercise(name, formalName, .body(type))
 }
@@ -29,7 +29,7 @@ fileprivate func bodyweight(_ name: String, _ formalName: String, _ numSets: Int
 fileprivate func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, by: Int) -> Exercise {
     let reps = Set(reps: by)
     let sets = Sets(Array(repeating: reps, count: numSets))
-    let subtype = RepsSubType(sets: sets, reps: by, restSecs: 0, advance: nil, advance2: nil)
+    let subtype = RepsSubType(sets: sets, reps: by, restSecs: 0)
     let type = BodyType(.reps(subtype))
     return Exercise(name, formalName, .body(type))
 }
@@ -43,7 +43,7 @@ fileprivate func bodyweight(_ name: String, _ formalName: String, numSets: Int, 
 
 fileprivate func pairedPlates(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
     let rest = Int(restMins*60.0)
-    let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest, advance: "If form was solid and you think you could have done another rep or two.", advance2: nil)
+    let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
     
     let apparatus = Apparatus.pairedPlates(plates: defaultPlates())
     let type = WeightsType(apparatus, .reps(subtype))
@@ -53,7 +53,7 @@ fileprivate func pairedPlates(_ name: String, _ formalName: String, _ reps: Stri
 
 fileprivate func cable(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
     let rest = Int(restMins*60.0)
-    let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest, advance: "If form was solid and you think you could have done another rep or two.", advance2: nil)
+    let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
     
     let apparatus = Apparatus.machine(range1: defaultMachine(), range2: zeroMachine(), extra: [])
     let type = WeightsType(apparatus, .reps(subtype))
@@ -63,7 +63,7 @@ fileprivate func cable(_ name: String, _ formalName: String, _ reps: String, sta
 
 fileprivate func dumbbell(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
     let rest = Int(restMins*60.0)
-    let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest, advance: "If form was solid and you think you could have done another rep or two.", advance2: nil)
+    let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
 
     let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: availableMagnets())
     let type = WeightsType(apparatus, .reps(subtype))
@@ -73,7 +73,7 @@ fileprivate func dumbbell(_ name: String, _ formalName: String, _ reps: String, 
 
 fileprivate func barbell(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
     let rest = Int(restMins*60.0)
-    let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest, advance: "If form was solid and you think you could have done another rep or two.", advance2: nil)
+    let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
     
     let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: defaultBumpers(), magnets: [])
     let type = WeightsType(apparatus, .reps(subtype))

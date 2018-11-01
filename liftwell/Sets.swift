@@ -96,10 +96,10 @@ struct Sets: Storable {
         let (_, worksets, _) = partition()
         if !worksets.sets.isEmpty {
             let labels = worksets.sets.map({ (reps) -> String in
-                if reps.minReps < reps.maxReps {
+                if currentReps < reps.maxReps {
                     return "\(currentReps)-\(reps.maxReps)"
                 } else {
-                    return "\(reps.minReps)"
+                    return "\(reps.maxReps)"
                 }
             })
             if let first = labels.first, labels.all({(label) -> Bool in label == first}) {

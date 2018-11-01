@@ -5,82 +5,15 @@ import Foundation
 import UIKit           // for UIColor
 import os.log
 
-func addResults(_ store: Store, _ key: String, _ value: [String: [Storable]]) {
-    store.addStrArray(key + "-keys", Array(value.keys))
-    store.addIntArray(key + "-counts", Array(value.keys.map {value[$0]?.count ?? 0}))
-    
-    var entries: [Storable] = []
-    let count = value.keys.reduce(0, {$0 + (value[$1]?.count ?? 0)})
-    entries.reserveCapacity(count)
-    
-    for (_, items) in value {
-        entries.append(contentsOf: items)
-    }
-    
-    store.addObjArray(key + "-values", entries)
-}
-
-func getResults<T: Storable>(_ store: Store, _ key: String) -> [String: [T]] {
-    let keys = store.getStrArray(key + "-keys")
-    let counts = store.getIntArray(key + "-counts")
-    let entries: [T] = store.getObjArray(key + "-values")
-    var index = 0
-
-    var results: [String: [T]] = [:]
-    for (i, k) in keys.enumerated() {
-        let count = counts[i]
-        
-        var items: [T] = []
-        items.reserveCapacity(count)
-        for _ in 0..<count {
-            items.append(entries[index])
-            index += 1
-        }
-        
-        results[k] = items
-    }
-    
-    return results
-}
-
-fileprivate func makeHistoryFromLabels(_ labels: [String]) -> String {
-    var entries: [String] = []
-    var i = labels.count - 1
-    while entries.count < 4 && i >= 0 {
-        var count = 0
-        while i-count >= 0 && labels[i-count] == labels[i] {
-            count += 1
-        }
-        assert(count >= 1, "count is \(count) in makeHistoryFromLabels with \(labels)")
-        
-        if count == 1 {
-            entries.append(labels[i])
-        } else {
-            entries.append(labels[i] + " x\(count)")
-        }
-        i -= count
-    }
-    
-    return entries.joined(separator: ", ")
-}
-
 /// Base class for Subtypes that use an apparatus.
 class ApparatusSubtype {
-    init(reps: Int, restSecs: Int, advance: String?, advance2: String?) {
-        self.advance = advance
-        self.advance2 = advance2
-        
+    init(reps: Int, restSecs: Int) {
         self.weight = 100.0     // TODO: start at 0.0
         self.restTime = restSecs
         self.reps = reps
     }
     
     required init(from store: Store) {
-        let a = store.getStr("advance")
-        self.advance = a != "" ? a : nil
-        let a2 = store.getStr("advance2")
-        self.advance2 = a2 != "" ? a2 : nil
-        
         self.weight = store.getDbl("weight")
         self.reps = store.getInt("reps")
         self.restTime = store.getInt("restTime")
@@ -92,9 +25,6 @@ class ApparatusSubtype {
     }
     
     func save(_ store: Store) {
-        store.addStr("advance", advance ?? "")
-        store.addStr("advance2", advance2 ?? "")
-        
         store.addDbl("weight", weight)
         store.addInt("reps", reps)
         store.addInt("restTime", restTime)
@@ -233,9 +163,6 @@ class ApparatusSubtype {
         }
     }
     
-    var advance: String?    // prompt that allows the user to advance reps or weight, note that deloads are handled at the program level
-    var advance2: String?   // allows the user to advance by twice as much
-    
     var weight: Double      // starts out at 0.0
     var reps: Int           // this only applies when minReps < maxReps, also this can be less than minReps
     var restTime: Int
@@ -276,11 +203,11 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
         var reps: Int
     }
 
-    init(cycles: [Sets], reps: Int, restSecs: Int, advance: String?, advance2: String?) {
+    init(cycles: [Sets], reps: Int, restSecs: Int) {
         self.cycles = cycles
         self.cycleIndex = 0
         
-        super.init(reps: reps, restSecs: restSecs, advance: advance, advance2: advance2)
+        super.init(reps: reps, restSecs: restSecs)
     }
     
     required init(from store: Store) {
@@ -700,9 +627,9 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
         var reps: Int
     }
     
-    init(sets: Sets, reps: Int, restSecs: Int, advance: String?, advance2: String?) {
+    init(sets: Sets, reps: Int, restSecs: Int) {
         self.sets = sets
-        super.init(reps: reps, restSecs: restSecs, advance: advance, advance2: advance2)
+        super.init(reps: reps, restSecs: restSecs)
     }
     
     required init(from store: Store) {
@@ -814,12 +741,10 @@ class TimedSubType: ExerciseInfo {
         var currentTime: Int
     }
     
-    init(numSets: Int, currentTime: Int, targetTime: Int?, advance: String?, advance2: String?) {
+    init(numSets: Int, currentTime: Int, targetTime: Int?) {
         self.numSets = numSets
         self.currentTime = currentTime
         self.targetTime = targetTime
-        self.advance = advance
-        self.advance2 = advance2
         
         self.weight = 0.0
     }
@@ -828,10 +753,6 @@ class TimedSubType: ExerciseInfo {
         self.numSets = store.getInt("numSets")
         let t = store.getInt("targetTime")
         self.targetTime = t > 0 ? t : nil
-        let a = store.getStr("advance")
-        self.advance = a != "" ? a : nil
-        let a2 = store.getStr("advance2")
-        self.advance2 = a2 != "" ? a2 : nil
         
         self.weight = store.getDbl("weight")
         self.currentTime = store.getInt("currentTime")
@@ -844,8 +765,6 @@ class TimedSubType: ExerciseInfo {
     func save(_ store: Store) {
         store.addInt("numSets", numSets)
         store.addInt("targetTime", targetTime ?? 0)
-        store.addStr("advance", advance ?? "")
-        store.addStr("advance2", advance2 ?? "")
         
         store.addDbl("weight", weight)
         store.addInt("currentTime", currentTime)
@@ -994,8 +913,6 @@ class TimedSubType: ExerciseInfo {
     
     var numSets: Int
     var targetTime: Int?
-    var advance: String?    // prompt that allows the user to advance reps or weight
-    var advance2: String?   // allows the user to advance by twice as much
     
     var weight: Double         // starts out at 0.0
     var currentTime: Int
@@ -1004,4 +921,65 @@ class TimedSubType: ExerciseInfo {
     private var currentWorkout = ""
     private var activities: [Activity] = []
     private var index: Int = 0
+}
+
+
+func addResults(_ store: Store, _ key: String, _ value: [String: [Storable]]) {
+    store.addStrArray(key + "-keys", Array(value.keys))
+    store.addIntArray(key + "-counts", Array(value.keys.map {value[$0]?.count ?? 0}))
+    
+    var entries: [Storable] = []
+    let count = value.keys.reduce(0, {$0 + (value[$1]?.count ?? 0)})
+    entries.reserveCapacity(count)
+    
+    for (_, items) in value {
+        entries.append(contentsOf: items)
+    }
+    
+    store.addObjArray(key + "-values", entries)
+}
+
+func getResults<T: Storable>(_ store: Store, _ key: String) -> [String: [T]] {
+    let keys = store.getStrArray(key + "-keys")
+    let counts = store.getIntArray(key + "-counts")
+    let entries: [T] = store.getObjArray(key + "-values")
+    var index = 0
+    
+    var results: [String: [T]] = [:]
+    for (i, k) in keys.enumerated() {
+        let count = counts[i]
+        
+        var items: [T] = []
+        items.reserveCapacity(count)
+        for _ in 0..<count {
+            items.append(entries[index])
+            index += 1
+        }
+        
+        results[k] = items
+    }
+    
+    return results
+}
+
+
+fileprivate func makeHistoryFromLabels(_ labels: [String]) -> String {
+    var entries: [String] = []
+    var i = labels.count - 1
+    while entries.count < 4 && i >= 0 {
+        var count = 0
+        while i-count >= 0 && labels[i-count] == labels[i] {
+            count += 1
+        }
+        assert(count >= 1, "count is \(count) in makeHistoryFromLabels with \(labels)")
+        
+        if count == 1 {
+            entries.append(labels[i])
+        } else {
+            entries.append(labels[i] + " x\(count)")
+        }
+        i -= count
+    }
+    
+    return entries.joined(separator: ", ")
 }
