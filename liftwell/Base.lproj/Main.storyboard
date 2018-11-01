@@ -332,6 +332,87 @@
             </objects>
             <point key="canvasLocation" x="2055" y="-320"/>
         </scene>
+        <!--Workout Options Controller-->
+        <scene sceneID="j12-2Z-zyg">
+            <objects>
+                <viewController storyboardIdentifier="WorkoutOptionsID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4Gu-Cs-Mra" customClass="WorkoutOptionsController" customModule="liftwell" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bhT-jZ-pno">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Swy-oK-Xkz">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <navigationItem id="Tm4-tQ-NY6">
+                                        <barButtonItem key="leftBarButtonItem" title="Done" id="Sq4-WT-sr6">
+                                            <connections>
+                                                <action selector="donePressed:" destination="4Gu-Cs-Mra" id="uGY-64-x8Z"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="60J-hG-MUj">
+                                            <connections>
+                                                <action selector="cancelPressed:" destination="4Gu-Cs-Mra" id="MgW-LL-sRq"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breadcrumb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9G-Rb-FnS">
+                                <rect key="frame" x="150" y="20" width="75" height="16"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Su2-ve-4hg">
+                                <rect key="frame" x="0.0" y="66" width="375" height="557"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WorkoutOptionsCellID" textLabel="oqB-1u-TEy" style="IBUITableViewCellStyleDefault" id="WPj-1c-4qQ">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WPj-1c-4qQ" id="Br3-qj-Ev7">
+                                            <rect key="frame" x="0.0" y="0.0" width="308" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oqB-1u-TEy">
+                                                    <rect key="frame" x="15" y="0.0" width="293" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="YJc-eC-pAQ" firstAttribute="trailing" secondItem="Su2-ve-4hg" secondAttribute="trailing" id="8pO-jI-dVC"/>
+                            <constraint firstItem="Swy-oK-Xkz" firstAttribute="trailing" secondItem="YJc-eC-pAQ" secondAttribute="trailing" id="B7s-wn-XGD"/>
+                            <constraint firstItem="y9G-Rb-FnS" firstAttribute="centerX" secondItem="bhT-jZ-pno" secondAttribute="centerX" id="BxB-P2-G2G"/>
+                            <constraint firstItem="Swy-oK-Xkz" firstAttribute="leading" secondItem="YJc-eC-pAQ" secondAttribute="leading" id="FGt-zX-EvG"/>
+                            <constraint firstItem="Su2-ve-4hg" firstAttribute="top" secondItem="y9G-Rb-FnS" secondAttribute="bottom" constant="30" id="JCR-kI-X1Q"/>
+                            <constraint firstItem="Su2-ve-4hg" firstAttribute="leading" secondItem="YJc-eC-pAQ" secondAttribute="leading" id="KU0-UZ-C50"/>
+                            <constraint firstItem="Swy-oK-Xkz" firstAttribute="top" secondItem="Su2-ve-4hg" secondAttribute="bottom" id="Ktp-hT-gSL"/>
+                            <constraint firstItem="y9G-Rb-FnS" firstAttribute="top" secondItem="YJc-eC-pAQ" secondAttribute="top" id="Vqa-xS-6W2"/>
+                            <constraint firstItem="Swy-oK-Xkz" firstAttribute="bottom" secondItem="YJc-eC-pAQ" secondAttribute="bottom" id="cg0-Ps-UNK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="YJc-eC-pAQ"/>
+                    </view>
+                    <connections>
+                        <outlet property="breadcrumbLabel" destination="y9G-Rb-FnS" id="Lzz-Dp-Hx9"/>
+                        <outlet property="tableView" destination="Su2-ve-4hg" id="SdH-SS-Ljr"/>
+                        <segue destination="JII-6W-USt" kind="unwind" identifier="unwindToWorkoutID" unwindAction="unwindToWorkout:" id="fQb-8s-2Ly"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LNd-cO-3D1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="JII-6W-USt" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2702" y="-321"/>
+        </scene>
         <!--Programs-->
         <scene sceneID="wg7-f3-ORb">
             <objects>

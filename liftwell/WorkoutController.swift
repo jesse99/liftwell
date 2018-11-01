@@ -172,10 +172,10 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
     @IBAction func optionsPressed(_ sender: Any) {
         //        dismissTooltip()
         
-        //        let storyboard = UIStoryboard(name: "Main", bundle: nil)  // TODO: implement
-//        let view = storyboard.instantiateViewController(withIdentifier: "WorkoutOptionsID") as! WorkoutOptionsController
-//        view.initialize(workout, breadcrumbLabel.text!)
-//        present(view, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil) 
+        let view = storyboard.instantiateViewController(withIdentifier: "WorkoutOptionsID") as! WorkoutOptionsController
+        view.initialize(workout, breadcrumbLabel.text!)
+        present(view, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt path: IndexPath) {

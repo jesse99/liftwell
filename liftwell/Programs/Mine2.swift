@@ -104,7 +104,6 @@ func Mine2() -> Program {
         barbell("Static Hold",      "Static Hold", threeReps, startReps: 1, restMins: 3.0),
         dumbbell("Back Extensions", "Back Extensions", extReps, startReps: 6, restMins: 3.0),
         cable("Cable Crunches",     "Cable Crunch", crunchReps, startReps: 5, restMins: 3.0),
-        pairedPlates("Calf Raises", "Standing Calf Raises", crunchReps, startReps: 5, restMins: 3.0),
 
         // Medium
         // Dumbbell Bench
@@ -125,7 +124,7 @@ func Mine2() -> Program {
     ]
     
     let workouts = [
-        Workout("Light", ["Dumbbell OHP", "Back Extensions", "Chinups", "Farmer's Walk", "Static Hold", "Cable Crunches", "Calf Raises"], scheduled: true, optional: ["Static Hold", "Back Extensions"]),
+        Workout("Light", ["Dumbbell OHP", "Back Extensions", "Chinups", "Farmer's Walk", "Static Hold", "Cable Crunches"], scheduled: true, optional: ["Static Hold", "Back Extensions", "Cable Crunches"]),
         Workout("Medium", ["Dumbbell Bench", "Split Squat", "Chinups", "Farmer's Walk", "Static Hold", "Dips"], scheduled: true, optional: ["Static Hold", "Dips"]),
         Workout("Heavy", ["Split Squat", "Dumbbell Bench", "Deadlift", "Dumbbell Flyes"], scheduled: true),
         
