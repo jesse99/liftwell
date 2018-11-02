@@ -80,10 +80,10 @@ class NotesController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func editPressed(_ sender: Any) {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let view = storyboard.instantiateViewController(withIdentifier: "EditNoteID") as! EditNoteController
-//        view.initialize(exercise.formalName, breadcrumbLabel.text!)
-//        self.present(view, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let view = storyboard.instantiateViewController(withIdentifier: "EditNoteControllerID") as! EditNoteController
+        view.initialize(exercise.formalName, breadcrumbLabel.text!)
+        self.present(view, animated: true, completion: nil)
     }
     
     private func doRevert() {

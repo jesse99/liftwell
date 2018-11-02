@@ -492,6 +492,87 @@
             </objects>
             <point key="canvasLocation" x="3340" y="-322"/>
         </scene>
+        <!--Edit Note Controller-->
+        <scene sceneID="hu5-BW-4sI">
+            <objects>
+                <viewController storyboardIdentifier="EditNoteControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NU4-ky-ClU" customClass="EditNoteController" customModule="liftwell" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="U5c-HY-HGs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yKF-Ul-5ph">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <navigationItem id="pL7-mu-SuK">
+                                        <barButtonItem key="leftBarButtonItem" title="Done" id="39R-Fs-RAh">
+                                            <connections>
+                                                <action selector="donePressed:" destination="NU4-ky-ClU" id="KLs-ZF-5Lp"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <rightBarButtonItems>
+                                            <barButtonItem title="Cancel" id="glu-7i-0At">
+                                                <connections>
+                                                    <action selector="cancelPressed:" destination="NU4-ky-ClU" id="bQC-TP-Zyo"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Help" id="ci6-Po-RFI">
+                                                <connections>
+                                                    <action selector="helpPressed:" destination="NU4-ky-ClU" id="MsZ-5g-0M0"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breadcrumb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yer-aS-eEz">
+                                <rect key="frame" x="150" y="20" width="75" height="16"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6ew-Lb-oeR">
+                                <rect key="frame" x="0.0" y="66" width="375" height="557"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="yKF-Ul-5ph" firstAttribute="leading" secondItem="dLF-TC-Mr3" secondAttribute="leading" id="8t4-Cu-kGr"/>
+                            <constraint firstItem="yKF-Ul-5ph" firstAttribute="bottom" secondItem="dLF-TC-Mr3" secondAttribute="bottom" id="Bpw-7u-R72"/>
+                            <constraint firstItem="yKF-Ul-5ph" firstAttribute="top" secondItem="6ew-Lb-oeR" secondAttribute="bottom" id="LAZ-wk-OcN"/>
+                            <constraint firstItem="yKF-Ul-5ph" firstAttribute="trailing" secondItem="dLF-TC-Mr3" secondAttribute="trailing" id="MLa-Pz-q2i"/>
+                            <constraint firstItem="yer-aS-eEz" firstAttribute="top" secondItem="dLF-TC-Mr3" secondAttribute="top" id="P0E-o9-rpv"/>
+                            <constraint firstItem="6ew-Lb-oeR" firstAttribute="leading" secondItem="dLF-TC-Mr3" secondAttribute="leading" id="U3Y-cd-boa"/>
+                            <constraint firstItem="6ew-Lb-oeR" firstAttribute="top" secondItem="yer-aS-eEz" secondAttribute="bottom" constant="30" id="XyF-Ej-4Qc"/>
+                            <constraint firstItem="dLF-TC-Mr3" firstAttribute="trailing" secondItem="6ew-Lb-oeR" secondAttribute="trailing" id="qCd-gE-bZ7"/>
+                            <constraint firstItem="yer-aS-eEz" firstAttribute="centerX" secondItem="U5c-HY-HGs" secondAttribute="centerX" id="sex-Ny-7mK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dLF-TC-Mr3"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="mbQ-WL-lka" appends="YES" id="rlj-q8-qDy"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="bottomConstraint" destination="LAZ-wk-OcN" id="0ND-q9-jFe"/>
+                        <outlet property="breadcrumbLabel" destination="yer-aS-eEz" id="ARv-sw-wAJ"/>
+                        <outlet property="textView" destination="6ew-Lb-oeR" id="eCX-JB-JUa"/>
+                        <segue destination="0LX-e6-eUk" kind="unwind" identifier="unwindToNotesID" unwindAction="unwindToNotes:" id="fph-Be-1cL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="irU-eM-PfE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="0LX-e6-eUk" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="mbQ-WL-lka">
+                    <connections>
+                        <action selector="tapped:" destination="NU4-ky-ClU" id="eMv-8G-OMV"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="3966" y="-322"/>
+        </scene>
         <!--Programs-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
