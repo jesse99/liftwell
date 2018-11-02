@@ -136,138 +136,139 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
         cell.textLabel!.text = workout.name
         cell.detailTextLabel!.text = ""
 
-//        if !hasActiveExercise(workout) {
-//            cell.detailTextLabel!.text = "inactive"
-//            //        } else if allCardio(workout) { // TODO
-//            //            // Cardio is typically spread out through the week so we don't care
-//            //            // so much about when it was last performed.
-//            //            cell.detailTextLabel!.text = getCardioDetails(workout)
-//        } else {
-//            cell.detailTextLabel!.text = ""
-//        }
-//
-        //        let todays = findTodaysWorkouts() // TODO: highlight the upcoming workout
-//        if todays.contains(index) {
-//            // Highlight any workouts the user is currently performing (can be multiple if he is switching between
-//            // something like mobility and a lifting workout).
-//            cell.detailTextLabel!.text = "in progress"
-//            let color = UIColor.red             // TODO: use targetColor
-//            cell.textLabel!.setColor(color)
-//            cell.detailTextLabel!.setColor(color)
-//
-//        } else {
-//            // Otherwise highlight the first workout the user hasn't completed or the oldest completed workout.
-//            let selectedIndex = findFirstMissingWorkout() ?? findOldestWorkout() ?? app.program.workouts.count
-//            var color = selectedIndex == index && todays.isEmpty ? UIColor.red : UIColor.black
-//
-//            let app = UIApplication.shared.delegate as! AppDelegate
-//            if let (date, partial) = app.dateWorkoutWasCompleted(workout) {
-//                let calendar = Calendar.current
-//                if calendar.isDate(date, inSameDayAs: Date()) && partial {
-//                    cell.detailTextLabel!.text = "in progress"
-//                } else if calendar.isDate(date, inSameDayAs: Date()) && !partial {
-//                    cell.detailTextLabel!.text = "finished today"
-//                    color = .lightGray
-//                } else if partial {
-//                    cell.detailTextLabel!.text = "partially completed \(date.daysName())"
-//                } else {
-//                    cell.detailTextLabel!.text = "completed \(date.daysName())"
-//                }
-//
-//            } else {
-//                cell.detailTextLabel!.text = "not completed"
-//            }
-//
-//            cell.textLabel!.setColor(color)
-//            cell.detailTextLabel!.setColor(color)
-//        }
+        if !hasActiveExercise(workout) {
+            cell.detailTextLabel!.text = "inactive"
+            //        } else if allCardio(workout) { // TODO
+            //            // Cardio is typically spread out through the week so we don't care
+            //            // so much about when it was last performed.
+            //            cell.detailTextLabel!.text = getCardioDetails(workout)
+        } else {
+            cell.detailTextLabel!.text = ""
+        }
+
+        let todays = findTodaysWorkouts()
+        if todays.contains(index) {
+            // Highlight any workouts the user is currently performing (can be multiple if he is switching between
+            // something like mobility and a lifting workout).
+            cell.detailTextLabel!.text = "in progress"
+            let color = UIColor.red             // TODO: use targetColor
+            cell.textLabel!.setColor(color)
+            cell.detailTextLabel!.setColor(color)
+
+        } else {
+            // Otherwise highlight the first workout the user hasn't completed or the oldest completed workout.
+            let selectedIndex = findFirstMissingWorkout() ?? findOldestWorkout() ?? app.program.workouts.count
+            var color = selectedIndex == index && todays.isEmpty ? UIColor.red : UIColor.black
+
+            let app = UIApplication.shared.delegate as! AppDelegate
+            if let (date, partial) = app.dateWorkoutWasCompleted(workout) {
+                let calendar = Calendar.current
+                if calendar.isDate(date, inSameDayAs: Date()) && partial {
+                    cell.detailTextLabel!.text = "in progress"
+                } else if calendar.isDate(date, inSameDayAs: Date()) && !partial {
+                    cell.detailTextLabel!.text = "finished today"
+                    color = .lightGray
+                } else if partial {
+                    cell.detailTextLabel!.text = "partially completed \(date.daysName())"
+                } else {
+                    cell.detailTextLabel!.text = "completed \(date.daysName())"
+                }
+
+            } else {
+                cell.detailTextLabel!.text = "not completed"
+            }
+
+            cell.textLabel!.setColor(color)
+            cell.detailTextLabel!.setColor(color)
+        }
         
         return cell
     }
     
     // Returns the workouts being executed atm (but not those that have finished executing).
-//    private func findTodaysWorkouts() -> [Int] {
-//        func isUnderway(_ workout: Workout) -> Bool {
-//            let app = UIApplication.shared.delegate as! AppDelegate
-//            for name in workout.exercises {
-//                if let exercise = app.program.findExercise(name), !workout.optional.contains(name) {
-//                    if case .underway = exercise.plan.state, exercise.plan.on(workout) {
-//                        return true
-//                    }
-//                }
-//            }
-//            return false
-//        }
-//
-//        func numCompleted(_ workout: Workout) -> Int {
-//            var count = 0
-//            let app = UIApplication.shared.delegate as! AppDelegate
-//            let calendar = Calendar.current
-//            for name in workout.exercises {
-//                if let exercise = app.program.findExercise(name), !workout.optional.contains(name) {
-//                    if let completed = exercise.completed[workout.name], calendar.isDate(completed, inSameDayAs: Date()) {
-//                        count += 1
-//                    }
-//                }
-//            }
-//            return count
-//        }
-//
-//        var todays: [Int] = []
-//        let app = UIApplication.shared.delegate as! AppDelegate
-//        for (i, workout) in app.program.workouts.enumerated() {
-//            let completed = numCompleted(workout)
-//            if isUnderway(workout) || (completed > 0 && completed < workout.exercises.count) {
-//                todays.append(i)
-//            }
-//        }
-//        return todays
-//    }
+    private func findTodaysWorkouts() -> [Int] {
+        func isUnderway(_ workout: Workout) -> Bool {
+            let app = UIApplication.shared.delegate as! AppDelegate
+            for name in workout.exercises {
+                if let exercise = app.program.findExercise(name), !workout.optional.contains(name) {
+                    let info = exercise.getInfo()
+                    if case .underway = info.state, info.on(workout) {
+                        return true
+                    }
+                }
+            }
+            return false
+        }
+
+        func numCompleted(_ workout: Workout) -> Int {
+            var count = 0
+            let app = UIApplication.shared.delegate as! AppDelegate
+            let calendar = Calendar.current
+            for name in workout.exercises {
+                if let exercise = app.program.findExercise(name), !workout.optional.contains(name) {
+                    if let completed = exercise.completed[workout.name], calendar.isDate(completed, inSameDayAs: Date()) {
+                        count += 1
+                    }
+                }
+            }
+            return count
+        }
+
+        var todays: [Int] = []
+        let app = UIApplication.shared.delegate as! AppDelegate
+        for (i, workout) in app.program.workouts.enumerated() {
+            let completed = numCompleted(workout)
+            if isUnderway(workout) || (completed > 0 && completed < workout.exercises.count) {
+                todays.append(i)
+            }
+        }
+        return todays
+    }
     
-//    private func findFirstMissingWorkout() -> Int? {
-//        let app = UIApplication.shared.delegate as! AppDelegate
-//        for (i, workout) in app.program.workouts.enumerated() {
-//            if workout.scheduled && workout.exercises.all({
-//                if let exercise = app.program.findExercise($0), !workout.optional.contains($0) {
-//                    if exercise.completed[workout.name] == nil {
-//                        return true
-//                    }
-//                }
-//                return false
-//            }) {
-//                return i
-//            }
-//        }
-//        return nil
-//    }
-//
-//    private func findOldestWorkout() -> Int? {
-//        var date = Date()
-//        var index: Int? = nil
-//
-//        let app = UIApplication.shared.delegate as! AppDelegate
-//        for (i, workout) in app.program.workouts.enumerated() {
-//            if workout.scheduled {
-//                if let (candidate, _) = app.dateWorkoutWasCompleted(workout) {
-//                    if candidate.compare(date) == .orderedAscending {
-//                        date = candidate
-//                        index = i
-//                    }
-//                }
-//            }
-//        }
-//        return index
-//    }
-//
-//    private func hasActiveExercise(_ workout: Workout) -> Bool {
-//        for exerciseName in workout.exercises {
-//            if !workout.optional.contains(exerciseName) {
-//                return true
-//            }
-//        }
-//
-//        return false
-//    }
+    private func findFirstMissingWorkout() -> Int? {
+        let app = UIApplication.shared.delegate as! AppDelegate
+        for (i, workout) in app.program.workouts.enumerated() {
+            if workout.scheduled && workout.exercises.all({
+                if let exercise = app.program.findExercise($0), !workout.optional.contains($0) {
+                    if exercise.completed[workout.name] == nil {
+                        return true
+                    }
+                }
+                return false
+            }) {
+                return i
+            }
+        }
+        return nil
+    }
+
+    private func findOldestWorkout() -> Int? {
+        var date = Date()
+        var index: Int? = nil
+
+        let app = UIApplication.shared.delegate as! AppDelegate
+        for (i, workout) in app.program.workouts.enumerated() {
+            if workout.scheduled {
+                if let (candidate, _) = app.dateWorkoutWasCompleted(workout) {
+                    if candidate.compare(date) == .orderedAscending {
+                        date = candidate
+                        index = i
+                    }
+                }
+            }
+        }
+        return index
+    }
+
+    private func hasActiveExercise(_ workout: Workout) -> Bool {
+        for exerciseName in workout.exercises {
+            if !workout.optional.contains(exerciseName) {
+                return true
+            }
+        }
+
+        return false
+    }
     
     //    private func allCardio(_ workout: Workout) -> Bool {
     //        for exerciseName in workout.exercises {

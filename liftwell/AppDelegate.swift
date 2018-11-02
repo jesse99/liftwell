@@ -84,7 +84,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         saveProgram()
         saveResults()
     }
-    
+
+    func dateWorkoutWasCompleted(_ workout: Workout) -> (Date, Bool)? {
+        func dateWorkoutWasLastCompleted() -> Date? {
+            var date: Date? = nil
+            
+            for name in workout.exercises {
+                if let exercise = program.findExercise(name), !workout.optional.contains(name) {
+                    if let completed = exercise.completed[workout.name] {
+                        if date == nil || completed.compare(date!) == .orderedDescending {
+                            date = completed
+                        }
+                    }
+                }
+            }
+            return date
+        }
+        
+        let date: Date? = dateWorkoutWasLastCompleted()
+        
+        var partial = false
+        if let latest = date {
+            let calendar = Calendar.current
+            for name in workout.exercises {
+                if let exercise = program.findExercise(name), !workout.optional.contains(name) {
+                    if let completed = exercise.completed[workout.name] {
+                        if !calendar.isDate(completed, inSameDayAs: latest) {   // this won't be exactly right if anyone is crazy enough to do workouts at midnight
+                            partial = true
+                        }
+                    } else {
+                        partial = true
+                    }
+                }
+            }
+        }
+        
+        return date !=  nil ? (date!, partial) : nil
+    }
+
     func saveResults() {
         let path = getPath(fileName: "results")
         let store = Store()

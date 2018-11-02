@@ -120,14 +120,14 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
                     } else {
                         cell.textLabel!.text = info.label(exercise)
                         cell.detailTextLabel!.text = info.sublabel(exercise)
-                        //                        let calendar = Calendar.current       // TODO: implement this
-//                        if let completed = info.completed[workout.name], calendar.isDate(completed, inSameDayAs: Date()) {
-//                            cell.textLabel?.setColor(.lightGray)
-//                            cell.detailTextLabel?.setColor(.lightGray)
-//                        } else {
-//                            cell.textLabel?.setColor(.black)
-//                            cell.detailTextLabel?.setColor(.black)
-//                        }
+                        let calendar = Calendar.current
+                        if let completed = exercise.completed[workout.name], calendar.isDate(completed, inSameDayAs: Date()) {
+                            cell.textLabel?.setColor(.lightGray)
+                            cell.detailTextLabel?.setColor(.lightGray)
+                        } else {
+                            cell.textLabel?.setColor(.black)
+                            cell.detailTextLabel?.setColor(.black)
+                        }
                     }
                     
                 } else {
