@@ -924,7 +924,7 @@ class TimedSubType: ExerciseInfo {
 }
 
 
-func addResults(_ store: Store, _ key: String, _ value: [String: [Storable]]) {
+func addStrDict(_ store: Store, _ key: String, _ value: [String: [Storable]]) {
     store.addStrArray(key + "-keys", Array(value.keys))
     store.addIntArray(key + "-counts", Array(value.keys.map {value[$0]?.count ?? 0}))
     
@@ -939,7 +939,7 @@ func addResults(_ store: Store, _ key: String, _ value: [String: [Storable]]) {
     store.addObjArray(key + "-values", entries)
 }
 
-func getResults<T: Storable>(_ store: Store, _ key: String) -> [String: [T]] {
+func getStrDict<T: Storable>(_ store: Store, _ key: String) -> [String: [T]] {
     let keys = store.getStrArray(key + "-keys")
     let counts = store.getIntArray(key + "-counts")
     let entries: [T] = store.getObjArray(key + "-values")
@@ -961,7 +961,6 @@ func getResults<T: Storable>(_ store: Store, _ key: String) -> [String: [T]] {
     
     return results
 }
-
 
 fileprivate func makeHistoryFromLabels(_ labels: [String]) -> String {
     var entries: [String] = []
