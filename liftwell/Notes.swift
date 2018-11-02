@@ -3,7 +3,7 @@
 import Foundation
 
 private func createNote(notes: [String], links: [String: String]) -> String {
-    let ammended = notes.map {"• " + $0}
+    let ammended = notes.map {"* " + $0}
     var text = ammended.joined(separator: "\n")
     text += "\n\n"
     
