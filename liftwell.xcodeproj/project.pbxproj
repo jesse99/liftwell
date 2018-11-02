@@ -48,6 +48,7 @@
 		37EFD6DC217A2D9000F60880 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6DB217A2D9000F60880 /* Set.swift */; };
 		37EFD6DE217A679F00F60880 /* Sets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6DD217A679F00F60880 /* Sets.swift */; };
 		37EFD6E0217B710A00F60880 /* ExerciseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6DF217B710A00F60880 /* ExerciseInfo.swift */; };
+		5312CB0DE6FC9C6CF275FC59 /* Pods_liftwell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2755A036AB78E243B7E01C33 /* Pods_liftwell.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		010C3ABFFFAF5B50B5BBCA80 /* Pods-liftwell.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-liftwell.debug.xcconfig"; path = "Pods/Target Support Files/Pods-liftwell/Pods-liftwell.debug.xcconfig"; sourceTree = "<group>"; };
+		2755A036AB78E243B7E01C33 /* Pods_liftwell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_liftwell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3707B8D42172C1D200DF43B2 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
 		37286822216259AE005F6FD0 /* liftwell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = liftwell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37286825216259AE005F6FD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +109,7 @@
 		37EFD6DB217A2D9000F60880 /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		37EFD6DD217A679F00F60880 /* Sets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sets.swift; sourceTree = "<group>"; };
 		37EFD6DF217B710A00F60880 /* ExerciseInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseInfo.swift; sourceTree = "<group>"; };
+		940AF51E1C6D433F9E269A4E /* Pods-liftwell.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-liftwell.release.xcconfig"; path = "Pods/Target Support Files/Pods-liftwell/Pods-liftwell.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5312CB0DE6FC9C6CF275FC59 /* Pods_liftwell.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +137,8 @@
 				37286824216259AE005F6FD0 /* liftwell */,
 				3728683B216259B0005F6FD0 /* liftwellTests */,
 				37286823216259AE005F6FD0 /* Products */,
+				CE5042C618D311E4D83FF3C1 /* Pods */,
+				A1CFD8258BC09E91E24602F1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -233,6 +240,23 @@
 			path = Options;
 			sourceTree = "<group>";
 		};
+		A1CFD8258BC09E91E24602F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2755A036AB78E243B7E01C33 /* Pods_liftwell.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE5042C618D311E4D83FF3C1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				010C3ABFFFAF5B50B5BBCA80 /* Pods-liftwell.debug.xcconfig */,
+				940AF51E1C6D433F9E269A4E /* Pods-liftwell.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -240,9 +264,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37286841216259B0005F6FD0 /* Build configuration list for PBXNativeTarget "liftwell" */;
 			buildPhases = (
+				550037089C93E8C50EF0A40D /* [CP] Check Pods Manifest.lock */,
 				3728681E216259AE005F6FD0 /* Sources */,
 				3728681F216259AE005F6FD0 /* Frameworks */,
 				37286820216259AE005F6FD0 /* Resources */,
+				25384D978751815C7672C9A6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -330,6 +356,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		25384D978751815C7672C9A6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-liftwell/Pods-liftwell-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/TSMarkdownParser/TSMarkdownParser.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMarkdownParser.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-liftwell/Pods-liftwell-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		550037089C93E8C50EF0A40D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-liftwell-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3728681E216259AE005F6FD0 /* Sources */ = {
@@ -530,6 +603,7 @@
 		};
 		37286842216259B0005F6FD0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 010C3ABFFFAF5B50B5BBCA80 /* Pods-liftwell.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -549,6 +623,7 @@
 		};
 		37286843216259B0005F6FD0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 940AF51E1C6D433F9E269A4E /* Pods-liftwell.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

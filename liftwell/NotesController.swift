@@ -3,6 +3,7 @@
 import Foundation
 import UIKit
 import os.log
+import TSMarkdownParser
 
 class NotesController: UIViewController, UITextViewDelegate {
     func initialize(_ exercise: Exercise, _ breadcrumb: String) {
@@ -43,9 +44,15 @@ class NotesController: UIViewController, UITextViewDelegate {
     }
     
     private func setText(_ str: String) {
-//        let markdown = SwiftyMarkdown(string: str)
-//        let text = markdown.attributedString()
-//        textView.textStorage.setAttributedString(text)
+        if let parser = TSMarkdownParser.standard() {
+            if let text = parser.attributedString(fromMarkdown: str) {
+                textView.textStorage.setAttributedString(text)
+            } else {
+                textView.text = "There was an error parsing the text."
+            }
+        } else {
+            textView.text = "Failed to load TSMarkdownParser."
+        }
     }
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {

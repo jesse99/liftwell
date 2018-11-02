@@ -1,0 +1,16 @@
+PODS:
+  - TSMarkdownParser (1.0.6)
+
+DEPENDENCIES:
+  - TSMarkdownParser
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - TSMarkdownParser
+
+SPEC CHECKSUMS:
+  TSMarkdownParser: 51ab526cd67cf96dfc174097ceddb13471da249d
+
+PODFILE CHECKSUM: 9dd854849762681ad66d5af9894045dcf2b7dd0a
+
+COCOAPODS: 1.5.3
