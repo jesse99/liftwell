@@ -311,10 +311,10 @@ class ExerciseController: UIViewController {
         //        savePosition()
         //        dismissTooltip()
         
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let view = storyboard.instantiateViewController(withIdentifier: "NotesID") as! NotesController
-//        view.initialize(exercise, breadcrumbLabel.text!)
-//        present(view, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let view = storyboard.instantiateViewController(withIdentifier: "NotesControllerID") as! NotesController
+        view.initialize(exercise, breadcrumbLabel.text!)
+        present(view, animated: true, completion: nil)
     }
     
 //    @IBAction func progressionPressed(_ sender: Any) {
