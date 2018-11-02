@@ -148,6 +148,7 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     @IBAction func donePressed(_ sender: Any) {
+        performSegue(withIdentifier: "unwindToWorkoutsID", sender: self)
     }
     
     @IBAction func skipPressed(_ sender: Any) {
