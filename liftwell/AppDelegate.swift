@@ -85,13 +85,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         saveResults()
     }
 
-    func dateWorkoutWasCompleted(_ workout: Workout) -> (Date, Bool)? {
+    func dateWorkoutWasCompleted(_ workout: Workout) -> (Date, Bool, Bool)? {
         func dateWorkoutWasLastCompleted() -> Date? {
             var date: Date? = nil
             
             for name in workout.exercises {
                 if let exercise = program.findExercise(name), !workout.optional.contains(name) {
-                    if let completed = exercise.completed[workout.name] {
+                    if let (completed, _) = exercise.dateCompleted(workout) {
                         if date == nil || completed.compare(date!) == .orderedDescending {
                             date = completed
                         }
@@ -104,13 +104,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let date: Date? = dateWorkoutWasLastCompleted()
         
         var partial = false
+        var skipped = 0
+        var notSkipped = 0
         if let latest = date {
             let calendar = Calendar.current
             for name in workout.exercises {
                 if let exercise = program.findExercise(name), !workout.optional.contains(name) {
-                    if let completed = exercise.completed[workout.name] {
+                    if let (completed, skip) = exercise.dateCompleted(workout) {
                         if !calendar.isDate(completed, inSameDayAs: latest) {   // this won't be exactly right if anyone is crazy enough to do workouts at midnight
                             partial = true
+                        }
+                        if skip {
+                            skipped += 1
+                        } else {
+                            notSkipped += 1
                         }
                     } else {
                         partial = true
@@ -119,7 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        return date !=  nil ? (date!, partial) : nil
+        return date !=  nil ? (date!, partial || (skipped > 0 && skipped != notSkipped), skipped > 0) : nil
     }
 
     func saveResults() {

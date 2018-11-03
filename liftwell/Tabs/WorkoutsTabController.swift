@@ -161,9 +161,15 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
             var color = selectedIndex == index && todays.isEmpty ? UIColor.red : UIColor.black
 
             let app = UIApplication.shared.delegate as! AppDelegate
-            if let (date, partial) = app.dateWorkoutWasCompleted(workout) {
+            if let (date, partial, skipped) = app.dateWorkoutWasCompleted(workout) {
                 let calendar = Calendar.current
-                if calendar.isDate(date, inSameDayAs: Date()) && partial {
+                if skipped {
+                    if partial {
+                        cell.detailTextLabel!.text = "partially skipped \(date.daysName())"
+                    } else {
+                        cell.detailTextLabel!.text = "skipped \(date.daysName())"
+                    }
+                } else if calendar.isDate(date, inSameDayAs: Date()) && partial {
                     cell.detailTextLabel!.text = "in progress"
                 } else if calendar.isDate(date, inSameDayAs: Date()) && !partial {
                     cell.detailTextLabel!.text = "finished today"
@@ -187,18 +193,18 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
     
     // Returns the workouts being executed atm (but not those that have finished executing).
     private func findTodaysWorkouts() -> [Int] {
-        func isUnderway(_ workout: Workout) -> Bool {
-            let app = UIApplication.shared.delegate as! AppDelegate
-            for name in workout.exercises {
-                if let exercise = app.program.findExercise(name), !workout.optional.contains(name) {
-                    let info = exercise.getInfo()
-                    if case .underway = info.state, info.on(workout) {
-                        return true
-                    }
-                }
-            }
-            return false
-        }
+//        func isUnderway(_ workout: Workout) -> Bool {
+//            let app = UIApplication.shared.delegate as! AppDelegate
+//            for name in workout.exercises {
+//                if let exercise = app.program.findExercise(name), !workout.optional.contains(name) {
+//                    let info = exercise.getInfo()
+//                    if case .underway = info.state, info.on(workout) {
+//                        return true
+//                    }
+//                }
+//            }
+//            return false
+//        }
 
         func numCompleted(_ workout: Workout) -> Int {
             var count = 0
@@ -206,7 +212,7 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
             let calendar = Calendar.current
             for name in workout.exercises {
                 if let exercise = app.program.findExercise(name), !workout.optional.contains(name) {
-                    if let completed = exercise.completed[workout.name], calendar.isDate(completed, inSameDayAs: Date()) {
+                    if let (completed, _) = exercise.dateCompleted(workout), calendar.isDate(completed, inSameDayAs: Date()) {
                         count += 1
                     }
                 }
@@ -218,7 +224,8 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
         let app = UIApplication.shared.delegate as! AppDelegate
         for (i, workout) in app.program.workouts.enumerated() {
             let completed = numCompleted(workout)
-            if isUnderway(workout) || (completed > 0 && completed < workout.exercises.count) {
+            if completed > 0 && completed < workout.exercises.count {
+//            if isUnderway(workout) || (completed > 0 && completed < workout.exercises.count) {
                 todays.append(i)
             }
         }
@@ -230,7 +237,7 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
         for (i, workout) in app.program.workouts.enumerated() {
             if workout.scheduled && workout.exercises.all({
                 if let exercise = app.program.findExercise($0), !workout.optional.contains($0) {
-                    if exercise.completed[workout.name] == nil {
+                    if exercise.dateCompleted(workout) == nil {
                         return true
                     }
                 }
@@ -249,7 +256,7 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
         let app = UIApplication.shared.delegate as! AppDelegate
         for (i, workout) in app.program.workouts.enumerated() {
             if workout.scheduled {
-                if let (candidate, _) = app.dateWorkoutWasCompleted(workout) {
+                if let (candidate, _, _) = app.dateWorkoutWasCompleted(workout) {
                     if candidate.compare(date) == .orderedAscending {
                         date = candidate
                         index = i

@@ -13,6 +13,7 @@ class Exercise: Storable {
 //        self.prevExercise = nil
         self.type = type
         self.completed = [:]
+        self.skipped = [:]
 //        self.hidden = hidden
     }
     
@@ -23,12 +24,18 @@ class Exercise: Storable {
 //        self.hidden = store.getBool("hidden")
         
         self.completed = [:]
+        self.skipped = [:]
         if store.hasKey("completed-names") {
             let names = store.getStrArray("completed-names")
+
             let dates = store.getDateArray("completed-dates")
-            
             for (i, name) in names.enumerated() {
                 self.completed[name] = dates[i]
+            }
+
+            let skip = store.getIntArray("completed-skip")
+            for (i, name) in names.enumerated() {
+                self.skipped[name] = skip[i] == 1
             }
         }
         
@@ -59,6 +66,7 @@ class Exercise: Storable {
         
         store.addStrArray("completed-names", Array(completed.keys))
         store.addDateArray("completed-dates", Array(completed.values))
+        store.addIntArray("completed-skip", Array(skipped.values.map {$0 ? 1 : 0}))
     }
     
 //    func sync(_ savedExercise: Exercise) {
@@ -76,7 +84,17 @@ class Exercise: Storable {
     var type: Type
     
     /// Date the exercise was last completed keyed by workout name (exercises can be shared across workouts).
-    var completed: [String: Date]
+    func dateCompleted(_ workout: Workout) -> (Date, Bool)? {
+        if let date = completed[workout.name], let skip = skipped[workout.name] {
+            return (date, skip)
+        }
+        return nil
+    }
+    
+    func complete(_ workout: Workout, skipped: Bool) {
+        completed[workout.name] = Date()
+        self.skipped[workout.name] = skipped
+    }
     
     /// These are used for exercises that support progression. For example, progressively harder planks. Users
     /// can use the Options screens to choose which version they want to perform.
@@ -120,4 +138,7 @@ class Exercise: Storable {
         
         return problems
     }
+
+    private var completed: [String: Date]
+    private var skipped: [String: Bool]
 }

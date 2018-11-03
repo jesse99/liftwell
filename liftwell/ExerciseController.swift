@@ -262,7 +262,7 @@ class ExerciseController: UIViewController {
     }
     
     private func finish() {
-        exercise.completed[workout.name] = Date()
+        exercise.complete(workout, skipped: false)
         
         let app = UIApplication.shared.delegate as! AppDelegate
         app.saveState()

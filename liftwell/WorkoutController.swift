@@ -121,7 +121,7 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
                         cell.textLabel!.text = info.label(exercise)
                         cell.detailTextLabel!.text = info.sublabel(exercise)
                         let calendar = Calendar.current
-                        if let completed = exercise.completed[workout.name], calendar.isDate(completed, inSameDayAs: Date()) {
+                        if let (completed, _) = exercise.dateCompleted(workout), calendar.isDate(completed, inSameDayAs: Date()) {
                             cell.textLabel?.setColor(.lightGray)
                             cell.detailTextLabel?.setColor(.lightGray)
                         } else {
@@ -152,23 +152,32 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     @IBAction func skipPressed(_ sender: Any) {
-        //        let alert = UIAlertController(title: "Are you sure you want to skip this workout?", message: "Note that this will only affect the appearence of the main screen.", preferredStyle: .actionSheet)
-        //
-        //        var action = UIAlertAction(title: "Yes", style: .destructive) {_ in self.doSkip()}
-        //        alert.addAction(action)
-        //
-        //        action = UIAlertAction(title: "No", style: .default, handler: nil)
-        //        alert.addAction(action)
-        //
-        //        self.present(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: "Are you sure you want to skip this workout?", message: "Note that this will only affect the appearence of the main screen.", preferredStyle: .actionSheet)
+
+        var action = UIAlertAction(title: "Yes", style: .destructive) {_ in self.doSkip()}
+        alert.addAction(action)
+
+        action = UIAlertAction(title: "No", style: .default, handler: nil)
+        alert.addAction(action)
+
+        self.present(alert, animated: true, completion: nil)
     }
     
-
-    //    private func doSkip()
-    //    {
-    //        presults.skipWorkout(workout.name)
-    //        self.performSegue(withIdentifier: "unwindToWorkoutsID", sender: self)
-    //    }
+    private func doSkip() {
+        let app = UIApplication.shared.delegate as! AppDelegate
+        let calendar = Calendar.current
+        for name in workout.exercises {
+            if let exercise = app.program.findExercise(name) {
+                if let (completed, _) = exercise.dateCompleted(workout), calendar.isDate(completed, inSameDayAs: Date()) {
+                    // already completed today
+                } else {
+                    exercise.complete(workout, skipped: true)
+                }
+            }
+        }
+        app.saveState()
+        self.performSegue(withIdentifier: "unwindToWorkoutsID", sender: self)
+    }
 
     @IBAction func optionsPressed(_ sender: Any) {
         //        dismissTooltip()
