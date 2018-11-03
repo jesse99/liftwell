@@ -56,6 +56,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+        // If there is more than one workout then,
+        if program.workouts.count > 1 {
+            // only restore if we think the user is probably still on the same workout.
+            return shouldRestoreCurrentWorkout()
+        }
+        return true
+    }
+    
+    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+        return true
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -179,8 +192,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
     
+    private func shouldRestoreCurrentWorkout() -> Bool {
+        let now = Date.init()
+        
+        for workout in program.workouts {
+            if let candidate = dateWorkoutWasCompleted(workout) {
+                let hours = now.hoursSinceDate(candidate.0)
+                if hours < 4 {
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+
     private func getPath(fileName: String) -> String {
         let dirs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let dir = dirs.first!
