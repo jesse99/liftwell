@@ -9,6 +9,7 @@ class Workout: Storable {
         self.exercises = exercises
         self.optional = optional
         self.scheduled = scheduled
+        self.lastWorkout = nil
     }
     
     required init(from store: Store) {
@@ -16,6 +17,12 @@ class Workout: Storable {
         self.exercises = store.getStrArray("exercises")
         self.optional = store.getStrArray("optional")
         self.scheduled = store.getBool("scheduled", ifMissing: true)
+        
+        if store.hasKey("lastWorkout") {
+            self.lastWorkout = store.getDate("lastWorkout")
+        } else {
+            self.lastWorkout = nil
+        }
     }
     
     func save(_ store: Store) {
@@ -23,6 +30,9 @@ class Workout: Storable {
         store.addStrArray("exercises", exercises)
         store.addStrArray("optional", optional)
         store.addBool("scheduled", scheduled)
+        if let date = lastWorkout {
+            store.addDate("lastWorkout", date)
+        }
     }
     
     var name: String         // "Heavy Day"
@@ -65,4 +75,19 @@ class Workout: Storable {
         
         return problems
     }
+
+    // Returns true if this is the first exercise completed today.
+    func completed(_ exercise: Exercise) -> Bool {
+        let today = Date()
+        let calendar = Calendar.current
+        if let last = lastWorkout, calendar.isDate(last, inSameDayAs: today) {
+            lastWorkout = today
+            return false
+        } else {
+            lastWorkout = today
+            return true
+        }
+    }
+    
+    private var lastWorkout: Date?
 }

@@ -45,7 +45,7 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         //dismissTooltip()  // TODO
         statusLabel.text = "Worked out 1000 times over six months."
-        //        statusLabel.text = WorkoutsTabController.getWorkoutSummary()  // TODO: add a real workout summary
+        statusLabel.text = WorkoutsTabController.getWorkoutSummary()
         tableView.reloadData()
     }
     
@@ -107,7 +107,7 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
     @IBAction func unwindToWorkouts(_ segue:UIStoryboardSegue) {
         tableView.reloadData()
         statusLabel.text = "Worked out 1000 times over six months."
-//        statusLabel.text = WorkoutsTabController.getWorkoutSummary()
+        statusLabel.text = WorkoutsTabController.getWorkoutSummary()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -298,44 +298,35 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
     
     // Returns a string like: "You’ve been running the Ripptoe Masters program for 3 months, and have
     // worked out 84 days."
-//    static internal func getWorkoutSummary() -> String {
-//        let app = UIApplication.shared.delegate as! AppDelegate
-//
-//        func numWorkouts() -> Int {
-//            let scheduledWorkouts = app.program.workouts.filter {$0.scheduled}
-//            let scheduledExercises = Set(scheduledWorkouts.flatMap {$0.exercises})
-//
-//            var dates: Set<Date> = []
-//            for exercise in app.program.exercises {
-//                if scheduledExercises.contains(exercise.name) {
-//                    for result in exercise.plan.getHistory() {
-//                        dates.insert(result.date.startOfDay())    // TODO: don't want the date if it's been more than a month(?) since the prior date
-//                    }
-//                }
-//            }
-//            return dates.count
-//        }
-//
-//        // TODO: return an attributed string (program name in italics)
-//        // TODO: or underline?
-//        //        if results.numWorkouts > 0 {
-//        //            let elapsed = results.dateStarted.longDurationName()
-//        //            let count = results.numWorkouts == 1 ? "1 day" : "\(results.numWorkouts) days"
-//        //            return "You’ve been running the \(results.program.name) program for \(elapsed) and have worked out \(count)."
-//        //        } else {
-//        //            return "You are running the \(results.program.name) program."
-//        //        }
-//        let count = numWorkouts()
-//        var mesg = "You've done \(count) \(app.program.name) " + (count == 1 ? "workout." : "workouts.")
-//        if let max = app.program.maxWorkouts, count >= max {
-//            if let next = app.program.nextProgram {
-//                mesg += " Consider switching to \(next)."
-//            } else {
-//                mesg += " You've done all the workouts the program calls for."
-//            }
-//        }
-//        return mesg
-//    }
+    static internal func getWorkoutSummary() -> String {
+        let app = UIApplication.shared.delegate as! AppDelegate
+        var mesg = ""
+        
+        // TODO: return an attributed string (program name in italics)
+        // TODO: or underline?
+        let name = app.program.name
+        if let started = app.program.dateStarted {
+            let count = app.program.numWorkouts
+            let days = started.longDurationName()
+            if let max = app.program.maxWorkouts {
+                mesg = "You’ve been running the \(name) program for \(days), and have done \(count) of \(max) workouts."
+                if let next = app.program.nextProgram, count >= max {
+                    mesg += " Consider switching to \(next)."
+                }
+            } else {
+                if count > 1 {
+                    mesg = "You’ve been running the \(name) program for \(days), and have done \(count) workouts."
+                } else if count == 1 {
+                    mesg = "You’ve been running the \(name) program for \(days), and have done 1 workout."
+                } else {
+                    mesg = "You are running the \(name) program."
+                }
+            }
+        } else {
+            mesg = "You are running the \(name) program."
+        }
+        return mesg
+    }
 
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var statusLabel: UILabel!

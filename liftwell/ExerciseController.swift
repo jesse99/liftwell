@@ -265,6 +265,9 @@ class ExerciseController: UIViewController {
         exercise.complete(workout, skipped: false)
         
         let app = UIApplication.shared.delegate as! AppDelegate
+        if workout.completed(exercise) {
+            app.program.incrementWorkouts()
+        }
         app.saveState()
         
         performSegue(withIdentifier: unwindTo, sender: self)

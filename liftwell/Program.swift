@@ -40,6 +40,8 @@ class Program: Storable {
         self.customNotes = [:]
         self.maxWorkouts = maxWorkouts
         self.nextProgram = nextProgram
+        self.numWorkouts = 0
+        self.dateStarted = nil
     }
     
     convenience init(_ name: String, _ workouts: [Workout], _ exercises: [Exercise], _ tags: [Tags], _ description: String) {
@@ -153,6 +155,13 @@ class Program: Storable {
         self.exercises = store.getObjArray("exercises")
         self.tags = Swift.Set(store.getObjArray("tags"))
         self.description = store.getStr("description")
+        self.numWorkouts = store.getInt("numWorkouts")
+        
+        if store.hasKey("dateStarted") {
+            self.dateStarted = store.getDate("dateStarted")
+        } else {
+            self.dateStarted = nil
+        }
         
         self.customNotes = [:]
         let customNames = store.getStrArray("custom-names", ifMissing: [])
@@ -189,6 +198,10 @@ class Program: Storable {
         if let nextProgram = self.nextProgram {
             store.addStr("nextProgram", nextProgram)
         }
+        store.addInt("numWorkouts", numWorkouts)
+        if let d = dateStarted {
+            store.addDate("dateStarted", d)
+        }
     }
     
     func findWorkout(_ name: String) -> Workout? {
@@ -197,6 +210,13 @@ class Program: Storable {
     
     func findExercise(_ name: String) -> Exercise? {
         return exercises.first {$0.name == name}
+    }
+    
+    func incrementWorkouts() {
+        numWorkouts += 1
+        if dateStarted == nil {
+            dateStarted = Date()
+        }
     }
 
 //    func setExercise(_ exercise: Exercise) {
@@ -278,6 +298,9 @@ class Program: Storable {
     
     var maxWorkouts: Int?    // number of workouts that the user is expected to perform before switching to a new program
     var nextProgram: String? // if the program has a well defined successor than it should be listed here
+    
+    private(set) var dateStarted: Date?     // will change if the user is switching between programs, TODO: do that
+    private(set) var numWorkouts: Int       // number of workouts user has done (not neccesarily completed workouts because that gets complicated)
 }
 
 extension Program.Tags: Storable {
