@@ -159,7 +159,7 @@ class ExerciseController: UIViewController {
         //        var shown = false
         //        if !exercise.hasBaseExercise()
         //        {
-        //            if setting.getMaxWeight(exercise) <= 0.0
+        //            if getMaxWeight(exercise) <= 0.0
         //            {
         //                shown = showTooltip(superview: view, forItem: optionsButton, "You can skip this by typing in the weight you want to use. You can also adjust how quickly weights jump up each time by toggling the available weights.", .bottom, id: "short_cut_max_lifts")
         //            }
@@ -427,15 +427,15 @@ class ExerciseController: UIViewController {
         switch exercise.type {
         case .body(let type):
             switch type.subtype {
-            case .maxReps(let subtype): setRepsOptions(RepsOptions(rest: subtype.setting.restTime, weight: subtype.setting.weight, reps: subtype.setting.currentReps, cycleIndex: nil, apparatus: nil))
-            case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.setting.restTime, weight: subtype.setting.weight, reps: subtype.setting.reps, cycleIndex: nil, apparatus: nil))
-            case .timed(let subtype): setTimedOptions(TimedOptions(time: subtype.setting.currentTime, weight: subtype.setting.weight, apparatus: nil))
+            case .maxReps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, weight: subtype.weight, reps: subtype.currentReps, cycleIndex: nil, apparatus: nil))
+            case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, weight: subtype.weight, reps: subtype.reps, cycleIndex: nil, apparatus: nil))
+            case .timed(let subtype): setTimedOptions(TimedOptions(time: subtype.currentTime, weight: subtype.weight, apparatus: nil))
             }
         case .weights(let type):
             switch type.subtype {
-            case .cyclic(let subtype): setRepsOptions(RepsOptions(rest: subtype.setting.restTime, weight: subtype.setting.weight, reps: subtype.setting.reps, cycleIndex: subtype.setting.cycleIndex, apparatus: type.setting.apparatus))
-            case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.setting.restTime, weight: subtype.setting.weight, reps: subtype.setting.reps, cycleIndex: nil, apparatus: type.setting.apparatus))
-            case .timed(let subtype): setTimedOptions(TimedOptions(time: subtype.setting.currentTime, weight: subtype.setting.weight, apparatus: type.setting.apparatus))
+            case .cyclic(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, weight: subtype.weight, reps: subtype.reps, cycleIndex: subtype.cycleIndex, apparatus: type.apparatus))
+            case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, weight: subtype.weight, reps: subtype.reps, cycleIndex: nil, apparatus: type.apparatus))
+            case .timed(let subtype): setTimedOptions(TimedOptions(time: subtype.currentTime, weight: subtype.weight, apparatus: type.apparatus))
             }
         }
     }
@@ -452,30 +452,30 @@ class ExerciseController: UIViewController {
         case .body(let type):
             switch type.subtype {
             case .maxReps(let subtype):
-                subtype.setting.restTime = options.rest
-                subtype.setting.weight = options.weight
-                subtype.setting.currentReps = options.reps!
+                subtype.restTime = options.rest
+                subtype.weight = options.weight
+                subtype.currentReps = options.reps!
                 subtype.updated(exercise)
             case .reps(let subtype):
-                subtype.setting.restTime = options.rest
-                subtype.setting.weight = options.weight
-                subtype.setting.reps = options.reps!
+                subtype.restTime = options.rest
+                subtype.weight = options.weight
+                subtype.reps = options.reps!
                 subtype.updated(exercise)
             case .timed(_): assert(false)
             }
         case .weights(let type):
-            type.setting.apparatus = options.apparatus!
+            type.apparatus = options.apparatus!
             switch type.subtype {
             case .cyclic(let subtype):
-                subtype.setting.restTime = options.rest
-                subtype.setting.weight = options.weight
-                subtype.setting.reps = options.reps!
-                subtype.setting.cycleIndex = options.cycleIndex!
+                subtype.restTime = options.rest
+                subtype.weight = options.weight
+                subtype.reps = options.reps!
+                subtype.cycleIndex = options.cycleIndex!
                 subtype.updated(exercise)
             case .reps(let subtype):
-                subtype.setting.restTime = options.rest
-                subtype.setting.weight = options.weight
-                subtype.setting.reps = options.reps!
+                subtype.restTime = options.rest
+                subtype.weight = options.weight
+                subtype.reps = options.reps!
                 subtype.updated(exercise)
             case .timed(_): assert(false)
             }
@@ -494,15 +494,15 @@ class ExerciseController: UIViewController {
         switch exercise.type {
         case .body(let type):
             if case let .timed(subtype) = type.subtype {
-                subtype.setting.currentTime = options.time
-                subtype.setting.weight = options.weight
+                subtype.currentTime = options.time
+                subtype.weight = options.weight
                 subtype.updated(exercise)
             }
         case .weights(let type):
-            type.setting.apparatus = options.apparatus!
+            type.apparatus = options.apparatus!
             if case let .timed(subtype) = type.subtype {
-                subtype.setting.currentTime = options.time
-                subtype.setting.weight = options.weight
+                subtype.currentTime = options.time
+                subtype.weight = options.weight
                 subtype.updated(exercise)
             }
         }

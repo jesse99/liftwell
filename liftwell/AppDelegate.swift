@@ -12,7 +12,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let path = getPath(fileName: "program_name")
         if let name = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? String {
             program = loadProgram(name)
-            loadSettings()
         }
 
         if program == nil {
@@ -96,7 +95,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func saveState() {
         saveProgram()
-        saveSettings()
         saveResults()
     }
 
@@ -262,87 +260,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    private func saveSettings() {
-        func getSetting(_ exercise: Exercise) -> Storable? {
-            switch exercise.type {
-            case .body(_):
-               return nil
-            case .weights(let type):
-                return type.setting
-            }
-        }
-        
-        func getSubSetting(_ exercise: Exercise) -> Storable {
-            switch exercise.type {
-            case .body(let type):
-                switch type.subtype {
-                case .maxReps(let subtype):
-                    return subtype.setting
-                case .reps(let subtype):
-                    return subtype.setting
-                case .timed(let subtype):
-                    return subtype.setting
-                }
-            case .weights(let type):
-                switch type.subtype {
-                case .cyclic(let subtype):
-                    return subtype.setting
-                case .reps(let subtype):
-                    return subtype.setting
-                case .timed(let subtype):
-                    return subtype.setting
-                }
-            }
-        }
-        
-        func getSettings() -> [String: Storable] {
-            var settings: [String: Storable] = [:]
-            for workout in program.workouts {
-                for name in workout.exercises {
-                    if let exercise = program.findExercise(name) {
-                        if let setting = getSetting(exercise) {
-                            let key = "\(workout.name)-\(exercise.name)-type"
-                            settings[key] = setting
-                        }
-                        
-                        let setting = getSubSetting(exercise)
-                        let key = "\(workout.name)-\(exercise.name)-subtype"
-                        settings[key] = setting
-                    } else {
-                        os_log("getSetting couldn't find %@", name)
-                    }
-                }
-            }
-            
-            return settings
-        }
-        
-        let path = getPath(fileName: "program_settings_" + program.name)
-        let store = Store()
-
-        let settings = getSettings()
-        store.addStrArray("keys", Array(settings.keys))
-        store.addObjArray("values", Array(settings.values)) // documented as being in the same order as keys
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .secondsSince1970
-        
-        do {
-            let data = try encoder.encode(store)
-            saveObject(data as AnyObject, path)
-        } catch {
-            os_log("Error encoding settings %@: %@", type: .error, program.name, error.localizedDescription)
-        }
-    }
-    
-    private func loadSettings() {
-        let path = getPath(fileName: "program_settings_" + program.name)
-        let store = Store()
-
-        var settings: [String: Storable] = [:]
-        let keys = store.getStrArray("keys")
-        let values: [Storable] = store.getObjArray("values")    // TODO: this won't instantiate the right type
-    }
-
     private func loadProgram(_ name: String) -> Program? {
         let path = getPath(fileName: "program_" + name)
         if let data = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? Data {
@@ -353,6 +270,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let savedProgram = Program(from: store)
                 if let builtin = findBuiltIn(savedProgram.name) {
                     // We use the built-in version so that updates to the exe actually take effect.
+                    builtin.sync(savedProgram)
                     return builtin
                 } else {
                     return savedProgram

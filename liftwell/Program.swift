@@ -204,6 +204,29 @@ class Program: Storable {
         }
     }
     
+    // This is called when a built-in program is loaded. What we do is use the built-in program but use the settings that
+    // were saved.
+    func sync(_ savedProgram: Program) {
+        for workout in workouts {
+            if let savedWorkout = savedProgram.findWorkout(workout.name) {
+                workout.sync(savedWorkout)
+            }
+        }
+
+        for exercise in exercises {
+            if let savedExercise = savedProgram.findExercise(exercise.name) {
+                switch exercise.type {
+                case .body(let type): type.sync(self, savedExercise)
+                case .weights(let type): type.sync(self, savedExercise)
+                }
+            }
+        }
+        
+        customNotes = savedProgram.customNotes
+        dateStarted = savedProgram.dateStarted
+        numWorkouts = savedProgram.numWorkouts
+    }
+    
     func findWorkout(_ name: String) -> Workout? {
         return workouts.first {$0.name == name}
     }
@@ -227,78 +250,16 @@ class Program: Storable {
 //        }
 //    }
     
-    /// Used to sync a saved version of a built-in program with the current version
-    /// of the built in program. In general all that should be used from the saved
-    /// program are settings and plan states (anything else requires a program edit
-    /// which requires that the user re-name the program),
-//    func sync(_ savedProgram: Program) {
-//        func inProgression(_ name1: String, _ name2: String) -> Bool {
-//            var name: String? = name1
-//            while let candidate = name, let exercise = findExercise(candidate) {
-//                if exercise.name == name2 {
-//                    return true
-//                }
-//                name = exercise.prevExercise
-//            }
-//            
-//            name = name1
-//            while let candidate = name, let exercise = findExercise(candidate) {
-//                if exercise.name == name2 {
-//                    return true
-//                }
-//                name = exercise.nextExercise
-//            }
-//            
-//            return false
-//        }
-//        
-//        assert(name == savedProgram.name, "attempt to sync programs \(name) and \(savedProgram.name)")
-//        for savedExercise in savedProgram.exercises {
-//            if let exercise = exercises.first(where: {$0.name == savedExercise.name}) {
-//                exercise.sync(savedExercise)
-//            } else if savedExercise.hidden {
-//                exercises.append(savedExercise)
-//            } else {
-//                os_log("dropping saved exercise %@", type: .info, savedExercise.name)
-//            }
-//        }
-//        
-//        // TODO: Progression is annoying: maybe we should ask the user to rename (and copy) the program?
-//        for workout in workouts {
-//            if let savedWorkout = savedProgram.findWorkout((workout.name)) {
-//                for (i, exerciseName) in workout.exercises.enumerated() {
-//                    if !savedWorkout.exercises.contains(exerciseName) {
-//                        
-//                        // We've found an exercise in a workout that isn't part of the saved workout.
-//                        for savedExerciseName in savedWorkout.exercises {
-//                            // If the saved workout has an exercise not in the builtin workout and that
-//                            // exercise is part of the progression for the exercise we're missing then
-//                            // we'll use the saved exercise. Otherwise we'll use the built-in exercise.
-//                            if !workout.exercises.contains(savedExerciseName) && inProgression(exerciseName, savedExerciseName) {
-//                                os_log("replacing built-in %@ with %@ for workout %@", type: .info, workout.exercises[i], savedExerciseName, workout.name)
-//                                workout.exercises[i] = savedExerciseName
-//                                break
-//                            }
-//                        }
-//                    }
-//                }
-//                workout.optional = savedWorkout.optional
-//            }
-//        }
-//        
-//        customNotes = savedProgram.customNotes
-//    }
-    
     var name: String             // "Mad Cow"
     var workouts: [Workout]
     var exercises: [Exercise]
     var tags: Swift.Set<Tags>
     var description: String
-    var customNotes: [String: String]    // formal name => markdown
     
     var maxWorkouts: Int?    // number of workouts that the user is expected to perform before switching to a new program
     var nextProgram: String? // if the program has a well defined successor than it should be listed here
     
+    var customNotes: [String: String]       // formal name => markdown
     private(set) var dateStarted: Date?     // will change if the user is switching between programs, TODO: do that
     private(set) var numWorkouts: Int       // number of workouts user has done (not neccesarily completed workouts because that gets complicated)
 }

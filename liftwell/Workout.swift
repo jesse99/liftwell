@@ -35,16 +35,9 @@ class Workout: Storable {
         }
     }
     
-    var name: String         // "Heavy Day"
-    var exercises: [String]
-    
-    /// Names from exercises that default to inactive.
-    var optional: [String]
-    
-    /// True for workouts that are typically performed on a certain day, eg the push day for a
-    /// push/pull program. False for stuff like a mobility or cardio workout that can be
-    /// performed at any time.
-    var scheduled: Bool
+    func sync(_ savedWorkout: Workout) {
+        lastWorkout = savedWorkout.lastWorkout
+    }
     
     func errors(_ program: Program) -> [String] {
         var problems: [String] = []
@@ -89,5 +82,16 @@ class Workout: Storable {
         }
     }
     
+    var name: String         // "Heavy Day"
+    var exercises: [String]
+    
+    /// Names from exercises that default to inactive.
+    var optional: [String]
+    
+    /// True for workouts that are typically performed on a certain day, eg the push day for a
+    /// push/pull program. False for stuff like a mobility or cardio workout that can be
+    /// performed at any time.
+    var scheduled: Bool
+
     private var lastWorkout: Date?
 }

@@ -83,7 +83,7 @@ fileprivate func barbell(_ name: String, _ formalName: String, _ reps: String, s
 
 func Mine2() -> Program {
     let dbReps = "5@50% 5@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R"
-    let squatReps = "5@50% 3@70% 1@90% 4-8@100% R 4-18@100% R 4-8@100% R"
+    let squatReps = "5@50% 3@70% 1@90% 4-8@100% R 4-8@100% R 4-8@100% R"
     let deadReps = "5@0% 5@0% 5@60% 5@70% 3@80% 1@90% 5@100% R"
     let extReps = "5@50% 3@75% 6-12@100% R 6-12@100% R 6-12@100%"
     let twoReps = "1@100% R 1@100%"

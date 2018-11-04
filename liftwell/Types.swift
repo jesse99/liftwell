@@ -1,6 +1,7 @@
 //  Created by Jesse Jones on 10/6/18.
 //  Copyright © 2018 MushinApps. All rights reserved.
 import Foundation
+import os.log
 
 enum Type {
     case weights(WeightsType)
@@ -15,25 +16,8 @@ class WeightsType: Storable {
         case timed(TimedSubType)
     }
     
-    class Setting: Storable {
-        init(_ apparatus: Apparatus) {
-            self.apparatus = apparatus
-        }
-        
-        required init(from store: Store) {
-            apparatus = store.getObj("apparatus")
-        }
-        
-        func save(_ store: Store) {
-            store.addObj("apparatus", apparatus)
-        }
-        
-        var apparatus: Apparatus
-    }
-    
     init(_ apparatus: Apparatus, _ subType: WeightsType.SubType) {
-        self.defaultSetting = Setting(apparatus)
-        self.setting = defaultSetting
+        self.apparatus = apparatus
         self.subtype = subType
     }
     
@@ -46,9 +30,8 @@ class WeightsType: Storable {
     }
     
     required init(from store: Store) {
-        defaultSetting = store.getObj("defaultSetting")
-        setting = defaultSetting    // will be fixed up after the program is loaded
-        
+        apparatus = store.getObj("apparatus")
+
         let name = store.getStr("subtypeName")
         switch name {
         case "cyclic": self.subtype = .cyclic(store.getObj("subtype"))
@@ -59,19 +42,31 @@ class WeightsType: Storable {
     }
     
     func save(_ store: Store) {
-        store.addObj("defaultSetting", defaultSetting)
-        
+        store.addObj("apparatus", apparatus)
+
         switch subtype {
         case .cyclic(let subtype): store.addStr("subtypeName", "cyclic"); store.addObj("subtype", subtype)
         case .reps(let subtype): store.addStr("subtypeName", "reps"); store.addObj("subtype", subtype)
         case .timed(let subtype): store.addStr("subtypeName", "timed"); store.addObj("subtype", subtype)
         }
     }
+    
+    func sync(_ program: Program, _ savedExercise: Exercise) {
+        switch savedExercise.type {
+        case .weights(let savedType):
+            apparatus = savedType.apparatus
+        default:
+            os_log("%@ wasn't saved as weights", savedExercise.name)
+        }
+        switch subtype {
+        case .cyclic(let builtIn): builtIn.sync(program, savedExercise)
+        case .reps(let builtIn): builtIn.sync(program, savedExercise)
+        case .timed(let builtIn): builtIn.sync(program, savedExercise)
+        }
+    }
 
-    var setting: Setting
+    var apparatus: Apparatus
     var subtype: WeightsType.SubType
-
-    private var defaultSetting: Setting
 }
 
 /// Used for exercises that like dips that are normally body-weight but can use odd sizes weights (like a vest
@@ -110,6 +105,14 @@ class BodyType: Storable {
         case .maxReps(let subtype): store.addStr("subtypeName", "maxReps"); store.addObj("subtype", subtype)
         case .reps(let subtype): store.addStr("subtypeName", "reps"); store.addObj("subtype", subtype)
         case .timed(let subtype): store.addStr("subtypeName", "timed"); store.addObj("subtype", subtype)
+        }
+    }
+    
+    func sync(_ program: Program, _ savedExercise: Exercise) {
+        switch subtype {
+        case .reps(let builtIn): builtIn.sync(program, savedExercise)
+        case .maxReps(let builtIn): builtIn.sync(program, savedExercise)
+        case .timed(let builtIn): builtIn.sync(program, savedExercise)
         }
     }
 
