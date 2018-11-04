@@ -120,35 +120,36 @@ struct Sets: Storable {
     func activities(_ weight: Double, _ apparatus: Apparatus, minimum: Int) -> (Int, [Activity]) {
         var result: [Activity] = []
         let (warmups, worksets, backoff) = partition()
+        let maxWeight = Weight(weight, apparatus).closest()
         for (i, reps) in warmups.sets.enumerated() {
-            let w = Weight(reps.percent*weight, apparatus).closest(below: weight)
+            let setWeight = Weight(reps.percent*weight, apparatus).closest(below: weight)
             result.append(Activity(
                 title: "Warmup \(i+1) of \(warmups.sets.count)",
-                subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
-                amount: "\(reps) @ \(w.text)",
-                details: w.plates,
+                subtitle: "\(Int(100*reps.percent))% of \(maxWeight.text)",
+                amount: "\(reps) @ \(setWeight.text)",
+                details: setWeight.plates,
                 buttonName: "Next",
                 showStartButton: true,
                 color: nil))
         }
         for (i, reps) in worksets.sets.enumerated() {
-            let w = Weight(reps.percent*weight, apparatus).closest()
+            let setWeight = Weight(reps.percent*weight, apparatus).closest()
             result.append(Activity(
                 title: "Workset \(i+1) of \(worksets.sets.count)",
-                subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
-                amount: "\(reps.label(minimum: minimum)) @ \(w.text)",
-                details: w.plates,
+                subtitle: "\(Int(100*reps.percent))% of \(maxWeight.text)",
+                amount: "\(reps.label(minimum: minimum)) @ \(setWeight.text)",
+                details: setWeight.plates,
                 buttonName: i+1 == worksets.sets.count && backoff.sets.isEmpty ? "Done" : "Next",
                 showStartButton: true,
                 color: nil))
         }
         for (i, reps) in backoff.sets.enumerated() {
-            let w = Weight(reps.percent*weight, apparatus).closest(below: weight)
+            let setWeight = Weight(reps.percent*weight, apparatus).closest(below: weight)
             result.append(Activity(
                 title: "Backoff \(i+1) of \(backoff.sets.count)",
-                subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
-                amount: "\(reps) @ \(w.text)",  // TODO: should probably check that variable reps is only used with worksets
-                details: w.plates,
+                subtitle: "\(Int(100*reps.percent))% of \(maxWeight.text)",
+                amount: "\(reps) @ \(setWeight.text)",  // TODO: should probably check that variable reps is only used with worksets
+                details: setWeight.plates,
                 buttonName: i+1 == backoff.sets.count ? "Done" : "Next",
                 showStartButton: true,
                 color: nil))
