@@ -7,17 +7,34 @@ import os.log
 
 /// Base class for Subtypes that use an apparatus.
 class ApparatusSubtype {
-    init(reps: Int, restSecs: Int) {
-        self.weight = 100.0     // TODO: start at 0.0
-        self.restTime = restSecs
-        self.reps = reps
+    class BaseSetting: Storable {
+        init(reps: Int, restTime: Int) {
+            self.weight = 100.0     // TODO: start at 0.0
+            self.reps = reps
+            self.restTime = restTime
+        }
+        
+        required init(from store: Store) {
+            weight = store.getDbl("weight")
+            reps = store.getInt("reps")
+            restTime = store.getInt("restTime")
+        }
+        
+        func save(_ store: Store) {
+            store.addDbl("weight", weight)
+            store.addInt("reps", reps)
+            store.addInt("restTime", restTime)
+        }
+        
+        var weight: Double      // starts out at 0.0
+        var reps: Int           // this only applies when minReps < maxReps, also this can be less than minReps
+        var restTime: Int
+    }
+    
+    init() {
     }
     
     required init(from store: Store) {
-        self.weight = store.getDbl("weight")
-        self.reps = store.getInt("reps")
-        self.restTime = store.getInt("restTime")
-        
         self.currentWorkout = store.getStr("currentWorkout")
         self.activities = store.getObjArray("activities")
         self.numWarmups = store.getInt("numWarmups")
@@ -25,10 +42,6 @@ class ApparatusSubtype {
     }
     
     func save(_ store: Store) {
-        store.addDbl("weight", weight)
-        store.addInt("reps", reps)
-        store.addInt("restTime", restTime)
-        
         store.addStr("currentWorkout", currentWorkout)
         store.addObjArray("activities", activities) // TODO: generate
         store.addInt("numWarmups", numWarmups)
@@ -79,7 +92,7 @@ class ApparatusSubtype {
     }
     
     func restSecs() -> RestTime {
-        return RestTime(autoStart: index > numWarmups, secs: restTime)
+        return RestTime(autoStart: index > numWarmups, secs: getSetting().restTime)
     }
     
     func restSound() -> UInt32 {
@@ -100,11 +113,11 @@ class ApparatusSubtype {
         case .weights(let type):
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             
-            let advance2 = UIAlertAction(title: "Advance x2", style: .default) {_ in self.doAdvance(type.apparatus, 2); completion()}
-            let advance = UIAlertAction(title: "Advance", style: .default) {_ in self.doAdvance(type.apparatus, 1); completion()}
+            let advance2 = UIAlertAction(title: "Advance x2", style: .default) {_ in self.doAdvance(type.setting.apparatus, 2); completion()}
+            let advance = UIAlertAction(title: "Advance", style: .default) {_ in self.doAdvance(type.setting.apparatus, 1); completion()}
             let maintain = UIAlertAction(title: "Maintain", style: .default) {_ in completion()}
-            let deload = UIAlertAction(title: "Deload", style: .default) {_ in self.doAdvance(type.apparatus, -1); completion()}
-            let deload2 = UIAlertAction(title: "Deload x2", style: .default) {_ in self.doAdvance(type.apparatus, -2); completion()}
+            let deload = UIAlertAction(title: "Deload", style: .default) {_ in self.doAdvance(type.setting.apparatus, -1); completion()}
+            let deload2 = UIAlertAction(title: "Deload x2", style: .default) {_ in self.doAdvance(type.setting.apparatus, -2); completion()}
             
             switch tag {
             case .easy:
@@ -148,24 +161,26 @@ class ApparatusSubtype {
     private func doAdvance(_ apparatus: Apparatus, _ amount: Int) {
         let (min, max) = getBaseRepRange()
         let delta = amount.signum()
+        let setting = getSetting()
         for _ in 0..<abs(amount) {
-            if reps + delta > max {
-                let w = Weight(weight, apparatus)
-                reps = min
-                weight = w.nextWeight()
-            } else if reps + delta < min {
-                let w = Weight(weight, apparatus)
-                reps = max
-                weight = w.prevWeight()
+            if setting.reps + delta > max {
+                let w = Weight(setting.weight, apparatus)
+                setting.reps = min
+                setting.weight = w.nextWeight()
+            } else if setting.reps + delta < min {
+                let w = Weight(setting.weight, apparatus)
+                setting.reps = max
+                setting.weight = w.prevWeight()
             } else {
-                reps += delta
+                setting.reps += delta
             }
         }
     }
     
-    var weight: Double      // starts out at 0.0
-    var reps: Int           // this only applies when minReps < maxReps, also this can be less than minReps
-    var restTime: Int
+    fileprivate func getSetting() -> BaseSetting {
+        assert(false)   // subclasses implement this
+        abort()
+    }
     
     fileprivate var currentWorkout = ""
     fileprivate var activities: [Activity] = []
@@ -203,11 +218,31 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
         var reps: Int
     }
 
+    class Setting: BaseSetting {
+        override init(reps: Int, restTime: Int) {
+            self.cycleIndex = 0
+            super.init(reps: reps, restTime: restTime)
+        }
+        
+        required init(from store: Store) {
+            cycleIndex = store.getInt("cycleIndex")
+            super.init(from: store)
+        }
+        
+        override func save(_ store: Store) {
+            super.save(store)
+            store.addInt("cycleIndex", cycleIndex)
+        }
+        
+        var cycleIndex: Int
+    }
+    
     init(cycles: [Sets], reps: Int, restSecs: Int) {
         self.cycles = cycles
-        self.cycleIndex = 0
+        self.defaultSetting = CyclicRepsSubtype.Setting(reps: reps, restTime: restSecs)
+        self.setting = defaultSetting
         
-        super.init(reps: reps, restSecs: restSecs)
+        super.init()
     }
     
     required init(from store: Store) {
@@ -217,7 +252,8 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
             let cycle: Sets = store.getObj("cycle\(i)")
             cycles.append(cycle)
         }
-        self.cycleIndex = store.getInt("cycleIndex")
+        self.defaultSetting = store.getObj("defaultSetting")
+        self.setting = defaultSetting
         
         super.init(from: store)
     }
@@ -227,7 +263,7 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
         for (i, cycle) in cycles.enumerated() {
             store.addObj("cycle\(i)", cycle)
         }
-        store.addInt("cycleIndex", cycleIndex)
+        store.addObj("defaultSetting", defaultSetting)
         
         super.save(store)
     }
@@ -250,15 +286,15 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
     
     func updated(_ exercise: Exercise) {
         switch exercise.type {
-        case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight, minimum: reps)
-        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, minimum: reps)
+        case .body(_): (numWarmups, activities) = cycles[setting.cycleIndex].activities(setting.weight, minimum: setting.reps)
+        case .weights(let type): (numWarmups, activities) = cycles[setting.cycleIndex].activities(setting.weight, type.setting.apparatus, minimum: setting.reps)
         }
     }
     
     func sublabel(_ exercise: Exercise) -> String {
         switch exercise.type {
-        case .body(_): return cycles[cycleIndex].sublabel(nil, weight, reps)
-        case .weights(let type): return cycles[cycleIndex].sublabel(type.apparatus, weight, reps)
+        case .body(_): return cycles[setting.cycleIndex].sublabel(nil, setting.weight, setting.reps)
+        case .weights(let type): return cycles[setting.cycleIndex].sublabel(type.setting.apparatus, setting.weight, setting.reps)
         }
     }
     
@@ -291,7 +327,7 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
     }
     
     override func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        let result = Result(tag, weight: weight, cycleIndex: cycleIndex, reps: reps)
+        let result = Result(tag, weight: setting.weight, cycleIndex: setting.cycleIndex, reps: setting.reps)
         
         var myResults = Self.results[exercise.formalName] ?? []
         myResults.append(result)
@@ -301,11 +337,16 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
     }
     
     fileprivate override func getBaseRepRange() -> (Int, Int) {
-        return cycles[cycleIndex].repRange(minimum: nil)
+        return cycles[setting.cycleIndex].repRange(minimum: nil)
     }
     
+    fileprivate override func getSetting() -> BaseSetting {
+        return setting
+    }
+
     var cycles: [Sets]
-    var cycleIndex: Int
+    var setting: Setting
+    private var defaultSetting: Setting
     static var results: [String: [Result]] = [:]
 }
 
@@ -340,42 +381,62 @@ class MaxRepsSubType: ExerciseInfo {
         var completed: [Int] = []
     }
     
+    class Setting: Storable {
+        init(currentReps: Int, restSecs: Int) {
+            self.weight = 0.0
+            self.currentReps = currentReps
+            self.restTime = restSecs
+        }
+        
+        required init(from store: Store) {
+            weight = store.getDbl("weight")
+            currentReps = store.getInt("currentReps")
+            restTime = store.getInt("restTime")
+        }
+        
+        func save(_ store: Store) {
+            store.addDbl("weight", weight)
+            store.addInt("currentReps", currentReps)
+            store.addInt("restTime", restTime)
+        }
+        
+        var weight: Double      // starts out at 0.0
+        var currentReps: Int
+        var restTime: Int
+    }
+    
     init(numSets: Int, goalReps: Int, restSecs: Int, restAtEnd: Bool) {
         self.numSets = numSets
-        self.currentReps = 5*numSets
         self.goalReps = goalReps
         self.restAtEnd = restAtEnd
         
-        self.weight = 0.0
-        self.restTime = restSecs
+        self.defaultSetting = Setting(currentReps: 5*numSets, restSecs: restSecs)
+        self.setting = defaultSetting
     }
     
     required init(from store: Store) {
         self.numSets = store.getInt("numSets")
         self.goalReps = store.getInt("goalReps")
         self.restAtEnd = store.getBool("restAtEnd")
-
-        self.weight = store.getDbl("weight")
-        self.currentReps = store.getInt("currentReps")
         self.completed = store.getIntArray("completed")
-        self.restTime = store.getInt("restTime")
 
         self.currentWorkout = store.getStr("currentWorkout")
         self.setIndex = store.getInt("setIndex")
+        
+        self.defaultSetting = store.getObj("defaultSetting")
+        self.setting = defaultSetting
     }
     
     func save(_ store: Store) {
         store.addInt("numSets", numSets)
         store.addInt("goalReps", goalReps)
         store.addBool("restAtEnd", restAtEnd)
-
-        store.addDbl("weight", weight)
-        store.addInt("currentReps", currentReps)
         store.addIntArray("completed", completed)
-        store.addInt("restTime", restTime)
 
         store.addStr("currentWorkout", currentWorkout)
         store.addInt("setIndex", setIndex)
+        
+        store.addObj("defaultSetting", defaultSetting)
     }
     
     public func errors() -> [String] {
@@ -422,9 +483,9 @@ class MaxRepsSubType: ExerciseInfo {
     func sublabel(_ exercise: Exercise) -> String {
         let w = weightStr(exercise)
         if w.isEmpty {
-            return "\(currentReps) reps"
+            return "\(setting.currentReps) reps"
         } else {
-            return "\(currentReps) reps @ \(w)"
+            return "\(setting.currentReps) reps @ \(w)"
         }
     }
     
@@ -480,8 +541,8 @@ class MaxRepsSubType: ExerciseInfo {
     
     func current(_ exercise: Exercise) -> Activity {
         let currentTotal = completed.reduce(0, {$0 + $1})
-        let expected = completed.count < numSets ? (currentReps - currentTotal)/(numSets - completed.count) : 0
-        let st = (setIndex+1 <= numSets ? "\(expected > 0 ? expected : 1)+ " : "") + "(\(currentReps)) reps"
+        let expected = completed.count < numSets ? (setting.currentReps - currentTotal)/(numSets - completed.count) : 0
+        let st = (setIndex+1 <= numSets ? "\(expected > 0 ? expected : 1)+ " : "") + "(\(setting.currentReps)) reps"
 
         let tt = setIndex+1 <= numSets ? "Set \(setIndex+1) of \(numSets)" : "Set \(numSets) of \(numSets)"
         
@@ -499,7 +560,7 @@ class MaxRepsSubType: ExerciseInfo {
     }
     
     func restSecs() -> RestTime {
-        return RestTime(autoStart: true, secs: restTime)
+        return RestTime(autoStart: true, secs: setting.restTime)
     }
     
     func restSound() -> UInt32 {
@@ -508,7 +569,7 @@ class MaxRepsSubType: ExerciseInfo {
     
     func completions(_ exercise: Exercise) -> [Completion] {
         let currentTotal = completed.reduce(0, {$0 + $1})
-        let expected = (currentReps - currentTotal)/(numSets - completed.count)
+        let expected = (setting.currentReps - currentTotal)/(numSets - completed.count)
         
         var result: [Completion] = []
         for count in max(expected - 4, 0)...(expected+4) {
@@ -519,7 +580,7 @@ class MaxRepsSubType: ExerciseInfo {
                     result.append(Completion(title: "\(count) reps", info: "", callback: {() -> Void in self.doCompleted(count)}))
                 }
             } else {
-                if currentTotal + count <= currentReps {
+                if currentTotal + count <= setting.currentReps {
                     result.append(Completion(title: "\(count) reps", info: "", callback: {() -> Void in self.doCompleted(count)}))
                 } else {
                     result.append(Completion(title: "\(count) reps (extra)", info: "", callback: {() -> Void in self.doCompleted(count)}))
@@ -531,21 +592,21 @@ class MaxRepsSubType: ExerciseInfo {
     }
     
     func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        let result = Result(tag, weight: weight, currentReps: currentReps, completed: completed)
+        let result = Result(tag, weight: setting.weight, currentReps: setting.currentReps, completed: completed)
 
         var myResults = Self.results[exercise.formalName] ?? []
         myResults.append(result)
         Self.results[exercise.formalName] = myResults
 
         let sum = completed.reduce(0, {$0 + $1})
-        if sum > currentReps {
+        if sum > setting.currentReps {
             switch tag {
             case .easy, .normal:
-                currentReps = sum
+                setting.currentReps = sum
                 completion()
 
             case .hard:
-                let advance = UIAlertAction(title: "Advance", style: .default) {_ in self.currentReps = sum; completion()}
+                let advance = UIAlertAction(title: "Advance", style: .default) {_ in self.setting.currentReps = sum; completion()}
                 let maintain = UIAlertAction(title: "Maintain", style: .default) {_ in completion()}
 
                 let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
@@ -574,11 +635,11 @@ class MaxRepsSubType: ExerciseInfo {
     }
     
     private func weightStr(_ exercise: Exercise) -> String {
-        if weight > 0.0 {
+        if setting.weight > 0.0 {
             switch exercise.type {
-            case .body(_): return Weight.friendlyUnitsStr(weight)
+            case .body(_): return Weight.friendlyUnitsStr(setting.weight)
             case .weights(let type):
-                let w = Weight(weight, type.apparatus).closest()
+                let w = Weight(setting.weight, type.setting.apparatus).closest()
                 return w.text
             }
         } else {
@@ -590,10 +651,9 @@ class MaxRepsSubType: ExerciseInfo {
     var goalReps: Int       // typically user would then switch to a harder version of the exercise or add weights
     var restAtEnd: Bool
 
-    var weight: Double      // starts out at 0.0
-    var currentReps: Int
     var completed: [Int] = []
-    var restTime: Int
+    var setting: Setting
+    private var defaultSetting: Setting
     static var results: [String: [Result]] = [:]
 
     private var currentWorkout = ""
@@ -629,16 +689,21 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     
     init(sets: Sets, reps: Int, restSecs: Int) {
         self.sets = sets
-        super.init(reps: reps, restSecs: restSecs)
+        self.defaultSetting = BaseSetting(reps: reps, restTime: restSecs)
+        self.setting = defaultSetting
+        super.init()
     }
     
     required init(from store: Store) {
         self.sets = store.getObj("sets")
+        self.defaultSetting = store.getObj("defaultSetting")
+        self.setting = defaultSetting
         super.init(from: store)
     }
     
     override func save(_ store: Store) {
         store.addObj("sets", sets)
+        store.addObj("defaultSetting", defaultSetting)
         super.save(store)
     }
     
@@ -656,15 +721,15 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     
     func updated(_ exercise: Exercise) {
         switch exercise.type {
-        case .body(_): (numWarmups, activities) = sets.activities(weight, minimum: reps)
-        case .weights(let type): (numWarmups, activities) = sets.activities(weight, type.apparatus, minimum: reps)
+        case .body(_): (numWarmups, activities) = sets.activities(setting.weight, minimum: setting.reps)
+        case .weights(let type): (numWarmups, activities) = sets.activities(setting.weight, type.setting.apparatus, minimum: setting.reps)
         }
     }
     
     func sublabel(_ exercise: Exercise) -> String {
         switch exercise.type {
-        case .body(_): return sets.sublabel(nil, weight, reps)
-        case .weights(let type): return sets.sublabel(type.apparatus, weight, reps)
+        case .body(_): return sets.sublabel(nil, setting.weight, setting.reps)
+        case .weights(let type): return sets.sublabel(type.setting.apparatus, setting.weight, setting.reps)
         }
     }
     
@@ -697,7 +762,7 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     }
     
     override func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        let result = Result(tag, weight: weight, reps: reps)
+        let result = Result(tag, weight: setting.weight, reps: setting.reps)
         
         var myResults = Self.results[exercise.formalName] ?? []
         myResults.append(result)
@@ -709,8 +774,14 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     fileprivate override func getBaseRepRange() -> (Int, Int) {
         return sets.repRange(minimum: nil)
     }
+    
+    fileprivate override func getSetting() -> BaseSetting {
+        return setting
+    }
 
     var sets: Sets
+    var setting: BaseSetting
+    private var defaultSetting: BaseSetting
     static var results: [String: [Result]] = [:]
 }
 
@@ -741,12 +812,32 @@ class TimedSubType: ExerciseInfo {
         var currentTime: Int
     }
     
+    class Setting: Storable {
+        init(currentTime: Int) {
+            self.weight = 0.0
+            self.currentTime = currentTime
+        }
+        
+        required init(from store: Store) {
+            weight = store.getDbl("weight")
+            currentTime = store.getInt("currentTime")
+        }
+        
+        func save(_ store: Store) {
+            store.addDbl("weight", weight)
+            store.addInt("currentTime", currentTime)
+        }
+        
+        var weight: Double         // starts out at 0.0
+        var currentTime: Int
+    }
+    
     init(numSets: Int, currentTime: Int, targetTime: Int?) {
         self.numSets = numSets
-        self.currentTime = currentTime
         self.targetTime = targetTime
         
-        self.weight = 0.0
+        self.defaultSetting = Setting(currentTime: currentTime)
+        self.setting = defaultSetting
     }
     
     required init(from store: Store) {
@@ -754,24 +845,23 @@ class TimedSubType: ExerciseInfo {
         let t = store.getInt("targetTime")
         self.targetTime = t > 0 ? t : nil
         
-        self.weight = store.getDbl("weight")
-        self.currentTime = store.getInt("currentTime")
-
         self.currentWorkout = store.getStr("currentWorkout")
         self.activities = store.getObjArray("activities")
         self.index = store.getInt("index")
+        
+        self.defaultSetting = store.getObj("defaultSetting")
+        self.setting = defaultSetting
     }
     
     func save(_ store: Store) {
         store.addInt("numSets", numSets)
         store.addInt("targetTime", targetTime ?? 0)
         
-        store.addDbl("weight", weight)
-        store.addInt("currentTime", currentTime)
-
         store.addStr("currentWorkout", currentWorkout)
         store.addObjArray("activities", activities)
         store.addInt("index", index)
+        
+        store.addObj("defaultSetting", defaultSetting)
     }
     
     public func errors() -> [String] {
@@ -814,11 +904,11 @@ class TimedSubType: ExerciseInfo {
         
         var w = ""
         var d = ""
-        if weight > 0 {
+        if setting.weight > 0 {
             switch exercise.type {
-            case .body(_): w = Weight.friendlyUnitsStr(weight)
+            case .body(_): w = Weight.friendlyUnitsStr(setting.weight)
             case .weights(let type):
-                let c = Weight(weight, type.apparatus).closest()
+                let c = Weight(setting.weight, type.setting.apparatus).closest()
                 w = c.text
                 d = c.plates
             }
@@ -846,7 +936,7 @@ class TimedSubType: ExerciseInfo {
     }
     
     func sublabel(_ exercise: Exercise) -> String {
-        return secsToStr(currentTime)
+        return secsToStr(setting.currentTime)
     }
     
     func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
@@ -882,7 +972,7 @@ class TimedSubType: ExerciseInfo {
     }
     
     func restSecs() -> RestTime {
-        return RestTime(autoStart: true, secs: currentTime)
+        return RestTime(autoStart: true, secs: setting.currentTime)
     }
     
     func restSound() -> UInt32 {
@@ -898,7 +988,7 @@ class TimedSubType: ExerciseInfo {
     }
     
     func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        let result = Result(tag, weight: weight, currentTime: currentTime)
+        let result = Result(tag, weight: setting.weight, currentTime: setting.currentTime)
         
         var myResults = Self.results[exercise.formalName] ?? []
         myResults.append(result)
@@ -914,8 +1004,8 @@ class TimedSubType: ExerciseInfo {
     var numSets: Int
     var targetTime: Int?
     
-    var weight: Double         // starts out at 0.0
-    var currentTime: Int
+    var setting: Setting
+    private var defaultSetting: Setting
     static var results: [String: [Result]] = [:]
 
     private var currentWorkout = ""

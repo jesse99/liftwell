@@ -15,8 +15,25 @@ class WeightsType: Storable {
         case timed(TimedSubType)
     }
     
+    class Setting: Storable {
+        init(_ apparatus: Apparatus) {
+            self.apparatus = apparatus
+        }
+        
+        required init(from store: Store) {
+            apparatus = store.getObj("apparatus")
+        }
+        
+        func save(_ store: Store) {
+            store.addObj("apparatus", apparatus)
+        }
+        
+        var apparatus: Apparatus
+    }
+    
     init(_ apparatus: Apparatus, _ subType: WeightsType.SubType) {
-        self.apparatus = apparatus
+        self.defaultSetting = Setting(apparatus)
+        self.setting = defaultSetting
         self.subtype = subType
     }
     
@@ -29,7 +46,8 @@ class WeightsType: Storable {
     }
     
     required init(from store: Store) {
-        apparatus = store.getObj("apparatus")
+        defaultSetting = store.getObj("defaultSetting")
+        setting = defaultSetting    // will be fixed up after the program is loaded
         
         let name = store.getStr("subtypeName")
         switch name {
@@ -41,7 +59,7 @@ class WeightsType: Storable {
     }
     
     func save(_ store: Store) {
-        store.addObj("apparatus", apparatus)
+        store.addObj("defaultSetting", defaultSetting)
         
         switch subtype {
         case .cyclic(let subtype): store.addStr("subtypeName", "cyclic"); store.addObj("subtype", subtype)
@@ -50,8 +68,10 @@ class WeightsType: Storable {
         }
     }
 
-    var apparatus: Apparatus
+    var setting: Setting
     var subtype: WeightsType.SubType
+
+    private var defaultSetting: Setting
 }
 
 /// Used for exercises that like dips that are normally body-weight but can use odd sizes weights (like a vest
