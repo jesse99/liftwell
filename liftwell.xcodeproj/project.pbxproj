@@ -169,12 +169,12 @@
 				3728684C21631302005F6FD0 /* Extensions */,
 				374FE954218BD10300CFC284 /* Notes.swift */,
 				374FE952218BD0DD00CFC284 /* NotesController.swift */,
-				374FE941218536CD00CFC284 /* Options */,
 				37286848216311D3005F6FD0 /* Program.swift */,
 				3728685721684231005F6FD0 /* Programs */,
 				37286862216A6C42005F6FD0 /* RepsParser.swift */,
 				37EFD6DB217A2D9000F60880 /* Set.swift */,
 				37EFD6DD217A679F00F60880 /* Sets.swift */,
+				374FE941218536CD00CFC284 /* Settings */,
 				3728684A21631202005F6FD0 /* Store.swift */,
 				3728686021699CC7005F6FD0 /* SubTypes.swift */,
 				3728684721630030005F6FD0 /* Tabs */,
@@ -232,7 +232,7 @@
 			path = Programs;
 			sourceTree = "<group>";
 		};
-		374FE941218536CD00CFC284 /* Options */ = {
+		374FE941218536CD00CFC284 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				374FE94A21869E1C00CFC284 /* BarbellController.swift */,
@@ -243,7 +243,7 @@
 				374FE9442185FE3C00CFC284 /* TimedOptionsController.swift */,
 				374FE94821867C4100CFC284 /* WeightsController.swift */,
 			);
-			path = Options;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		A1CFD8258BC09E91E24602F1 /* Frameworks */ = {

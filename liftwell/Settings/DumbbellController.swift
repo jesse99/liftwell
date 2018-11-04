@@ -12,7 +12,7 @@ class DumbbellController: UIViewController, UITableViewDataSource, UITableViewDe
         self.breadcrumb = "\(breadcrumb) • Dumbbell"
         self.unwind = unwind
         
-        self.available = defaultDumbbells()
+        self.available = availableDumbbells()
         switch apparatus {
         case .dumbbells(weights: let weights, magnets: _):
             self.used = weights

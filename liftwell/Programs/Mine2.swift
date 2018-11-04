@@ -65,7 +65,7 @@ fileprivate func dumbbell(_ name: String, _ formalName: String, _ reps: String, 
     let rest = Int(restMins*60.0)
     let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
 
-    let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: availableMagnets())
+    let apparatus = Apparatus.dumbbells(weights: availableDumbbells(), magnets: availableMagnets())
     let type = WeightsType(apparatus, .reps(subtype))
     
     return Exercise(name, formalName, .weights(type))
