@@ -60,7 +60,7 @@ class DumbbellController: UIViewController, UITableViewDataSource, UITableViewDe
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let view = storyboard.instantiateViewController(withIdentifier: "WeightsControllerID") as! WeightsController
         view.initialize(
-            available: defaultMagnets(),
+            available: availableMagnets(),
             used: usedMagnets,
             emptyOK: true,
             self.updateMagnets,
