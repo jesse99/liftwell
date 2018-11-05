@@ -182,7 +182,7 @@ func defaultBumpers() -> [Double] {
     //    switch units
     //    {
     //    case .imperial:
-    return [15.0, 25, 45]
+    return [25, 45]
     
     //    case .metric:
     //        let plates = [5.0, 10, 20]

@@ -97,6 +97,9 @@ enum ExerciseState {
     /// The user has advanced so far that there is nothing left to do for this iteration of the workout.
     case finished
     
+    /// Like finish except that there is no prompt fow how hard the exercise was.
+    case finishNoPrompt
+    
     /// Start was called but the exercise cannot be executed until another exercise is executed. For example,
     /// PercentOfPlan requires that its base plan be executed before it can execute.  TODO: fix name
     case blocked
@@ -110,6 +113,8 @@ enum ExerciseState {
 protocol ExerciseInfo: Storable {
     var state: ExerciseState {get}
     
+    func clone() -> ExerciseInfo
+
     /// If the exercise requires another exercise to be executed then a new Exercise will be returned
     /// and state will be set to blocked.
     func start(_ workout: Workout, _ exercise: Exercise) -> Exercise?

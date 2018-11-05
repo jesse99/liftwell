@@ -102,7 +102,7 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
         let name = filtered[index]
         let app = UIApplication.shared.delegate as! AppDelegate
         if let exercise = app.program.findExercise(name) {
-            let info = exercise.getInfo()
+            var info = exercise.getInfo()
             if case .underway = info.state, info.on(workout) {
                 cell.textLabel!.text = info.label(exercise)
                 cell.detailTextLabel!.text = info.sublabel(exercise)
@@ -110,6 +110,7 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
                 cell.detailTextLabel?.setColor(.red)    // TODO: use targetColor
                 
             } else {
+                info = info.clone()
                 if info.start(workout, exercise) == nil {
                     if case let .error(err) = info.state {
                         cell.textLabel!.text = name
@@ -196,31 +197,18 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
         let name = filtered[index]
         let app = UIApplication.shared.delegate as! AppDelegate
         if let exercise = app.program.findExercise(name) {
-            let info = exercise.getInfo()
+            var info = exercise.getInfo()
             if case .underway = info.state, info.on(workout) {
                 presentExercise(exercise)
                 
             } else {
                 // If we're started but not underway we want to re-start to ensure that we pickup
                 // on any changes from a base exercise.
-                if info.start(workout, exercise) != nil {
-//                if let newPlan = exercise.start(workout) {
-                    //                    let newName = exercise.name + "-" + newPlan.planName  // TODO: something here
-//                    let newExercise = exercise.withPlan(newName, newPlan)
-//                    app.program.setExercise(newExercise)
-//
-//                    if let newerPlan = newPlan.start(workout, newName) {
-//                        err = "Plan \(exercise.planName) started plan \(newPlan.planName) which started \(newerPlan.planName)"
-//                    } else {
-//                        switch newPlan.state {
-//                        case .error(let mesg):
-//                            err = mesg
-//                        default:
-//                            presentExercise(newExercise)
-//                        }
-//                    }
-                    assert(false, "not implemented")
-                    
+                if let newExercise = info.start(workout, exercise) {
+                    info = newExercise.getInfo()
+                    let newerExercise = info.start(workout, newExercise)
+                    assert(newerExercise == nil)
+                    presentExercise(newExercise)
                 } else {
                     switch info.state {
                     case .error(let mesg):

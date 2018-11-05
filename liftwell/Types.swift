@@ -12,6 +12,7 @@ enum Type {
 class WeightsType: Storable {
     enum SubType {
         case cyclic(CyclicRepsSubtype)
+        case find(FindWeightSubType)
         case reps(RepsSubType)
         case timed(TimedSubType)
     }
@@ -24,6 +25,7 @@ class WeightsType: Storable {
     func errors() -> [String] {
         switch subtype {
         case .cyclic(let subtype): return subtype.errors()
+        case .find(let subtype): return subtype.errors()
         case .reps(let subtype): return subtype.errors()
         case .timed(let subtype): return subtype.errors()
         }
@@ -35,6 +37,7 @@ class WeightsType: Storable {
         let name = store.getStr("subtypeName")
         switch name {
         case "cyclic": self.subtype = .cyclic(store.getObj("subtype"))
+        case "find": self.subtype = .find(store.getObj("subtype"))
         case "reps": self.subtype = .reps(store.getObj("subtype"))
         case "timed": self.subtype = .timed(store.getObj("subtype"))
         default: assert(false, "bad subtype name: \(name)"); abort()
@@ -46,6 +49,7 @@ class WeightsType: Storable {
 
         switch subtype {
         case .cyclic(let subtype): store.addStr("subtypeName", "cyclic"); store.addObj("subtype", subtype)
+        case .find(let subtype): store.addStr("subtypeName", "find"); store.addObj("subtype", subtype)
         case .reps(let subtype): store.addStr("subtypeName", "reps"); store.addObj("subtype", subtype)
         case .timed(let subtype): store.addStr("subtypeName", "timed"); store.addObj("subtype", subtype)
         }
@@ -60,6 +64,7 @@ class WeightsType: Storable {
         }
         switch subtype {
         case .cyclic(let builtIn): builtIn.sync(program, savedExercise)
+        case .find(let builtIn): builtIn.sync(program, savedExercise)
         case .reps(let builtIn): builtIn.sync(program, savedExercise)
         case .timed(let builtIn): builtIn.sync(program, savedExercise)
         }

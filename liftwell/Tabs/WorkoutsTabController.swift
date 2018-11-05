@@ -193,19 +193,6 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
     
     // Returns the workouts being executed atm (but not those that have finished executing).
     private func findTodaysWorkouts() -> [Int] {
-//        func isUnderway(_ workout: Workout) -> Bool {
-//            let app = UIApplication.shared.delegate as! AppDelegate
-//            for name in workout.exercises {
-//                if let exercise = app.program.findExercise(name), !workout.optional.contains(name) {
-//                    let info = exercise.getInfo()
-//                    if case .underway = info.state, info.on(workout) {
-//                        return true
-//                    }
-//                }
-//            }
-//            return false
-//        }
-
         func numCompleted(_ workout: Workout) -> Int {
             var count = 0
             let app = UIApplication.shared.delegate as! AppDelegate

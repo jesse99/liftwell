@@ -69,19 +69,12 @@ class Exercise: Storable {
         store.addIntArray("completed-skip", Array(skipped.values.map {$0 ? 1 : 0}))
     }
     
-//    func sync(_ savedExercise: Exercise) {
-//        if plan.shouldSync(savedExercise.plan) {
-//            plan = savedExercise.plan
-//            completed = savedExercise.completed
-//            setting = savedExercise.setting
-//        } else {
-//            os_log("ignoring saved exercise %@", type: .info, name)
-//        }
-//    }
-    
-    var name: String             // "Heavy Bench"
-    var formalName: String       // "Bench Press"
-    var type: Type
+    func clone() -> Exercise {
+        let store = Store()
+        store.addObj("self", self)
+        let result: Exercise = store.getObj("self")
+        return result
+    }
     
     /// Date the exercise was last completed keyed by workout name (exercises can be shared across workouts).
     func dateCompleted(_ workout: Workout) -> (Date, Bool)? {
@@ -95,15 +88,7 @@ class Exercise: Storable {
         completed[workout.name] = Date()
         self.skipped[workout.name] = skipped
     }
-    
-    /// These are used for exercises that support progression. For example, progressively harder planks. Users
-    /// can use the Options screens to choose which version they want to perform.
-//    var prevExercise: String?
-//    var nextExercise: String?
-    
-    /// If true don't display the plan in UI.
-//    var hidden: Bool
-    
+
     func getInfo() -> ExerciseInfo {
         switch type {
         case .body(let type):
@@ -115,6 +100,7 @@ class Exercise: Storable {
         case .weights(let type):
             switch type.subtype {
             case .cyclic(let subtype): return subtype
+            case .find(let subtype): return subtype
             case .reps(let subtype): return subtype
             case .timed(let subtype): return subtype
             }
@@ -129,16 +115,28 @@ class Exercise: Storable {
         case .weights(let type): problems += type.errors()
         }
         
-//        if let name = prevExercise, program.findExercise(name) == nil {
-//            problems += ["exercise \(name) prevExercise (\(name)( is missing from the program"]
-//        }
-//        if let name = nextExercise, program.findExercise(name) == nil {
-//            problems += ["exercise \(name) nextExercise (\(name)) is missing from the program"]
-//        }
+        //        if let name = prevExercise, program.findExercise(name) == nil {
+        //            problems += ["exercise \(name) prevExercise (\(name)( is missing from the program"]
+        //        }
+        //        if let name = nextExercise, program.findExercise(name) == nil {
+        //            problems += ["exercise \(name) nextExercise (\(name)) is missing from the program"]
+        //        }
         
         return problems
     }
-
+    
+    var name: String             // "Heavy Bench"
+    var formalName: String       // "Bench Press"
+    var type: Type
+    
+    /// These are used for exercises that support progression. For example, progressively harder planks. Users
+    /// can use the Options screens to choose which version they want to perform.
+//    var prevExercise: String?
+//    var nextExercise: String?
+    
+    /// If true don't display the plan in UI.
+//    var hidden: Bool
+    
     private var completed: [String: Date]
     private var skipped: [String: Bool]
 }

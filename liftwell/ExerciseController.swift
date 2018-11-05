@@ -58,7 +58,7 @@ class ExerciseController: UIViewController {
             os_log("couldn't load exercise '%@' for program '%@'", type: .error, name, app.program.name)
         }
         
-        let info = exercise.getInfo()
+        var info = exercise.getInfo()
         if let date = coder.decodeObject(forKey: "startTime") as? Date {
             startTime = date
             startedTimer = coder.decodeBool(forKey: "startedTimer")
@@ -72,8 +72,12 @@ class ExerciseController: UIViewController {
         // When plans load they can reset to waiting if it's been too long so we need to re-start
         // the plan if that happened.
         if case .waiting = info.state {
-            let newPlan = info.start(workout, exercise)
-            assert(newPlan == nil, "newPlan should have been nil") // because we got here via starting the plan
+            if let newExercise = info.start(workout, exercise) {
+                exercise = newExercise
+                info = exercise.getInfo()
+                let newerExercise = info.start(workout, exercise)
+                assert(newerExercise == nil)   // shouldn't get a new exercise twice
+            }
         }
         
         super.decodeRestorableState(with: coder)
@@ -211,6 +215,8 @@ class ExerciseController: UIViewController {
         let info = exercise.getInfo()
         if case .finished = info.state {
             setTag(info)
+        } else if case .finishNoPrompt = info.state {
+            info.finalize(exercise, .normal, self, self.finish)
         } else {
             let results = info.completions(exercise)
 //            switch info.completions(exercise) {
@@ -434,6 +440,7 @@ class ExerciseController: UIViewController {
         case .weights(let type):
             switch type.subtype {
             case .cyclic(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, weight: subtype.weight, reps: subtype.reps, cycleIndex: subtype.cycleIndex, apparatus: type.apparatus))
+            case .find(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, weight: subtype.weight, reps: subtype.reps, cycleIndex: nil, apparatus: type.apparatus))
             case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, weight: subtype.weight, reps: subtype.reps, cycleIndex: nil, apparatus: type.apparatus))
             case .timed(let subtype): setTimedOptions(TimedOptions(time: subtype.currentTime, weight: subtype.weight, apparatus: type.apparatus))
             }
@@ -471,6 +478,11 @@ class ExerciseController: UIViewController {
                 subtype.weight = options.weight
                 subtype.reps = options.reps!
                 subtype.cycleIndex = options.cycleIndex!
+                subtype.updated(exercise)
+            case .find(let subtype):
+                subtype.restTime = options.rest
+                subtype.weight = options.weight
+                subtype.reps = options.reps!
                 subtype.updated(exercise)
             case .reps(let subtype):
                 subtype.restTime = options.rest
