@@ -84,7 +84,7 @@ struct Completion {
 /// Lifecycle for an exercise within an ExerciseController. Typically the transitions are from waiting -> started -> underway -> finished.
 enum ExerciseState {
     /// The exercise has been initialized but not started yet. Note that exercises also enter this state
-    /// when they are loaded from disk if it's been more than a day since they were started. TODO: need to do this
+    /// when they are loaded from disk if it's been more than a day since they were started.
     case waiting
     
     /// Start has been called and the exercise was able to start OK but the user hasn't advanced within

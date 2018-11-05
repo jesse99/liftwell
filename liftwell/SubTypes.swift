@@ -262,7 +262,7 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
         super.save(store)
     }
     
-    func sync(_ program: Program, _ savedExercise: Exercise) {  // TODO: need to restore activities somehow
+    func sync(_ program: Program, _ savedExercise: Exercise) {
         switch savedExercise.type {
         case .body(_):
             os_log("saved %@ subtype wasn't weights", savedExercise.name)
@@ -854,7 +854,6 @@ class MaxRepsSubType: ExerciseInfo {
     }
     
     private func doCompleted(_ count: Int) {
-        // TODO: update history (when finished)
         completed.append(count)
         setIndex += 1
     }
