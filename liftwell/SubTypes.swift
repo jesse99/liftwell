@@ -35,12 +35,12 @@ class ApparatusSubtype {
         store.addInt("index", index)
     }
     
-    func sync(_ program: Program, _ savedSubtype: ApparatusSubtype) {
+    func sync(_ program: Program, _ savedSubtype: ApparatusSubtype, sameSets: Bool) {
         weight = savedSubtype.weight
         reps = savedSubtype.reps
         restTime = savedSubtype.restTime
         
-        if activities.count == savedSubtype.activities.count && numWarmups == savedSubtype.numWarmups && program.findWorkout(savedSubtype.currentWorkout) != nil {
+        if sameSets && program.findWorkout(savedSubtype.currentWorkout) != nil {
             currentWorkout = savedSubtype.currentWorkout
             index = savedSubtype.index
         }
@@ -270,7 +270,7 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
             switch saved.subtype {
             case .cyclic(let savedSubtype):
                 cycleIndex = savedSubtype.cycleIndex
-                super.sync(program, savedSubtype)
+                super.sync(program, savedSubtype, sameSets: cycles.count == savedSubtype.cycles.count)
             default:
                 os_log("saved %@ subtype wasn't cyclic", savedExercise.name)
             }
@@ -930,15 +930,22 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     }
     
     func sync(_ program: Program, _ savedExercise: Exercise) {
+        let app = UIApplication.shared.delegate as! AppDelegate
+        let exeExecercise = app.program.findExercise(savedExercise.name)
+        let (_, exeActivities) = getActivities(exeExecercise ?? savedExercise)
+
+        let (_, savedActivities) = getActivities(savedExercise)
+        let same = exeActivities.count == savedActivities.count
+
         switch savedExercise.type {
         case .body(let saved):
             switch saved.subtype {
-            case .reps(let savedSubtype): super.sync(program, savedSubtype)
+            case .reps(let savedSubtype): super.sync(program, savedSubtype, sameSets: same)
             default: os_log("saved %@ subtype wasn't Reps", savedExercise.name)
             }
         case .weights(let saved):
             switch saved.subtype {
-            case .reps(let savedSubtype): super.sync(program, savedSubtype)
+            case .reps(let savedSubtype): super.sync(program, savedSubtype, sameSets: same)
             default: os_log("saved %@ subtype wasn't Reps", savedExercise.name)
             }
         }
@@ -975,10 +982,7 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     }
     
     func updated(_ exercise: Exercise) {
-        switch exercise.type {
-        case .body(_): (numWarmups, activities) = sets.activities(weight, minimum: reps)
-        case .weights(let type): (numWarmups, activities) = sets.activities(weight, type.apparatus, minimum: reps)
-        }
+        (numWarmups, activities) = getActivities(exercise)
     }
     
     func sublabel(_ exercise: Exercise) -> String {
@@ -1030,6 +1034,13 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
         return sets.repRange(minimum: nil)
     }
     
+    private func getActivities(_ exercise: Exercise) -> (Int, [Activity]) {
+        switch exercise.type {
+        case .body(_): return sets.activities(weight, minimum: reps)
+        case .weights(let type): return sets.activities(weight, type.apparatus, minimum: reps)
+        }
+    }
+
     var sets: Sets
     static var results: [String: [Result]] = [:]
 }
