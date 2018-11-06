@@ -929,8 +929,7 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     }
     
     func sync(_ program: Program, _ savedExercise: Exercise) {
-        let app = UIApplication.shared.delegate as! AppDelegate
-        let exeExecercise = app.program.findExercise(savedExercise.name)
+        let exeExecercise = program.findExercise(savedExercise.name)
         let (_, exeActivities) = getActivities(exeExecercise ?? savedExercise)
 
         let (_, savedActivities) = getActivities(savedExercise)
