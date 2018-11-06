@@ -82,34 +82,26 @@ fileprivate func barbell(_ name: String, _ formalName: String, _ reps: String, s
 }
 
 func Mine2() -> Program {
-    let dbReps = "5@50% 5@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R"
-    let squatReps = "5@50% 3@70% 1@90% 4-8@100% R 4-8@100% R 4-8@100% R"
-    let deadReps = "5@0% 5@0% 5@60% 5@70% 3@80% 1@90% 5@100% R"
-    let extReps = "5@50% 3@75% 6-12@100% R 6-12@100% R 6-12@100%"
-    let twoReps = "1@100% R 1@100%"
-    let threeReps = "1@100% R 1@100% R 1@100%"
-    let crunchReps = "6-12@100% R 6-12@100% R 6-12@100%"
-
     let exercises = [
         // Heavy
-        dumbbell("Dumbbell Bench", "Dumbbell Bench Press", dbReps, startReps: 5, restMins: 4.0),
-        dumbbell("Split Squat",    "Dumbbell Single Leg Split Squat", squatReps, startReps: 4, restMins: 4.0),
-        dumbbell("Dumbbell Flyes", "Dumbbell Flyes", dbReps, startReps: 5, restMins: 3.0),
-        barbell("Deadlift",        "Deadlift", deadReps, startReps: 5, restMins: 4.0),
+        dumbbell("Dumbbell Bench", "Dumbbell Bench Press",            "5@50% 5@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R", startReps: 5, restMins: 4.0),
+        dumbbell("Split Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75% 4-8@100% R 4-8@100% R 4-8@100% R", startReps: 4, restMins: 4.0),
+        dumbbell("Dumbbell Flyes", "Dumbbell Flyes",                  "5@50% 5-10@100% R 5-10@100% R 5-10@100% R", startReps: 5, restMins: 3.0),
+        barbell("Deadlift",        "Deadlift",                        "5@0% 5@0% 5@60% 5@70% 3@80% 1@90% 5@100% R", startReps: 5, restMins: 4.0),
 
         // Light
-        dumbbell("Dumbbell OHP",    "Dumbbell Shoulder Press", dbReps, startReps: 5, restMins: 3.5),
+        dumbbell("Dumbbell OHP",    "Dumbbell Shoulder Press", "5@50% 5@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R", startReps: 5, restMins: 3.5),
+        dumbbell("Farmer's Walk",   "Farmer's Walk",           "1@100% R 1@100%", startReps: 1, restMins: 3.0),
+        barbell("Static Hold",      "Static Hold",             "1@100% R 1@100% R 1@100%", startReps: 1, restMins: 3.0),
+        dumbbell("Back Extensions", "Back Extensions",         "5@50% 6-12@100% R 6-12@100% R 6-12@100%", startReps: 6, restMins: 3.0),
+        cable("Cable Crunches",     "Cable Crunch",            "6-12@100% R 6-12@100% R 6-12@100%", startReps: 5, restMins: 3.0),
         bodyweight("Chinups",       "Chinup", numSets: 4, goalReps: 25, restMins: 3.5),
-        dumbbell("Farmer's Walk",   "Farmer's Walk", twoReps, startReps: 1, restMins: 3.0),
-        barbell("Static Hold",      "Static Hold", threeReps, startReps: 1, restMins: 3.0),
-        dumbbell("Back Extensions", "Back Extensions", extReps, startReps: 6, restMins: 3.0),
-        cable("Cable Crunches",     "Cable Crunch", crunchReps, startReps: 5, restMins: 3.0),
 
         // Medium
         // Dumbbell Bench
         // Split Squat
         // Chinups
-        bodyweight("Dips",       "Dips", numSets: 3, goalReps: 30, restMins: 3.5),
+        bodyweight("Dips",          "Dips", numSets: 3, goalReps: 30, restMins: 3.5),
         
         bodyweight("Foam Rolling",            "IT-Band Foam Roll",         1, by: 15),
         bodyweight("Shoulder Dislocates",     "Shoulder Dislocate",        1, by: 12),
@@ -132,6 +124,8 @@ func Mine2() -> Program {
         ]
     
     let tags: [Program.Tags] = [.intermediate, .strength, .barbell, .unisex, .threeDays, .age40s, .age50s]
+    
+    // TODO: review description
     let description = """
 This is one of the programs I use when I have intermittent access to a gym with barbells. It's a three day a week program and the days look like this:
 
