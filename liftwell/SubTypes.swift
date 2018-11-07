@@ -766,7 +766,10 @@ class MaxRepsSubType: ExerciseInfo {
     
     func current(_ exercise: Exercise) -> Activity {
         let currentTotal = completed.reduce(0, {$0 + $1})
-        let expected = completed.count < numSets ? (currentReps - currentTotal)/(numSets - completed.count) : 0
+        var expected = completed.count < numSets ? (currentReps - currentTotal)/(numSets - completed.count) : 0
+        if currentTotal + (numSets - completed.count)*expected < currentReps {
+            expected += 1
+        }
         let st = (setIndex+1 <= numSets ? "\(expected > 0 ? expected : 1)+ " : "") + "(\(currentReps)) reps"
 
         let tt = setIndex+1 <= numSets ? "Set \(setIndex+1) of \(numSets)" : "Set \(numSets) of \(numSets)"
