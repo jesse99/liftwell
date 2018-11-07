@@ -34,9 +34,9 @@ fileprivate func bodyweight(_ name: String, _ formalName: String, _ numSets: Int
     return Exercise(name, formalName, .body(type))
 }
 
-fileprivate func bodyweight(_ name: String, _ formalName: String, numSets: Int, goalReps: Int, restMins: Double) -> Exercise {
+fileprivate func bodyweight(_ name: String, _ formalName: String, numSets: Int, goalReps: Int, restMins: Double, restAtEnd: Bool) -> Exercise {
     let rest = Int(restMins*60.0)
-    let subtype = MaxRepsSubType(numSets: numSets, goalReps: goalReps, restSecs: rest, restAtEnd: true)
+    let subtype = MaxRepsSubType(numSets: numSets, goalReps: goalReps, restSecs: rest, restAtEnd: restAtEnd)
     let type = BodyType(.maxReps(subtype))
     return Exercise(name, formalName, .body(type))
 }
@@ -86,22 +86,22 @@ func Mine2() -> Program {
         // Heavy
         dumbbell("Dumbbell Bench", "Dumbbell Bench Press",            "10@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R", startReps: 5, restMins: 4.0),
         dumbbell("Split Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75% 4-8@100% R 4-8@100% R 4-8@100% R", startReps: 4, restMins: 4.0),
-        dumbbell("Dumbbell Flyes", "Dumbbell Flyes",                  "10@50% 5-10@100% R 5-10@100% R 5-10@100% R", startReps: 5, restMins: 3.0),
+        dumbbell("Dumbbell Flyes", "Dumbbell Flyes",                  "10@50% 5-10@100% R 5-10@100% R 5-10@100%", startReps: 5, restMins: 3.0),
         barbell("Deadlift",        "Deadlift",                        "5@0% 5@0% 5@60% 5@70% 3@80% 1@90% 5@100% R", startReps: 5, restMins: 4.0),
 
         // Light
         dumbbell("Dumbbell OHP",    "Dumbbell Shoulder Press", "10@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R", startReps: 5, restMins: 3.5),
-        dumbbell("Farmer's Walk",   "Farmer's Walk",           "1@100% R 1@100%", startReps: 1, restMins: 3.0),
-        barbell("Static Hold",      "Static Hold",             "1@100% R 1@100% R 1@100%", startReps: 1, restMins: 3.0),
-        dumbbell("Back Extensions", "Back Extensions",         "10@50% 6-12@100% R 6-12@100% R 6-12@100%", startReps: 6, restMins: 3.0),
+        dumbbell("Farmer's Walk",   "Farmer's Walk",           "1@100% R 1@100% R", startReps: 1, restMins: 3.0),
+        barbell("Static Hold",      "Static Hold",             "1@100% R 1@100% R 1@100% R", startReps: 1, restMins: 3.0),
+        dumbbell("Back Extensions", "Back Extensions",         "10@50% 6-12@100% R 6-12@100% R 6-12@100% R", startReps: 6, restMins: 3.0),
         cable("Cable Crunches",     "Cable Crunch",            "6-12@100% R 6-12@100% R 6-12@100%", startReps: 5, restMins: 3.0),
-        bodyweight("Chinups",       "Chinup", numSets: 4, goalReps: 25, restMins: 3.5),
+        bodyweight("Chinups",       "Chinup", numSets: 4, goalReps: 25, restMins: 3.5, restAtEnd: true),
 
         // Medium
         // Dumbbell Bench
         // Split Squat
         // Chinups
-        bodyweight("Dips",          "Dips", numSets: 3, goalReps: 30, restMins: 3.5),
+        bodyweight("Dips",          "Dips", numSets: 3, goalReps: 30, restMins: 3.5, restAtEnd: false),
         
         bodyweight("Foam Rolling",            "IT-Band Foam Roll",         1, by: 15),
         bodyweight("Shoulder Dislocates",     "Shoulder Dislocate",        1, by: 12),
@@ -116,7 +116,7 @@ func Mine2() -> Program {
     ]
     
     let workouts = [
-        Workout("Light", ["Dumbbell OHP", "Back Extensions", "Chinups", "Farmer's Walk", "Static Hold", "Cable Crunches"], scheduled: true, optional: ["Static Hold", "Back Extensions", "Cable Crunches"]),
+        Workout("Light", ["Dumbbell OHP", "Chinups", "Back Extensions", "Farmer's Walk", "Static Hold", "Cable Crunches"], scheduled: true, optional: ["Static Hold", "Back Extensions", "Cable Crunches"]),
         Workout("Medium", ["Dumbbell Bench", "Split Squat", "Chinups", "Farmer's Walk", "Static Hold", "Dips"], scheduled: true, optional: ["Static Hold", "Dips"]),
         Workout("Heavy", ["Split Squat", "Dumbbell Bench", "Deadlift", "Dumbbell Flyes"], scheduled: true),
         

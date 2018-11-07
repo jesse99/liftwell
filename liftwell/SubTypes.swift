@@ -89,10 +89,6 @@ class ApparatusSubtype {
         return index < activities.count ? activities[index] : activities.last!
     }
     
-    func restSecs() -> RestTime {
-        return RestTime(autoStart: index > numWarmups, secs: restTime)
-    }
-    
     func restSound() -> UInt32 {
         return kSystemSoundID_Vibrate
     }
@@ -350,6 +346,11 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
             return historyLabel(history)
         }
         return ""
+    }
+    
+    func restSecs() -> RestTime {
+        // note that autoStart is only used after index is incremented
+        return RestTime(autoStart: cycles[cycleIndex].sets[index > 0 ? index-1 : 0].rest, secs: restTime)
     }
     
     override func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
@@ -788,7 +789,7 @@ class MaxRepsSubType: ExerciseInfo {
     }
     
     func restSecs() -> RestTime {
-        return RestTime(autoStart: true, secs: restTime)
+        return RestTime(autoStart: completed.count < numSets || restAtEnd, secs: restTime)
     }
     
     func restSound() -> UInt32 {
@@ -1019,6 +1020,11 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
             return historyLabel(history)
         }
         return ""
+    }
+    
+    func restSecs() -> RestTime {
+        // note that autoStart is only used after index is incremented
+        return RestTime(autoStart: sets.sets[index > 0 ? index-1 : 0].rest, secs: restTime)
     }
     
     override func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
