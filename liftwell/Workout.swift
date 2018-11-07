@@ -37,6 +37,23 @@ class Workout: Storable {
     
     func sync(_ savedWorkout: Workout) {
         lastWorkout = savedWorkout.lastWorkout
+        
+        // If there is a brand new exercise in optional then we have to use it.
+        var newOptional: [String] = []
+        for candidate in optional {
+            if !savedWorkout.exercises.contains(candidate) {
+                newOptional.append(candidate)
+            }
+        }
+        
+        // If the saved optional exercise still exists then use that too.
+        for candidate in savedWorkout.optional {
+            if exercises.contains(candidate) {
+                newOptional.append(candidate)
+            }
+        }
+        
+        optional = newOptional
     }
     
     func errors(_ program: Program) -> [String] {
