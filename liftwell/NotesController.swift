@@ -45,6 +45,16 @@ class NotesController: UIViewController, UITextViewDelegate {
     
     private func setText(_ str: String) {
         if let parser = TSMarkdownParser.standard() {
+            parser.paragraphFont = UIFont.preferredFont(forTextStyle: .body)
+            parser.strongFont = UIFont.preferredFont(forTextStyle: .body).makeBold()
+            parser.emphasisFont = UIFont.preferredFont(forTextStyle: .body).makeItalic()
+            parser.h6Font = UIFont.preferredFont(forTextStyle: .body).makeBigger(delta: 1).makeBold()
+            parser.h5Font = UIFont.preferredFont(forTextStyle: .body).makeBigger(delta: 3).makeBold()
+            parser.h4Font = UIFont.preferredFont(forTextStyle: .body).makeBigger(delta: 5).makeBold()
+            parser.h3Font = UIFont.preferredFont(forTextStyle: .body).makeBigger(delta: 7).makeBold()
+            parser.h2Font = UIFont.preferredFont(forTextStyle: .body).makeBigger(delta: 9).makeBold()
+            parser.h1Font = UIFont.preferredFont(forTextStyle: .body).makeBigger(delta: 11).makeBold()
+
             if let text = parser.attributedString(fromMarkdown: str) {
                 textView.textStorage.setAttributedString(text)
             } else {

@@ -9,5 +9,19 @@ extension UIFont {
         }
         return self
     }
+
+    func makeItalic() -> UIFont {
+        if let descriptor = self.fontDescriptor.withSymbolicTraits(.traitItalic) {
+            return UIFont(descriptor: descriptor, size: self.pointSize)
+        }
+        return self
+    }
+
+    func makeBigger(delta: Int) -> UIFont {
+        if let descriptor = self.fontDescriptor.withSymbolicTraits(.traitItalic) {
+            return UIFont(descriptor: descriptor, size: self.pointSize + CGFloat(delta))
+        }
+        return self
+    }
 }
 

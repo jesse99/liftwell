@@ -217,9 +217,9 @@
 			children = (
 				374D3EDD217D50EF00AC828D /* ColorExtensions.swift */,
 				374D3ED9217BFBD100AC828D /* DateExtensionw.swift */,
+				374D3EDF217D510E00AC828D /* FontExtensions.swift */,
 				37EFD6D921780EDC00F60880 /* LabelExtensions.swift */,
 				3728684D21631314005F6FD0 /* SequenceExtensions.swift */,
-				374D3EDF217D510E00AC828D /* FontExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
