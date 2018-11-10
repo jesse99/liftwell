@@ -173,7 +173,7 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
                     cell.detailTextLabel!.text = "in progress"
                 } else if calendar.isDate(date, inSameDayAs: Date()) && !partial {
                     cell.detailTextLabel!.text = "finished today"
-                    color = .lightGray
+                    color = UIColor.fromName("darkGreen")!
                 } else if partial {
                     cell.detailTextLabel!.text = "partially completed \(date.daysName())"
                 } else {
@@ -211,7 +211,7 @@ class WorkoutsTabController: UIViewController, UITableViewDataSource, UITableVie
         let app = UIApplication.shared.delegate as! AppDelegate
         for (i, workout) in app.program.workouts.enumerated() {
             let completed = numCompleted(workout)
-            if completed > 0 && completed < workout.exercises.count {
+            if completed > 0 && completed < workout.exercises.count - workout.optional.count {
 //            if isUnderway(workout) || (completed > 0 && completed < workout.exercises.count) {
                 todays.append(i)
             }
