@@ -563,12 +563,12 @@ class ExerciseController: UIViewController {
             t.invalidate()
             timer = nil
             nextButton.isHidden = false
-            
-            let center = UNUserNotificationCenter.current()
-            center.removeAllPendingNotificationRequests()
-            UIApplication.shared.isIdleTimerDisabled = false
         }
         
+        let center = UNUserNotificationCenter.current()
+        center.removeAllPendingNotificationRequests()
+        UIApplication.shared.isIdleTimerDisabled = false
+
         startTimerButton.setTitle("Start Timer", for: UIControl.State())
         startTimerButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         
