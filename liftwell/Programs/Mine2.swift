@@ -101,7 +101,7 @@ func Mine2() -> Program {
         // Dumbbell Bench
         // Split Squat
         // Chinups
-        bodyweight("Dips",          "Dips", numSets: 3, goalReps: 30, restMins: 3.5, restAtEnd: false),
+        bodyweight("Dips",          "Dips", numSets: 3, goalReps: 36, restMins: 3.5, restAtEnd: false),
         
         bodyweight("Foam Rolling",            "IT-Band Foam Roll",         1, by: 15),
         bodyweight("Shoulder Dislocates",     "Shoulder Dislocate",        1, by: 12),

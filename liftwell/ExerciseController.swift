@@ -87,7 +87,7 @@ class ExerciseController: UIViewController {
     }
     
     @objc func leavingForeground() {
-        //savePosition()
+        saveTimers()
     }
     
     private func updateUI() {
@@ -155,6 +155,8 @@ class ExerciseController: UIViewController {
         
         let notify = NotificationCenter.default
         notify.addObserver(self, selector: #selector(ExerciseController.leavingForeground), name: UIApplication.willResignActiveNotification, object: nil)
+
+        restoreTimers()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -196,8 +198,13 @@ class ExerciseController: UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        saveTimers()
+        super.viewWillDisappear(animated)
+    }
+    
     @IBAction func unwindToExercise(_ segue: UIStoryboardSegue) {
-        //restorePosition()
+        restoreTimers()
        // let info = exercise.getInfo()
         //        info.refresh()    // TODO: do we need this?
         updateUI()
@@ -268,6 +275,7 @@ class ExerciseController: UIViewController {
     }
     
     private func finish() {
+        saveTimers()
         exercise.complete(workout, skipped: false)
         
         let app = UIApplication.shared.delegate as! AppDelegate
@@ -319,7 +327,7 @@ class ExerciseController: UIViewController {
     }
     
     @IBAction func notesPressed(_ sender: Any) {
-        //        savePosition()
+        saveTimers()
         //        dismissTooltip()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -428,6 +436,7 @@ class ExerciseController: UIViewController {
 //    }
     
     @IBAction func optionsPressed(_ sender: Any) {
+        saveTimers()
         //        dismissTooltip()
         
         switch exercise.type {
@@ -659,6 +668,49 @@ class ExerciseController: UIViewController {
         }
     }
     
+    private func saveTimers() {
+        let defaults = UserDefaults.standard
+        
+        let info = exercise.getInfo()
+        switch info.state {
+        case .waiting, .started:
+            defaults.set(Date.distantPast, forKey: "\(workout.name)-\(exercise.name)-savedDate")
+        default:
+            defaults.set(Date(), forKey: "\(workout.name)-\(exercise.name)-savedDate")
+            defaults.set(startTime, forKey: "\(workout.name)-\(exercise.name)-startTime")
+            defaults.set(startedTimer, forKey: "\(workout.name)-\(exercise.name)-startedTimer")
+            defaults.set(timer != nil, forKey: "\(workout.name)-\(exercise.name)-timerRunning")
+        }
+        
+        defaults.synchronize()
+    }
+    
+    private func restoreTimers() {
+        func acceptable(_ date: Date) -> Bool {
+            if UIDevice.current.name == "Jesse’s MacBook Pro" {
+                // Saved state can change during development so don't keep old state
+                // around very long.
+                return Date().minsSinceDate(date) < 10.0
+            } else {
+                return Date().hoursSinceDate(date) < 2.0
+            }
+        }
+        
+        let defaults = UserDefaults.standard
+        if let savedDate = defaults.object(forKey: "\(workout.name)-\(exercise.name)-savedDate") as? Date, acceptable(savedDate) {
+            startTime = defaults.object(forKey: "\(workout.name)-\(exercise.name)-startTime") as! Date
+            startedTimer = defaults.bool(forKey: "\(workout.name)-\(exercise.name)-startedTimer")
+            
+            let info = exercise.getInfo()
+            if startedTimer && info.restSecs().secs > 0 {
+                let running = defaults.bool(forKey: "\(workout.name)-\(exercise.name)-timerRunning")
+                if running {
+                    startTimer(force: true)
+                }
+            }
+        }
+    }
+    
     @IBOutlet private var breadcrumbLabel: UILabel!
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var subtitleLabel: UILabel!
@@ -675,13 +727,12 @@ class ExerciseController: UIViewController {
     
     private var timer: Timer? = nil
     private var startTime = Date()
+    private var startedTimer = false
+
     private var originalColor: UIColor? = nil
-    
     private var workout: Workout!
     private var exercise: Exercise!
     private var unwindTo: String!
-    
-    private var startedTimer = false
     private var breadcrumb = ""
 }
 

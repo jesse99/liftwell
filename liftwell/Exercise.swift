@@ -76,6 +76,11 @@ class Exercise: Storable {
         return result
     }
     
+    func sync(_ savedExercise: Exercise) {
+        completed = savedExercise.completed
+        skipped = savedExercise.skipped
+    }
+    
     /// Date the exercise was last completed keyed by workout name (exercises can be shared across workouts).
     func dateCompleted(_ workout: Workout) -> (Date, Bool)? {
         if let date = completed[workout.name], let skip = skipped[workout.name] {

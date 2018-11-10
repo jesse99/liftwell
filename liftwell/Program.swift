@@ -215,6 +215,8 @@ class Program: Storable {
 
         for exercise in exercises {
             if let savedExercise = savedProgram.findExercise(exercise.name) {
+                exercise.sync(savedExercise)
+                
                 switch exercise.type {
                 case .body(let type): type.sync(self, savedExercise)
                 case .weights(let type): type.sync(self, savedExercise)
