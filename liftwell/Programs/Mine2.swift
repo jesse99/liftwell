@@ -20,98 +20,98 @@ func parseSets(_ text: String) -> Sets {
     }
 }
 
-fileprivate func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, secs: Int) -> Exercise {
+fileprivate func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, secs: Int, main: Bool = false) -> Exercise {
     let subtype = TimedSubType(numSets: numSets, currentTime: secs, targetTime: nil)
     let type = BodyType(.timed(subtype))
-    return Exercise(name, formalName, .body(type))
+    return Exercise(name, formalName, .body(type), main: main)
 }
 
-fileprivate func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, by: Int) -> Exercise {
+fileprivate func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, by: Int, main: Bool = false) -> Exercise {
     let reps = Set(reps: by)
     let sets = Sets(Array(repeating: reps, count: numSets))
     let subtype = RepsSubType(sets: sets, reps: by, restSecs: 0)
     let type = BodyType(.reps(subtype))
-    return Exercise(name, formalName, .body(type))
+    return Exercise(name, formalName, .body(type), main: main)
 }
 
-fileprivate func bodyweight(_ name: String, _ formalName: String, numSets: Int, goalReps: Int, restMins: Double, restAtEnd: Bool) -> Exercise {
+fileprivate func bodyweight(_ name: String, _ formalName: String, numSets: Int, goalReps: Int, restMins: Double, restAtEnd: Bool, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     let subtype = MaxRepsSubType(numSets: numSets, goalReps: goalReps, restSecs: rest, restAtEnd: restAtEnd)
     let type = BodyType(.maxReps(subtype))
-    return Exercise(name, formalName, .body(type))
+    return Exercise(name, formalName, .body(type), main: main)
 }
 
-fileprivate func pairedPlates(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
+fileprivate func pairedPlates(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
     
     let apparatus = Apparatus.pairedPlates(plates: defaultPlates())
     let type = WeightsType(apparatus, .reps(subtype))
     
-    return Exercise(name, formalName, .weights(type))
+    return Exercise(name, formalName, .weights(type), main: main)
 }
 
-fileprivate func cable(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
+fileprivate func cable(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
     
     let apparatus = Apparatus.machine(range1: defaultMachine(), range2: zeroMachine(), extra: [])
     let type = WeightsType(apparatus, .reps(subtype))
     
-    return Exercise(name, formalName, .weights(type))
+    return Exercise(name, formalName, .weights(type), main: main)
 }
 
-fileprivate func dumbbell1(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
+fileprivate func dumbbell1(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
 
     let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: defaultMagnets(), paired: false)
     let type = WeightsType(apparatus, .reps(subtype))
     
-    return Exercise(name, formalName, .weights(type))
+    return Exercise(name, formalName, .weights(type), main: main)
 }
 
-fileprivate func dumbbell2(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
+fileprivate func dumbbell2(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
     
     let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: defaultMagnets(), paired: true)
     let type = WeightsType(apparatus, .reps(subtype))
     
-    return Exercise(name, formalName, .weights(type))
+    return Exercise(name, formalName, .weights(type), main: main)
 }
 
-fileprivate func barbell(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
+fileprivate func barbell(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
     
     let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: defaultBumpers(), magnets: [])
     let type = WeightsType(apparatus, .reps(subtype))
     
-    return Exercise(name, formalName, .weights(type))
+    return Exercise(name, formalName, .weights(type), main: main)
 }
 
 func Mine2() -> Program {
     let exercises = [
         // Heavy
-        dumbbell2("Dumbbell Bench", "Dumbbell Bench Press",            "10@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R", startReps: 5, restMins: 4.0),
-        dumbbell2("Split Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75% 4-8@100% R 4-8@100% R 4-8@100% R", startReps: 4, restMins: 4.0),
+        dumbbell2("Dumbbell Bench", "Dumbbell Bench Press",            "10@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R", startReps: 5, restMins: 4.0, main: true),
+        dumbbell2("Split Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75% 4-8@100% R 4-8@100% R 4-8@100% R", startReps: 4, restMins: 4.0, main: true),
         dumbbell2("Dumbbell Flyes", "Dumbbell Flyes",                  "10@50% 5-10@100% R 5-10@100% R 5-10@100%", startReps: 5, restMins: 3.0),
-        barbell("Deadlift",        "Deadlift",                        "5@0% 5@0% 5@60% 5@70% 3@80% 1@90% 5@100% R", startReps: 5, restMins: 4.0),
+        barbell("Deadlift",         "Deadlift",                        "5@0% 5@0% 5@60% 5@70% 3@80% 1@90% 5@100% R", startReps: 5, restMins: 4.0, main: true),
 
         // Light
-        dumbbell2("Dumbbell OHP",    "Dumbbell Shoulder Press", "10@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R", startReps: 5, restMins: 3.5),
+        dumbbell2("Dumbbell OHP",    "Dumbbell Shoulder Press", "10@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R", startReps: 5, restMins: 3.5, main: true),
         dumbbell2("Farmer's Walk",   "Farmer's Walk",           "1@100% R 1@100% R", startReps: 1, restMins: 3.0),
-        barbell("Static Hold",      "Static Hold",             "1@100% R 1@100% R 1@100% R", startReps: 1, restMins: 3.0),
+        barbell("Static Hold",       "Static Hold",             "1@100% R 1@100% R 1@100% R", startReps: 1, restMins: 3.0),
         dumbbell1("Back Extensions", "Back Extensions",         "10@50% 6-12@100% R 6-12@100% R 6-12@100% R", startReps: 6, restMins: 3.0),
-        cable("Cable Crunches",     "Cable Crunch",            "6-12@100% R 6-12@100% R 6-12@100%", startReps: 5, restMins: 3.0),
-        bodyweight("Chinups",       "Chinup", numSets: 4, goalReps: 25, restMins: 3.5, restAtEnd: true),
+        cable("Cable Crunches",      "Cable Crunch",            "6-12@100% R 6-12@100% R 6-12@100%", startReps: 5, restMins: 3.0),
+        bodyweight("Chinups",        "Chinup", numSets: 4, goalReps: 25, restMins: 3.5, restAtEnd: true),
 
         // Medium
         // Dumbbell Bench
         // Split Squat
         // Chinups
-        bodyweight("Dips",          "Dips", numSets: 3, goalReps: 36, restMins: 3.5, restAtEnd: false),
+        bodyweight("Dips",           "Dips", numSets: 3, goalReps: 36, restMins: 3.5, restAtEnd: false),
         
         bodyweight("Foam Rolling",            "IT-Band Foam Roll",         1, by: 15),
         bodyweight("Shoulder Dislocates",     "Shoulder Dislocate",        1, by: 12),

@@ -1,17 +1,15 @@
 //  Created by Jesse Jones on 10/1/18.
 //  Copyright © 2018 MushinApps. All rights reserved.
-//import AVFoundation // for kSystemSoundID_Vibrate
 import Foundation
-//import UIKit
-//import os.log
 
 class Exercise: Storable {
-    init(_ name: String, _ formalName: String, _ type: Type) {
+    init(_ name: String, _ formalName: String, _ type: Type, main: Bool) {
         self.name = name
         self.formalName = formalName
 //        self.nextExercise = nil
 //        self.prevExercise = nil
         self.type = type
+        self.main = main
         self.completed = [:]
         self.skipped = [:]
 //        self.hidden = hidden
@@ -21,6 +19,7 @@ class Exercise: Storable {
         self.name = store.getStr("name")
         self.formalName = store.getStr("formalName")
         self.type = store.getObj("type")
+        self.main = store.getBool("main", ifMissing: false)
 //        self.hidden = store.getBool("hidden")
         
         self.completed = [:]
@@ -55,6 +54,7 @@ class Exercise: Storable {
         store.addStr("name", name)
         store.addStr("formalName", formalName)
         store.addObj("type", type)
+        store.addBool("main", main)
 //        store.addBool("hidden", hidden)
         
 //        if let next = nextExercise {
@@ -133,6 +133,7 @@ class Exercise: Storable {
     var name: String             // "Heavy Bench"
     var formalName: String       // "Bench Press"
     var type: Type
+    var main: Bool
     
     /// These are used for exercises that support progression. For example, progressively harder planks. Users
     /// can use the Options screens to choose which version they want to perform.
