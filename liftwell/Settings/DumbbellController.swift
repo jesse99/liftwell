@@ -14,7 +14,7 @@ class DumbbellController: UIViewController, UITableViewDataSource, UITableViewDe
         
         self.available = availableDumbbells()
         switch apparatus {
-        case .dumbbells(weights: let weights, magnets: _):
+        case .dumbbells(weights: let weights, magnets: _, paired: _):
             self.used = weights
         default:
             assert(false, "expected a dumbbell")
@@ -36,8 +36,8 @@ class DumbbellController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBAction func donePressed(_ sender: Any) {
         switch apparatus! {
-        case .dumbbells(weights: _, magnets: let oldMagnets):
-            apparatus = .dumbbells(weights: used, magnets: oldMagnets)
+        case .dumbbells(weights: _, magnets: let oldMagnets, paired: let oldPaired):
+            apparatus = .dumbbells(weights: used, magnets: oldMagnets, paired: oldPaired)
             completion(apparatus)
         default:
             assert(false, "DumbbellController was called without a dumbbell")
@@ -50,7 +50,7 @@ class DumbbellController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func magnetsPressed(_ sender: Any) {
         var usedMagnets: [Double]
         switch apparatus! {
-        case .dumbbells(weights: _, magnets: let magnets):
+        case .dumbbells(weights: _, magnets: let magnets, _):
             usedMagnets = magnets
         default:
             assert(false, "DumbbellController was called without a dumbbell")
@@ -102,8 +102,8 @@ class DumbbellController: UIViewController, UITableViewDataSource, UITableViewDe
     
     private func updateMagnets(_ newMagnets: [Double]) {
         switch apparatus! {
-        case .dumbbells(weights: let oldWeights, magnets: _):
-            apparatus = .dumbbells(weights: oldWeights, magnets: newMagnets)
+        case .dumbbells(weights: let oldWeights, magnets: _, paired: let oldPaired):
+            apparatus = .dumbbells(weights: oldWeights, magnets: newMagnets, paired: oldPaired)
         default:
             assert(false, "DumbbellController was called without a dumbbell")
             abort()

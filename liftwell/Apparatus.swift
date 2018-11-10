@@ -11,8 +11,10 @@ public struct MachineRange {
 public enum Apparatus {
     case barbell(bar: Double, collar: Double, plates: [Double], bumpers: [Double], magnets: [Double])
     
-    /// Dumbbell, both single and double (we treat these the same because in practice it seems annoying to show 2x the double weight).
-    case dumbbells(weights: [Double], magnets: [Double])
+    /// In general we want to treat single and paired dumbbells the same (users want to think about the 60 pound dumbbell
+    /// not that they are actually lifting 120 pounds). But for stuff like acheivements we want to know how much they
+    /// actually did lift.
+    case dumbbells(weights: [Double], magnets: [Double], paired: Bool)
     
     /// Used for stuff like cable machines with a stack of plates. Range2 is for machines that have weights like [5, 10, 15, 20, 30, ...]. Extra are small weights that can be optionally added.
     case machine(range1: MachineRange, range2: MachineRange, extra: [Double])
@@ -65,7 +67,7 @@ extension Apparatus {
                 problems += ["singlePlates.plates is less than 0"]
             }
             
-        case .dumbbells(weights: let weights, magnets: let magnets):
+        case .dumbbells(weights: let weights, magnets: let magnets, paired: _):
             if weights.isEmpty {
                 problems += ["dumbbells.weights is empty"]
             }
@@ -236,7 +238,8 @@ extension Apparatus: Storable {
         case "dumbbells":
             let weights = store.getDblArray("weights")
             let magnets = store.getDblArray("magnets")
-            self = .dumbbells(weights: weights, magnets: magnets)
+            let paired = store.hasKey("paired") ? store.getBool("paired") : true
+            self = .dumbbells(weights: weights, magnets: magnets, paired: paired)
             
         case "machine":
             let min1 = store.getDbl("min1")
@@ -275,10 +278,11 @@ extension Apparatus: Storable {
             store.addStr("type", "single-plates")
             store.addDblArray("plates", plates)
             
-        case .dumbbells(weights: let weights, magnets: let magnets):
+        case .dumbbells(weights: let weights, magnets: let magnets, paired: let paired):
             store.addStr("type", "dumbbells")
             store.addDblArray("weights", weights)
             store.addDblArray("magnets", magnets)
+            store.addBool("paired", paired)
             
         case .machine(let range1, let range2, let extra):
             store.addStr("type", "machine")

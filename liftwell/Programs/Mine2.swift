@@ -61,11 +61,21 @@ fileprivate func cable(_ name: String, _ formalName: String, _ reps: String, sta
     return Exercise(name, formalName, .weights(type))
 }
 
-fileprivate func dumbbell(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
+fileprivate func dumbbell1(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
     let rest = Int(restMins*60.0)
     let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
 
-    let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: defaultMagnets())
+    let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: defaultMagnets(), paired: false)
+    let type = WeightsType(apparatus, .reps(subtype))
+    
+    return Exercise(name, formalName, .weights(type))
+}
+
+fileprivate func dumbbell2(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double) -> Exercise {
+    let rest = Int(restMins*60.0)
+    let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
+    
+    let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: defaultMagnets(), paired: true)
     let type = WeightsType(apparatus, .reps(subtype))
     
     return Exercise(name, formalName, .weights(type))
@@ -84,16 +94,16 @@ fileprivate func barbell(_ name: String, _ formalName: String, _ reps: String, s
 func Mine2() -> Program {
     let exercises = [
         // Heavy
-        dumbbell("Dumbbell Bench", "Dumbbell Bench Press",            "10@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R", startReps: 5, restMins: 4.0),
-        dumbbell("Split Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75% 4-8@100% R 4-8@100% R 4-8@100% R", startReps: 4, restMins: 4.0),
-        dumbbell("Dumbbell Flyes", "Dumbbell Flyes",                  "10@50% 5-10@100% R 5-10@100% R 5-10@100%", startReps: 5, restMins: 3.0),
+        dumbbell2("Dumbbell Bench", "Dumbbell Bench Press",            "10@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R", startReps: 5, restMins: 4.0),
+        dumbbell2("Split Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75% 4-8@100% R 4-8@100% R 4-8@100% R", startReps: 4, restMins: 4.0),
+        dumbbell2("Dumbbell Flyes", "Dumbbell Flyes",                  "10@50% 5-10@100% R 5-10@100% R 5-10@100%", startReps: 5, restMins: 3.0),
         barbell("Deadlift",        "Deadlift",                        "5@0% 5@0% 5@60% 5@70% 3@80% 1@90% 5@100% R", startReps: 5, restMins: 4.0),
 
         // Light
-        dumbbell("Dumbbell OHP",    "Dumbbell Shoulder Press", "10@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R", startReps: 5, restMins: 3.5),
-        dumbbell("Farmer's Walk",   "Farmer's Walk",           "1@100% R 1@100% R", startReps: 1, restMins: 3.0),
+        dumbbell2("Dumbbell OHP",    "Dumbbell Shoulder Press", "10@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R", startReps: 5, restMins: 3.5),
+        dumbbell2("Farmer's Walk",   "Farmer's Walk",           "1@100% R 1@100% R", startReps: 1, restMins: 3.0),
         barbell("Static Hold",      "Static Hold",             "1@100% R 1@100% R 1@100% R", startReps: 1, restMins: 3.0),
-        dumbbell("Back Extensions", "Back Extensions",         "10@50% 6-12@100% R 6-12@100% R 6-12@100% R", startReps: 6, restMins: 3.0),
+        dumbbell1("Back Extensions", "Back Extensions",         "10@50% 6-12@100% R 6-12@100% R 6-12@100% R", startReps: 6, restMins: 3.0),
         cable("Cable Crunches",     "Cable Crunch",            "6-12@100% R 6-12@100% R 6-12@100%", startReps: 5, restMins: 3.0),
         bodyweight("Chinups",       "Chinup", numSets: 4, goalReps: 25, restMins: 3.5, restAtEnd: true),
 

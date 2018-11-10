@@ -93,7 +93,7 @@ class RepsOptionController: UIViewController {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
             switch apparatus {
-            case .dumbbells(weights: _, magnets: _):
+            case .dumbbells(weights: _, magnets: _, paired: _):
                 let view = storyboard.instantiateViewController(withIdentifier: "DumbbellControllerID") as! DumbbellController
                 view.initialize(apparatus, self.updateApparatus, breadcrumb, "unwindToRepsOptionsID")
                 present(view, animated: true, completion: nil)

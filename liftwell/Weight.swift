@@ -200,7 +200,7 @@ public struct Weight: CustomStringConvertible {
             
             return candidates
             
-        case .dumbbells(let weights, let magnets):
+        case .dumbbells(let weights, let magnets, _):
             return findDumbbells(weights, magnets, multipler: 1)
             
         case .machine(range1: let range1, range2: let range2, extra: let inExtra):
