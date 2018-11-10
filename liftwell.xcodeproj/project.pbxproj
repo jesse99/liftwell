@@ -42,6 +42,9 @@
 		374FE955218BD10300CFC284 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FE954218BD10300CFC284 /* Notes.swift */; };
 		37C2D3B9218D142500D9AF0E /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C2D3B8218D142500D9AF0E /* Workout.swift */; };
 		37E6577D218CC01200ED8BD0 /* EditNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6577C218CC01200ED8BD0 /* EditNoteController.swift */; };
+		37E7BF03219750AF0087E7FE /* AchievementsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7BF02219750AF0087E7FE /* AchievementsTabController.swift */; };
+		37E7BF05219750C40087E7FE /* HistoryTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7BF04219750C40087E7FE /* HistoryTabController.swift */; };
+		37E7BF07219750DF0087E7FE /* OptionsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7BF06219750DF0087E7FE /* OptionsTabController.swift */; };
 		37EFD6D22172C54500F60880 /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D12172C54500F60880 /* Weight.swift */; };
 		37EFD6D42172C60A00F60880 /* WeightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D32172C60A00F60880 /* WeightsTests.swift */; };
 		37EFD6D62172CA6700F60880 /* PopulateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD6D52172CA6700F60880 /* PopulateTests.swift */; };
@@ -105,6 +108,9 @@
 		374FE954218BD10300CFC284 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
 		37C2D3B8218D142500D9AF0E /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		37E6577C218CC01200ED8BD0 /* EditNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteController.swift; sourceTree = "<group>"; };
+		37E7BF02219750AF0087E7FE /* AchievementsTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsTabController.swift; sourceTree = "<group>"; };
+		37E7BF04219750C40087E7FE /* HistoryTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTabController.swift; sourceTree = "<group>"; };
+		37E7BF06219750DF0087E7FE /* OptionsTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsTabController.swift; sourceTree = "<group>"; };
 		37EFD6D12172C54500F60880 /* Weight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weight.swift; sourceTree = "<group>"; };
 		37EFD6D32172C60A00F60880 /* WeightsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsTests.swift; sourceTree = "<group>"; };
 		37EFD6D52172CA6700F60880 /* PopulateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateTests.swift; sourceTree = "<group>"; };
@@ -206,6 +212,9 @@
 		3728684721630030005F6FD0 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				37E7BF02219750AF0087E7FE /* AchievementsTabController.swift */,
+				37E7BF04219750C40087E7FE /* HistoryTabController.swift */,
+				37E7BF06219750DF0087E7FE /* OptionsTabController.swift */,
 				37286829216259AE005F6FD0 /* ProgramsTabController.swift */,
 				37286827216259AE005F6FD0 /* WorkoutsTabController.swift */,
 			);
@@ -427,6 +436,7 @@
 				3728684B21631202005F6FD0 /* Store.swift in Sources */,
 				374D3EDA217BFBD100AC828D /* DateExtensionw.swift in Sources */,
 				37286849216311D3005F6FD0 /* Program.swift in Sources */,
+				37E7BF05219750C40087E7FE /* HistoryTabController.swift in Sources */,
 				374FE94921867C4100CFC284 /* WeightsController.swift in Sources */,
 				3728682A216259AE005F6FD0 /* ProgramsTabController.swift in Sources */,
 				37EFD6D22172C54500F60880 /* Weight.swift in Sources */,
@@ -436,6 +446,7 @@
 				37286826216259AE005F6FD0 /* AppDelegate.swift in Sources */,
 				374D3EDE217D50EF00AC828D /* ColorExtensions.swift in Sources */,
 				3728685F21699C17005F6FD0 /* Types.swift in Sources */,
+				37E7BF07219750DF0087E7FE /* OptionsTabController.swift in Sources */,
 				374FE9402183D10700CFC284 /* BaseResult.swift in Sources */,
 				37EFD6DA21780EDC00F60880 /* LabelExtensions.swift in Sources */,
 				37C2D3B9218D142500D9AF0E /* Workout.swift in Sources */,
@@ -446,6 +457,7 @@
 				3728685021631462005F6FD0 /* Exercise.swift in Sources */,
 				37286863216A6C42005F6FD0 /* RepsParser.swift in Sources */,
 				37EFD6DE217A679F00F60880 /* Sets.swift in Sources */,
+				37E7BF03219750AF0087E7FE /* AchievementsTabController.swift in Sources */,
 				374FE955218BD10300CFC284 /* Notes.swift in Sources */,
 				374D3EDC217D4F4E00AC828D /* ExerciseController.swift in Sources */,
 				374D3EE0217D510E00AC828D /* FontExtensions.swift in Sources */,

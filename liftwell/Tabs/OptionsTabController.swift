@@ -1,8 +1,8 @@
-//  Created by Jesse Jones on 10/1/18.
+//  Created by Jesse Jones on 11/10/18.
 //  Copyright © 2018 MushinApps. All rights reserved.
 import UIKit
 
-class ProgramsTabControllerController: UIViewController {
+class OptionsTabControllerController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

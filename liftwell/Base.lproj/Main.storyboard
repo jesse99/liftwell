@@ -77,7 +77,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
                 <exit id="39b-17-RdA" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
+            <point key="canvasLocation" x="711" y="-791"/>
         </scene>
         <!--Workout Controller-->
         <scene sceneID="LY1-NO-Ahk">
@@ -173,7 +173,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HNS-Dv-PHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Wj8-6r-Fp4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1408.8" y="-323.38830584707648"/>
+            <point key="canvasLocation" x="1361" y="-791"/>
         </scene>
         <!--Exercise Controller-->
         <scene sceneID="3M1-3X-D37">
@@ -331,7 +331,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5wG-xa-Thj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="BHy-YD-KHy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2055" y="-320"/>
+            <point key="canvasLocation" x="2012" y="-791"/>
         </scene>
         <!--Workout Options Controller-->
         <scene sceneID="j12-2Z-zyg">
@@ -412,7 +412,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LNd-cO-3D1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="JII-6W-USt" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2702" y="-321"/>
+            <point key="canvasLocation" x="2655" y="-791"/>
         </scene>
         <!--Notes Controller-->
         <scene sceneID="Hjb-Uk-68B">
@@ -491,7 +491,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vqk-x7-EUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="XLm-Mq-6KD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3340" y="-322"/>
+            <point key="canvasLocation" x="3287" y="-791"/>
         </scene>
         <!--Edit Note Controller-->
         <scene sceneID="hu5-BW-4sI">
@@ -572,7 +572,39 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3966" y="-322"/>
+            <point key="canvasLocation" x="3946" y="-791"/>
+        </scene>
+        <!--Options-->
+        <scene sceneID="WEb-ep-a5q">
+            <objects>
+                <viewController id="ZFS-Wr-GNO" customClass="OptionsTabControllerController" customModule="liftwell" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dF4-Pr-2BL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="FOl-bE-7ID"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Options" image="first" id="2m9-ry-nI6"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yLN-lI-ljB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="729" y="1901"/>
+        </scene>
+        <!--Achievements-->
+        <scene sceneID="hWw-4k-9IP">
+            <objects>
+                <viewController id="brS-ar-9Op" customClass="AchievementsTabControllerController" customModule="liftwell" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YT0-4w-Pm9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="NT7-AX-Pwe"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Achievements" image="second" id="8Uz-yc-Eiz"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cBI-2A-FF1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="710" y="-126"/>
         </scene>
         <!--Programs-->
         <scene sceneID="wg7-f3-ORb">
@@ -609,7 +641,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="360"/>
+            <point key="canvasLocation" x="730" y="1238"/>
         </scene>
         <!--Reps Option Controller-->
         <scene sceneID="sol-FP-t1k">
@@ -769,6 +801,22 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1412" y="368"/>
+        </scene>
+        <!--History-->
+        <scene sceneID="XIJ-Bj-fqL">
+            <objects>
+                <viewController id="siJ-Ql-I4z" customClass="HistoryTabControllerController" customModule="liftwell" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RW1-Vf-oMX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="wjT-ox-KmW"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="History" image="first" id="zKb-MV-qE3"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HYa-xp-Uzj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="710" y="545"/>
         </scene>
         <!--Dumbbell Controller-->
         <scene sceneID="7tv-Fu-2bA">
@@ -1485,7 +1533,10 @@
                     </tabBar>
                     <connections>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
+                        <segue destination="brS-ar-9Op" kind="relationship" relationship="viewControllers" id="rBf-Vt-0VF"/>
+                        <segue destination="siJ-Ql-I4z" kind="relationship" relationship="viewControllers" id="DBy-jv-a0J"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="ZFS-Wr-GNO" kind="relationship" relationship="viewControllers" id="BpD-HZ-9Ip"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
