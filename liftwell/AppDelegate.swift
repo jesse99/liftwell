@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         loadResults()
         
+        achievements.append(OneRepMaxAchievement(self))
+
         //        let warmups = Warmups(withBar: 0, firstPercent: 0.5, lastPercent: 0.9, reps: [5, 3, 1])
         //        let plan = AMRAPPlan("default plan", warmups, workSets: 3, workReps: 5)
         //        let plan = CycleRepsPlan("default plan", warmups, numSets: 3, minReps: 4, maxReps: 8)
@@ -93,9 +95,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         saveState()
     }
     
+    func checkForNewAwards(_ exercise: Exercise, _ view: UIViewController, _ complete: @escaping () -> Void) {
+        var awards: [String] = []
+        
+        for achievement in achievements {
+            let (newAwards, _) = achievement.checkForNewAwards(exercise)
+            awards.append(contentsOf: newAwards.map {$0.title})
+        }
+        
+        if !awards.isEmpty {
+            let title = awards.count == 1 ? "You have earned a new achievement!" : "You have earned \(awards.count) new achievements!"
+            let alert = UIAlertController(title: title, message: awards.joined(separator: "\n"), preferredStyle: .alert)
+            
+            let action = UIAlertAction(title: "OK", style: .default, handler: {_ in self.updateAwards(exercise); complete()})
+            alert.addAction(action)
+            
+            view.present(alert, animated: true, completion:nil)
+        } else {
+            updateAwards(exercise)
+            complete()
+        }
+    }
+    
+    private func updateAwards(_ exercise: Exercise) {
+        for achievement in achievements {
+            achievement.updateAwards(exercise)
+        }
+    }
+    
     func saveState() {
         saveProgram()
         saveResults()
+        
+        for achievement in achievements {
+            achievement.save(self)
+        }
     }
 
     func dateWorkoutWasCompleted(_ workout: Workout) -> (Date, Bool, Bool)? {
@@ -208,14 +242,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return false
     }
 
-    private func getPath(fileName: String) -> String {
+    func getPath(fileName: String) -> String {
         let dirs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let dir = dirs.first!
         let name = sanitizeFileName(fileName)
         let url = dir.appendingPathComponent("\(name).archive")
         return url.path
     }
-    
+
+    func saveObject(_ object: AnyObject, _ path: String) {
+        if NSKeyedArchiver.archiveRootObject(object, toFile: path) {
+            //print("saved \(name) to \(path)")
+        } else {
+            os_log("failed to save to %@", type: .error, path)
+        }
+    }
+
     private func sanitizeFileName(_ name: String) -> String {
         var result = ""
         
@@ -232,14 +274,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return result
-    }
-
-    private func saveObject(_ object: AnyObject, _ path: String) {
-        if NSKeyedArchiver.archiveRootObject(object, toFile: path) {
-            //print("saved \(name) to \(path)")
-        } else {
-            os_log("failed to save to %@", type: .error, path)
-        }
     }
     
     private func saveProgram() {
@@ -317,6 +351,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var program: Program!
     var notificationsAreEnabled = false
+    
+    var achievements: [Achievement] = []
 }
 
 func assert(_ predicate: Bool, _ message: String) {

@@ -7,5 +7,10 @@ class OptionsTabControllerController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    @IBAction func onTapped(_ sender: Any) {
+    }
+    @IBOutlet var weightTextbox: UITextField!
+    
 }
 

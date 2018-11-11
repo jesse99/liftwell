@@ -282,9 +282,7 @@ class ExerciseController: UIViewController {
         if workout.completed(exercise) {
             app.program.incrementWorkouts()
         }
-        app.saveState()
-        
-        performSegue(withIdentifier: unwindTo, sender: self)
+        app.checkForNewAwards(exercise, self, {app.saveState(); self.performSegue(withIdentifier: self.unwindTo, sender: self)})
     }
     
     private func handleNext(_ action: String) {
@@ -293,7 +291,7 @@ class ExerciseController: UIViewController {
             updateUI()
             maybeStartTimer()
         } else {
-            os_log("%@: %@/%@", type: .info, action, info.current(exercise).amount, info.current(exercise).details)
+            //os_log("%@: %@/%@", type: .info, action, info.current(exercise).amount, info.current(exercise).details)
             fadeOut {self.updateUI(); self.maybeStartTimer()}
         }
     }

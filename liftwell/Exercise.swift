@@ -130,6 +130,56 @@ class Exercise: Storable {
         return problems
     }
     
+    func getWeight() -> Double? {
+        switch type {
+        case .body(let type):
+            switch type.subtype {
+            case .maxReps(let subtype): return subtype.weight
+            case .reps(let subtype): return subtype.weight
+            case .timed(let subtype): return subtype.weight
+            }
+        case .weights(let type):
+            switch type.subtype {
+            case .cyclic(let subtype): return subtype.weight
+            case .find(_): return nil
+            case .reps(let subtype): return subtype.weight
+            case .timed(let subtype): return subtype.weight
+            }
+        }
+    }
+    
+    func getReps() -> Int? {
+        switch type {
+        case .body(let type):
+            switch type.subtype {
+            case .maxReps(_):
+                if let result = MaxRepsSubType.results[formalName]?.last {
+                    return result.completed.first
+                }
+            case .reps(_):
+                if let result = RepsSubType.results[formalName]?.last {
+                    return result.reps
+                }
+            case .timed(_):
+                break
+            }
+        case .weights(let type):
+            switch type.subtype {
+            case .cyclic(_):
+                if let result = CyclicRepsSubtype.results[formalName]?.last {
+                    return result.reps
+                }
+            case .find(_), .timed(_):
+                break
+            case .reps(_):
+                if let result = RepsSubType.results[formalName]?.last {
+                    return result.reps
+                }
+            }
+        }
+        return nil
+    }
+
     var name: String             // "Heavy Bench"
     var formalName: String       // "Bench Press"
     var type: Type
