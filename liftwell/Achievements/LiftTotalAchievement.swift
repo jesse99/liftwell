@@ -70,7 +70,7 @@ class LiftTotalAchievement: Achievement {
         let total = findCUrrentToal()
         if nextTarget > 0.0 {
             let result = Award(
-                key: "lift totals",
+                key: "AAA lift totals",
                 title: "Main lifts 1RM total @ \(Weight.friendlyUnitsStr(nextTarget))",
                 details: "Total was \(Weight.friendlyUnitsStr(total))",
                 date: nil)
@@ -89,7 +89,7 @@ class LiftTotalAchievement: Achievement {
             os_log("total=%.0f nextTarget=%.0f", type: .error, total, nextTarget)
             if total >= nextTarget {
                 let result = Award(
-                    key: "lift totals",
+                    key: "AAA lift totals",
                     title: "Main lifts 1RM total @ \(Weight.friendlyUnitsStr(nextTarget))",
                     details: "Total was \(Weight.friendlyUnitsStr(total))",
                     date: Date())

@@ -10,18 +10,16 @@ class OptionsTabControllerController: UIViewController {
         weightTextbox.text = "\(app.bodyWeight)"
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    @IBAction func onTapped(_ sender: Any) {
+        weightTextbox.resignFirstResponder()
 
+        // Nicer to use viewWillDisappear but that is called after viewWillAppear
+        // so we do it this way to ensure that the achievements tab is legit.
         let app = UIApplication.shared.delegate as! AppDelegate
         if let weight = Int(weightTextbox.text!), weight != app.bodyWeight {
             app.bodyWeight = weight
             app.saveState()
         }
-    }
-    
-    @IBAction func onTapped(_ sender: Any) {
-        weightTextbox.resignFirstResponder()
     }
     
     @IBOutlet var weightTextbox: UITextField!

@@ -81,7 +81,7 @@ class OneRepMaxAchievement: Achievement {
                 if let weight = exercise.getWeight(), weight > 0.0, let reps = exercise.getReps(), let max = get1RM(weight, reps), max > 0.0 {
                     let nextTarget = nextTargets[exercise.formalName] ?? advanceTarget(max)
                     let result = Award(
-                        key: exercise.formalName + " 1RM",
+                        key: exercise.formalName + " ccc",
                         title: "\(exercise.formalName) 1RM @ \(Weight.friendlyUnitsStr(nextTarget))",
                         details: "Current 1RM is \(Weight.friendlyUnitsStr(max))",
                         date: nil)
@@ -104,7 +104,7 @@ class OneRepMaxAchievement: Achievement {
                                 os_log("weight=%.0f reps=%d 1RM=%.0f nextTarget=%.0f", type: .error, exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0, get1RM(exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0) ?? 0.0, nextTarget)
                 if let weight = exercise.getWeight(), weight > 0.0, let reps = exercise.getReps(), let max = get1RM(weight, reps), max >= nextTarget {
                     let result = Award(
-                        key: exercise.formalName + " 1RM",
+                        key: exercise.formalName + " ccc",
                         title: "\(exercise.formalName) 1RM @ \(Weight.friendlyUnitsStr(nextTarget))",
                         details: "1RM was \(Weight.friendlyUnitsStr(max))",
                         date: Date())

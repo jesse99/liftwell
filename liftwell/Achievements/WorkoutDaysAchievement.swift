@@ -68,7 +68,7 @@ class WorkoutDaysAchievement: Achievement {
         
         let app = UIApplication.shared.delegate as! AppDelegate
         let result = Award(
-            key: "Worked out days",
+            key: "zzzWorked out days",
             title: "Worked out \(nextTarget) days",
             details: app.totalWorkouts == 1 ? "Currently at 1 day" : "Currently at \(app.totalWorkouts) days",
             date: nil)

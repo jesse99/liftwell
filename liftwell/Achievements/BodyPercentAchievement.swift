@@ -89,7 +89,7 @@ class BodyPercentAchievement: Achievement {
                         nextPercent = advanceTarget(nextPercent)
                     }
                     let result = Award(
-                        key: exercise.formalName + " body weight",
+                        key: exercise.formalName + " aaa",
                         title: "\(exercise.formalName) @ \(Int(nextPercent*100))% of body weight",
                         details: "Currently at \(Int(100*currentPercent))% of body weight",
                         date: nil)
@@ -98,7 +98,7 @@ class BodyPercentAchievement: Achievement {
             } else if app.bodyWeight == 0 {
                 let percent = advanceTarget(0.0)
                 let result = Award(
-                    key: exercise.formalName + " body weight",
+                    key: exercise.formalName + " aaa",
                     title: "Main lifts @ \(Int(percent*100))% of body weight",
                     details: "Use options to set body weight",
                     date: nil)
@@ -122,7 +122,7 @@ class BodyPercentAchievement: Achievement {
             if let weight = exercise.getWeight() {
                 if nextTarget > 0.0 && weight >= nextTarget {
                     let result = Award(
-                        key: exercise.formalName + " body weight",
+                        key: exercise.formalName + " aaa",
                         title: "\(exercise.formalName) @ \(Int(nextPercent*100))% of body weight",
                         details: "Was at \(Int(100*weight/Double(app.bodyWeight)))% of body weight",
                         date: Date())
