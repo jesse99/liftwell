@@ -12,16 +12,21 @@ class OneRepMaxAchievement: Achievement {
                 
                 let store = try decoder.decode(Store.self, from: data)
                 self.completed = store.getObjArray("completed")
-                self.prevTarget = store.getDbl("prevTarget")
+                let names = store.getStrArray("nextNames")
+                let targets = store.getDblArray("nextTargets")
+                nextTargets = [:]
+                for i in 0..<names.count {
+                    nextTargets[names[i]] = targets[i]
+                }
             } catch {
                 os_log("failed to decode OneRepMaxAchievement from %@: %@", type: .error, path, error.localizedDescription)
                 self.completed = []
-                self.prevTarget = 0.0
+                nextTargets = [:]
             }
         } else {
             os_log("failed to unarchive OneRepMaxAchievement from %@", type: .error, path)
             self.completed = []
-            self.prevTarget = 0.0
+            nextTargets = [:]
         }
     }
     
@@ -29,7 +34,8 @@ class OneRepMaxAchievement: Achievement {
         let path = app.getPath(fileName: "OneRepMaxAchievement")
         let store = Store()
         store.addObjArray("completed", completed)
-        store.addDbl("prevTarget", prevTarget)
+        store.addStrArray("nextNames", Array(nextTargets.keys))
+        store.addDblArray("nextTargets", Array(nextTargets.values))
         
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .secondsSince1970
@@ -47,38 +53,49 @@ class OneRepMaxAchievement: Achievement {
     
     func checkForNewAwards(_ exercise: Exercise) -> ([Award], Double) {
         var new: [Award] = []
-        var currentTarget = 0.0
+        var newTarget = 0.0
         
-        if prevTarget > 0.0 {
-            let target = nextTarget(prevTarget)
-//            os_log("weight=%.0f reps=%d 1RM=%.0f prevTarget=%.0f target=%.0f", type: .error, exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0, get1RM(exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0) ?? 0.0, prevTarget, target)
-            if let weight = exercise.getWeight(), weight > 0.0, let reps = exercise.getReps(), let max = get1RM(weight, reps), max >= target {
-                let result = Award(title: "\(exercise.formalName) 1RM @ \(Weight.friendlyUnitsStr(target))", details: "1RM was \(Weight.friendlyUnitsStr(max))", date: Date())
-                new.append(result)
-                currentTarget = nextTarget(max)
-//                os_log("   adding award '%@', currentTarget = %.0f", type: .error, result.title, currentTarget)
-            }
+        let app = UIApplication.shared.delegate as! AppDelegate
+        if app.program.isInUse(exercise) && exercise.main {
+            let nextTarget = nextTargets[exercise.formalName] ?? 0.0
+            if nextTarget > 0.0 {
+//                os_log("weight=%.0f reps=%d 1RM=%.0f nextTarget=%.0f", type: .error, exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0, get1RM(exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0) ?? 0.0, nextTarget)
+                if let weight = exercise.getWeight(), weight > 0.0, let reps = exercise.getReps(), let max = get1RM(weight, reps), max >= nextTarget {
+                    let result = Award(
+                        key: exercise.formalName + " 1RM",
+                        title: "\(exercise.formalName) 1RM @ \(Weight.friendlyUnitsStr(nextTarget))",
+                        details: "1RM was \(Weight.friendlyUnitsStr(max))",
+                        date: Date())
+                    new.append(result)
+                    newTarget = advanceTarget(max)
+//                    os_log("   adding award '%@', newTarget=%.0f", type: .error, result.title, newTarget)
+                }
 
-        } else if prevTarget == 0.0 {
-//            os_log("weight=%.0f reps=%d 1RM=%.0f", type: .error, exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0, get1RM(exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0) ?? 0.0)
-            if let weight = exercise.getWeight(), weight > 0.0, let reps = exercise.getReps(), let max = get1RM(weight, reps), max > 0.0 {
-                currentTarget = nextTarget(max)
-//                os_log("   currentTarget = %.0f", type: .error, currentTarget)
+            } else if nextTarget == 0.0 {
+//                os_log("weight=%.0f reps=%d 1RM=%.0f", type: .error, exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0, get1RM(exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0) ?? 0.0)
+                if let weight = exercise.getWeight(), weight > 0.0, let reps = exercise.getReps(), let max = get1RM(weight, reps), max > 0.0 {
+                    newTarget = advanceTarget(max)
+//                    os_log("   newTarget=%.0f", type: .error, newTarget)
+                }
             }
         }
-
-        return (new, currentTarget)
+        
+        return (new, newTarget)
     }
     
     func updateAwards(_ exercise: Exercise) {
-        let (awards, currentTarget) = checkForNewAwards(exercise)
-        if !awards.isEmpty {
-            completed.append(contentsOf: awards)
-            prevTarget = currentTarget
-//            os_log("   setting prevTarget to %.0f (had awards)", type: .error, currentTarget)
-        } else if prevTarget == 0.0 {
-            prevTarget = currentTarget
-//            os_log("   setting prevTarget to %.0f", type: .error, currentTarget)
+        let app = UIApplication.shared.delegate as! AppDelegate
+        if app.program.isInUse(exercise) && exercise.main {
+            let (awards, newTarget) = checkForNewAwards(exercise)
+            let nextTarget = nextTargets[exercise.formalName] ?? 0.0
+            if !awards.isEmpty {
+                completed.append(contentsOf: awards)
+                nextTargets[exercise.formalName] = newTarget
+//                os_log("   setting nextTarget to %.0f (had awards)", type: .error, newTarget)
+            } else if nextTarget == 0.0 {
+                nextTargets[exercise.formalName] = newTarget
+//                os_log("   setting nextTarget to %.0f (no award)", type: .error, newTarget)
+            }
         }
     }
     
@@ -86,11 +103,15 @@ class OneRepMaxAchievement: Achievement {
         var completions: [Award] = []
         
         let app = UIApplication.shared.delegate as! AppDelegate
-        for exercise in app.program.exercises { // TODO: might want to exclude exercises that were made optional
-            if exercise.main {
+        for exercise in app.program.exercises {
+            if app.program.isInUse(exercise) && exercise.main {
                 if let weight = exercise.getWeight(), weight > 0.0, let reps = exercise.getReps(), let max = get1RM(weight, reps), max > 0.0 {
-                    let target = nextTarget(max)
-                    let result = Award(title: "\(exercise.formalName) 1RM @ \(Weight.friendlyUnitsStr(target))", details: "Current 1RM is \(Weight.friendlyUnitsStr(max))", date: nil)
+                    let target = advanceTarget(max)
+                    let result = Award(
+                        key: exercise.formalName + " 1RM",
+                        title: "\(exercise.formalName) 1RM @ \(Weight.friendlyUnitsStr(target))",
+                        details: "Current 1RM is \(Weight.friendlyUnitsStr(max))",
+                        date: nil)
                     completions.append(result)
                 }
             }
@@ -99,9 +120,9 @@ class OneRepMaxAchievement: Achievement {
         return completions
     }
     
-    private func nextTarget(_ weight: Double) -> Double {
+    private func advanceTarget(_ weight: Double) -> Double {
         let delta = findDelta(weight)
-        let target = delta*(weight/delta).rounded(.up)
+        let target = delta*((weight + 1)/delta).rounded(.up)
         return target
     }
     
@@ -125,5 +146,5 @@ class OneRepMaxAchievement: Achievement {
     }
 
     private var completed: [Award]
-    private var prevTarget: Double
+    private var nextTargets: [String: Double]
 }

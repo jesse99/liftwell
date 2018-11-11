@@ -57,10 +57,10 @@ class AchievementsTabControllerController: UIViewController, UITableViewDataSour
     }
     
     private func doSort(lhs: Award, rhs: Award) -> Bool {
-        // Sort first by title,
-        if lhs.title < rhs.title {
+        // Sort first by key,
+        if lhs.key < rhs.key {
             return true
-        } else if lhs.title > rhs.title {
+        } else if lhs.key > rhs.key {
             return false
         }
 

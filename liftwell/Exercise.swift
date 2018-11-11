@@ -139,11 +139,18 @@ class Exercise: Storable {
             case .timed(let subtype): return subtype.weight
             }
         case .weights(let type):
+            let weight: Double
             switch type.subtype {
-            case .cyclic(let subtype): return subtype.weight
+            case .cyclic(let subtype): weight = subtype.weight
             case .find(_): return nil
-            case .reps(let subtype): return subtype.weight
-            case .timed(let subtype): return subtype.weight
+            case .reps(let subtype): weight = subtype.weight
+            case .timed(let subtype): weight = subtype.weight
+            }
+
+            if case let .dumbbells(weights: _, magnets: _, paired: paired) = type.apparatus, paired {
+                return 2 * weight
+            } else {
+                return weight
             }
         }
     }

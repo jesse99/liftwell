@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         loadResults()
         
         achievements.append(OneRepMaxAchievement(self))
+//        achievements.append(WorkoutDaysAchievement(self))
 
         //        let warmups = Warmups(withBar: 0, firstPercent: 0.5, lastPercent: 0.9, reps: [5, 3, 1])
         //        let plan = AMRAPPlan("default plan", warmups, workSets: 3, workReps: 5)

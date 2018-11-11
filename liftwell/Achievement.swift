@@ -3,17 +3,20 @@
 import Foundation
 
 struct Award: Storable {
+    let key: String         // used for sorting
     let title: String
     let details: String
     let date: Date?
 
-    init(title: String, details: String, date: Date?) {
+    init(key: String, title: String, details: String, date: Date?) {
+        self.key = key
         self.title = title
         self.details = details
         self.date = date
     }
     
     init(from store: Store) {
+        self.key = store.getStr("key")
         self.title = store.getStr("title")
         self.details = store.getStr("details")
         if store.hasKey("details") {
@@ -24,6 +27,7 @@ struct Award: Storable {
     }
     
     func save(_ store: Store) {
+        store.addStr("key", key)
         store.addStr("title", title)
         store.addStr("details", details)
         if let date = self.date {

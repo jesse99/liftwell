@@ -237,6 +237,15 @@ class Program: Storable {
         return exercises.first {$0.name == name}
     }
     
+    func isInUse(_ exercise: Exercise) -> Bool {
+        for workout in workouts {
+            if workout.exercises.contains(exercise.name) && !workout.optional.contains(exercise.name) {
+                return true
+            }
+        }
+        return false
+    }
+    
     func incrementWorkouts() {
         numWorkouts += 1
         if dateStarted == nil {
