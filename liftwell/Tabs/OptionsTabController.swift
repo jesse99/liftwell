@@ -3,14 +3,27 @@
 import UIKit
 
 class OptionsTabControllerController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        let app = UIApplication.shared.delegate as! AppDelegate
+        weightTextbox.text = "\(app.bodyWeight)"
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        let app = UIApplication.shared.delegate as! AppDelegate
+        if let weight = Int(weightTextbox.text!), weight != app.bodyWeight {
+            app.bodyWeight = weight
+            app.saveState()
+        }
     }
     
     @IBAction func onTapped(_ sender: Any) {
+        weightTextbox.resignFirstResponder()
     }
-    @IBOutlet var weightTextbox: UITextField!
     
+    @IBOutlet var weightTextbox: UITextField!
 }
 
