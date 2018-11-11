@@ -280,6 +280,7 @@ class ExerciseController: UIViewController {
         
         let app = UIApplication.shared.delegate as! AppDelegate
         if workout.completed(exercise) {
+            app.totalWorkouts += 1
             app.program.incrementWorkouts()
         }
         app.checkForNewAwards(exercise, self, {app.saveState(); self.performSegue(withIdentifier: self.unwindTo, sender: self)})

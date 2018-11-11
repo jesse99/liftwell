@@ -19,10 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             program = Mine2() // TODO: use a better default
         }
         
+        let defaults = UserDefaults.standard
+        totalWorkouts = defaults.integer(forKey: "totalWorkouts")
+        if totalWorkouts < program.numWorkouts {    // this is here so that my program has the right totalWorkouts
+            totalWorkouts = program.numWorkouts
+        }
+        
         loadResults()
         
         achievements.append(OneRepMaxAchievement(self))
-//        achievements.append(WorkoutDaysAchievement(self))
+        achievements.append(WorkoutDaysAchievement(self))
 
         //        let warmups = Warmups(withBar: 0, firstPercent: 0.5, lastPercent: 0.9, reps: [5, 3, 1])
         //        let plan = AMRAPPlan("default plan", warmups, workSets: 3, workReps: 5)
@@ -100,7 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var awards: [String] = []
         
         for achievement in achievements {
-            let (newAwards, _) = achievement.checkForNewAwards(exercise)
+            let newAwards = achievement.checkForNewAwards(exercise)
             awards.append(contentsOf: newAwards.map {$0.title})
         }
         
@@ -131,6 +137,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for achievement in achievements {
             achievement.save(self)
         }
+
+        let defaults = UserDefaults.standard
+        defaults.set(totalWorkouts, forKey: "totalWorkouts")
+        defaults.synchronize()
     }
 
     func dateWorkoutWasCompleted(_ workout: Workout) -> (Date, Bool, Bool)? {
@@ -351,6 +361,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var program: Program!
+    var totalWorkouts: Int = 0                  // number of workouts independent of which program is in use
     var notificationsAreEnabled = false
     
     var achievements: [Achievement] = []

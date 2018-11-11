@@ -43,7 +43,7 @@ protocol Achievement {
     func oldAwards() -> [Award]
 
     /// Returns achievements the user has completed after the last call to updateCompletions.
-    func checkForNewAwards(_ exercise: Exercise) -> ([Award], Double)
+    func checkForNewAwards(_ exercise: Exercise) -> [Award]
     
     /// Moves new achievements into haveCompleted.
     func updateAwards(_ exercise: Exercise)
