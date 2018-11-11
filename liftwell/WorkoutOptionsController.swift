@@ -59,11 +59,20 @@ class WorkoutOptionsController: UIViewController, UITableViewDataSource, UITable
         let index = path.item
         let name = workout.exercises[index]
         
+        let app = UIApplication.shared.delegate as! AppDelegate
         if newOptional.contains(name) {
-            cell.textLabel!.text = "\(name) (inactive)"
+            if let exercise = app.program.findExercise(name), exercise.main {
+                cell.textLabel!.text = "\(name) (main, inactive)"
+            } else {
+                cell.textLabel!.text = "\(name) (inactive)"
+            }
             cell.textLabel!.setColor(UIColor.gray)
         } else {
-            cell.textLabel!.text = name
+            if let exercise = app.program.findExercise(name), exercise.main {
+                cell.textLabel!.text = "\(name) (main)"
+            } else {
+                cell.textLabel!.text = name
+            }
             cell.textLabel!.setColor(UIColor.black)
         }
         
