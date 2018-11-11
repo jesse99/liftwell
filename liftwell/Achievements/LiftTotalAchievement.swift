@@ -110,7 +110,7 @@ class LiftTotalAchievement: Achievement {
     }
     
     private func advanceTarget(_ weight: Double) -> Double {
-        let target = 250*((weight / 250).rounded(.down) + 1)
+        let target = 100*((weight / 100).rounded(.down) + 1)
         return target
     }
     

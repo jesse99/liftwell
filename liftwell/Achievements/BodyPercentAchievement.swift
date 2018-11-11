@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 import os.log
 
-fileprivate let Step = 0.25
+fileprivate let Step = 0.10
 
 class BodyPercentAchievement: Achievement {
     init(_ app: AppDelegate) {
@@ -90,7 +90,7 @@ class BodyPercentAchievement: Achievement {
                     }
                     let result = Award(
                         key: exercise.formalName + " aaa",
-                        title: "\(exercise.formalName) @ \(Int(nextPercent*100))% of body weight",
+                        title: "\(exercise.formalName) @ body weight x \(Int(nextPercent*100))%",
                         details: "Currently at \(Int(100*currentPercent))% of body weight",
                         date: nil)
                     completions.append(result)
@@ -123,7 +123,7 @@ class BodyPercentAchievement: Achievement {
                 if nextTarget > 0.0 && weight >= nextTarget {
                     let result = Award(
                         key: exercise.formalName + " aaa",
-                        title: "\(exercise.formalName) @ \(Int(nextPercent*100))% of body weight",
+                        title: "\(exercise.formalName) @ body weight x \(Int(nextPercent*100))%",
                         details: "Was at \(Int(100*weight/Double(app.bodyWeight)))% of body weight",
                         date: Date())
                     new.append(result)
