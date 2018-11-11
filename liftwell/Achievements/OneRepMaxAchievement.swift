@@ -64,10 +64,10 @@ class OneRepMaxAchievement: Achievement {
             if !awards.isEmpty {
                 completed.append(contentsOf: awards)
                 nextTargets[exercise.formalName] = newTarget
-//                os_log("   setting nextTarget to %.0f (had awards)", type: .error, newTarget)
+                os_log("   setting nextTarget to %.0f (had awards)", type: .error, newTarget)
             } else if nextTarget == 0.0 {
                 nextTargets[exercise.formalName] = newTarget
-//                os_log("   setting nextTarget to %.0f (no award)", type: .error, newTarget)
+                os_log("   setting nextTarget to %.0f (no award)", type: .error, newTarget)
             }
         }
     }
@@ -79,10 +79,10 @@ class OneRepMaxAchievement: Achievement {
         for exercise in app.program.exercises {
             if app.program.isInUse(exercise) && exercise.main {
                 if let weight = exercise.getWeight(), weight > 0.0, let reps = exercise.getReps(), let max = get1RM(weight, reps), max > 0.0 {
-                    let target = advanceTarget(max)
+                    let nextTarget = nextTargets[exercise.formalName] ?? advanceTarget(max)
                     let result = Award(
                         key: exercise.formalName + " 1RM",
-                        title: "\(exercise.formalName) 1RM @ \(Weight.friendlyUnitsStr(target))",
+                        title: "\(exercise.formalName) 1RM @ \(Weight.friendlyUnitsStr(nextTarget))",
                         details: "Current 1RM is \(Weight.friendlyUnitsStr(max))",
                         date: nil)
                     completions.append(result)
@@ -101,7 +101,7 @@ class OneRepMaxAchievement: Achievement {
         if app.program.isInUse(exercise) && exercise.main {
             let nextTarget = nextTargets[exercise.formalName] ?? 0.0
             if nextTarget > 0.0 {
-                //                os_log("weight=%.0f reps=%d 1RM=%.0f nextTarget=%.0f", type: .error, exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0, get1RM(exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0) ?? 0.0, nextTarget)
+                                os_log("weight=%.0f reps=%d 1RM=%.0f nextTarget=%.0f", type: .error, exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0, get1RM(exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0) ?? 0.0, nextTarget)
                 if let weight = exercise.getWeight(), weight > 0.0, let reps = exercise.getReps(), let max = get1RM(weight, reps), max >= nextTarget {
                     let result = Award(
                         key: exercise.formalName + " 1RM",
@@ -110,14 +110,14 @@ class OneRepMaxAchievement: Achievement {
                         date: Date())
                     new.append(result)
                     newTarget = advanceTarget(max)
-                    //                    os_log("   adding award '%@', newTarget=%.0f", type: .error, result.title, newTarget)
+                                        os_log("   adding award '%@', newTarget=%.0f", type: .error, result.title, newTarget)
                 }
                 
             } else if nextTarget == 0.0 {
-                //                os_log("weight=%.0f reps=%d 1RM=%.0f", type: .error, exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0, get1RM(exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0) ?? 0.0)
+                                os_log("weight=%.0f reps=%d 1RM=%.0f", type: .error, exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0, get1RM(exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0) ?? 0.0)
                 if let weight = exercise.getWeight(), weight > 0.0, let reps = exercise.getReps(), let max = get1RM(weight, reps), max > 0.0 {
                     newTarget = advanceTarget(max)
-                    //                    os_log("   newTarget=%.0f", type: .error, newTarget)
+                                        os_log("   newTarget=%.0f", type: .error, newTarget)
                 }
             }
         }
@@ -127,7 +127,7 @@ class OneRepMaxAchievement: Achievement {
     
     private func advanceTarget(_ weight: Double) -> Double {
         let delta = findDelta(weight)
-        let target = delta*((weight + 1)/delta).rounded(.up)
+        let target = delta*((weight + delta - 1)/delta).rounded(.up)
         return target
     }
     

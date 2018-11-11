@@ -73,7 +73,7 @@ class WorkoutDaysAchievement: Achievement {
             details: app.totalWorkouts == 1 ? "Currently at 1 day" : "Currently at \(app.totalWorkouts) days",
             date: nil)
         completions.append(result)
-                
+        
         return completions
     }
     

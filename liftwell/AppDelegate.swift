@@ -21,12 +21,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let defaults = UserDefaults.standard
         totalWorkouts = defaults.integer(forKey: "totalWorkouts")
+        bodyWeight = defaults.double(forKey: "bodyWeight")
         if totalWorkouts < program.numWorkouts {    // this is here so that my program has the right totalWorkouts
             totalWorkouts = program.numWorkouts
+        }
+        if bodyWeight == 0.0 {
+            bodyWeight = 180.0
         }
         
         loadResults()
         
+        achievements.append(BodyPercentAchievement(self))
         achievements.append(OneRepMaxAchievement(self))
         achievements.append(WorkoutDaysAchievement(self))
 
@@ -140,6 +145,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let defaults = UserDefaults.standard
         defaults.set(totalWorkouts, forKey: "totalWorkouts")
+        defaults.set(bodyWeight, forKey: "bodyWeight")
         defaults.synchronize()
     }
 
@@ -361,8 +367,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var program: Program!
-    var totalWorkouts: Int = 0                  // number of workouts independent of which program is in use
     var notificationsAreEnabled = false
+    
+    var totalWorkouts: Int = 0                  // number of workouts independent of which program is in use
+    var bodyWeight: Double = 0.0
     
     var achievements: [Achievement] = []
 }
