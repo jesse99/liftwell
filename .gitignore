@@ -4,6 +4,7 @@
 
 .DS_Store
 Pods
+.TODO-back-color.xml
 
 ## Build generated
 build/

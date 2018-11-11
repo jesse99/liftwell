@@ -136,20 +136,20 @@ class OneRepMaxAchievement: Achievement {
         delta = 5*(delta/5).rounded(.up)  // TODO: have to revist this for metric units
         return delta
     }
-    
-    // Table is based on Baechle TR, Earle RW, Wathen D (2000). Essentials of Strength Training and Conditioning
-    // by way of https://exrx.net/Calculators/OneRepMax.
-    private func get1RM(_ weight: Double, _ reps: Int) -> Double? {
-        //  reps                    1   2   3   4   5   6   7   8   9  10  11  12  13  14  15
-        let percents: [Double] = [100, 95, 93, 90, 87, 85, 83, 80, 77, 75, 72, 67, 66, 66, 65]
-        if reps > 0 && reps - 1 < percents.count {
-            let percent = percents[reps - 1]/100.0
-            let max = weight*(2.0 - percent)
-            return max.rounded(.toNearestOrEven)
-        }
-        return nil
-    }
 
     private var completed: [Award]
     private var nextTargets: [String: Double]
+}
+
+// Table is based on Baechle TR, Earle RW, Wathen D (2000). Essentials of Strength Training and Conditioning
+// by way of https://exrx.net/Calculators/OneRepMax.
+func get1RM(_ weight: Double, _ reps: Int) -> Double? {
+    //  reps                    1   2   3   4   5   6   7   8   9  10  11  12  13  14  15
+    let percents: [Double] = [100, 95, 93, 90, 87, 85, 83, 80, 77, 75, 72, 67, 66, 66, 65]
+    if reps > 0 && reps - 1 < percents.count {
+        let percent = percents[reps - 1]/100.0
+        let max = weight*(2.0 - percent)
+        return max.rounded(.toNearestOrEven)
+    }
+    return nil
 }

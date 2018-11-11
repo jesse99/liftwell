@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         loadResults()
         
         achievements.append(BodyPercentAchievement(self))
+        achievements.append(LiftTotalAchievement(self))
         achievements.append(OneRepMaxAchievement(self))
         achievements.append(WorkoutDaysAchievement(self))
 

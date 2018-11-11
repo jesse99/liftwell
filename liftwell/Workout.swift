@@ -86,7 +86,7 @@ class Workout: Storable {
         return problems
     }
 
-    // Returns true if this is the first exercise completed today.
+    // Returns true if this is the first exercise completed today. TODO: this is a little goofy...
     func completed(_ exercise: Exercise) -> Bool {
         let today = Date()
         let calendar = Calendar.current
