@@ -519,7 +519,7 @@ let builtInNotes: [String: String] = [
             "Chest out, back straight, big breath, start pulling.",
             "Keep the bar as close as possible to your legs.",
             "Push with your heels.",
-            "As the bar approaches your knees push forward with your hips.",
+            "As the bar approaches your knees drive forward with your hips.",
             "Never bend arms: all the lifting should be done with legs and back.",
             "Don't shrug or lean back too far at the top.",
             "Can help to switch to a mixed grip for the last warmup and work sets.",
