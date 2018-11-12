@@ -96,8 +96,8 @@ func Mine2() -> Program {
         // Heavy
         dumbbell2("Dumbbell Bench", "Dumbbell Bench Press",            "10@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R", startReps: 5, restMins: 4.0, main: true),
         dumbbell2("Split Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75% 4-8@100% R 4-8@100% R 4-8@100% R", startReps: 4, restMins: 4.0, main: true),
-        dumbbell2("Dumbbell Flyes", "Dumbbell Flyes",                  "10@50% 5-10@100% R 5-10@100% R 5-10@100%", startReps: 5, restMins: 3.0),
-        barbell("Deadlift",         "Deadlift",                        "5@0% 5@0% 5@60% 5@70% 3@80% 1@90% 5@100% R", startReps: 5, restMins: 4.0, main: true),
+        dumbbell2("Dumbbell Flyes", "Dumbbell Flyes",                  "10@50% 6-12@100% R 6-12@100% R 6-12@100%", startReps: 5, restMins: 3.0),
+        barbell("Deadlift",         "Deadlift",                        "5@0% 5@0% 5@60% 3@75% 1@90% 5@100% R", startReps: 5, restMins: 4.0, main: true),
 
         // Light
         dumbbell2("Dumbbell OHP",    "Dumbbell Shoulder Press", "10@50% 3@70% 1@90% 5-10@100% R 5-10@100% R 5-10@100% R", startReps: 5, restMins: 3.5, main: true),

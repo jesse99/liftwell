@@ -105,7 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         saveState()
     }
     
-    func checkForNewAwards(_ exercise: Exercise, _ view: UIViewController, _ complete: @escaping () -> Void) {
+    func findNewAwards(_ exercise: Exercise) -> [String] {
         var awards: [String] = []
         
         for achievement in achievements {
@@ -113,6 +113,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             awards.append(contentsOf: newAwards.map {$0.title})
         }
         
+        return awards
+    }
+    
+    func processAwards(_ exercise: Exercise, _ awards: [String], _ view: UIViewController, _ complete: @escaping () -> Void) {
         if !awards.isEmpty {
             let title = awards.count == 1 ? "You have earned a new achievement!" : "You have earned \(awards.count) new achievements!"
             let alert = UIAlertController(title: title, message: awards.joined(separator: "\n"), preferredStyle: .alert)

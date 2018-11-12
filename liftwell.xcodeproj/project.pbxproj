@@ -41,6 +41,7 @@
 		374FE953218BD0DD00CFC284 /* NotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FE952218BD0DD00CFC284 /* NotesController.swift */; };
 		374FE955218BD10300CFC284 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FE954218BD10300CFC284 /* Notes.swift */; };
 		37C2D3B9218D142500D9AF0E /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C2D3B8218D142500D9AF0E /* Workout.swift */; };
+		37DE95F8219A1E7600D60101 /* SAConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95F7219A1E7600D60101 /* SAConfettiView.swift */; };
 		37E6577D218CC01200ED8BD0 /* EditNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6577C218CC01200ED8BD0 /* EditNoteController.swift */; };
 		37E7BF03219750AF0087E7FE /* AchievementsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7BF02219750AF0087E7FE /* AchievementsTabController.swift */; };
 		37E7BF05219750C40087E7FE /* HistoryTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7BF04219750C40087E7FE /* HistoryTabController.swift */; };
@@ -112,6 +113,7 @@
 		374FE952218BD0DD00CFC284 /* NotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesController.swift; sourceTree = "<group>"; };
 		374FE954218BD10300CFC284 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
 		37C2D3B8218D142500D9AF0E /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		37DE95F7219A1E7600D60101 /* SAConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConfettiView.swift; sourceTree = "<group>"; };
 		37E6577C218CC01200ED8BD0 /* EditNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteController.swift; sourceTree = "<group>"; };
 		37E7BF02219750AF0087E7FE /* AchievementsTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsTabController.swift; sourceTree = "<group>"; };
 		37E7BF04219750C40087E7FE /* HistoryTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTabController.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				37286848216311D3005F6FD0 /* Program.swift */,
 				3728685721684231005F6FD0 /* Programs */,
 				37286862216A6C42005F6FD0 /* RepsParser.swift */,
+				37DE95F7219A1E7600D60101 /* SAConfettiView.swift */,
 				37EFD6DB217A2D9000F60880 /* Set.swift */,
 				37EFD6DD217A679F00F60880 /* Sets.swift */,
 				374FE941218536CD00CFC284 /* Settings */,
@@ -476,6 +479,7 @@
 				374FE9402183D10700CFC284 /* BaseResult.swift in Sources */,
 				37EFD6DA21780EDC00F60880 /* LabelExtensions.swift in Sources */,
 				37C2D3B9218D142500D9AF0E /* Workout.swift in Sources */,
+				37DE95F8219A1E7600D60101 /* SAConfettiView.swift in Sources */,
 				37E7BF102197D8410087E7FE /* WorkoutDaysAchievement.swift in Sources */,
 				37EFD6E0217B710A00F60880 /* ExerciseInfo.swift in Sources */,
 				3728684E21631314005F6FD0 /* SequenceExtensions.swift in Sources */,

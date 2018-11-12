@@ -283,7 +283,40 @@ class ExerciseController: UIViewController {
             app.totalWorkouts += 1
             app.program.incrementWorkouts()
         }
-        app.checkForNewAwards(exercise, self, {app.saveState(); self.performSegue(withIdentifier: self.unwindTo, sender: self)})
+        
+        let awards = app.findNewAwards(exercise)
+        if !awards.isEmpty {
+            startConfetti()
+        }
+        app.processAwards(exercise, awards, self, {
+            app.saveState()
+            self.stopConfetti()
+            self.performSegue(withIdentifier: self.unwindTo, sender: self)
+        })
+    }
+    
+    private func startConfetti() {
+        let confetti = SAConfettiView(frame: self.view.bounds)
+        
+        confetti.colors = [UIColor(red:0.95, green:0.40, blue:0.27, alpha:1.0),
+                           UIColor(red:1.00, green:0.78, blue:0.36, alpha:1.0),
+                           UIColor(red:0.48, green:0.78, blue:0.64, alpha:1.0),
+                           UIColor(red:0.30, green:0.76, blue:0.85, alpha:1.0),
+                           UIColor(red:0.58, green:0.39, blue:0.55, alpha:1.0)]
+        
+        confetti.intensity = 0.5
+        confetti.type = .diamond
+        view.addSubview(confetti)
+        confetti.startConfetti()
+
+        confettiView = confetti
+    }
+    
+    private func stopConfetti() {
+        if let confetti = confettiView {
+            confetti.stopConfetti()
+            confettiView = nil
+        }
     }
     
     private func handleNext(_ action: String) {
@@ -733,5 +766,7 @@ class ExerciseController: UIViewController {
     private var exercise: Exercise!
     private var unwindTo: String!
     private var breadcrumb = ""
+    
+    private var confettiView: SAConfettiView? = nil
 }
 
