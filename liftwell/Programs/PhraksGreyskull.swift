@@ -24,19 +24,19 @@ func PhraksGreyskull() -> Program {
     
     let description = """
 This is the [beginner program](https://old.reddit.com/r/Fitness/wiki/phraks-gslp) recommended by reddit/fitness. After three months (or if you are already familiar with bench press, overhead
-press, squat, and deadlift) then switch to either 5/3/1 for Beginners or GZCLP. This is a three day a week program:
+press, squat, and deadlift) then switch to either [5/3/1 for Beginners](https://old.reddit.com/r/Fitness/wiki/531-beginners) or [GZCLP](https://www.reddit.com/r/Fitness/wiki/gzclp). This is a three day a week program:
 
 **1A**
 * Chin Ups 3x5+
 * OHP 3x5+
 * Squat 3x5+
 
-**2A**
+**1B**
 * Rows 3x5+
 * Bench Press 3x5+
 * Deadlift 1x5+
 
-**3A**
+**1C**
 * Chin Ups 3x5+
 * OHP 3x5+
 * Squat 3x5+

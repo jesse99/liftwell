@@ -83,10 +83,10 @@ class ProgramsTabControllerController: UIViewController, UITableViewDataSource, 
     }
     
     private func showAbout(_ program: Program) {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let view = storyboard.instantiateViewController(withIdentifier: "MarkdownID") as! MarkdownController
-//        view.initialize(program.description, "\(program.name) ª Description", "unwindToProgramsID")
-//        present(view, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let view = storyboard.instantiateViewController(withIdentifier: "MarkdownID") as! MarkdownController
+        view.initialize(program.description, "\(program.name) ª Description", "unwindToProgramsID")
+        present(view, animated: true, completion: nil)
     }
     
     private func activate(_ program: Program) {

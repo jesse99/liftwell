@@ -44,6 +44,7 @@
 		37DE95F8219A1E7600D60101 /* SAConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95F7219A1E7600D60101 /* SAConfettiView.swift */; };
 		37DE95FA219A48E200D60101 /* ProgramHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95F9219A48E200D60101 /* ProgramHelpers.swift */; };
 		37DE95FC219A4BA500D60101 /* PhraksGreyskull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */; };
+		37DE95FE219A5E0B00D60101 /* MarkdownController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95FD219A5E0B00D60101 /* MarkdownController.swift */; };
 		37E6577D218CC01200ED8BD0 /* EditNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6577C218CC01200ED8BD0 /* EditNoteController.swift */; };
 		37E7BF03219750AF0087E7FE /* AchievementsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7BF02219750AF0087E7FE /* AchievementsTabController.swift */; };
 		37E7BF05219750C40087E7FE /* HistoryTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7BF04219750C40087E7FE /* HistoryTabController.swift */; };
@@ -118,6 +119,7 @@
 		37DE95F7219A1E7600D60101 /* SAConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConfettiView.swift; sourceTree = "<group>"; };
 		37DE95F9219A48E200D60101 /* ProgramHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramHelpers.swift; sourceTree = "<group>"; };
 		37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhraksGreyskull.swift; sourceTree = "<group>"; };
+		37DE95FD219A5E0B00D60101 /* MarkdownController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownController.swift; sourceTree = "<group>"; };
 		37E6577C218CC01200ED8BD0 /* EditNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteController.swift; sourceTree = "<group>"; };
 		37E7BF02219750AF0087E7FE /* AchievementsTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsTabController.swift; sourceTree = "<group>"; };
 		37E7BF04219750C40087E7FE /* HistoryTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTabController.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				37EFD6DF217B710A00F60880 /* ExerciseInfo.swift */,
 				374D3EDB217D4F4E00AC828D /* ExerciseController.swift */,
 				3728684C21631302005F6FD0 /* Extensions */,
+				37DE95FD219A5E0B00D60101 /* MarkdownController.swift */,
 				374FE954218BD10300CFC284 /* Notes.swift */,
 				374FE952218BD0DD00CFC284 /* NotesController.swift */,
 				37286848216311D3005F6FD0 /* Program.swift */,
@@ -482,6 +485,7 @@
 				37286826216259AE005F6FD0 /* AppDelegate.swift in Sources */,
 				374D3EDE217D50EF00AC828D /* ColorExtensions.swift in Sources */,
 				3728685F21699C17005F6FD0 /* Types.swift in Sources */,
+				37DE95FE219A5E0B00D60101 /* MarkdownController.swift in Sources */,
 				37E7BF07219750DF0087E7FE /* OptionsTabController.swift in Sources */,
 				374FE9402183D10700CFC284 /* BaseResult.swift in Sources */,
 				37EFD6DA21780EDC00F60880 /* LabelExtensions.swift in Sources */,
