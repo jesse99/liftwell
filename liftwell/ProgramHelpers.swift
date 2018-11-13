@@ -18,10 +18,12 @@ func parseSets(_ text: String) -> Sets {
     }
 }
 
-func barbell(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double, main: Bool = false) -> Exercise {
+func barbell(_ name: String, _ formalName: String, _ reps: String, restMins: Double, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     // TODO: probably want to use parseCycles if reps has a /
-    let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
+    let sets = parseSets(reps)
+    let (_, maxReps) = sets.repRange(minimum: nil)
+    let subtype = RepsSubType(sets: sets, reps: maxReps, restSecs: rest)
     
     let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: defaultBumpers(), magnets: [])
     let type = WeightsType(apparatus, .reps(subtype))
@@ -43,6 +45,15 @@ func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, by: Int, m
     return Exercise(name, formalName, .body(type), main: main)
 }
 
+func bodyweight(_ name: String, _ formalName: String, _ reps: String, restMins: Double, main: Bool = false) -> Exercise {
+    let rest = Int(restMins*60.0)
+    let sets = parseSets(reps)
+    let (_, maxReps) = sets.repRange(minimum: nil)
+    let subtype = RepsSubType(sets: sets, reps: maxReps, restSecs: rest)
+    let type = BodyType(.reps(subtype))
+    return Exercise(name, formalName, .body(type), main: main)
+}
+
 func bodyweight(_ name: String, _ formalName: String, numSets: Int, goalReps: Int, restMins: Double, restAtEnd: Bool, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     let subtype = MaxRepsSubType(numSets: numSets, goalReps: goalReps, restSecs: rest, restAtEnd: restAtEnd)
@@ -50,9 +61,11 @@ func bodyweight(_ name: String, _ formalName: String, numSets: Int, goalReps: In
     return Exercise(name, formalName, .body(type), main: main)
 }
 
-func cable(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double, main: Bool = false) -> Exercise {
+func cable(_ name: String, _ formalName: String, _ reps: String, restMins: Double, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
-    let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
+    let sets = parseSets(reps)
+    let (_, maxReps) = sets.repRange(minimum: nil)
+    let subtype = RepsSubType(sets: sets, reps: maxReps, restSecs: rest)
     
     let apparatus = Apparatus.machine(range1: defaultMachine(), range2: zeroMachine(), extra: [])
     let type = WeightsType(apparatus, .reps(subtype))
@@ -60,9 +73,11 @@ func cable(_ name: String, _ formalName: String, _ reps: String, startReps: Int,
     return Exercise(name, formalName, .weights(type), main: main)
 }
 
-func dumbbell1(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double, main: Bool = false) -> Exercise {
+func dumbbell1(_ name: String, _ formalName: String, _ reps: String, restMins: Double, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
-    let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
+    let sets = parseSets(reps)
+    let (_, maxReps) = sets.repRange(minimum: nil)
+    let subtype = RepsSubType(sets: sets, reps: maxReps, restSecs: rest)
     
     let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: defaultMagnets(), paired: false)
     let type = WeightsType(apparatus, .reps(subtype))
@@ -70,9 +85,11 @@ func dumbbell1(_ name: String, _ formalName: String, _ reps: String, startReps: 
     return Exercise(name, formalName, .weights(type), main: main)
 }
 
-func dumbbell2(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double, main: Bool = false) -> Exercise {
+func dumbbell2(_ name: String, _ formalName: String, _ reps: String, restMins: Double, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
-    let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
+    let sets = parseSets(reps)
+    let (_, maxReps) = sets.repRange(minimum: nil)
+    let subtype = RepsSubType(sets: sets, reps: maxReps, restSecs: rest)
     
     let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: defaultMagnets(), paired: true)
     let type = WeightsType(apparatus, .reps(subtype))
@@ -80,9 +97,11 @@ func dumbbell2(_ name: String, _ formalName: String, _ reps: String, startReps: 
     return Exercise(name, formalName, .weights(type), main: main)
 }
 
-func pairedPlates(_ name: String, _ formalName: String, _ reps: String, startReps: Int, restMins: Double, main: Bool = false) -> Exercise {
+func pairedPlates(_ name: String, _ formalName: String, _ reps: String, restMins: Double, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
-    let subtype = RepsSubType(sets: parseSets(reps), reps: startReps, restSecs: rest)
+    let sets = parseSets(reps)
+    let (_, maxReps) = sets.repRange(minimum: nil)
+    let subtype = RepsSubType(sets: sets, reps: maxReps, restSecs: rest)
     
     let apparatus = Apparatus.pairedPlates(plates: defaultPlates())
     let type = WeightsType(apparatus, .reps(subtype))

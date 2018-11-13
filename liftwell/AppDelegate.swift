@@ -375,6 +375,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var bodyWeight: Int = 0
     
     var achievements: [Achievement] = []
+    
+    let programs = [Mine2(), PhraksGreyskull()]
 }
 
 func assert(_ predicate: Bool, _ message: String) {

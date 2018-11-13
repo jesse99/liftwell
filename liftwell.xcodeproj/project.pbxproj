@@ -43,6 +43,7 @@
 		37C2D3B9218D142500D9AF0E /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C2D3B8218D142500D9AF0E /* Workout.swift */; };
 		37DE95F8219A1E7600D60101 /* SAConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95F7219A1E7600D60101 /* SAConfettiView.swift */; };
 		37DE95FA219A48E200D60101 /* ProgramHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95F9219A48E200D60101 /* ProgramHelpers.swift */; };
+		37DE95FC219A4BA500D60101 /* PhraksGreyskull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */; };
 		37E6577D218CC01200ED8BD0 /* EditNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6577C218CC01200ED8BD0 /* EditNoteController.swift */; };
 		37E7BF03219750AF0087E7FE /* AchievementsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7BF02219750AF0087E7FE /* AchievementsTabController.swift */; };
 		37E7BF05219750C40087E7FE /* HistoryTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7BF04219750C40087E7FE /* HistoryTabController.swift */; };
@@ -116,6 +117,7 @@
 		37C2D3B8218D142500D9AF0E /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		37DE95F7219A1E7600D60101 /* SAConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConfettiView.swift; sourceTree = "<group>"; };
 		37DE95F9219A48E200D60101 /* ProgramHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramHelpers.swift; sourceTree = "<group>"; };
+		37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhraksGreyskull.swift; sourceTree = "<group>"; };
 		37E6577C218CC01200ED8BD0 /* EditNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteController.swift; sourceTree = "<group>"; };
 		37E7BF02219750AF0087E7FE /* AchievementsTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsTabController.swift; sourceTree = "<group>"; };
 		37E7BF04219750C40087E7FE /* HistoryTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTabController.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				37286858216842C8005F6FD0 /* Mine2.swift */,
+				37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 				3728684B21631202005F6FD0 /* Store.swift in Sources */,
 				374D3EDA217BFBD100AC828D /* DateExtensionw.swift in Sources */,
 				37286849216311D3005F6FD0 /* Program.swift in Sources */,
+				37DE95FC219A4BA500D60101 /* PhraksGreyskull.swift in Sources */,
 				37E7BF05219750C40087E7FE /* HistoryTabController.swift in Sources */,
 				374FE94921867C4100CFC284 /* WeightsController.swift in Sources */,
 				3728682A216259AE005F6FD0 /* ProgramsTabController.swift in Sources */,
