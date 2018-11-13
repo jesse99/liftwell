@@ -6,7 +6,7 @@ import os.log
 
 class LiftTotalAchievement: Achievement {
     init(_ app: AppDelegate) {
-        let path = app.getPath(fileName: "LiftTotalAchievement")
+        let path = app.getPath(fileName: "LiftTotalAchievement-" + app.program.name)
         if let data = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? Data {
             do {
                 let decoder = JSONDecoder()
@@ -28,7 +28,7 @@ class LiftTotalAchievement: Achievement {
     }
     
     func save(_ app: AppDelegate) {
-        let path = app.getPath(fileName: "LiftTotalAchievement")
+        let path = app.getPath(fileName: "LiftTotalAchievement-" + app.program.name)
         let store = Store()
         store.addObjArray("completed", completed)
         store.addDbl("nextTarget", nextTarget)
@@ -73,6 +73,7 @@ class LiftTotalAchievement: Achievement {
                 key: "AAA lift totals",
                 title: "Main lifts 1RM total @ \(Weight.friendlyUnitsStr(nextTarget))",
                 details: "Total was \(Weight.friendlyUnitsStr(total))",
+                formalName: nil,
                 date: nil)
             completions.append(result)
         }
@@ -92,6 +93,7 @@ class LiftTotalAchievement: Achievement {
                     key: "AAA lift totals",
                     title: "Main lifts 1RM total @ \(Weight.friendlyUnitsStr(nextTarget))",
                     details: "Total was \(Weight.friendlyUnitsStr(total))",
+                    formalName: nil,
                     date: Date())
                 new.append(result)
                 newTarget = advanceTarget(total)

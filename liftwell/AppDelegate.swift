@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if program == nil {
             os_log("failed to load program from %@", type: .info, path)
-            program = Mine2() // TODO: use a better default
+            program = PhraksGreyskull()
         }
         
         let defaults = UserDefaults.standard
@@ -27,11 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         loadResults()
-        
-        achievements.append(BodyPercentAchievement(self))
-        achievements.append(LiftTotalAchievement(self))
-        achievements.append(OneRepMaxAchievement(self))
-        achievements.append(WorkoutDaysAchievement(self))
+        loadAchievements()
 
         //        let warmups = Warmups(withBar: 0, firstPercent: 0.5, lastPercent: 0.9, reps: [5, 3, 1])
         //        let plan = AMRAPPlan("default plan", warmups, workSets: 3, workReps: 5)
@@ -135,6 +131,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for achievement in achievements {
             achievement.updateAwards(exercise)
         }
+    }
+    
+    func changeProgram(_ program: Program) {
+        for achievement in achievements {
+            achievement.save(self)
+        }
+
+        if let newProgram = loadProgram(program.name) {
+            self.program = newProgram
+        } else {
+            self.program = program
+        }
+        
+        loadAchievements()
     }
     
     func saveState() {
@@ -365,6 +375,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             os_log("failed to unarchive program from %@", type: .error, path)
         }
+    }
+    
+    private func loadAchievements() {
+        achievements.removeAll()
+        achievements.append(BodyPercentAchievement(self))
+        achievements.append(LiftTotalAchievement(self))
+        achievements.append(OneRepMaxAchievement(self))
+        achievements.append(WorkoutDaysAchievement(self))
     }
     
     var window: UIWindow?

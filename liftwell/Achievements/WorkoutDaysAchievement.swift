@@ -8,7 +8,7 @@ fileprivate let MinDays = 5
 
 class WorkoutDaysAchievement: Achievement {
     init(_ app: AppDelegate) {
-        let path = app.getPath(fileName: "WorkoutDaysAchievement")
+        let path = app.getPath(fileName: "WorkoutDaysAchievement2")
         if let data = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? Data {
             do {
                 let decoder = JSONDecoder()
@@ -30,7 +30,7 @@ class WorkoutDaysAchievement: Achievement {
     }
     
     func save(_ app: AppDelegate) {
-        let path = app.getPath(fileName: "WorkoutDaysAchievement")
+        let path = app.getPath(fileName: "WorkoutDaysAchievement2")
         let store = Store()
         store.addObjArray("completed", completed)
         store.addInt("nextTarget", nextTarget)
@@ -71,6 +71,7 @@ class WorkoutDaysAchievement: Achievement {
             key: "zzzWorked out days",
             title: "Worked out \(nextTarget) days",
             details: app.totalWorkouts == 1 ? "Currently at 1 day" : "Currently at \(app.totalWorkouts) days",
+            formalName: nil,
             date: nil)
         completions.append(result)
         
@@ -88,6 +89,7 @@ class WorkoutDaysAchievement: Achievement {
                 key: "Worked out days",
                 title: "Worked out \(nextTarget) days",
                 details: "",
+                formalName: nil,
                 date: Date())
             new.append(result)
             newTarget = findNext(app.totalWorkouts)

@@ -90,9 +90,9 @@ class ProgramsTabControllerController: UIViewController, UITableViewDataSource, 
     }
     
     private func activate(_ program: Program) {
-//        let app = UIApplication.shared.delegate as! AppDelegate
-//        app.changeProgram(program)
-//        tableView.reloadData()
+        let app = UIApplication.shared.delegate as! AppDelegate
+        app.changeProgram(program)
+        tableView.reloadData()
     }
     
     @IBAction func stagePressed(_ sender: Any) {

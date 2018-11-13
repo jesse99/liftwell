@@ -8,7 +8,7 @@ fileprivate let Step = 0.10
 
 class BodyPercentAchievement: Achievement {
     init(_ app: AppDelegate) {
-        let path = app.getPath(fileName: "BodyPercentAchievement")
+        let path = app.getPath(fileName: "BodyPercentAchievement2")
         if let data = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? Data {
             do {
                 let decoder = JSONDecoder()
@@ -35,7 +35,7 @@ class BodyPercentAchievement: Achievement {
     }
     
     func save(_ app: AppDelegate) {
-        let path = app.getPath(fileName: "BodyPercentAchievement")
+        let path = app.getPath(fileName: "BodyPercentAchievement2")
         let store = Store()
         store.addObjArray("completed", completed)
         store.addStrArray("nextNames", Array(nextPercents.keys))
@@ -52,7 +52,17 @@ class BodyPercentAchievement: Achievement {
     }
     
     func oldAwards() -> [Award] {
-        return completed
+        let app = UIApplication.shared.delegate as! AppDelegate
+        return completed.filter({award in
+            for exercise in app.program.exercises {
+                if let formalName = award.formalName, formalName == exercise.formalName {
+                    if app.program.isInUse(exercise) && exercise.main {
+                        return true
+                    }
+                }
+            }
+            return false
+        })
     }
     
     func checkForNewAwards(_ exercise: Exercise) -> [Award] {
@@ -92,6 +102,7 @@ class BodyPercentAchievement: Achievement {
                         key: exercise.formalName + " aaa",
                         title: "\(exercise.formalName) @ body weight x \(Int(nextPercent*100))%",
                         details: "Currently at \(Int(100*currentPercent))% of body weight",
+                        formalName: exercise.formalName,
                         date: nil)
                     completions.append(result)
                 }
@@ -101,6 +112,7 @@ class BodyPercentAchievement: Achievement {
                     key: exercise.formalName + " aaa",
                     title: "Main lifts @ \(Int(percent*100))% of body weight",
                     details: "Use options to set body weight",
+                    formalName: nil,
                     date: nil)
                 completions.append(result)
                 break
@@ -125,6 +137,7 @@ class BodyPercentAchievement: Achievement {
                         key: exercise.formalName + " aaa",
                         title: "\(exercise.formalName) @ body weight x \(Int(nextPercent*100))%",
                         details: "Was at \(Int(100*weight/Double(app.bodyWeight)))% of body weight",
+                        formalName: exercise.formalName,
                         date: Date())
                     new.append(result)
                     newPercent = advanceTarget(nextPercent)

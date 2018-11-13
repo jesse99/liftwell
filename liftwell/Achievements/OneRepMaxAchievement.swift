@@ -4,7 +4,7 @@ import os.log
 
 class OneRepMaxAchievement: Achievement {
     init(_ app: AppDelegate) {
-        let path = app.getPath(fileName: "OneRepMaxAchievement")
+        let path = app.getPath(fileName: "OneRepMaxAchievement2")
         if let data = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? Data {
             do {
                 let decoder = JSONDecoder()
@@ -31,7 +31,7 @@ class OneRepMaxAchievement: Achievement {
     }
     
     func save(_ app: AppDelegate) {
-        let path = app.getPath(fileName: "OneRepMaxAchievement")
+        let path = app.getPath(fileName: "OneRepMaxAchievement2")
         let store = Store()
         store.addObjArray("completed", completed)
         store.addStrArray("nextNames", Array(nextTargets.keys))
@@ -48,7 +48,17 @@ class OneRepMaxAchievement: Achievement {
     }
     
     func oldAwards() -> [Award] {
-        return completed
+        let app = UIApplication.shared.delegate as! AppDelegate
+        return completed.filter({award in
+            for exercise in app.program.exercises {
+                if let formalName = award.formalName, formalName == exercise.formalName {
+                    if app.program.isInUse(exercise) && exercise.main {
+                        return true
+                    }
+                }
+            }
+            return false
+        })
     }
     
     func checkForNewAwards(_ exercise: Exercise) -> [Award] {
@@ -84,6 +94,7 @@ class OneRepMaxAchievement: Achievement {
                         key: exercise.formalName + " ccc",
                         title: "\(exercise.formalName) 1RM @ \(Weight.friendlyUnitsStr(nextTarget))",
                         details: "Current 1RM is \(Weight.friendlyUnitsStr(max))",
+                        formalName: exercise.formalName,
                         date: nil)
                     completions.append(result)
                 }
@@ -107,6 +118,7 @@ class OneRepMaxAchievement: Achievement {
                         key: exercise.formalName + " ccc",
                         title: "\(exercise.formalName) 1RM @ \(Weight.friendlyUnitsStr(nextTarget))",
                         details: "1RM was \(Weight.friendlyUnitsStr(max))",
+                        formalName: exercise.formalName,
                         date: Date())
                     new.append(result)
                     newTarget = advanceTarget(max)

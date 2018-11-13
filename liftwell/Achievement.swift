@@ -3,15 +3,17 @@
 import Foundation
 
 struct Award: Storable {
-    let key: String         // used for sorting
+    let key: String           // used for sorting
     let title: String
     let details: String
+    let formalName: String?    // for awards associated with a particular exercise
     let date: Date?
 
-    init(key: String, title: String, details: String, date: Date?) {
+    init(key: String, title: String, details: String, formalName: String?, date: Date?) {
         self.key = key
         self.title = title
         self.details = details
+        self.formalName = formalName
         self.date = date
     }
     
@@ -19,7 +21,12 @@ struct Award: Storable {
         self.key = store.getStr("key")
         self.title = store.getStr("title")
         self.details = store.getStr("details")
-        if store.hasKey("details") {
+        if store.hasKey("formalName") {
+            self.formalName = store.getStr("formalName")
+        } else {
+            self.formalName = nil
+        }
+        if store.hasKey("date") {
             self.date = store.getDate("date")
         } else {
             self.date = nil
@@ -30,6 +37,9 @@ struct Award: Storable {
         store.addStr("key", key)
         store.addStr("title", title)
         store.addStr("details", details)
+        if let formalName = self.formalName {
+            store.addStr("formalName", formalName)
+        }
         if let date = self.date {
             store.addDate("date", date)
         }
