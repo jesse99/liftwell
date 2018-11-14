@@ -18,14 +18,14 @@ func parseSets(_ text: String) -> Sets {
     }
 }
 
-func barbell(_ name: String, _ formalName: String, _ reps: String, restMins: Double, main: Bool = false) -> Exercise {
+func barbell(_ name: String, _ formalName: String, _ reps: String, restMins: Double, bumpers: [Double] = [], main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     // TODO: probably want to use parseCycles if reps has a /
     let sets = parseSets(reps)
     let (_, maxReps) = sets.repRange(minimum: nil)
     let subtype = RepsSubType(sets: sets, reps: maxReps, restSecs: rest)
     
-    let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: defaultBumpers(), magnets: [])
+    let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: bumpers, magnets: [])
     let type = WeightsType(apparatus, .reps(subtype))
     
     return Exercise(name, formalName, .weights(type), main: main)
