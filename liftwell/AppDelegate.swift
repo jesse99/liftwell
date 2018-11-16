@@ -394,7 +394,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var achievements: [Achievement] = []
     
-    let programs = [Mine2(), PhraksGreyskull()]
+    let programs = [FiveThreeOneBeginner(), Mine2(), PhraksGreyskull()]
 }
 
 func assert(_ predicate: Bool, _ message: String) {

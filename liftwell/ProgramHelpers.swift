@@ -37,10 +37,11 @@ func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, secs: Int,
     return Exercise(name, formalName, .body(type), main: main)
 }
 
-func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, by: Int, main: Bool = false) -> Exercise {
+func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, by: Int, restMins: Double = 0.0, main: Bool = false) -> Exercise {
+    let rest = Int(restMins*60.0)
     let reps = Set(reps: by)
     let sets = Sets(Array(repeating: reps, count: numSets))
-    let subtype = RepsSubType(sets: sets, reps: by, restSecs: 0)
+    let subtype = RepsSubType(sets: sets, reps: by, restSecs: rest)
     let type = BodyType(.reps(subtype))
     return Exercise(name, formalName, .body(type), main: main)
 }

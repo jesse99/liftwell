@@ -45,6 +45,7 @@
 		37DE95FA219A48E200D60101 /* ProgramHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95F9219A48E200D60101 /* ProgramHelpers.swift */; };
 		37DE95FC219A4BA500D60101 /* PhraksGreyskull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */; };
 		37DE95FE219A5E0B00D60101 /* MarkdownController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95FD219A5E0B00D60101 /* MarkdownController.swift */; };
+		37DE9600219D1D3300D60101 /* FiveThreeOneBeginner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95FF219D1D3300D60101 /* FiveThreeOneBeginner.swift */; };
 		37E6577D218CC01200ED8BD0 /* EditNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6577C218CC01200ED8BD0 /* EditNoteController.swift */; };
 		37E7BF03219750AF0087E7FE /* AchievementsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7BF02219750AF0087E7FE /* AchievementsTabController.swift */; };
 		37E7BF05219750C40087E7FE /* HistoryTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7BF04219750C40087E7FE /* HistoryTabController.swift */; };
@@ -120,6 +121,7 @@
 		37DE95F9219A48E200D60101 /* ProgramHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramHelpers.swift; sourceTree = "<group>"; };
 		37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhraksGreyskull.swift; sourceTree = "<group>"; };
 		37DE95FD219A5E0B00D60101 /* MarkdownController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownController.swift; sourceTree = "<group>"; };
+		37DE95FF219D1D3300D60101 /* FiveThreeOneBeginner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveThreeOneBeginner.swift; sourceTree = "<group>"; };
 		37E6577C218CC01200ED8BD0 /* EditNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteController.swift; sourceTree = "<group>"; };
 		37E7BF02219750AF0087E7FE /* AchievementsTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsTabController.swift; sourceTree = "<group>"; };
 		37E7BF04219750C40087E7FE /* HistoryTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTabController.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 		3728685721684231005F6FD0 /* Programs */ = {
 			isa = PBXGroup;
 			children = (
+				37DE95FF219D1D3300D60101 /* FiveThreeOneBeginner.swift */,
 				37286858216842C8005F6FD0 /* Mine2.swift */,
 				37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */,
 			);
@@ -476,6 +479,7 @@
 				37286849216311D3005F6FD0 /* Program.swift in Sources */,
 				37DE95FC219A4BA500D60101 /* PhraksGreyskull.swift in Sources */,
 				37E7BF05219750C40087E7FE /* HistoryTabController.swift in Sources */,
+				37DE9600219D1D3300D60101 /* FiveThreeOneBeginner.swift in Sources */,
 				374FE94921867C4100CFC284 /* WeightsController.swift in Sources */,
 				3728682A216259AE005F6FD0 /* ProgramsTabController.swift in Sources */,
 				37EFD6D22172C54500F60880 /* Weight.swift in Sources */,
