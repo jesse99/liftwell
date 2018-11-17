@@ -4,12 +4,12 @@ import Foundation
 
 func PhraksGreyskull() -> Program {
     let exercises = [
-        bodyweight("Chinups",     "Chinup", "5@100% R 5@100% R 5+@100%", restMins: 2.5, main: false),
-        barbell("OHP",         "Overhead Press", "10@0% 5@50% 3@75% 1@90% 5@100% R 5@100% R 5+@100%", restMins: 2.5, main: true),
-        barbell("Squat",       "Low bar Squat", "10@0% 5@50% 3@75% 1@90% 5@100% R 5@100% R 5+@100%", restMins: 2.5, main: true),
-        barbell("Rows",        "Pendlay Row", "10@50% 5@100% R 5@100% R 5+@100%", restMins: 2.5, main: true),
-        barbell("Deadlift",    "Deadlift", "5@0% 5@50% 3@75% 1@90% 5+@100%", restMins: 2.5, bumpers: defaultBumpers(), main: true),
-        barbell("Bench Press", "Bench Press", "10@0% 5@50% 3@75% 1@90% 5@100% R 5@100% R 5+@100%", restMins: 2.5, main: true)]
+        bodyweight("Chinups",  "Chinup",                                    "5@100% R 5@100% R 5+@100%", restMins: 2.5, main: false),
+        barbell("OHP",         "Overhead Press", "10@0% 5@50% 3@75% 1@90%", "5@100% R 5@100% R 5+@100%", restMins: 2.5, main: true),
+        barbell("Squat",       "Low bar Squat",  "10@0% 5@50% 3@75% 1@90%", "5@100% R 5@100% R 5+@100%", restMins: 2.5, main: true),
+        barbell("Rows",        "Pendlay Row",    "10@50%",                  "5@100% R 5@100% R 5+@100%", restMins: 2.5, main: true),
+        barbell("Deadlift",    "Deadlift",       "5@0% 5@50% 3@75% 1@90%",  "5+@100%",                   restMins: 2.5, bumpers: defaultBumpers(), main: true),
+        barbell("Bench Press", "Bench Press",    "10@0% 5@50% 3@75% 1@90%", "5@100% R 5@100% R 5+@100%", restMins: 2.5, main: true)]
     
     let workouts = [
         Workout("1A", ["Chinups", "OHP", "Squat"], scheduled: true, optional: []),

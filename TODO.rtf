@@ -2,11 +2,11 @@
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 AndaleMono;
 }
 {\colortbl;\red255\green255\blue255;\red2\green2\blue2;\red0\green0\blue0;\red170\green13\blue145;
-\red92\green38\blue153;\red0\green116\blue0;\red162\green91\blue55;\red63\green110\blue116;\red28\green0\blue207;
-\red38\green71\blue75;\red196\green26\blue22;}
+\red92\green38\blue153;\red0\green116\blue0;\red196\green26\blue22;\red63\green110\blue116;\red28\green0\blue207;
+\red162\green91\blue55;\red38\green71\blue75;}
 {\*\expandedcolortbl;;\csgenericrgb\c784\c784\c784;\csgenericrgb\c0\c0\c0;\csgenericrgb\c66500\c5200\c56900;
-\csgenericrgb\c35900\c14900\c60100;\csgenericrgb\c0\c45600\c0;\csgenericrgb\c63573\c35812\c21460;\csgenericrgb\c24700\c43100\c45600;\csgenericrgb\c11000\c0\c81000;
-\csgenericrgb\c14900\c27800\c29400;\csgenericrgb\c77000\c10200\c8600;}
+\csgenericrgb\c35900\c14900\c60100;\csgenericrgb\c0\c45600\c0;\csgenericrgb\c77000\c10200\c8600;\csgenericrgb\c24700\c43100\c45600;\csgenericrgb\c11000\c0\c81000;
+\csgenericrgb\c63573\c35812\c21460;\csgenericrgb\c14900\c27800\c29400;}
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
 \deftab864
@@ -50,11 +50,52 @@ This should go on the program\
 \pard\pardeftab720\partightenfactor0
 
 \fs48 \cf2 \
-	\
+\pard\tx864\pardeftab864\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \
+
+\f2\fs36 \cf4 func\cf3  barbell(\cf4 _\cf3  name: \cf5 String\cf3 , \cf4 _\cf3  formalName: \cf5 String\cf3 , \cf4 _\cf3  warmups: \cf5 String\cf3 , \cf4 _\cf3  worksets: \cf5 String\cf3 , \cf4 _\cf3  backoff: \cf5 String\cf3  = \cf7 ""\cf3 , restMins: \cf5 Double\cf3 , bumpers: [\cf5 Double\cf3 ] = [], main: \cf5 Bool\cf3  = \cf4 false\cf3 ) -> \cf8 Exercise
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf4 func\cf3  barbell(\cf4 _\cf3  name: \cf5 String\cf3 , \cf4 _\cf3  formalName: \cf5 String\cf3 , \cf4 _\cf3  cycles: [(\cf5 String\cf3 , \cf5 String\cf3 , \cf5 String\cf3 )], restMins: \cf5 Double\cf3 , bumpers: [\cf5 Double\cf3 ] = [], main: \cf5 Bool\cf3  = \cf4 false\cf3 ) -> \cf8 Exercise
+\f0\fs24 \cf0 \
+\
+
+\f2\fs36 \cf4 func\cf3  bodyweight(\cf4 _\cf3  name: \cf5 String\cf3 , \cf4 _\cf3  formalName: \cf5 String\cf3 , \cf4 _\cf3  numSets: \cf5 Int\cf3 , secs: \cf5 Int\cf3 , main: \cf5 Bool\cf3  = \cf4 false\cf3 ) -> \cf8 Exercise
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf4 func\cf3  bodyweight(\cf4 _\cf3  name: \cf5 String\cf3 , \cf4 _\cf3  formalName: \cf5 String\cf3 , \cf4 _\cf3  numSets: \cf5 Int\cf3 , by: \cf5 Int\cf3 , restMins: \cf5 Double\cf3  = \cf9 0.0\cf3 , main: \cf5 Bool\cf3  = \cf4 false\cf3 ) -> \cf8 Exercise
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf4 func\cf3  bodyweight(\cf4 _\cf3  name: \cf5 String\cf3 , \cf4 _\cf3  formalName: \cf5 String\cf3 , \cf4 _\cf3  worksets: \cf5 String\cf3 , restMins: \cf5 Double\cf3 , main: \cf5 Bool\cf3  = \cf4 false\cf3 ) -> \cf8 Exercise
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf4 func\cf3  bodyweight(\cf4 _\cf3  name: \cf5 String\cf3 , \cf4 _\cf3  formalName: \cf5 String\cf3 , numSets: \cf5 Int\cf3 , goalReps: \cf5 Int\cf3 , restMins: \cf5 Double\cf3 , restAtEnd: \cf5 Bool\cf3 , main: \cf5 Bool\cf3  = \cf4 false\cf3 ) -> \cf8 Exercise
+\f0\fs24 \cf0 \
+\
+
+\f2\fs36 \cf4 func\cf3  cable(\cf4 _\cf3  name: \cf5 String\cf3 , \cf4 _\cf3  formalName: \cf5 String\cf3 , \cf4 _\cf3  warmups: \cf5 String\cf3 , \cf4 _\cf3  worksets: \cf5 String\cf3 , \cf4 _\cf3  backoff: \cf5 String\cf3  = \cf7 ""\cf3 , restMins: \cf5 Double\cf3 , main: \cf5 Bool\cf3  = \cf4 false\cf3 ) -> \cf8 Exercise
+\f0\fs24 \cf0 \
+\
+
+\f2\fs36 \cf4 func\cf3  dumbbell1(\cf4 _\cf3  name: \cf5 String\cf3 , \cf4 _\cf3  formalName: \cf5 String\cf3 , \cf4 _\cf3  warmups: \cf5 String\cf3 , \cf4 _\cf3  worksets: \cf5 String\cf3 , \cf4 _\cf3  backoff: \cf5 String\cf3  = \cf7 ""\cf3 , restMins: \cf5 Double\cf3 , main: \cf5 Bool\cf3  = \cf4 false\cf3 ) -> \cf8 Exercise
+\f0\fs24 \cf0 \
+\
+
+\f2\fs36 \cf4 func\cf3  dumbbell2(\cf4 _\cf3  name: \cf5 String\cf3 , \cf4 _\cf3  formalName: \cf5 String\cf3 , \cf4 _\cf3  warmups: \cf5 String\cf3 , \cf4 _\cf3  worksets: \cf5 String\cf3 , \cf4 _\cf3  backoff: \cf5 String\cf3  = \cf7 ""\cf3 , restMins: \cf5 Double\cf3 , main: \cf5 Bool\cf3  = \cf4 false\cf3 ) -> \cf8 Exercise
+\f0\fs24 \cf0 \
+\
+
+\f2\fs36 \cf4 func\cf3  pairedPlates(\cf4 _\cf3  name: \cf5 String\cf3 , \cf4 _\cf3  formalName: \cf5 String\cf3 , \cf4 _\cf3  warmups: \cf5 String\cf3 , \cf4 _\cf3  worksets: \cf5 String\cf3 , \cf4 _\cf3  backoff: \cf5 String\cf3  = \cf7 ""\cf3 , restMins: \cf5 Double\cf3 , main: \cf5 Bool\cf3  = \cf4 false\cf3 ) -> \cf8 Exercise
+\f0\fs24 \cf0 \
 \pard\pardeftab720\partightenfactor0
 
-\b \cf2 get main lifts working\
-	do a commit\
+\fs48 \cf2 \
+\pard\pardeftab720\partightenfactor0
+
+\b \cf2 do a commit\
+enable checking for program errors\
+get main lifts working\
 	may want separate warmup, workset, and backoff sets (see below)\
 	double check usage with the spreadsheet\
 	weight should be added at the end of the cycle\
@@ -82,7 +123,6 @@ re-compte TM?
 \pard\tx220\tx720\pardeftab720\li720\fi-720\sl342\partightenfactor0
 \ls1\ilvl0\cf2 * Find max weight subtype should say to stop once the bar slows down\
 significantly.\
-* Might want separate sets for warmup, workset, and backoff.\
 * Work on more programs:\
 		- 5/3/1 for Beginners, do 4x10 of assistence (x2), re-compute TM every 10th week?\
 		- GZCLP\
@@ -200,7 +240,7 @@ cardio\
 \
 \pard\tx864\pardeftab864\pardirnatural\partightenfactor0
 
-\f2\fs36 \cf7 /// Masters program with cycles of 3x5, 3x3,and 3x1.
+\f2\fs36 \cf10 /// Masters program with cycles of 3x5, 3x3,and 3x1.
 \f0\fs24 \cf0 \
 \pard\tx864\pardeftab864\pardirnatural\partightenfactor0
 
@@ -232,32 +272,32 @@ cardio\
 \f2\fs36 \cf3         \cf6 // Heavy
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 dumbbell\cf3 (\cf11 "Dumbbell Bench"\cf3 , \cf11 "Dumbbell Bench Press"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: dumbbellWarmup, restMins: \cf9 4.0\cf3 ),
+\f2\fs36 \cf3         \cf11 dumbbell\cf3 (\cf7 "Dumbbell Bench"\cf3 , \cf7 "Dumbbell Bench Press"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: dumbbellWarmup, restMins: \cf9 4.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 dumbbell\cf3 (\cf11 "Split Squat"\cf3 ,    \cf11 "Dumbbell Single Leg Split Squat"\cf3 , \cf9 3\cf3 , minReps: \cf9 4\cf3 , maxReps: \cf9 8\cf3 , warmups: dumbbellWarmup, restMins: \cf9 3.5\cf3 ),
+\f2\fs36 \cf3         \cf11 dumbbell\cf3 (\cf7 "Split Squat"\cf3 ,    \cf7 "Dumbbell Single Leg Split Squat"\cf3 , \cf9 3\cf3 , minReps: \cf9 4\cf3 , maxReps: \cf9 8\cf3 , warmups: dumbbellWarmup, restMins: \cf9 3.5\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 dumbbell\cf3 (\cf11 "Dumbbell Flyes"\cf3 , \cf11 "Dumbbell Flyes"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: noWarmup, restMins: \cf9 3.0\cf3 ),
+\f2\fs36 \cf3         \cf11 dumbbell\cf3 (\cf7 "Dumbbell Flyes"\cf3 , \cf7 "Dumbbell Flyes"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: noWarmup, restMins: \cf9 3.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 barbell\cf3 (\cf11 "Deadlift"\cf3 ,        \cf11 "Deadlift"\cf3 , \cf9 1\cf3 , by: \cf9 5\cf3 , warmups: deadWarmup, useBumpers: \cf4 true\cf3 , restMins: \cf9 3.5\cf3 ),
+\f2\fs36 \cf3         \cf11 barbell\cf3 (\cf7 "Deadlift"\cf3 ,        \cf7 "Deadlift"\cf3 , \cf9 1\cf3 , by: \cf9 5\cf3 , warmups: deadWarmup, useBumpers: \cf4 true\cf3 , restMins: \cf9 3.5\cf3 ),
 \f0\fs24 \cf0 \
 \
 
 \f2\fs36 \cf3         \cf6 // Light
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 dumbbell\cf3 (\cf11 "Dumbbell OHP"\cf3 ,  \cf11 "Dumbbell Shoulder Press"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: dumbbellWarmup, restMins: \cf9 3.5\cf3 ),
+\f2\fs36 \cf3         \cf11 dumbbell\cf3 (\cf7 "Dumbbell OHP"\cf3 ,  \cf7 "Dumbbell Shoulder Press"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: dumbbellWarmup, restMins: \cf9 3.5\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf11 "Chinups"\cf3 ,     \cf11 "Chinup"\cf3 , requestedReps: \cf9 12\cf3 , targetReps: \cf9 30\cf3 , restMins: \cf9 3.5\cf3 ),
+\f2\fs36 \cf3         \cf11 bodyWeight\cf3 (\cf7 "Chinups"\cf3 ,     \cf7 "Chinup"\cf3 , requestedReps: \cf9 12\cf3 , targetReps: \cf9 30\cf3 , restMins: \cf9 3.5\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 dumbbell\cf3 (\cf11 "Farmer's Walk"\cf3 , \cf11 "Farmer's Walk"\cf3 , \cf9 2\cf3 , by: \cf9 1\cf3 , warmups: noWarmup, restMins: \cf9 3.0\cf3 ),
+\f2\fs36 \cf3         \cf11 dumbbell\cf3 (\cf7 "Farmer's Walk"\cf3 , \cf7 "Farmer's Walk"\cf3 , \cf9 2\cf3 , by: \cf9 1\cf3 , warmups: noWarmup, restMins: \cf9 3.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 barbell\cf3 (\cf11 "Static Hold"\cf3 ,    \cf11 "Static Hold"\cf3 , \cf9 3\cf3 , by: \cf9 1\cf3 , warmups: \cf4 nil\cf3 , restMins: \cf9 3.0\cf3 ),
+\f2\fs36 \cf3         \cf11 barbell\cf3 (\cf7 "Static Hold"\cf3 ,    \cf7 "Static Hold"\cf3 , \cf9 3\cf3 , by: \cf9 1\cf3 , warmups: \cf4 nil\cf3 , restMins: \cf9 3.0\cf3 ),
 \f0\fs24 \cf0 \
 \
 
@@ -274,34 +314,34 @@ cardio\
 \f0\fs24 \cf0 \
 \
 
-\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf11 "Foam Rolling"\cf3 ,            \cf11 "IT-Band Foam Roll"\cf3 ,         \cf9 1\cf3 , by: \cf9 15\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf11 bodyWeight\cf3 (\cf7 "Foam Rolling"\cf3 ,            \cf7 "IT-Band Foam Roll"\cf3 ,         \cf9 1\cf3 , by: \cf9 15\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf11 "Shoulder Dislocates"\cf3 ,     \cf11 "Shoulder Dislocate"\cf3 ,        \cf9 1\cf3 , by: \cf9 12\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf11 bodyWeight\cf3 (\cf7 "Shoulder Dislocates"\cf3 ,     \cf7 "Shoulder Dislocate"\cf3 ,        \cf9 1\cf3 , by: \cf9 12\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf11 "Bent-knee Iron Cross"\cf3 ,    \cf11 "Bent-knee Iron Cross"\cf3 ,      \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf11 bodyWeight\cf3 (\cf7 "Bent-knee Iron Cross"\cf3 ,    \cf7 "Bent-knee Iron Cross"\cf3 ,      \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf11 "Roll-over into V-sit"\cf3 ,    \cf11 "Roll-over into V-sit"\cf3 ,      \cf9 1\cf3 , by: \cf9 15\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf11 bodyWeight\cf3 (\cf7 "Roll-over into V-sit"\cf3 ,    \cf7 "Roll-over into V-sit"\cf3 ,      \cf9 1\cf3 , by: \cf9 15\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf11 "Rocking Frog Stretch"\cf3 ,    \cf11 "Rocking Frog Stretch"\cf3 ,      \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf11 bodyWeight\cf3 (\cf7 "Rocking Frog Stretch"\cf3 ,    \cf7 "Rocking Frog Stretch"\cf3 ,      \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf11 "Fire Hydrant Hip Circle"\cf3 , \cf11 "Fire Hydrant Hip Circle"\cf3 ,   \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf11 bodyWeight\cf3 (\cf7 "Fire Hydrant Hip Circle"\cf3 , \cf7 "Fire Hydrant Hip Circle"\cf3 ,   \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf11 "Mountain Climber"\cf3 ,        \cf11 "Mountain Climber"\cf3 ,          \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf11 bodyWeight\cf3 (\cf7 "Mountain Climber"\cf3 ,        \cf7 "Mountain Climber"\cf3 ,          \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf11 "Cossack Squat"\cf3 ,           \cf11 "Cossack Squat"\cf3 ,             \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf11 bodyWeight\cf3 (\cf7 "Cossack Squat"\cf3 ,           \cf7 "Cossack Squat"\cf3 ,             \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf11 "Piriformis Stretch"\cf3 ,      \cf11 "Seated Piriformis Stretch"\cf3 , \cf9 2\cf3 , secs: \cf9 30\cf3 ),
+\f2\fs36 \cf3         \cf11 bodyWeight\cf3 (\cf7 "Piriformis Stretch"\cf3 ,      \cf7 "Seated Piriformis Stretch"\cf3 , \cf9 2\cf3 , secs: \cf9 30\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf11 "Hip Flexor Stretch"\cf3 ,      \cf11 "Rear-foot-elevated Hip Flexor Stretch"\cf3 , \cf9 2\cf3 , secs: \cf9 30\cf3 )
+\f2\fs36 \cf3         \cf11 bodyWeight\cf3 (\cf7 "Hip Flexor Stretch"\cf3 ,      \cf7 "Rear-foot-elevated Hip Flexor Stretch"\cf3 , \cf9 2\cf3 , secs: \cf9 30\cf3 )
 \f0\fs24 \cf0 \
 
 \f2\fs36 \cf3     ]
@@ -313,19 +353,19 @@ cardio\
 \f2\fs36 \cf3     \cf4 let\cf3  workouts = [
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf8 Workout\cf3 (\cf11 "Light"\cf3 , [\cf11 "Dumbbell OHP"\cf3 , \cf11 "Chinups"\cf3 , \cf11 "Farmer's Walk"\cf3 , \cf11 "Static Hold"\cf3 ], scheduled: \cf4 true\cf3 , optional: [\cf11 "Static Hold"\cf3 ]),
+\f2\fs36 \cf3         \cf8 Workout\cf3 (\cf7 "Light"\cf3 , [\cf7 "Dumbbell OHP"\cf3 , \cf7 "Chinups"\cf3 , \cf7 "Farmer's Walk"\cf3 , \cf7 "Static Hold"\cf3 ], scheduled: \cf4 true\cf3 , optional: [\cf7 "Static Hold"\cf3 ]),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf8 Workout\cf3 (\cf11 "Medium"\cf3 , [\cf11 "Dumbbell Bench"\cf3 , \cf11 "Split Squat"\cf3 , \cf11 "Chinups"\cf3 , \cf11 "Farmer's Walk"\cf3 , \cf11 "Static Hold"\cf3 ], scheduled: \cf4 true\cf3 , optional: [\cf11 "Static Hold"\cf3 ]),
+\f2\fs36 \cf3         \cf8 Workout\cf3 (\cf7 "Medium"\cf3 , [\cf7 "Dumbbell Bench"\cf3 , \cf7 "Split Squat"\cf3 , \cf7 "Chinups"\cf3 , \cf7 "Farmer's Walk"\cf3 , \cf7 "Static Hold"\cf3 ], scheduled: \cf4 true\cf3 , optional: [\cf7 "Static Hold"\cf3 ]),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf8 Workout\cf3 (\cf11 "Heavy"\cf3 , [\cf11 "Dumbbell Bench"\cf3 , \cf11 "Split Squat"\cf3 , \cf11 "Deadlift"\cf3 , \cf11 "Dumbbell Flyes"\cf3 ], scheduled: \cf4 true\cf3 ),
+\f2\fs36 \cf3         \cf8 Workout\cf3 (\cf7 "Heavy"\cf3 , [\cf7 "Dumbbell Bench"\cf3 , \cf7 "Split Squat"\cf3 , \cf7 "Deadlift"\cf3 , \cf7 "Dumbbell Flyes"\cf3 ], scheduled: \cf4 true\cf3 ),
 \f0\fs24 \cf0 \
 
 \f2\fs36 \cf3         
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf8 Workout\cf3 (\cf11 "Mobility"\cf3 , [\cf11 "Foam Rolling"\cf3 , \cf11 "Shoulder Dislocates"\cf3 , \cf11 "Bent-knee Iron Cross"\cf3 , \cf11 "Roll-over into V-sit"\cf3 , \cf11 "Rocking Frog Stretch"\cf3 , \cf11 "Fire Hydrant Hip Circle"\cf3 , \cf11 "Mountain Climber"\cf3 , \cf11 "Cossack Squat"\cf3 , \cf11 "Piriformis Stretch"\cf3 , \cf11 "Hip Flexor Stretch"\cf3 ], scheduled: \cf4 false\cf3 ),
+\f2\fs36 \cf3         \cf8 Workout\cf3 (\cf7 "Mobility"\cf3 , [\cf7 "Foam Rolling"\cf3 , \cf7 "Shoulder Dislocates"\cf3 , \cf7 "Bent-knee Iron Cross"\cf3 , \cf7 "Roll-over into V-sit"\cf3 , \cf7 "Rocking Frog Stretch"\cf3 , \cf7 "Fire Hydrant Hip Circle"\cf3 , \cf7 "Mountain Climber"\cf3 , \cf7 "Cossack Squat"\cf3 , \cf7 "Piriformis Stretch"\cf3 , \cf7 "Hip Flexor Stretch"\cf3 ], scheduled: \cf4 false\cf3 ),
 \f0\fs24 \cf0 \
 
 \f2\fs36 \cf3     ]
@@ -334,77 +374,77 @@ cardio\
 \f2\fs36 \cf3     
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3     \cf4 let\cf3  tags: [\cf8 Program\cf3 .\cf8 Tags\cf3 ] = [.\cf10 intermediate\cf3 , .\cf10 strength\cf3 , .\cf10 barbell\cf3 , .\cf10 unisex\cf3 , .\cf10 threeDays\cf3 , .\cf10 age40s\cf3 , .\cf10 age50s\cf3 ]
+\f2\fs36 \cf3     \cf4 let\cf3  tags: [\cf8 Program\cf3 .\cf8 Tags\cf3 ] = [.\cf11 intermediate\cf3 , .\cf11 strength\cf3 , .\cf11 barbell\cf3 , .\cf11 unisex\cf3 , .\cf11 threeDays\cf3 , .\cf11 age40s\cf3 , .\cf11 age50s\cf3 ]
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3     \cf4 let\cf3  description = \cf11 """
-\f0\fs24 \cf0 \
-\pard\tx864\pardeftab864\pardirnatural\partightenfactor0
-
-\f2\fs36 \cf11 This is one of the programs I use when I have intermittent access to a gym with barbells. It's a three day a week program and the days look like this:
-\f0\fs24 \cf0 \
-\
-
-\f2\fs36 \cf11 **Heavy**
-\f0\fs24 \cf0 \
-
-\f2\fs36 \cf11 * Dumbbell Bench 3x4-12
-\f0\fs24 \cf0 \
-
-\f2\fs36 \cf11 * Bulgarian Split Squat 3x3-8
-\f0\fs24 \cf0 \
-
-\f2\fs36 \cf11 * Dumbbell Flyes 3x4-12
-\f0\fs24 \cf0 \
-
-\f2\fs36 \cf11 * Deadlift 1x5
-\f0\fs24 \cf0 \
-\
-
-\f2\fs36 \cf11 **Light**
-\f0\fs24 \cf0 \
-
-\f2\fs36 \cf11 * Dumbbell OHP 3x4-12
-\f0\fs24 \cf0 \
-
-\f2\fs36 \cf11 * Chin Ups to 30 reps
-\f0\fs24 \cf0 \
-
-\f2\fs36 \cf11 * Farmers Walk x1
-\f0\fs24 \cf0 \
-\
-
-\f2\fs36 \cf11 **Medium**
-\f0\fs24 \cf0 \
-
-\f2\fs36 \cf11 * Dumbbell Bench 3x4-12
-\f0\fs24 \cf0 \
-
-\f2\fs36 \cf11 * Bulgarian Split Squat 3x3-8
-\f0\fs24 \cf0 \
-
-\f2\fs36 \cf11 * Chin Ups to 30 reps
-\f0\fs24 \cf0 \
-\
-
-\f2\fs36 \cf11 It should be a bit of a struggle to do all the reps.
-\f0\fs24 \cf0 \
-\
-
-\f2\fs36 \cf11 **Notes**
-\f0\fs24 \cf0 \
-
-\f2\fs36 \cf11 * Chinups are done with as many sets as are required, once you can do thirty add weight.
-\f0\fs24 \cf0 \
-
-\f2\fs36 \cf11 * If you get stuck at a rep range keep trying to advance on the other rep ranges (that will help you progress on the other rep range).
-\f0\fs24 \cf0 \
-
-\f2\fs36 \cf11 """
+\f2\fs36 \cf3     \cf4 let\cf3  description = \cf7 """
 \f0\fs24 \cf0 \
 \pard\tx864\pardeftab864\pardirnatural\partightenfactor0
 
-\f2\fs36 \cf3     \cf4 return\cf3  \cf8 Program\cf3 (\cf11 "HLM3"\cf3 , workouts, exercises, tags, description)
+\f2\fs36 \cf7 This is one of the programs I use when I have intermittent access to a gym with barbells. It's a three day a week program and the days look like this:
+\f0\fs24 \cf0 \
+\
+
+\f2\fs36 \cf7 **Heavy**
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf7 * Dumbbell Bench 3x4-12
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf7 * Bulgarian Split Squat 3x3-8
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf7 * Dumbbell Flyes 3x4-12
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf7 * Deadlift 1x5
+\f0\fs24 \cf0 \
+\
+
+\f2\fs36 \cf7 **Light**
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf7 * Dumbbell OHP 3x4-12
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf7 * Chin Ups to 30 reps
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf7 * Farmers Walk x1
+\f0\fs24 \cf0 \
+\
+
+\f2\fs36 \cf7 **Medium**
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf7 * Dumbbell Bench 3x4-12
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf7 * Bulgarian Split Squat 3x3-8
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf7 * Chin Ups to 30 reps
+\f0\fs24 \cf0 \
+\
+
+\f2\fs36 \cf7 It should be a bit of a struggle to do all the reps.
+\f0\fs24 \cf0 \
+\
+
+\f2\fs36 \cf7 **Notes**
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf7 * Chinups are done with as many sets as are required, once you can do thirty add weight.
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf7 * If you get stuck at a rep range keep trying to advance on the other rep ranges (that will help you progress on the other rep range).
+\f0\fs24 \cf0 \
+
+\f2\fs36 \cf7 """
+\f0\fs24 \cf0 \
+\pard\tx864\pardeftab864\pardirnatural\partightenfactor0
+
+\f2\fs36 \cf3     \cf4 return\cf3  \cf8 Program\cf3 (\cf7 "HLM3"\cf3 , workouts, exercises, tags, description)
 \f0\fs24 \cf0 \
 
 \f2\fs36 \cf3 \}

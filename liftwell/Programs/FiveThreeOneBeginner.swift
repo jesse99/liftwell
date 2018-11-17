@@ -3,40 +3,48 @@
 import Foundation
 
 func FiveThreeOneBeginner() -> Program {
-    let warmup = "5@40% 5@50% 3@60%"
-    let sets1  = "5@65% R 5@75% R 5+@85% R 5@65% 5@65% 5@65% 5@65% 5@65%"
-    let sets2  = "3@70% R 3@80% R 3+@90% R 5@70% 5@70% 5@70% 5@70% 5@70%"
-    let sets3  = "5@75% R 3@85% R 1+@95% R 5@75% 5@75% 5@75% 5@75% 5@75%"
-    let sets = "\(warmup) \(sets1)/\(warmup) \(sets2)/\(warmup) \(sets3)/"
+    let warmup    = "5@40% 5@50% 3@60%"
+
+    let worksets1 = "5@65% R 5@75% R 5+@85% R"
+    let backoff1  = "5@65% 5@65% 5@65% 5@65% 5@65%"
+    let sets1     = (warmup, worksets1, backoff1)
+
+    let worksets2 = "3@70% R 3@80% R 3+@90% R"
+    let backoff2  = "5@70% 5@70% 5@70% 5@70% 5@70%"
+    let sets2     = (warmup, worksets2, backoff2)
+
+    let worksets3 = "5@75% R 3@85% R 1+@95% R"
+    let backoff3  = "5@75% 5@75% 5@75% 5@75% 5@75%"
+    let sets3     = (warmup, worksets3, backoff3)
     
+    let sets = [sets1, sets2, sets3]
+
     let assistence  = "8-12@100% R 8-12@100% R 8-12@100% R 8-12@100%"
 
     let exercises = [
-        bodyweight("Chinups",  "Chinup", "5@100% R 5@100% R 5+@100%", restMins: 2.0, main: false),
-        barbell("OHP",         "Overhead Press", sets, restMins: 2.0, main: true),
         barbell("Squat",       "Low bar Squat", sets, restMins: 2.0, main: true),
-        barbell("Rows",        "Pendlay Row", sets, restMins: 2.0, main: true),
-        barbell("Deadlift",    "Deadlift", sets, restMins: 2.0, bumpers: defaultBumpers(), main: true),
         barbell("Bench Press", "Bench Press", sets, restMins: 2.0, main: true),
+        barbell("Deadlift",    "Deadlift", sets, restMins: 2.0, bumpers: defaultBumpers(), main: true),
+        barbell("OHP",         "Overhead Press", sets, restMins: 2.0, main: true),
 
         // Push
-        dumbbell2("Dumbbell Bench", "Dumbbell Bench Press",    assistence, restMins: 1.5),
-        dumbbell2("Dumbbell OHP",   "Dumbbell Shoulder Press", assistence, restMins: 1.5),
-        cable("Triceps Pushdown",   "Triceps Pushdown (rope)", assistence, restMins: 1.5),
+        dumbbell2("Dumbbell Bench", "Dumbbell Bench Press",    "", assistence, restMins: 1.5),
+        dumbbell2("Dumbbell OHP",   "Dumbbell Shoulder Press", "", assistence, restMins: 1.5),
+        cable("Triceps Pushdown",   "Triceps Pushdown (rope)", "", assistence, restMins: 1.5),
 
         // Pull
-        dumbbell2("Preacher Curl", "Preacher Curl", assistence, restMins: 1.5),
+        dumbbell2("Preacher Curl", "Preacher Curl", "", assistence, restMins: 1.5),
 
         // Single Leg/Core
-        dumbbell1("Back Extensions", "Back Extensions",                 assistence, restMins: 1.5),
-        dumbbell2("Split Squat",     "Dumbbell Single Leg Split Squat", assistence, restMins: 1.5),
-        dumbbell2("Step-ups",        "Step-ups",                        assistence, restMins: 1.5),
-]
+        dumbbell1("Back Extensions", "Back Extensions",                 "", assistence, restMins: 1.5),
+        dumbbell2("Split Squat",     "Dumbbell Single Leg Split Squat", "", assistence, restMins: 1.5),
+        dumbbell2("Step-ups",        "Step-ups",                        "", assistence, restMins: 1.5),
+        ]
     
     let workouts = [
-        Workout("A", ["Squat", "Bench Press", "Squat", "Dumbbell Bench", "Step-ups", "Triceps Pushdown"], scheduled: true, optional: ["Triceps Pushdown"]),
-        Workout("B", ["Rows", "Bench Press", "Deadlift", "Preacher Curl", "Back Extensions"], scheduled: true, optional: []),
-        Workout("C", ["Chinups", "OHP", "Squat", "Dumbbell OHP", "Split Squat"], scheduled: true)]
+        Workout("A", ["Squat", "Bench Press", "Dumbbell Bench", "Step-ups", "Triceps Pushdown"], scheduled: true, optional: ["Triceps Pushdown"]),
+        Workout("B", ["Deadlift", "OHP", "Preacher Curl", "Back Extensions"], scheduled: true, optional: []),
+        Workout("C", ["Bench Press", "Squat", "Dumbbell OHP", "Split Squat"], scheduled: true)]
     
     let tags: [Program.Tags] = [.beginner, .strength, .barbell, .unisex, .threeDays, .ageUnder40, .age40s]
     

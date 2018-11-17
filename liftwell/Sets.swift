@@ -3,31 +3,50 @@
 import Foundation
 
 struct Sets: Storable {
-    let sets: [Set]
-    
-    init(_ sets: [Set]) {
-        self.sets = sets
+    init(_ warmups: [Set], _ worksets: [Set], _ backoff: [Set] = []) {
+        self.warmups = warmups
+        self.worksets = worksets
+        self.backoff = backoff
     }
     
     init(from store: Store) {
-        self.sets = store.getObjArray("sets")
+        if store.hasKey("warmups") {
+            self.warmups = store.getObjArray("warmups")
+            self.worksets = store.getObjArray("worksets")
+            self.backoff = store.getObjArray("backoff")
+
+        } else {
+            self.warmups = []
+            self.worksets = store.getObjArray("sets")
+            self.backoff = []
+        }
     }
     
     func save(_ store: Store) {
-        store.addObjArray("sets", sets)
+        store.addObjArray("warmups", warmups)
+        store.addObjArray("worksets", worksets)
+        store.addObjArray("backoff", backoff)
     }
     
     func errors() -> [String] {
         var problems: [String] = []
 
-        if sets.isEmpty {
-            problems += ["There are no sets."]
+        for set in warmups {
+            problems += set.errors()
+        }
+        for set in worksets {
+            problems += set.errors()
+        }
+        for set in backoff {
+            problems += set.errors()
+        }
+
+        if worksets.isEmpty {
+            problems += ["There are no work sets."]
         } else {
             var minReps: Int? = nil
             var maxReps: Int? = nil
-            for set in sets {
-                problems += set.errors()
-                
+            for set in worksets {
                 if set.minReps < set.maxReps {
                     if minReps == nil {
                         minReps = set.minReps
@@ -43,28 +62,23 @@ struct Sets: Storable {
         
         return problems
     }
-
-    // Returns warmup, work, and backoff sets (some of which can be empty).
-    func partition() -> (Sets, Sets, Sets) {
-        if let max = sets.max(by: {(lhs, rhs) -> Bool in lhs.percent < rhs.percent}) {
-            var warmups: [Set] = []
-            var worksets: [Set] = []
-            var backoff: [Set] = []
-            for reps in sets {
-                if reps.percent == max.percent {
-                    worksets.append(reps)
-                } else if reps.percent < max.percent {
-                    if worksets.isEmpty {
-                        warmups.append(reps)
-                    } else {
-                        backoff.append(reps)
-                    }
-                }
-            }
-            return (Sets(warmups), Sets(worksets), Sets(backoff))
-        } else {
-            return (Sets([]), Sets([]), Sets([]))
+    
+    var count: Int {get {return warmups.count + worksets.count + backoff.count}}
+    
+    func set(_ index: Int) -> Set {
+        var i = index
+        
+        if i < warmups.count {
+            return warmups[i]
         }
+        i -= warmups.count
+        
+        if i < worksets.count {
+            return worksets[i]
+        }
+        i -= worksets.count
+        
+        return backoff[i]
     }
     
     // So here we need to return the minimum and maximum we're supposed to use for worksets.
@@ -74,8 +88,7 @@ struct Sets: Storable {
         var minReps = 1
         var maxReps = 1
         
-        let (_, worksets, _) = partition()
-        if let set = worksets.sets.first(where: {$0.minReps < $0.maxReps}) {
+        if let set = worksets.first(where: {$0.minReps < $0.maxReps}) {
             if let min = minimum {            // minimum only applies if set.minReps < set.maxReps
                 minReps = min
             } else {
@@ -83,9 +96,9 @@ struct Sets: Storable {
             }
             maxReps = set.maxReps
 
-        } else if !worksets.sets.isEmpty {
-            minReps = worksets.sets[0].minReps
-            maxReps = worksets.sets[0].maxReps
+        } else if !worksets.isEmpty {
+            minReps = worksets[0].minReps
+            maxReps = worksets[0].maxReps
         }
         
         return (minReps, maxReps)
@@ -93,9 +106,8 @@ struct Sets: Storable {
     
     /// "3x5-10 @ 100 lbs".
     func sublabel(_ apparatus: Apparatus?, _ targetWeight: Double, _ currentReps: Int) -> String {
-        let (_, worksets, _) = partition()
-        if !worksets.sets.isEmpty {
-            let labels = worksets.sets.map({ (reps) -> String in
+        if !worksets.isEmpty {
+            let labels = worksets.map({ (reps) -> String in
                 if currentReps < reps.maxReps {
                     return "\(currentReps)-\(reps.maxReps)"
                 } else {
@@ -119,12 +131,11 @@ struct Sets: Storable {
 
     func activities(_ weight: Double, _ apparatus: Apparatus, minimum: Int) -> (Int, [Activity]) {
         var result: [Activity] = []
-        let (warmups, worksets, backoff) = partition()
         let maxWeight = Weight(weight, apparatus).closest()
-        for (i, reps) in warmups.sets.enumerated() {
+        for (i, reps) in warmups.enumerated() {
             let setWeight = Weight(reps.percent*weight, apparatus).closest(below: weight)
             result.append(Activity(
-                title: "Warmup \(i+1) of \(warmups.sets.count)",
+                title: "Warmup \(i+1) of \(warmups.count)",
                 subtitle: "\(Int(100*reps.percent))% of \(maxWeight.text)",
                 amount: "\(reps) @ \(setWeight.text)",
                 details: setWeight.plates,
@@ -132,38 +143,37 @@ struct Sets: Storable {
                 showStartButton: true,
                 color: nil))
         }
-        for (i, reps) in worksets.sets.enumerated() {
+        for (i, reps) in worksets.enumerated() {
             let setWeight = Weight(reps.percent*weight, apparatus).closest()
             result.append(Activity(
-                title: "Workset \(i+1) of \(worksets.sets.count)",
+                title: "Workset \(i+1) of \(worksets.count)",
                 subtitle: "\(Int(100*reps.percent))% of \(maxWeight.text)",
                 amount: "\(reps.label(minimum: minimum)) @ \(setWeight.text)",
                 details: setWeight.plates,
-                buttonName: i+1 == worksets.sets.count && backoff.sets.isEmpty ? "Done" : "Next",
+                buttonName: i+1 == worksets.count && backoff.isEmpty ? "Done" : "Next",
                 showStartButton: true,
                 color: nil))
         }
-        for (i, reps) in backoff.sets.enumerated() {
+        for (i, reps) in backoff.enumerated() {
             let setWeight = Weight(reps.percent*weight, apparatus).closest(below: weight)
             result.append(Activity(
-                title: "Backoff \(i+1) of \(backoff.sets.count)",
+                title: "Backoff \(i+1) of \(backoff.count)",
                 subtitle: "\(Int(100*reps.percent))% of \(maxWeight.text)",
                 amount: "\(reps) @ \(setWeight.text)",  // TODO: should probably check that variable reps is only used with worksets
                 details: setWeight.plates,
-                buttonName: i+1 == backoff.sets.count ? "Done" : "Next",
+                buttonName: i+1 == backoff.count ? "Done" : "Next",
                 showStartButton: true,
                 color: nil))
         }
-        return (warmups.sets.count, result)
+        return (warmups.count, result)
     }
     
     func activities(_ weight: Double, minimum: Int) -> (Int, [Activity]) {
         var result: [Activity] = []
-        let (warmups, worksets, backoff) = partition()
-        for (i, reps) in warmups.sets.enumerated() {
+        for (i, reps) in warmups.enumerated() {
             let w = Weight.friendlyUnitsStr(reps.percent*weight)
             result.append(Activity(
-                title: "Warmup \(i+1) of \(warmups.sets.count)",
+                title: "Warmup \(i+1) of \(warmups.count)",
                 subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
                 amount: "\(reps) @ \(w)",
                 details: "",
@@ -171,29 +181,33 @@ struct Sets: Storable {
                 showStartButton: true,
                 color: nil))
         }
-        for (i, reps) in worksets.sets.enumerated() {
+        for (i, reps) in worksets.enumerated() {
             let w = Weight.friendlyUnitsStr(reps.percent*weight)
             result.append(Activity(
-                title: "Workset \(i+1) of \(worksets.sets.count)",
+                title: "Workset \(i+1) of \(worksets.count)",
                 subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
                 amount: "\(reps.label(minimum: minimum)) @ \(w)",
                 details: "",
-                buttonName: i+1 == worksets.sets.count && backoff.sets.isEmpty ? "Done" : "Next",
+                buttonName: i+1 == worksets.count && backoff.isEmpty ? "Done" : "Next",
                 showStartButton: true,
                 color: nil))
         }
-        for (i, reps) in backoff.sets.enumerated() {
+        for (i, reps) in backoff.enumerated() {
             let w = Weight.friendlyUnitsStr(reps.percent*weight)
             result.append(Activity(
-                title: "Backoff \(i+1) of \(backoff.sets.count)",
+                title: "Backoff \(i+1) of \(backoff.count)",
                 subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
                 amount: "\(reps) @ \(w)",
                 details: "",
-                buttonName: i+1 == backoff.sets.count ? "Done" : "Next",
+                buttonName: i+1 == backoff.count ? "Done" : "Next",
                 showStartButton: true,
                 color: nil))
         }
-        return (warmups.sets.count, result)
+        return (warmups.count, result)
     }
+
+    let warmups: [Set]
+    let worksets: [Set]
+    let backoff: [Set]
 }
 

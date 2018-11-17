@@ -26,35 +26,8 @@ class Parser {
         self.lexer = Lexer(text: text)
     }
     
-    // Cycles := Sets ('/' Sets)*
-    func parseCycles() -> Either<Parser.Error, [Sets]> {
-        var result: [Sets] = []
-        
-        switch parseSets() {
-        case .left(let m): return .left(m)
-        case .right(let s): result.append(s)
-        }
-
-        while true {
-            if case .eof = lexer.token() {
-                break
-            }
-            if case .slash = lexer.token() {
-                lexer.advance()
-                switch parseSets() {
-                case .left(let m): return .left(m)
-                case .right(let s): result.append(s)
-                }
-            } else {
-                return .left(Error(expected: "/", lexer))
-            }
-        }
-                
-        return .right(result)
-    }
-    
     // Sets := Reps+
-    func parseSets() -> Either<Parser.Error, Sets> {
+    func parseSets() -> Either<Parser.Error, [Set]> {
         var result: [Set] = []
         while true {
             if case .eof = lexer.token() {
@@ -73,7 +46,7 @@ class Parser {
             return .left(Error("There are no reps", 0))
         }
         
-        return .right(Sets(result))
+        return .right(result)
     }
 
     // Reps := Int ('-' Int)? '+'? ('@' Int '%')? 'R'? 

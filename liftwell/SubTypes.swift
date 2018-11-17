@@ -227,11 +227,12 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
         var reps: Int
     }
 
-    init(cycles: [Sets], reps: Int, restSecs: Int) {
+    init(_ cycles: [Sets], restSecs: Int) {
         self.cycleIndex = 0
         self.cycles = cycles
         
-        super.init(reps: reps, restTime: restSecs)
+        let (_, maxReps) = cycles[0].repRange(minimum: nil)
+        super.init(reps: maxReps, restTime: restSecs)
     }
     
     required init(from store: Store) {
@@ -350,7 +351,7 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
     
     func restSecs() -> RestTime {
         // note that autoStart is only used after index is incremented
-        return RestTime(autoStart: cycles[cycleIndex].sets[index > 0 ? index-1 : 0].rest, secs: restTime)
+        return RestTime(autoStart: cycles[cycleIndex].set(index > 0 ? index-1 : 0).rest, secs: restTime)
     }
     
     override func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
@@ -917,9 +918,10 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
         var reps: Int
     }
     
-    init(sets: Sets, reps: Int, restSecs: Int) {
+    init(_ sets: Sets, restSecs: Int) {
         self.sets = sets
-        super.init(reps: reps, restTime: restSecs)
+        let (_, maxReps) = sets.repRange(minimum: nil)
+        super.init(reps: maxReps, restTime: restSecs)
     }
     
     required init(from store: Store) {
@@ -1024,7 +1026,7 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     
     func restSecs() -> RestTime {
         // note that autoStart is only used after index is incremented
-        return RestTime(autoStart: sets.sets[index > 0 ? index-1 : 0].rest, secs: restTime)
+        return RestTime(autoStart: sets.set(index > 0 ? index-1 : 0).rest, secs: restTime)
     }
     
     override func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
