@@ -104,26 +104,46 @@ struct Sets: Storable {
         return (minReps, maxReps)
     }
     
-    /// "3x5-10 @ 100 lbs".
+    /// 3x5 @ 195 lbs     if reps are all the same
+    /// 5,3,1+ @ 195 lbs  if percentages are all the same
+    /// 1+ @ 195 lbs      otherwise
     func sublabel(_ apparatus: Apparatus?, _ targetWeight: Double, _ currentReps: Int) -> String {
-        if !worksets.isEmpty {
-            let labels = worksets.map({ (reps) -> String in
-                if currentReps < reps.maxReps {
-                    return "\(currentReps)-\(reps.maxReps)"
+        func repsStr(_ reps: Set) -> String {
+            let suffix = reps.amrap ? "+" : ""
+            if currentReps < reps.maxReps {
+                return "\(currentReps)-\(reps.maxReps)\(suffix)"
+            } else {
+                return "\(reps.maxReps)\(suffix)"
+            }
+        }
+        
+        func weightStr(_ reps: Set) -> String {
+            var weight = ""
+            if targetWeight > 0.0 {
+                let suffix = reps.percent < 1.0 ? " (\(Int(reps.percent*100))%)" : ""
+                if let apparatus = apparatus {
+                    weight = " @ " + Weight(targetWeight*reps.percent, apparatus).closest().text + suffix
                 } else {
-                    return "\(reps.maxReps)"
+                    weight = " @ " + Weight.friendlyUnitsStr(targetWeight*reps.percent) + suffix
                 }
-            })
-            if let first = labels.first, labels.all({(label) -> Bool in label == first}) {
-                var weight = ""
-                if targetWeight > 0.0 {
-                    if let apparatus = apparatus {
-                        weight = " @ \(Weight(targetWeight, apparatus).closest().text)"
-                    } else {
-                        weight = " @ \(Weight.friendlyUnitsStr(targetWeight))"
-                    }
-                }
-                return "\(labels.count)x\(first)\(weight)"
+            }
+            return weight
+        }
+        
+        if let first = worksets.first {
+            let sameReps = worksets.all {$0.minReps == first.minReps && $0.maxReps == first.maxReps && $0.amrap == first.amrap}
+            let samePercents = worksets.all {abs($0.percent - first.percent) < 0.02}
+            
+            if sameReps && samePercents {
+                return "\(worksets.count)x\(repsStr(first))\(weightStr(first))"
+
+            } else if samePercents {
+                let labels = worksets.map {repsStr($0)}
+                let label = labels.joined(separator: ",")
+                return "\(label)\(weightStr(first))"
+            
+            } else if let last = worksets.last {
+                return "\(repsStr(last))\(weightStr(last))"
             }
         }
         return ""
