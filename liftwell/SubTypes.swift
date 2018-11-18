@@ -362,7 +362,13 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
         myResults.append(result)
         Self.results[exercise.formalName] = myResults
         
-        super.finalize(exercise, tag, view, completion)
+        cycleIndex = (cycleIndex + 1) % cycles.count
+        if cycleIndex == 0 {
+            // Prompt user for advancement
+            super.finalize(exercise, tag, view, completion)
+        } else {
+            completion()
+        }
     }
     
     fileprivate override func getBaseRepRange() -> (Int, Int) {
