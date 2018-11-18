@@ -45,20 +45,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        ]
         //        let plan = MastersBasicCyclePlan("default plan", cycles)
         //        runWeighted(plan, numWorkouts: 15, defaultWeight: 2)
-        
-//        for p in programs {
-//            let problems = p.errors()
-//            for q in problems {
-//                os_log("%@", type: .error, q)
-//            }
-//            self.assert(problems.isEmpty, "\(p.name) has errors")
-//        }
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
             self.notificationsAreEnabled = granted
+        }
+
+        for p in programs {
+            let problems = p.errors()
+            for q in problems {
+                os_log("%@", type: .error, q)
+            }
+            _assert(problems.isEmpty, "\(p.name) has errors")
         }
 
         return true

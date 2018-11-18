@@ -26,7 +26,7 @@ class Parser {
         self.lexer = Lexer(text: text)
     }
     
-    // Sets := Reps+
+    // Sets := Reps*
     func parseSets() -> Either<Parser.Error, [Set]> {
         var result: [Set] = []
         while true {
@@ -41,11 +41,7 @@ class Parser {
             case .right(let r): result.append(r)
             }
         }
-        
-        if result.isEmpty {
-            return .left(Error("There are no reps", 0))
-        }
-        
+                
         return .right(result)
     }
 
