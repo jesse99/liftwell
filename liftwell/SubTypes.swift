@@ -290,6 +290,7 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
             case .weights(let type):
                 let newSubtype = FindWeightSubType(reps: getBaseRepRange().1, restSecs: restTime)
                 type.subtype = .find(newSubtype)
+                return newExercise
             default:
                 break
             }
