@@ -461,11 +461,11 @@ class FindWeightSubType: ExerciseInfo {
     }
     
     func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
-        return ("", UIColor.black)
+        return ("Stop when you think you couldn't do more than one extra rep,", UIColor.black)
     }
     
     func historyLabel(_ exercise: Exercise) -> String {
-        return ""
+        return "e.g. when the reps slow significantly."
     }
     
     func current(_ exercise: Exercise) -> Activity {
