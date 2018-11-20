@@ -21,30 +21,47 @@ func FiveThreeOneBeginner() -> Program {
 
     let assistence  = "8-12@100% R 8-12@100% R 8-12@100% R 8-12@100%"
 
-    let exercises = [
+    let exercises: [Exercise] = [
         barbell("Squat",       "Low bar Squat", sets, restMins: 2.0, trainingMaxPercent: 0.9, main: true),
         barbell("Bench Press", "Bench Press", sets, restMins: 2.0, trainingMaxPercent: 0.9, main: true),
         barbell("Deadlift",    "Deadlift", sets, restMins: 2.0, bumpers: defaultBumpers(), trainingMaxPercent: 0.9, main: true),
         barbell("OHP",         "Overhead Press", sets, restMins: 2.0, trainingMaxPercent: 0.9, main: true),
 
         // Push
+        bodyweight("Dips",          "Dips",                        4, by: 12, restMins: 1.5),
         dumbbell2("Dumbbell Bench", "Dumbbell Bench Press",    "", assistence, restMins: 1.5),
         dumbbell2("Dumbbell OHP",   "Dumbbell Shoulder Press", "", assistence, restMins: 1.5),
+        bodyweight("Pushup",        "Pushup",                      4, by: 12, restMins: 1.5),
         cable("Triceps Pushdown",   "Triceps Pushdown (rope)", "", assistence, restMins: 1.5),
 
         // Pull
-        dumbbell2("Preacher Curl", "Preacher Curl", "", assistence, restMins: 1.5),
+        bodyweight("Band Pull Apart", "Band Pull Apart",      4, by: 12),
+        bodyweight("Chinups",         "Chinup",               numSets: 4, goalReps: 50, restMins: 2.0, restAtEnd: false),
+        cable("Face Pull",            "Face Pull", "",        assistence, restMins: 1.5),
+        bodyweight("Inverted Row",    "Inverted Row",         4, by: 12, restMins: 1.5),
+        cable("Lat Pulldown",         "Lat Pulldown", "",     assistence, restMins: 1.5),
+        barbell("Preacher Curl",      "Preacher Curl", "",    assistence, restMins: 1.5),
+        cable("Seated Cable Row",     "Seated Cable Row", "", assistence, restMins: 1.5),
 
         // Single Leg/Core
-        dumbbell1("Back Extensions", "Back Extensions",                 "", assistence, restMins: 1.5),
-        dumbbell2("Split Squat",     "Dumbbell Single Leg Split Squat", "", assistence, restMins: 1.5),
-        dumbbell2("Step-ups",        "Step-ups",                        "", assistence, restMins: 1.5),
+        bodyweight("Ab Wheel Rollout",  "Ab Wheel Rollout",                    4, by: 12, restMins: 1.5),
+        dumbbell1("Back Extensions",    "Back Extensions",                 "", assistence, restMins: 1.5),
+        cable("Cable Crunch",           "Cable Crunch", "",                    assistence, restMins: 1.5),
+        dumbbell2("Dumbbell Lunge",     "Dumbbell Lunge", "",                  assistence, restMins: 1.5),
+        bodyweight("Kettlebell Snatch", "One-Arm Kettlebell Snatch",           4, by: 12, restMins: 1.5),
+        bodyweight("Kettlebell Swing",  "Kettlebell Two Arm Swing",            4, by: 12, restMins: 1.5),
+        bodyweight("Reverse Hyper",     "Reverse Hyperextension",              4, by: 12, restMins: 1.5),
+        dumbbell2("Spell Caster",       "Spell Caster", "",                    assistence, restMins: 1.5),
+        dumbbell2("Split Squat",        "Dumbbell Single Leg Split Squat", "", assistence, restMins: 1.5),
+        dumbbell2("Step-ups",           "Step-ups",                        "", assistence, restMins: 1.5),
         ]
     
     let workouts = [
-        Workout("A", ["Squat", "Bench Press", "Dumbbell Bench", "Step-ups", "Triceps Pushdown"], scheduled: true, optional: ["Triceps Pushdown"]),
-        Workout("B", ["Deadlift", "OHP", "Preacher Curl", "Back Extensions"], scheduled: true, optional: []),
-        Workout("C", ["Bench Press", "Squat", "Dumbbell OHP", "Split Squat"], scheduled: true)]
+        Workout("A", ["Squat", "Bench Press", "Dips", "Dumbbell Bench",    "Ab Wheel Rollout", "Back Extensions", "Cable Crunch", "Dumbbell Lunge", "Dumbbell OHP", "Kettlebell Snatch", "Kettlebell Swing", "Pushup", "Reverse Hyper", "Spell Caster", "Split Squat", "Step-ups", "Triceps Pushdown"], scheduled: true, optional: ["Ab Wheel Rollout", "Back Extensions", "Cable Crunch", "Dumbbell Lunge", "Dumbbell OHP", "Kettlebell Snatch", "Kettlebell Swing", "Pushup", "Reverse Hyper", "Spell Caster", "Split Squat", "Triceps Pushdown"]),
+        
+        Workout("B", ["Deadlift", "OHP", "Back Extensions", "Preacher Curl",    "Ab Wheel Rollout", "Band Pull Apart", "Cable Crunch", "Chinups", "Dumbbell Lunge", "Face Pull", "Inverted Row", "Kettlebell Snatch", "Kettlebell Swing", "Lat Pulldown", "Reverse Hyper", "Spell Caster", "Split Squat", "Seated Cable Row", "Step-ups"], scheduled: true, optional: ["Ab Wheel Rollout", "Band Pull Apart", "Cable Crunch", "Face Pull", "Chinups", "Dumbbell Lunge", "Inverted Row", "Kettlebell Snatch", "Kettlebell Swing", "Lat Pulldown", "Reverse Hyper", "Spell Caster", "Split Squat", "Seated Cable Row", "Step-ups"]),
+        
+        Workout("C", ["Bench Press", "Squat", "Dumbbell OHP", "Split Squat",    "Ab Wheel Rollout", "Back Extensions", "Cable Crunch", "Dips", "Dumbbell Bench", "Dumbbell Lunge", "Kettlebell Snatch", "Kettlebell Swing", "Pushup", "Reverse Hyper", "Spell Caster", "Step-ups", "Triceps Pushdown"], scheduled: true, optional: ["Ab Wheel Rollout", "Back Extensions", "Cable Crunch", "Dips", "Dumbbell Bench", "Dumbbell Lunge", "Kettlebell Snatch", "Kettlebell Swing", "Pushup", "Reverse Hyper", "Spell Caster", "Step-ups", "Triceps Pushdown"])]
     
     let tags: [Program.Tags] = [.beginner, .strength, .barbell, .unisex, .threeDays, .ageUnder40, .age40s]
     

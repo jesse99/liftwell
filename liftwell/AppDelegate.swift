@@ -348,12 +348,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
         
     private func findBuiltIn(_ name: String) -> Program? {
-        //        return programs.first(where: {$0.name == savedProgram.name})  // TODO: something like this
-        let candidate = Mine2()
-        if name == candidate.name {
-            return candidate
-        }
-        return nil
+        return programs.first(where: {$0.name == name}) 
     }
 
     private func loadResults() {

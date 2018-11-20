@@ -110,6 +110,14 @@ let builtInNotes: [String: String] = [
             "Hold that position."],
         links: ["Video": "https://www.youtube.com/watch?v=xwoPR2_F6qc"]),
     
+    "Band Pull Apart": createNote(
+        notes: [
+            "Grip a band with your hands and extend your arms straight out in fromnt of you.",
+            "Move your hands to your sides keeping your arms straight.",
+            "Keep your shoulders back.",
+            "Bring your hands back to the starting position."],
+        links: ["Link": "https://www.bodybuilding.com/exercises/band-pull-apart"]),
+    
     "Band Seated Abduction": createNote(
         notes: [
             "Sit on a box or low chair.",
