@@ -88,7 +88,7 @@ class OneRepMaxAchievement: Achievement {
         let app = UIApplication.shared.delegate as! AppDelegate
         for exercise in app.program.exercises {
             if app.program.isInUse(exercise) && exercise.main {
-                if let weight = exercise.getWeight(), weight > 0.0, let reps = exercise.getReps(), let max = get1RM(weight, reps), max > 0.0 {
+                if let weight = exercise.getLastWeight(), weight > 0.0, let reps = exercise.getLastReps(), let max = get1RM(weight, reps), max > 0.0 {
                     let nextTarget = nextTargets[exercise.formalName] ?? advanceTarget(max)
                     let result = Award(
                         key: exercise.formalName + " ccc",
@@ -112,8 +112,8 @@ class OneRepMaxAchievement: Achievement {
         if app.program.isInUse(exercise) && exercise.main {
             let nextTarget = nextTargets[exercise.formalName] ?? 0.0
             if nextTarget > 0.0 {
-                                os_log("weight=%.0f reps=%d 1RM=%.0f nextTarget=%.0f", type: .error, exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0, get1RM(exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0) ?? 0.0, nextTarget)
-                if let weight = exercise.getWeight(), weight > 0.0, let reps = exercise.getReps(), let max = get1RM(weight, reps), max >= nextTarget {
+                                os_log("weight=%.0f reps=%d 1RM=%.0f nextTarget=%.0f", type: .error, exercise.getLastWeight() ?? 0.0, exercise.getLastReps() ?? 0, get1RM(exercise.getLastWeight() ?? 0.0, exercise.getLastReps() ?? 0) ?? 0.0, nextTarget)
+                if let weight = exercise.getLastWeight(), weight > 0.0, let reps = exercise.getLastReps(), let max = get1RM(weight, reps), max >= nextTarget {
                     let result = Award(
                         key: exercise.formalName + " ccc",
                         title: "\(exercise.formalName) 1RM @ \(Weight.friendlyUnitsStr(nextTarget))",
@@ -126,8 +126,8 @@ class OneRepMaxAchievement: Achievement {
                 }
                 
             } else if nextTarget == 0.0 {
-                                os_log("weight=%.0f reps=%d 1RM=%.0f", type: .error, exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0, get1RM(exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0) ?? 0.0)
-                if let weight = exercise.getWeight(), weight > 0.0, let reps = exercise.getReps(), let max = get1RM(weight, reps), max > 0.0 {
+                                os_log("weight=%.0f reps=%d 1RM=%.0f", type: .error, exercise.getLastWeight() ?? 0.0, exercise.getLastReps() ?? 0, get1RM(exercise.getLastWeight() ?? 0.0, exercise.getLastReps() ?? 0) ?? 0.0)
+                if let weight = exercise.getLastWeight(), weight > 0.0, let reps = exercise.getLastReps(), let max = get1RM(weight, reps), max > 0.0 {
                     newTarget = advanceTarget(max)
                                         os_log("   newTarget=%.0f", type: .error, newTarget)
                 }

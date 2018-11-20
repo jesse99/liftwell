@@ -96,9 +96,9 @@ struct Sets: Storable {
             }
             maxReps = set.maxReps
 
-        } else if !worksets.isEmpty {
-            minReps = worksets[0].minReps
-            maxReps = worksets[0].maxReps
+        } else if let last = worksets.last {
+            minReps = last.minReps
+            maxReps = last.maxReps
         }
         
         return (minReps, maxReps)

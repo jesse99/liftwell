@@ -67,7 +67,7 @@ class LiftTotalAchievement: Achievement {
     func upcomingAwards() -> [Award] {
         var completions: [Award] = []
         
-        let total = findCurrentToal()
+        let total = findCurrentTotal()
         if nextTarget > 0.0 {
             let result = Award(
                 key: "AAA lift totals",
@@ -84,7 +84,7 @@ class LiftTotalAchievement: Achievement {
     private func getNewAwards(_ exercise: Exercise) -> ([Award], Double) {
         var new: [Award] = []
         var newTarget = 0.0
-        let total = findCurrentToal()
+        let total = findCurrentTotal()
         
         if nextTarget > 0.0 {
             os_log("total=%.0f nextTarget=%.0f", type: .error, total, nextTarget)
@@ -119,12 +119,12 @@ class LiftTotalAchievement: Achievement {
         return target
     }
     
-    private func findCurrentToal() -> Double {
+    private func findCurrentTotal() -> Double {
         var total = 0.0
         let app = UIApplication.shared.delegate as! AppDelegate
         for exercise in app.program.exercises {
             if app.program.isInUse(exercise) && exercise.main {
-                if let weight = exercise.getWeight(), weight > 0.0, let reps = exercise.getReps(), let max = get1RM(weight, reps) {
+                if let weight = exercise.getLastWeight(), weight > 0.0, let reps = exercise.getLastReps(), let max = get1RM(weight, reps) {
                     total += max
                 }
             }

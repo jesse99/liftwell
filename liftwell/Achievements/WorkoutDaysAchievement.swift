@@ -83,7 +83,7 @@ class WorkoutDaysAchievement: Achievement {
         var newTarget = 0
         
         let app = UIApplication.shared.delegate as! AppDelegate
-        //                os_log("weight=%.0f reps=%d 1RM=%.0f nextTarget=%.0f", type: .error, exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0, get1RM(exercise.getWeight() ?? 0.0, exercise.getReps() ?? 0) ?? 0.0, nextTarget)
+        //                os_log("weight=%.0f reps=%d 1RM=%.0f nextTarget=%.0f", type: .error, getLastWeight() ?? 0.0, exercise.getReps() ?? 0, get1RM(exercise.getLastWeight() ?? 0.0, exercise.getReps() ?? 0) ?? 0.0, nextTarget)
         if app.totalWorkouts >= nextTarget {
             let result = Award(
                 key: "Worked out days",

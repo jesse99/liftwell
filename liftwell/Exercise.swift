@@ -130,32 +130,45 @@ class Exercise: Storable {
         return problems
     }
     
-    func getWeight() -> Double? {
+    func getLastWeight() -> Double? {
+        var weight: Double? = nil
         switch type {
         case .body(let type):
             switch type.subtype {
-            case .maxReps(let subtype): return subtype.weight
-            case .reps(let subtype): return subtype.weight
-            case .timed(let subtype): return subtype.weight
+            case .maxReps(_):
+                break
+            case .reps(_):
+                if let result = RepsSubType.results[formalName]?.last {
+                    weight = result.weight
+                }
+            case .timed(_):
+                break
             }
         case .weights(let type):
-            let weight: Double
             switch type.subtype {
-            case .cyclic(let subtype): weight = subtype.weight
-            case .find(_): return nil
-            case .reps(let subtype): weight = subtype.weight
-            case .timed(let subtype): weight = subtype.weight
+            case .cyclic(_):
+                if let result = CyclicRepsSubtype.results[formalName]?.last {
+                    weight = result.weight
+                }
+            case .find(_), .timed(_):
+                break
+            case .reps(_):
+                if let result = RepsSubType.results[formalName]?.last {
+                    weight = result.weight
+                }
             }
 
-            if case let .dumbbells(weights: _, magnets: _, paired: paired) = type.apparatus, paired {
-                return 2 * weight
-            } else {
-                return weight
+            if let w = weight {
+                if case let .dumbbells(weights: _, magnets: _, paired: paired) = type.apparatus, paired {
+                    weight = 2 * w
+                }
             }
         }
+        
+        return weight
     }
     
-    func getReps() -> Int? {
+    func getLastReps() -> Int? {
         switch type {
         case .body(let type):
             switch type.subtype {

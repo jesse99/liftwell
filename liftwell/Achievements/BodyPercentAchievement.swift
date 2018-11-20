@@ -92,7 +92,7 @@ class BodyPercentAchievement: Achievement {
         let app = UIApplication.shared.delegate as! AppDelegate
         for exercise in app.program.exercises {
             if app.program.isInUse(exercise) && exercise.main && app.bodyWeight > 0 {
-                if let weight = exercise.getWeight(), weight > 0.0 {
+                if let weight = exercise.getLastWeight(), weight > 0.0 {
                     var nextPercent = nextPercents[exercise.formalName] ?? 0.0
                     let currentPercent = weight/Double(app.bodyWeight)
                     while currentPercent + Step/10 > nextPercent {
@@ -131,7 +131,7 @@ class BodyPercentAchievement: Achievement {
             let nextPercent = nextPercents[exercise.formalName] ?? 0.0
             let nextTarget = Double(app.bodyWeight) * nextPercent
 //            os_log("nextPercent=%.2f nextTarget=%.2f", type: .error, nextPercent, nextTarget)
-            if let weight = exercise.getWeight() {
+            if let weight = exercise.getLastWeight() {
                 if nextTarget > 0.0 && weight >= nextTarget {
                     let result = Award(
                         key: exercise.formalName + " aaa",

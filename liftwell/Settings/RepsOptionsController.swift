@@ -6,7 +6,7 @@ import os.log
 
 struct RepsOptions {
     var rest: Int
-    var weight: Double
+    var aweight: ApparatusWeight
     var reps: Int? = nil
     var cycleIndex: Int? = nil
     var apparatus: Apparatus? = nil
@@ -32,17 +32,36 @@ class RepsOptionController: UIViewController {
         
         breadcrumbLabel.text = breadcrumb
         restTextbox.text = secsToStr(options.rest)
-        weightTextbox.text = Weight.friendlyStr(options.weight)
         
-        if let reps = options.reps {
-            repsLabel.isHidden = false
-            repsTextbox.isHidden = false
-            repsTextbox.text = "\(reps)"
-        } else {
+        switch options.aweight {
+        case .weight(let weight):
+            if let reps = options.reps {
+                repsLabel.isHidden = false
+                repsTextbox.isHidden = false
+                repsTextbox.text = "\(reps)"
+            } else {
+                repsLabel.isHidden = true
+                repsTextbox.isHidden = true
+            }
+            
+            tm1RMLabel.isHidden = true
+            tm1RMTextbox.isHidden = true
+            tmSubtitle.isHidden = true
+            weightLabel.text = "Weight:"
+            weightTextbox.text = Weight.friendlyStr(weight)
+
+        case .trainingMax(percent: let percent, oneRepMax: let max):
             repsLabel.isHidden = true
             repsTextbox.isHidden = true
+            tm1RMLabel.isHidden = false
+            tm1RMTextbox.isHidden = false
+            tmSubtitle.isHidden = false
+            weightLabel.text = "TM:"
+            weightTextbox.text = Weight.friendlyStr(percent*max)
+            tm1RMTextbox.text = Weight.friendlyStr(max)
+            tmSubtitle.text = "Training Max = \(Int(100*percent))% of 1RM"
         }
-
+        
         if let cycle = options.cycleIndex {
             cycleLabel.isHidden = false
             cycleTextbox.isHidden = false
@@ -67,16 +86,51 @@ class RepsOptionController: UIViewController {
         weightTextbox.resignFirstResponder()
         repsTextbox.resignFirstResponder()
         cycleTextbox.resignFirstResponder()
+        tm1RMTextbox.resignFirstResponder()
+    }
+    
+    @IBAction func tmChanged(_ sender: Any) {
+        if let text = weightTextbox.text, let tm = Double(text) {
+            switch options.aweight {
+            case .weight(_):
+                break
+            case .trainingMax(percent: let percent, oneRepMax: _):
+                tm1RMTextbox.text = Weight.friendlyStr(tm/percent)
+            }
+        }
+    }
+    
+    @IBAction func oneRepMaxChanged(_ sender: Any) {
+        if let text = tm1RMTextbox.text, let max = Double(text) {
+            switch options.aweight {
+            case .weight(_):
+                assert(false)
+                
+            case .trainingMax(percent: let percent, oneRepMax: _):
+                weightTextbox.text = Weight.friendlyStr(percent*max)
+            }
+        }
     }
     
     @IBAction func unwindToRepsOptions(_ segue:UIStoryboardSegue) {
     }
 
     @IBAction func donePressed(_ sender: Any) {
+        switch options.aweight {
+        case .weight(_):
+            if let text = weightTextbox.text, let tm = Double(text) {
+                options.aweight = .weight(Double(tm)) // TODO: use something like toWeight
+            }
+            
+        case .trainingMax(percent: let percent, oneRepMax: _):
+            if let text = tm1RMTextbox.text, let max = Double(text) {
+                options.aweight = .trainingMax(percent: percent, oneRepMax: max)
+            }
+        }
+
         if let text = restTextbox.text, let value = strToSecs(text) {
             options.rest = value
         }
-        options.weight = Double(weightTextbox.text!)! // TODO: use something like toWeight
         if options.reps != nil {
             options.reps = Int(repsTextbox.text!)!
         }
@@ -178,16 +232,27 @@ class RepsOptionController: UIViewController {
         RepsOptionController.adjustWeight(self, self.adjustWeight)
     }
     
-    private func adjustWeight(_ percent: Double) {
+    private func adjustWeight(_ adjustPercent: Double) {
         if let apparatus = options.apparatus {
-            let newWeight = options.weight + options.weight*percent
-            let info = Weight.init(newWeight, apparatus).closest()
-            weightTextbox.text = Weight.friendlyStr(info.weight)
+            switch options.aweight {
+            case .weight(let weight):
+                let newWeight = weight + weight*adjustPercent
+                let info = Weight.init(newWeight, apparatus).closest()
+                weightTextbox.text = Weight.friendlyStr(info.weight)
+
+            case .trainingMax(percent: let percent, oneRepMax: let max):
+                let oldWeight = percent*max
+                let newWeight = oldWeight + oldWeight*adjustPercent
+                let info = Weight.init(newWeight, apparatus).closest()
+                weightTextbox.text = Weight.friendlyStr(info.weight)
+                tm1RMTextbox.text = Weight.friendlyStr(info.weight/percent)
+            }
         }
     }
     
     @IBOutlet var breadcrumbLabel: UILabel!
     @IBOutlet var restTextbox: UITextField!
+    @IBOutlet var weightLabel: UILabel!
     @IBOutlet var weightTextbox: UITextField!
     @IBOutlet var repsTextbox: UITextField!
     @IBOutlet var cycleTextbox: UITextField!
@@ -196,6 +261,10 @@ class RepsOptionController: UIViewController {
     
     @IBOutlet var repsLabel: UILabel!
     @IBOutlet var cycleLabel: UILabel!
+    
+    @IBOutlet var tm1RMLabel: UILabel!
+    @IBOutlet var tm1RMTextbox: UITextField!
+    @IBOutlet var tmSubtitle: UILabel!
     
     private var options: RepsOptions!
     private var completion: Completion!

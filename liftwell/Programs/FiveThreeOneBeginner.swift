@@ -22,10 +22,10 @@ func FiveThreeOneBeginner() -> Program {
     let assistence  = "8-12@100% R 8-12@100% R 8-12@100% R 8-12@100%"
 
     let exercises = [
-        barbell("Squat",       "Low bar Squat", sets, restMins: 2.0, main: true),
-        barbell("Bench Press", "Bench Press", sets, restMins: 2.0, main: true),
-        barbell("Deadlift",    "Deadlift", sets, restMins: 2.0, bumpers: defaultBumpers(), main: true),
-        barbell("OHP",         "Overhead Press", sets, restMins: 2.0, main: true),
+        barbell("Squat",       "Low bar Squat", sets, restMins: 2.0, trainingMaxPercent: 0.9, main: true),
+        barbell("Bench Press", "Bench Press", sets, restMins: 2.0, trainingMaxPercent: 0.9, main: true),
+        barbell("Deadlift",    "Deadlift", sets, restMins: 2.0, bumpers: defaultBumpers(), trainingMaxPercent: 0.9, main: true),
+        barbell("OHP",         "Overhead Press", sets, restMins: 2.0, trainingMaxPercent: 0.9, main: true),
 
         // Push
         dumbbell2("Dumbbell Bench", "Dumbbell Bench Press",    "", assistence, restMins: 1.5),
