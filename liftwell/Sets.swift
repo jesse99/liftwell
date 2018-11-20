@@ -107,11 +107,11 @@ struct Sets: Storable {
     /// 3x5 @ 195 lbs     if reps are all the same
     /// 5,3,1+ @ 195 lbs  if percentages are all the same
     /// 1+ @ 195 lbs      otherwise
-    func sublabel(_ apparatus: Apparatus?, _ targetWeight: Double, _ currentReps: Int) -> String {
+    func sublabel(_ apparatus: Apparatus?, _ targetWeight: Double, _ currentReps: Int?) -> String {
         func repsStr(_ reps: Set) -> String {
             let suffix = reps.amrap ? "+" : ""
-            if currentReps < reps.maxReps {
-                return "\(currentReps)-\(reps.maxReps)\(suffix)"
+            if let current = currentReps, current < reps.maxReps {
+                return "\(current)-\(reps.maxReps)\(suffix)"
             } else {
                 return "\(reps.maxReps)\(suffix)"
             }
@@ -149,7 +149,7 @@ struct Sets: Storable {
         return ""
     }
 
-    func activities(_ weight: Double, _ apparatus: Apparatus, minimum: Int) -> (Int, [Activity]) {
+    func activities(_ weight: Double, _ apparatus: Apparatus, minimum: Int?) -> (Int, [Activity]) {
         var result: [Activity] = []
         let maxWeight = Weight(weight, apparatus).closest()
         for (i, reps) in warmups.enumerated() {
@@ -188,7 +188,7 @@ struct Sets: Storable {
         return (warmups.count, result)
     }
     
-    func activities(_ weight: Double, minimum: Int) -> (Int, [Activity]) {
+    func activities(_ weight: Double, minimum: Int?) -> (Int, [Activity]) {
         var result: [Activity] = []
         for (i, reps) in warmups.enumerated() {
             let w = Weight.friendlyUnitsStr(reps.percent*weight)

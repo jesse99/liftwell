@@ -25,13 +25,13 @@ extension ApparatusWeight {
 
 /// Base class for Subtypes that use an apparatus.
 class ApparatusSubtype {
-    init(reps: Int, restTime: Int, trainingMaxPercent: Double? = nil) {
+    init(reps: Int?, restTime: Int, trainingMaxPercent: Double? = nil) {
         if let percent = trainingMaxPercent {
             self.aweight = .trainingMax(percent: percent, oneRepMax: 0.0)
         } else {
             self.aweight = .weight(0.0)
         }
-        self.reps = reps
+        self.workingReps = reps
         self.restTime = restTime
     }
     
@@ -44,13 +44,20 @@ class ApparatusSubtype {
         } else {
             self.aweight = .weight(store.getDbl("weight"))
         }
-        reps = store.getInt("reps")
         restTime = store.getInt("restTime")
 
         self.currentWorkout = store.getStr("currentWorkout")
         self.activities = store.getObjArray("activities")
         self.numWarmups = store.getInt("numWarmups")
         self.index = store.getInt("index")
+
+        let reps = store.getInt("reps")
+        let (min, max) = getBaseRepRange()
+        if reps > 0 && min < max {
+            workingReps = reps
+        } else {
+            workingReps = nil
+        }
     }
     
     func save(_ store: Store) {
@@ -61,7 +68,7 @@ class ApparatusSubtype {
             store.addDbl("percent", percent)
             store.addDbl("max", max)
         }
-        store.addInt("reps", reps)
+        store.addInt("reps", workingReps ?? 0)
         store.addInt("restTime", restTime)
 
         store.addStr("currentWorkout", currentWorkout)
@@ -72,9 +79,15 @@ class ApparatusSubtype {
     
     func sync(_ program: Program, _ savedSubtype: ApparatusSubtype, sameSets: Bool) {
         aweight = savedSubtype.aweight
-        reps = savedSubtype.reps
         restTime = savedSubtype.restTime
         
+        let (min, max) = getBaseRepRange()  // need to be sure and check this in case the program has changed
+        if min < max {
+            workingReps = savedSubtype.workingReps
+        } else {
+            workingReps = nil
+        }
+
         if sameSets && program.findWorkout(savedSubtype.currentWorkout) != nil {
             currentWorkout = savedSubtype.currentWorkout
             index = savedSubtype.index
@@ -209,19 +222,31 @@ class ApparatusSubtype {
     private func doAdvance(_ apparatus: Apparatus, _ amount: Int) {
         var weight = aweight.getWorkingWeight()
         
-        let (min, max) = getBaseRepRange()
         let delta = amount.signum()
-        for _ in 0..<abs(amount) {
-            if reps + delta > max {
+        if var reps = workingReps {
+            let (min, max) = getBaseRepRange()
+            for _ in 0..<abs(amount) {
+                if reps + delta > max {
+                    let w = Weight(weight, apparatus)
+                    reps = min
+                    weight = w.nextWeight()
+                } else if reps + delta < min {
+                    let w = Weight(weight, apparatus)
+                    reps = max
+                    weight = w.prevWeight()
+                } else {
+                    reps += delta
+                }
+            }
+            workingReps = reps
+        } else {
+            for _ in 0..<abs(amount) {
                 let w = Weight(weight, apparatus)
-                reps = min
-                weight = w.nextWeight()
-            } else if reps + delta < min {
-                let w = Weight(weight, apparatus)
-                reps = max
-                weight = w.prevWeight()
-            } else {
-                reps += delta
+                if delta > 0 {
+                    weight = w.nextWeight()
+                } else {
+                    weight = w.prevWeight()
+                }
             }
         }
 
@@ -233,12 +258,18 @@ class ApparatusSubtype {
         case .weight(_):
             aweight = .weight(weight)
         case .trainingMax(percent: let percent, oneRepMax: _):
-            aweight = .trainingMax(percent: percent, oneRepMax: weight/percent)
+            let (_, maxReps) = getBaseRepRange()
+            let reps = workingReps ?? maxReps
+            if let max = get1RM(weight, reps) {
+                aweight = .trainingMax(percent: percent, oneRepMax: max)
+            } else {
+                aweight = .trainingMax(percent: percent, oneRepMax: 0.0)    // not clear what we should do here but at least this will be obviously wrong
+            }
         }
     }
     
     var aweight: ApparatusWeight  // starts out at 0.0
-    var reps: Int                // this only applies when minReps < maxReps, also this can be less than minReps
+    var workingReps: Int?         // set when minReps < maxReps, also this can be less than minReps
     var restTime: Int
 
     fileprivate var activities: [Activity] = []
@@ -282,7 +313,7 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
         self.cycles = cycles
         
         let (minReps, maxReps) = cycles[0].repRange(minimum: nil)
-        let reps = minReps < maxReps ? maxReps : 0
+        let reps: Int? = minReps < maxReps ? maxReps : nil
         super.init(reps: reps, restTime: restSecs, trainingMaxPercent: trainingMaxPercent)
     }
     
@@ -362,16 +393,16 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
     func updated(_ exercise: Exercise) {
         let weight = aweight.getWorkingWeight()
         switch exercise.type {
-        case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight, minimum: reps)
-        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, minimum: reps)
+        case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight, minimum: workingReps)
+        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, minimum: workingReps)
         }
     }
     
     func sublabel(_ exercise: Exercise) -> String {
         let weight = aweight.getWorkingWeight()
         switch exercise.type {
-        case .body(_): return cycles[cycleIndex].sublabel(nil, weight, reps)
-        case .weights(let type): return cycles[cycleIndex].sublabel(type.apparatus, weight, reps)
+        case .body(_): return cycles[cycleIndex].sublabel(nil, weight, workingReps)
+        case .weights(let type): return cycles[cycleIndex].sublabel(type.apparatus, weight, workingReps)
         }
     }
     
@@ -410,7 +441,8 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
     
     override func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let weight = aweight.getWorkingWeight()
-        let result = Result(tag, weight: weight, cycleIndex: cycleIndex, reps: reps)
+        let (_, max) = getBaseRepRange()
+        let result = Result(tag, weight: weight, cycleIndex: cycleIndex, reps: workingReps ?? max)
         
         var myResults = Self.results[exercise.formalName] ?? []
         myResults.append(result)
@@ -982,7 +1014,7 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     init(_ sets: Sets, restSecs: Int, trainingMaxPercent: Double? = nil) {
         self.sets = sets
         let (minReps, maxReps) = sets.repRange(minimum: nil)
-        let reps = minReps < maxReps ? maxReps : 0
+        let reps = minReps < maxReps ? maxReps : nil
         super.init(reps: reps, restTime: restSecs, trainingMaxPercent: trainingMaxPercent)
     }
     
@@ -1055,8 +1087,8 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     func sublabel(_ exercise: Exercise) -> String {
         let weight = aweight.getWorkingWeight()
         switch exercise.type {
-        case .body(_): return sets.sublabel(nil, weight, reps)
-        case .weights(let type): return sets.sublabel(type.apparatus, weight, reps)
+        case .body(_): return sets.sublabel(nil, weight, workingReps)
+        case .weights(let type): return sets.sublabel(type.apparatus, weight, workingReps)
         }
     }
     
@@ -1095,7 +1127,8 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     
     override func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let weight = aweight.getWorkingWeight()
-        let result = Result(tag, weight: weight, reps: reps)
+        let (_, max) = getBaseRepRange()
+        let result = Result(tag, weight: weight, reps: workingReps ?? max)
         
         var myResults = Self.results[exercise.formalName] ?? []
         myResults.append(result)
@@ -1111,8 +1144,8 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     private func getActivities(_ exercise: Exercise) -> (Int, [Activity]) {
         let weight = aweight.getWorkingWeight()
         switch exercise.type {
-        case .body(_): return sets.activities(weight, minimum: reps)
-        case .weights(let type): return sets.activities(weight, type.apparatus, minimum: reps)
+        case .body(_): return sets.activities(weight, minimum: workingReps)
+        case .weights(let type): return sets.activities(weight, type.apparatus, minimum: workingReps)
         }
     }
 

@@ -475,14 +475,14 @@ class ExerciseController: UIViewController {
         case .body(let type):
             switch type.subtype {
             case .maxReps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: .weight(subtype.weight), reps: subtype.currentReps, cycleIndex: nil, apparatus: nil))
-            case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.reps, cycleIndex: nil, apparatus: nil))
+            case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: nil, apparatus: nil))
             case .timed(let subtype): setTimedOptions(TimedOptions(time: subtype.currentTime, weight: subtype.weight, apparatus: nil))
             }
         case .weights(let type):
             switch type.subtype {
-            case .cyclic(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.reps, cycleIndex: subtype.cycleIndex, apparatus: type.apparatus))
+            case .cyclic(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: subtype.cycleIndex, apparatus: type.apparatus))
             case .find(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: .weight(subtype.weight), reps: subtype.reps, cycleIndex: nil, apparatus: type.apparatus))
-            case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.reps, cycleIndex: nil, apparatus: type.apparatus))
+            case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: nil, apparatus: type.apparatus))
             case .timed(let subtype): setTimedOptions(TimedOptions(time: subtype.currentTime, weight: subtype.weight, apparatus: type.apparatus))
             }
         }
@@ -507,7 +507,7 @@ class ExerciseController: UIViewController {
             case .reps(let subtype):
                 subtype.restTime = options.rest
                 subtype.aweight = options.aweight
-                subtype.reps = options.reps!
+                subtype.workingReps = options.reps
                 subtype.updated(exercise)
             case .timed(_): assert(false)
             }
@@ -517,7 +517,7 @@ class ExerciseController: UIViewController {
             case .cyclic(let subtype):
                 subtype.restTime = options.rest
                 subtype.aweight = options.aweight
-                subtype.reps = options.reps!
+                subtype.workingReps = options.reps
                 subtype.cycleIndex = options.cycleIndex!
                 subtype.updated(exercise)
             case .find(let subtype):
@@ -528,7 +528,7 @@ class ExerciseController: UIViewController {
             case .reps(let subtype):
                 subtype.restTime = options.rest
                 subtype.aweight = options.aweight
-                subtype.reps = options.reps!
+                subtype.workingReps = options.reps
                 subtype.updated(exercise)
             case .timed(_): assert(false)
             }
