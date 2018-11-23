@@ -5,7 +5,7 @@ import Foundation
 func Mine2() -> Program {
     let exercises = [
         // Heavy
-        dumbbell2("Dumbbell Bench", "Dumbbell Bench Press",            "10@50% 3@70% 1@90%",          "5-10@100% R 5-10@100% R 5-10@100% R", restMins: 4.0, main: true),
+        dumbbell2("Dumbbell Bench", "Dumbbell Bench Press",            "10@50% 3@70% 1@90%",          "6-12@100% R 6-12@100% R 6-12@100% R", restMins: 4.0, main: true),
         dumbbell2("Split Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75%",                 "4-8@100% R 4-8@100% R 4-8@100% R", restMins: 4.0, main: true),
         dumbbell2("Dumbbell Flyes", "Dumbbell Flyes",                  "10@50% ",                     "6-12@100% R 6-12@100% R 6-12@100%", restMins: 3.0),
         barbell("Deadlift",         "Deadlift",                        "5@0% 5@0% 5@60% 3@75% 1@90%", "5@100% R", restMins: 4.0, bumpers: defaultBumpers(), main: true),
