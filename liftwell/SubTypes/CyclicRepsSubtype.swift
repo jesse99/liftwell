@@ -106,6 +106,9 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
                 break
             }
         }
+        amrapReps = nil
+        amrapTag = nil
+
         index = 0
         currentWorkout = workout.name
         updated(exercise)
@@ -173,7 +176,7 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
             getAMRAPResult(view, last.maxReps, {self.doFinalize(exercise, $1, $0, view, completion)})
             
         } else {
-            let (_, max) = getBaseRepRange()
+            let (_, max, _) = getBaseRepRange()
             getDifficultly(view, {self.doFinalize(exercise, $0, self.workingReps ?? max, view, completion)})
         }
     }
@@ -195,8 +198,13 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
         }
     }
     
-    override func getBaseRepRange() -> (Int, Int) {
-        return cycles[cycleIndex].repRange(minimum: nil)
+    override func getBaseRepRange() -> (Int, Int, Int?) {
+        let (min, max) = cycles[cycleIndex].repRange(minimum: nil)
+        if let last = cycles[cycleIndex].worksets.last, last.amrap {
+            return (min, max, last.maxReps)
+        } else {
+            return (min, max, nil)
+        }
     }
     
     var cycleIndex: Int

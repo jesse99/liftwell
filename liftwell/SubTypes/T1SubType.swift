@@ -175,7 +175,7 @@ class T1RepsSubtype: ApparatusSubtype, ExerciseInfo {
     
     private func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let weight = aweight.getWorkingWeight()
-        let (_, max) = getBaseRepRange()
+        let (_, max, _) = getBaseRepRange()
         let result = Result(tag, weight: weight, cycleIndex: cycleIndex, reps: workingReps ?? max)
         
         var myResults = Self.results[exercise.formalName] ?? []
@@ -191,8 +191,13 @@ class T1RepsSubtype: ApparatusSubtype, ExerciseInfo {
         }
     }
     
-    override func getBaseRepRange() -> (Int, Int) {
-        return cycles[cycleIndex].repRange(minimum: nil)
+    override func getBaseRepRange() -> (Int, Int, Int?) {
+        let (min, max) = cycles[cycleIndex].repRange(minimum: nil)
+        if let last = cycles[cycleIndex].worksets.last, last.amrap {
+            return (min, max, last.maxReps)
+        } else {
+            return (min, max, nil)
+        }
     }
     
     var cycleIndex: Int

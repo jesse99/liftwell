@@ -1,6 +1,7 @@
 //  Created by Jesse Jones on 11/22/18.
 //  Copyright © 2018 MushinApps. All rights reserved.
 import Foundation
+import UIKit
 
 func getDifficultly(_ view: UIViewController, _ completion: @escaping (ResultTag) -> Void) {
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)

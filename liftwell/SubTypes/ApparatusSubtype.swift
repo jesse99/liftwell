@@ -52,7 +52,7 @@ class ApparatusSubtype {
         self.index = store.getInt("index")
         
         let reps = store.getInt("reps")
-        let (min, max) = getBaseRepRange()
+        let (min, max, _) = getBaseRepRange()
         if reps > 0 && min < max {
             workingReps = reps
         } else {
@@ -81,7 +81,7 @@ class ApparatusSubtype {
         aweight = savedSubtype.aweight
         restTime = savedSubtype.restTime
         
-        let (min, max) = getBaseRepRange()  // need to be sure and check this in case the program has changed
+        let (min, max, _) = getBaseRepRange()  // need to be sure and check this in case the program has changed
         if min < max {
             workingReps = savedSubtype.workingReps
         } else {
@@ -156,7 +156,7 @@ class ApparatusSubtype {
         case .body(_): completion()
         case .weights(let type):
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-            let (minReps, maxReps) = getBaseRepRange()
+            let (minReps, maxReps, _) = getBaseRepRange()
             let variableReps = minReps != maxReps
             
             let label4 = variableReps ? "4 reps" : advanceWeightLabel(exercise, weight, by: 4)
@@ -214,9 +214,9 @@ class ApparatusSubtype {
         index = 0
     }
     
-    func getBaseRepRange() -> (Int, Int) {
+    func getBaseRepRange() -> (Int, Int, Int?) {
         assert(false)   // subclasses implement this
-        return (0, 0)
+        return (0, 0, nil)
     }
     
     private func doAdvance(_ apparatus: Apparatus, _ amount: Int) {
@@ -224,7 +224,7 @@ class ApparatusSubtype {
         
         let delta = amount.signum()
         if var reps = workingReps {
-            let (min, max) = getBaseRepRange()
+            let (min, max, _) = getBaseRepRange()
             for _ in 0..<abs(amount) {
                 if reps + delta > max {
                     let w = Weight(weight, apparatus)
@@ -258,7 +258,7 @@ class ApparatusSubtype {
         case .weight(_):
             aweight = .weight(weight)
         case .trainingMax(percent: let percent, oneRepMax: _):
-            let (_, maxReps) = getBaseRepRange()
+            let (_, maxReps, _) = getBaseRepRange()
             let reps = workingReps ?? maxReps
             if let max = get1RM(weight, reps) {
                 aweight = .trainingMax(percent: percent, oneRepMax: max)
@@ -276,4 +276,7 @@ class ApparatusSubtype {
     var numWarmups: Int = 0
     var currentWorkout = ""
     var index: Int = 0
+    
+    var amrapReps: Int? = nil
+    var amrapTag: ResultTag? = nil
 }
