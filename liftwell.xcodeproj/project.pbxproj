@@ -22,9 +22,14 @@
 		3728685421644C0C005F6FD0 /* Apparatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728685321644C0C005F6FD0 /* Apparatus.swift */; };
 		37286859216842C8005F6FD0 /* Mine2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286858216842C8005F6FD0 /* Mine2.swift */; };
 		3728685F21699C17005F6FD0 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728685E21699C17005F6FD0 /* Types.swift */; };
-		3728686121699CC7005F6FD0 /* SubTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728686021699CC7005F6FD0 /* SubTypes.swift */; };
 		37286863216A6C42005F6FD0 /* RepsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286862216A6C42005F6FD0 /* RepsParser.swift */; };
 		37286865216A83A5005F6FD0 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286864216A83A5005F6FD0 /* Either.swift */; };
+		373CCFB721A78FE100096291 /* ApparatusSubtype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFB621A78FE100096291 /* ApparatusSubtype.swift */; };
+		373CCFB921A78FF100096291 /* CyclicRepsSubtype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFB821A78FF100096291 /* CyclicRepsSubtype.swift */; };
+		373CCFBB21A78FFF00096291 /* FindWeightSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFBA21A78FFF00096291 /* FindWeightSubType.swift */; };
+		373CCFBD21A7900E00096291 /* MaxRepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFBC21A7900E00096291 /* MaxRepsSubType.swift */; };
+		373CCFBF21A7901A00096291 /* RepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFBE21A7901A00096291 /* RepsSubType.swift */; };
+		373CCFC121A7902700096291 /* TimedSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFC021A7902700096291 /* TimedSubType.swift */; };
 		374D3EDA217BFBD100AC828D /* DateExtensionw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3ED9217BFBD100AC828D /* DateExtensionw.swift */; };
 		374D3EDC217D4F4E00AC828D /* ExerciseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3EDB217D4F4E00AC828D /* ExerciseController.swift */; };
 		374D3EDE217D50EF00AC828D /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3EDD217D50EF00AC828D /* ColorExtensions.swift */; };
@@ -98,9 +103,14 @@
 		3728685321644C0C005F6FD0 /* Apparatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apparatus.swift; sourceTree = "<group>"; };
 		37286858216842C8005F6FD0 /* Mine2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mine2.swift; sourceTree = "<group>"; };
 		3728685E21699C17005F6FD0 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
-		3728686021699CC7005F6FD0 /* SubTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTypes.swift; sourceTree = "<group>"; };
 		37286862216A6C42005F6FD0 /* RepsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsParser.swift; sourceTree = "<group>"; };
 		37286864216A83A5005F6FD0 /* Either.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
+		373CCFB621A78FE100096291 /* ApparatusSubtype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApparatusSubtype.swift; sourceTree = "<group>"; };
+		373CCFB821A78FF100096291 /* CyclicRepsSubtype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyclicRepsSubtype.swift; sourceTree = "<group>"; };
+		373CCFBA21A78FFF00096291 /* FindWeightSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindWeightSubType.swift; sourceTree = "<group>"; };
+		373CCFBC21A7900E00096291 /* MaxRepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxRepsSubType.swift; sourceTree = "<group>"; };
+		373CCFBE21A7901A00096291 /* RepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsSubType.swift; sourceTree = "<group>"; };
+		373CCFC021A7902700096291 /* TimedSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedSubType.swift; sourceTree = "<group>"; };
 		374D3ED9217BFBD100AC828D /* DateExtensionw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionw.swift; sourceTree = "<group>"; };
 		374D3EDB217D4F4E00AC828D /* ExerciseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseController.swift; sourceTree = "<group>"; };
 		374D3EDD217D50EF00AC828D /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
@@ -207,7 +217,7 @@
 				37EFD6DD217A679F00F60880 /* Sets.swift */,
 				374FE941218536CD00CFC284 /* Settings */,
 				3728684A21631202005F6FD0 /* Store.swift */,
-				3728686021699CC7005F6FD0 /* SubTypes.swift */,
+				373CCFB521A78FD100096291 /* SubTypes */,
 				3728684721630030005F6FD0 /* Tabs */,
 				3728685E21699C17005F6FD0 /* Types.swift */,
 				37EFD6D12172C54500F60880 /* Weight.swift */,
@@ -266,6 +276,19 @@
 				37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */,
 			);
 			path = Programs;
+			sourceTree = "<group>";
+		};
+		373CCFB521A78FD100096291 /* SubTypes */ = {
+			isa = PBXGroup;
+			children = (
+				373CCFB621A78FE100096291 /* ApparatusSubtype.swift */,
+				373CCFB821A78FF100096291 /* CyclicRepsSubtype.swift */,
+				373CCFBA21A78FFF00096291 /* FindWeightSubType.swift */,
+				373CCFBC21A7900E00096291 /* MaxRepsSubType.swift */,
+				373CCFBE21A7901A00096291 /* RepsSubType.swift */,
+				373CCFC021A7902700096291 /* TimedSubType.swift */,
+			);
+			path = SubTypes;
 			sourceTree = "<group>";
 		};
 		374FE941218536CD00CFC284 /* Settings */ = {
@@ -462,8 +485,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3728686121699CC7005F6FD0 /* SubTypes.swift in Sources */,
+				373CCFB921A78FF100096291 /* CyclicRepsSubtype.swift in Sources */,
 				37E7BF122197E6CF0087E7FE /* BodyPercentAchievement.swift in Sources */,
+				373CCFBB21A78FFF00096291 /* FindWeightSubType.swift in Sources */,
 				374FE943218536F500CFC284 /* RepsOptionsController.swift in Sources */,
 				37E6577D218CC01200ED8BD0 /* EditNoteController.swift in Sources */,
 				37EFD6DC217A2D9000F60880 /* Set.swift in Sources */,
@@ -506,11 +530,15 @@
 				37EFD6DE217A679F00F60880 /* Sets.swift in Sources */,
 				37E7BF03219750AF0087E7FE /* AchievementsTabController.swift in Sources */,
 				374FE955218BD10300CFC284 /* Notes.swift in Sources */,
+				373CCFBF21A7901A00096291 /* RepsSubType.swift in Sources */,
+				373CCFB721A78FE100096291 /* ApparatusSubtype.swift in Sources */,
 				374D3EDC217D4F4E00AC828D /* ExerciseController.swift in Sources */,
 				37DE95FA219A48E200D60101 /* ProgramHelpers.swift in Sources */,
 				374D3EE0217D510E00AC828D /* FontExtensions.swift in Sources */,
 				374FE947218627AC00CFC284 /* DumbbellController.swift in Sources */,
+				373CCFBD21A7900E00096291 /* MaxRepsSubType.swift in Sources */,
 				37286828216259AE005F6FD0 /* WorkoutsTabController.swift in Sources */,
+				373CCFC121A7902700096291 /* TimedSubType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
