@@ -147,13 +147,18 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     }
     
     func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        getDifficultly(view, {self.doFinalize(exercise, $0, view, completion)})
+        if let last = sets.worksets.last, last.amrap {
+            getAMRAPResult(view, last.maxReps, {self.doFinalize(exercise, $1, $0, view, completion)})
+
+        } else {
+            let (_, max) = getBaseRepRange()
+            getDifficultly(view, {self.doFinalize(exercise, $0, self.workingReps ?? max, view, completion)})
+        }
     }
     
-    private func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
+    private func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let weight = aweight.getWorkingWeight()
-        let (_, max) = getBaseRepRange()
-        let result = Result(tag, weight: weight, reps: workingReps ?? max)
+        let result = Result(tag, weight: weight, reps: reps)
         
         var myResults = Self.results[exercise.formalName] ?? []
         myResults.append(result)
@@ -178,21 +183,3 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     static var results: [String: [Result]] = [:]
 }
 
-func getDifficultly(_ view: UIViewController, _ completion: @escaping (ResultTag) -> Void) {
-    let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-    
-    var action = UIAlertAction(title: "Easy", style: .default) {_ in completion(.easy)}
-    alert.addAction(action)
-    
-    action = UIAlertAction(title: "Normal", style: .default) {_ in completion(.normal)}
-    alert.addAction(action)
-    alert.preferredAction = action
-    
-    action = UIAlertAction(title: "Hard", style: .default) {_ in completion(.hard)}
-    alert.addAction(action)
-    
-    action = UIAlertAction(title: "Failed", style: .default) {_ in completion(.failed)}
-    alert.addAction(action)
-    
-    view.present(alert, animated: true, completion: nil)
-}

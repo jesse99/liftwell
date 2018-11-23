@@ -169,13 +169,18 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
     }
     
     func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        getDifficultly(view, {self.doFinalize(exercise, $0, view, completion)})
+        if let last = cycles[cycleIndex].worksets.last, last.amrap {
+            getAMRAPResult(view, last.maxReps, {self.doFinalize(exercise, $1, $0, view, completion)})
+            
+        } else {
+            let (_, max) = getBaseRepRange()
+            getDifficultly(view, {self.doFinalize(exercise, $0, self.workingReps ?? max, view, completion)})
+        }
     }
     
-    private func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
+    private func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let weight = aweight.getWorkingWeight()
-        let (_, max) = getBaseRepRange()
-        let result = Result(tag, weight: weight, cycleIndex: cycleIndex, reps: workingReps ?? max)
+        let result = Result(tag, weight: weight, cycleIndex: cycleIndex, reps: reps)
         
         var myResults = Self.results[exercise.formalName] ?? []
         myResults.append(result)
