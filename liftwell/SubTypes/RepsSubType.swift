@@ -150,8 +150,8 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     }
     
     func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        if let last = sets.worksets.last, last.amrap {
-            getAMRAPResult(view, last.maxReps, {self.doFinalize(exercise, $1, $0, view, completion)})
+        if let reps = amrapReps, let tag = amrapTag {
+            self.doFinalize(exercise, tag, reps, view, completion)
 
         } else {
             let (_, max, _) = getBaseRepRange()
@@ -177,6 +177,10 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
         } else {
             return (min, max, nil)
         }
+    }
+    
+    override func isWorkset(_ index: Int) -> Bool {
+        return index > sets.warmups.count && index < sets.warmups.count + sets.worksets.count
     }
     
     private func getActivities(_ exercise: Exercise) -> (Int, [Activity]) {

@@ -36,9 +36,8 @@ class T1RepsSubtype: ApparatusSubtype, ExerciseInfo {
         var reps: Int
     }
     
-    // GZCLP says to set the training max to 85% of the 5RM which is 87% of 1RM
-    // and 0.85 * 0.87 == 0.74 which is what we use for the percent of 1RM.
-    init(_ cycles: [Sets], restSecs: Int, trainingMaxPercent: Double = 0.74) {
+    /// trainingMaxPercent is a percent of 1RM
+    init(_ cycles: [Sets], restSecs: Int, trainingMaxPercent: Double? = nil) {
         self.cycleIndex = 0
         self.cycles = cycles
         
@@ -107,6 +106,9 @@ class T1RepsSubtype: ApparatusSubtype, ExerciseInfo {
                 break
             }
         }
+        amrapReps = nil
+        amrapTag = nil
+        
         index = 0
         currentWorkout = workout.name
         updated(exercise)
@@ -170,13 +172,18 @@ class T1RepsSubtype: ApparatusSubtype, ExerciseInfo {
     }
     
     func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        getDifficultly(view, {self.doFinalize(exercise, $0, view, completion)})
+        if let reps = amrapReps, let tag = amrapTag {
+            self.doFinalize(exercise, tag, reps, view, completion)
+            
+        } else {
+            let (_, max, _) = getBaseRepRange()
+            getDifficultly(view, {self.doFinalize(exercise, $0, self.workingReps ?? max, view, completion)})
+        }
     }
     
-    private func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
+    private func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let weight = aweight.getWorkingWeight()
-        let (_, max, _) = getBaseRepRange()
-        let result = Result(tag, weight: weight, cycleIndex: cycleIndex, reps: workingReps ?? max)
+        let result = Result(tag, weight: weight, cycleIndex: cycleIndex, reps: reps)
         
         var myResults = Self.results[exercise.formalName] ?? []
         myResults.append(result)
@@ -198,6 +205,10 @@ class T1RepsSubtype: ApparatusSubtype, ExerciseInfo {
         } else {
             return (min, max, nil)
         }
+    }
+    
+    override func isWorkset(_ index: Int) -> Bool {
+        return index > cycles[cycleIndex].warmups.count && index < cycles[cycleIndex].warmups.count + cycles[cycleIndex].worksets.count
     }
     
     var cycleIndex: Int

@@ -56,7 +56,7 @@ class FindWeightSubType: ExerciseInfo {
             switch set {
             case .notStarted: return .waiting
             case .started(let index): return index == 1 ? .started : .underway
-            case .finished(_): return .finishNoPrompt
+            case .finished(_): return .finished
             }
         }
     }
@@ -133,12 +133,12 @@ class FindWeightSubType: ExerciseInfo {
         let label3 = advanceWeightLabel(exercise, weight, by: 3)
         let label2 = advanceWeightLabel(exercise, weight, by: 2)
         let label1 = advanceWeightLabel(exercise, weight, by: 1)
-        return [Completion(title: "Advance by \(label8)", info: "", callback: {self.doAdvance(exercise, index, 8)}),
-                Completion(title: "Advance by \(label4)", info: "", callback: {self.doAdvance(exercise, index, 4)}),
-                Completion(title: "Advance by \(label3)", info: "", callback: {self.doAdvance(exercise, index, 3)}),
-                Completion(title: "Advance by \(label2)", info: "", callback: {self.doAdvance(exercise, index, 2)}),
-                Completion(title: "Advance by \(label1)", info: "", callback: {self.doAdvance(exercise, index, 1)}),
-                Completion(title: "Done", info: "", callback: {self.set = .finished(index)})]
+        return [Completion(title: "Advance by \(label8)", info: "", callback: {_,completion in self.doAdvance(exercise, index, 8); completion()}),
+                Completion(title: "Advance by \(label4)", info: "", callback: {_,completion in self.doAdvance(exercise, index, 4); completion()}),
+                Completion(title: "Advance by \(label3)", info: "", callback: {_,completion in self.doAdvance(exercise, index, 3); completion()}),
+                Completion(title: "Advance by \(label2)", info: "", callback: {_,completion in self.doAdvance(exercise, index, 2); completion()}),
+                Completion(title: "Advance by \(label1)", info: "", callback: {_,completion in self.doAdvance(exercise, index, 1); completion()}),
+                Completion(title: "Done", info: "", callback: {_,completion in self.set = .finished(index); completion()})]
     }
     
     func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {

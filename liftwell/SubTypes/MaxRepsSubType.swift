@@ -241,15 +241,15 @@ class MaxRepsSubType: ExerciseInfo {
         for count in max(expected - 4, 0)...(expected+4) {
             if count <= expected {
                 if count == 1 {
-                    result.append(Completion(title: "1 rep", info: "", callback: {() -> Void in self.doCompleted(count)}))
+                    result.append(Completion(title: "1 rep", info: "", callback: {_,completion in self.doCompleted(count); completion()}))
                 } else {
-                    result.append(Completion(title: "\(count) reps", info: "", callback: {() -> Void in self.doCompleted(count)}))
+                    result.append(Completion(title: "\(count) reps", info: "", callback: {_,completion in self.doCompleted(count); completion()}))
                 }
             } else {
                 if currentTotal + count <= currentReps {
-                    result.append(Completion(title: "\(count) reps", info: "", callback: {() -> Void in self.doCompleted(count)}))
+                    result.append(Completion(title: "\(count) reps", info: "", callback: {_,completion in self.doCompleted(count); completion()}))
                 } else {
-                    result.append(Completion(title: "\(count) reps (extra)", info: "", callback: {() -> Void in self.doCompleted(count)}))
+                    result.append(Completion(title: "\(count) reps (extra)", info: "", callback: {_,completion in self.doCompleted(count); completion()}))
                 }
             }
         }

@@ -78,7 +78,7 @@ struct Completion {
     //let isDefault: Bool
     
     /// Called by Exercise to do things like maintain or advance reps/weight.
-    let callback: () -> Void
+    let callback: (_ view: UIViewController, _ completion: @escaping () -> Void) -> Void
 }
 
 /// Lifecycle for an exercise within an ExerciseController. Typically the transitions are from waiting -> started -> underway -> finished.
@@ -96,9 +96,6 @@ enum ExerciseState {
     
     /// The user has advanced so far that there is nothing left to do for this iteration of the workout.
     case finished
-    
-    /// Like finish except that there is no prompt fow how hard the exercise was.
-    case finishNoPrompt
     
     /// Start was called but the exercise cannot be executed until another exercise is executed. For example,
     /// PercentOfPlan requires that its base plan be executed before it can execute.  TODO: fix name

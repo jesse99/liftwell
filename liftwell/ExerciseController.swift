@@ -222,20 +222,17 @@ class ExerciseController: UIViewController {
         let info = exercise.getInfo()
         if case .finished = info.state {
             info.finalize(self.exercise, self, self.finish)
-        } else if case .finishNoPrompt = info.state {
-            info.finalize(exercise, self, self.finish)
         } else {
             let results = info.completions(exercise)
 //            switch info.completions(exercise) {
 //            case .normal(let results):
                 if results.count == 1 {
-                    results[0].callback()
-                    handleNext("default")
+                    results[0].callback(self, {self.handleNext("default")})
                 } else {
                     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
                     
                     for result in results {
-                        let action = UIAlertAction(title: result.title, style: .default) {_ in result.callback(); self.handleNext(result.title)}
+                        let action = UIAlertAction(title: result.title, style: .default) {_ in result.callback(self, {self.handleNext(result.title)})}
                         alert.addAction(action)
 //                        if result.isDefault {
 //                            alert.preferredAction = action

@@ -172,8 +172,8 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
     }
     
     func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        if let last = cycles[cycleIndex].worksets.last, last.amrap {
-            getAMRAPResult(view, last.maxReps, {self.doFinalize(exercise, $1, $0, view, completion)})
+        if let reps = amrapReps, let tag = amrapTag {
+            self.doFinalize(exercise, tag, reps, view, completion)
             
         } else {
             let (_, max, _) = getBaseRepRange()
@@ -205,6 +205,10 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
         } else {
             return (min, max, nil)
         }
+    }
+    
+    override func isWorkset(_ index: Int) -> Bool {
+        return index > cycles[cycleIndex].warmups.count && index < cycles[cycleIndex].warmups.count + cycles[cycleIndex].worksets.count
     }
     
     var cycleIndex: Int

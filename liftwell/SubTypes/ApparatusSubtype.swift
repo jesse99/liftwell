@@ -143,9 +143,31 @@ class ApparatusSubtype {
     
     func completions(_ exercise: Exercise) -> [Completion] {
         if index+1 < activities.count {
-            return [Completion(title: "", info: "", callback: {self.index += 1})]
+            return [Completion(title: "", info: "", callback: self.doNext)]
         } else {
-            return [Completion(title: "", info: "", callback: {self.index = self.activities.count})]
+            return [Completion(title: "", info: "", callback: self.doLast)]
+        }
+    }
+    
+    private func doNext(_ view: UIViewController, _ completion: @escaping () -> Void) {
+        let (_, _, amrapReps) = getBaseRepRange()
+        if let reps = amrapReps, isWorkset(index) && !isWorkset(index+1) {
+            getAMRAPResult(view, reps, {self.amrapReps = $0; self.amrapTag = $1; self.index += 1; completion()})
+            
+        } else {
+            index += 1
+            completion()
+        }
+    }
+    
+    private func doLast(_ view: UIViewController, _ completion: @escaping () -> Void) {
+        let (_, _, amrapReps) = getBaseRepRange()
+        if let reps = amrapReps, isWorkset(index) && !isWorkset(index+1) {
+            getAMRAPResult(view, reps, {self.amrapReps = $0; self.amrapTag = $1; self.index = self.activities.count; completion()})
+
+        } else {
+            index = self.activities.count
+            completion()
         }
     }
     
@@ -266,6 +288,11 @@ class ApparatusSubtype {
                 aweight = .trainingMax(percent: percent, oneRepMax: 0.0)    // not clear what we should do here but at least this will be obviously wrong
             }
         }
+    }
+    
+    func isWorkset(_ index: Int) -> Bool {
+        assert(false)       // subclasses implement this
+        return false
     }
     
     var aweight: ApparatusWeight  // starts out at 0.0

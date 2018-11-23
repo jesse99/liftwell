@@ -210,9 +210,9 @@ class TimedSubType: ExerciseInfo {
     
     func completions(_ exercise: Exercise) -> [Completion] {
         if index+1 < activities.count {
-            return [Completion(title: "", info: "", callback: {self.index += 1})]
+            return [Completion(title: "", info: "", callback: {_,completion in self.index += 1; completion()})]
         } else {
-            return [Completion(title: "", info: "", callback: {self.index = self.activities.count})]
+            return [Completion(title: "", info: "", callback: {_,completion in self.index = self.activities.count; completion()})]
         }
     }
     
