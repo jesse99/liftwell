@@ -154,7 +154,7 @@ protocol ExerciseInfo: Storable {
     func completions(_ exercise: Exercise) -> [Completion]
     
     /// Called once the exercise is all finished. Tag is an arbitrary string.
-    func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void)
+    func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void)
     
     /// Start over from the beginning.
     func reset()

@@ -216,8 +216,8 @@ class TimedSubType: ExerciseInfo {
         }
     }
     
-    func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        let result = Result(tag, weight: weight, currentTime: currentTime)
+    func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {
+        let result = Result(.normal, weight: weight, currentTime: currentTime)
         
         var myResults = Self.results[exercise.formalName] ?? []
         myResults.append(result)

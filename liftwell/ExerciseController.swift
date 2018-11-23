@@ -221,9 +221,9 @@ class ExerciseController: UIViewController {
         
         let info = exercise.getInfo()
         if case .finished = info.state {
-            setTag(info)
+            info.finalize(self.exercise, self, self.finish)
         } else if case .finishNoPrompt = info.state {
-            info.finalize(exercise, .normal, self, self.finish)
+            info.finalize(exercise, self, self.finish)
         } else {
             let results = info.completions(exercise)
 //            switch info.completions(exercise) {
@@ -255,23 +255,6 @@ class ExerciseController: UIViewController {
     }
     
     private func setTag(_ info: ExerciseInfo) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        let completion: () -> Void = {self.finish()}
-        
-        var action = UIAlertAction(title: "Easy", style: .default) {_ in info.finalize(self.exercise, .easy, self, completion)}
-        alert.addAction(action)
-        
-        action = UIAlertAction(title: "Normal", style: .default) {_ in info.finalize(self.exercise, .normal, self, completion)}
-        alert.addAction(action)
-        alert.preferredAction = action
-        
-        action = UIAlertAction(title: "Hard", style: .default) {_ in info.finalize(self.exercise, .hard, self, completion)}
-        alert.addAction(action)
-        
-        action = UIAlertAction(title: "Failed", style: .default) {_ in info.finalize(self.exercise, .failed, self, completion)}
-        alert.addAction(action)
-
-        self.present(alert, animated: true, completion: nil)
     }
     
     private func finish() {

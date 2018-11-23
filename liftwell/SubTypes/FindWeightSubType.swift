@@ -141,7 +141,7 @@ class FindWeightSubType: ExerciseInfo {
                 Completion(title: "Done", info: "", callback: {self.set = .finished(index)})]
     }
     
-    func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
+    func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let app = UIApplication.shared.delegate as! AppDelegate
         if let original = app.program.findExercise(exercise.name) {
             switch original.type {

@@ -257,7 +257,11 @@ class MaxRepsSubType: ExerciseInfo {
         return result
     }
     
-    func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
+    func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {
+        getDifficultly(view, {self.doFinalize(exercise, $0, view, completion)})
+    }
+    
+    private func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let result = Result(tag, weight: weight, currentReps: currentReps, completed: completed)
         
         var myResults = Self.results[exercise.formalName] ?? []

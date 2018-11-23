@@ -146,7 +146,11 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
         return RestTime(autoStart: sets.set(index > 0 ? index-1 : 0).rest, secs: restTime)
     }
     
-    override func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
+    func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {
+        getDifficultly(view, {self.doFinalize(exercise, $0, view, completion)})
+    }
+    
+    private func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let weight = aweight.getWorkingWeight()
         let (_, max) = getBaseRepRange()
         let result = Result(tag, weight: weight, reps: workingReps ?? max)
@@ -172,4 +176,23 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     
     var sets: Sets
     static var results: [String: [Result]] = [:]
+}
+
+func getDifficultly(_ view: UIViewController, _ completion: @escaping (ResultTag) -> Void) {
+    let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+    
+    var action = UIAlertAction(title: "Easy", style: .default) {_ in completion(.easy)}
+    alert.addAction(action)
+    
+    action = UIAlertAction(title: "Normal", style: .default) {_ in completion(.normal)}
+    alert.addAction(action)
+    alert.preferredAction = action
+    
+    action = UIAlertAction(title: "Hard", style: .default) {_ in completion(.hard)}
+    alert.addAction(action)
+    
+    action = UIAlertAction(title: "Failed", style: .default) {_ in completion(.failed)}
+    alert.addAction(action)
+    
+    view.present(alert, animated: true, completion: nil)
 }

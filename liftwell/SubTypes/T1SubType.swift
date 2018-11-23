@@ -169,7 +169,11 @@ class T1RepsSubtype: ApparatusSubtype, ExerciseInfo {
         return RestTime(autoStart: cycles[cycleIndex].set(index > 0 ? index-1 : 0).rest, secs: restTime)
     }
     
-    override func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
+    func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {
+        getDifficultly(view, {self.doFinalize(exercise, $0, view, completion)})
+    }
+    
+    private func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let weight = aweight.getWorkingWeight()
         let (_, max) = getBaseRepRange()
         let result = Result(tag, weight: weight, cycleIndex: cycleIndex, reps: workingReps ?? max)
