@@ -136,7 +136,7 @@ class RepsSubType: ApparatusSubtype, ExerciseInfo {
     func historyLabel(_ exercise: Exercise) -> String {
         if let myResults = Self.results[exercise.formalName] {
             let history = myResults.map {($0.reps, $0.weight)}
-            return historyLabel(history)
+            return historyLabel1(history)
         }
         return ""
     }

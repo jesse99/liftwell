@@ -1,13 +1,13 @@
-//  Created by Jesse Jones on 10/6/18.
+//  Created by Jesse Jones on 11/22/18.
 //  Copyright © 2018 MushinApps. All rights reserved.
 import AVFoundation // for kSystemSoundID_Vibrate
 import Foundation
 import UIKit           // for UIColor
 import os.log
 
-/// Sets/reps/percents vary from week to week.
-class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
-    private typealias `Self` = CyclicRepsSubtype
+/// GZCLP scheme where volume is dropped on failure and then Training Max is reset.
+class T1RepsSubtype: ApparatusSubtype, ExerciseInfo {
+    private typealias `Self` = T1RepsSubtype
     
     class Result: BaseResult, Storable {
         init(_ tag: ResultTag, weight: Double, cycleIndex: Int, reps: Int) {
@@ -36,8 +36,9 @@ class CyclicRepsSubtype: ApparatusSubtype, ExerciseInfo {
         var reps: Int
     }
     
-    /// trainingMaxPercent is a percent of 1RM
-    init(_ cycles: [Sets], restSecs: Int, trainingMaxPercent: Double? = nil) {
+    // GZCLP says to set the training max to 85% of the 5RM which is 87% of 1RM
+    // and 0.85 * 0.87 == 0.74 which is what we use for the percent of 1RM.
+    init(_ cycles: [Sets], restSecs: Int, trainingMaxPercent: Double = 0.74) {
         self.cycleIndex = 0
         self.cycles = cycles
         

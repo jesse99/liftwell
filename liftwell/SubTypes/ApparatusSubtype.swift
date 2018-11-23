@@ -94,7 +94,7 @@ class ApparatusSubtype {
         }
     }
     
-    func historyLabel(_ history: [(Int, Double)]) -> String {
+    func historyLabel1(_ history: [(Int, Double)]) -> String {
         var labels: [String] = []
         
         for (reps, weight) in history {
