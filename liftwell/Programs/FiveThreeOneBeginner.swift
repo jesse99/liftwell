@@ -65,6 +65,8 @@ func FiveThreeOneBeginner() -> Program {
     
     let tags: [Program.Tags] = [.beginner, .strength, .barbell, .unisex, .threeDays, .ageUnder40, .age40s]
     
+    // TODO: this did call for re-checking the training max after every third cycle. If we do this we should ask the user if he really wants
+    // to do that and we'll need to make sure that this can be edited.
     let description = """
 [This program](https://old.reddit.com/r/Fitness/wiki/531-beginners) and [GZCLP](https://www.reddit.com/r/Fitness/wiki/gzclp) are the two programs recommended by reddit/fitness if you're familiar with the barbell lifts or if you have run [Phrak's Greyskull](https://old.reddit.com/r/Fitness/wiki/phraks-gslp) program for a few months. This program is based on three week cycles where each week the volume goes down but percentages go up. After the third week the weight should normally go up. It's a three days a week program.
 
