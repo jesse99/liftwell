@@ -34,6 +34,8 @@
 		373CCFC521A7B22800096291 /* SubTypeHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFC421A7B22800096291 /* SubTypeHelpers.swift */; };
 		373CCFC721A9B2A400096291 /* T2RepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFC621A9B2A400096291 /* T2RepsSubType.swift */; };
 		373CCFC921A9C4BA00096291 /* BaseCyclicRepsSubtype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFC821A9C4BA00096291 /* BaseCyclicRepsSubtype.swift */; };
+		373CCFCB21A9DF6000096291 /* T3RepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFCA21A9DF6000096291 /* T3RepsSubType.swift */; };
+		373CCFCD21A9E73200096291 /* BaseRepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFCC21A9E73200096291 /* BaseRepsSubType.swift */; };
 		374D3EDA217BFBD100AC828D /* DateExtensionw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3ED9217BFBD100AC828D /* DateExtensionw.swift */; };
 		374D3EDC217D4F4E00AC828D /* ExerciseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3EDB217D4F4E00AC828D /* ExerciseController.swift */; };
 		374D3EDE217D50EF00AC828D /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3EDD217D50EF00AC828D /* ColorExtensions.swift */; };
@@ -119,6 +121,8 @@
 		373CCFC421A7B22800096291 /* SubTypeHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTypeHelpers.swift; sourceTree = "<group>"; };
 		373CCFC621A9B2A400096291 /* T2RepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = T2RepsSubType.swift; sourceTree = "<group>"; };
 		373CCFC821A9C4BA00096291 /* BaseCyclicRepsSubtype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCyclicRepsSubtype.swift; sourceTree = "<group>"; };
+		373CCFCA21A9DF6000096291 /* T3RepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = T3RepsSubType.swift; sourceTree = "<group>"; };
+		373CCFCC21A9E73200096291 /* BaseRepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepsSubType.swift; sourceTree = "<group>"; };
 		374D3ED9217BFBD100AC828D /* DateExtensionw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionw.swift; sourceTree = "<group>"; };
 		374D3EDB217D4F4E00AC828D /* ExerciseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseController.swift; sourceTree = "<group>"; };
 		374D3EDD217D50EF00AC828D /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
@@ -291,6 +295,7 @@
 			children = (
 				373CCFB621A78FE100096291 /* BaseApparatusSubtype.swift */,
 				373CCFC821A9C4BA00096291 /* BaseCyclicRepsSubtype.swift */,
+				373CCFCC21A9E73200096291 /* BaseRepsSubType.swift */,
 				373CCFB821A78FF100096291 /* CyclicRepsSubtype.swift */,
 				373CCFBA21A78FFF00096291 /* FindWeightSubType.swift */,
 				373CCFBC21A7900E00096291 /* MaxRepsSubType.swift */,
@@ -299,6 +304,7 @@
 				373CCFC021A7902700096291 /* TimedSubType.swift */,
 				373CCFC221A792CA00096291 /* T1SubType.swift */,
 				373CCFC621A9B2A400096291 /* T2RepsSubType.swift */,
+				373CCFCA21A9DF6000096291 /* T3RepsSubType.swift */,
 			);
 			path = SubTypes;
 			sourceTree = "<group>";
@@ -508,7 +514,9 @@
 				37E7BF0C219761970087E7FE /* OneRepMaxAchievement.swift in Sources */,
 				37EFD6D82176C69900F60880 /* WorkoutController.swift in Sources */,
 				37E7BF0921975DCD0087E7FE /* Achievement.swift in Sources */,
+				373CCFCB21A9DF6000096291 /* T3RepsSubType.swift in Sources */,
 				374FE9452185FE3C00CFC284 /* TimedOptionsController.swift in Sources */,
+				373CCFCD21A9E73200096291 /* BaseRepsSubType.swift in Sources */,
 				37286859216842C8005F6FD0 /* Mine2.swift in Sources */,
 				3728684B21631202005F6FD0 /* Store.swift in Sources */,
 				374D3EDA217BFBD100AC828D /* DateExtensionw.swift in Sources */,

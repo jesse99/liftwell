@@ -18,6 +18,16 @@ class T2RepsSubType: BaseCyclicRepsSubtype {
         super.init(from: store)
     }
     
+    override func errors() -> [String] {
+        var problems: [String] = super.errors()
+        for sets in cycles {
+            if let last = sets.worksets.last, last.amrap {
+                problems.append("Last set in each cycle should NOT be AMRAP.")
+            }
+        }
+        return problems
+    }
+
     // ---- ExerciseInfo ----------------------------------------------------------------------
     override func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let weight: Double
