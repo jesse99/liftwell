@@ -1,83 +1,101 @@
-//  Created by Jesse Jones on 10/6/18.
+//  Created by Jesse Jones on 11/24/18.
 //  Copyright © 2018 MushinApps. All rights reserved.
 import AVFoundation // for kSystemSoundID_Vibrate
 import Foundation
 import UIKit           // for UIColor
 import os.log
 
-/// Simple scheme where number of sets is fixed.
-class RepsSubType: BaseApparatusSubtype, ExerciseInfo {
-    private typealias `Self` = RepsSubType
+/// Sets/reps/percents vary from week to week.
+class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
+    private typealias `Self` = BaseCyclicRepsSubtype
     
-    class Result: BaseResult, Storable {
-        init(_ tag: ResultTag, weight: Double, reps: Int) {
+    class CyclicResult: BaseResult, Storable {
+        init(_ tag: ResultTag, weight: Double, cycleIndex: Int, reps: Int) {
             self.weight = weight
+            self.cycleIndex = cycleIndex
             self.reps = reps
             super.init(tag)
         }
         
         required init(from store: Store) {
             self.weight = store.getDbl("weight")
+            self.cycleIndex = store.getInt("cycleIndex")
             self.reps = store.getInt("reps")
             super.init(from: store)
         }
         
         override func save(_ store: Store) {
             store.addDbl("weight", weight)
+            store.addInt("cycleIndex", cycleIndex)
             store.addInt("reps", reps)
             super.save(store)
         }
         
         var weight: Double
+        var cycleIndex: Int
         var reps: Int
     }
     
-    init(_ sets: Sets, restSecs: Int, trainingMaxPercent: Double? = nil) {
-        self.sets = sets
-        let (minReps, maxReps) = sets.repRange(minimum: nil)
-        let reps = minReps < maxReps ? maxReps : nil
+    /// trainingMaxPercent is a percent of 1RM
+    init(_ cycles: [Sets], restSecs: Int, trainingMaxPercent: Double? = nil) {
+        self.cycleIndex = 0
+        self.cycles = cycles
+        
+        let (minReps, maxReps) = cycles[0].repRange(minimum: nil)
+        let reps: Int? = minReps < maxReps ? maxReps : nil
         super.init(reps: reps, restTime: restSecs, trainingMaxPercent: trainingMaxPercent)
     }
     
     required init(from store: Store) {
-        self.sets = store.getObj("sets")
+        cycleIndex = store.getInt("cycleIndex")
+        
+        cycles = []
+        let count = store.getInt("cyclesCount")
+        for i in 0..<count {
+            let cycle: Sets = store.getObj("cycle\(i)")
+            cycles.append(cycle)
+        }
+        
         super.init(from: store)
     }
     
     override func save(_ store: Store) {
-        store.addObj("sets", sets)
+        store.addInt("cycleIndex", cycleIndex)
+        
+        store.addInt("cyclesCount", cycles.count)
+        for (i, cycle) in cycles.enumerated() {
+            store.addObj("cycle\(i)", cycle)
+        }
+        
         super.save(store)
     }
     
     func sync(_ program: Program, _ savedExercise: Exercise) {
-        let exeExecercise = program.findExercise(savedExercise.name)
-        let (_, exeActivities) = getActivities(exeExecercise ?? savedExercise)
-        
-        let (_, savedActivities) = getActivities(savedExercise)
-        let same = exeActivities.count == savedActivities.count
-        
         switch savedExercise.type {
-        case .body(let saved):
-            switch saved.subtype {
-            case .reps(let savedSubtype): super.sync(program, savedSubtype, sameSets: same)
-            default: os_log("saved %@ subtype wasn't Reps", savedExercise.name)
-            }
+        case .body(_):
+            os_log("saved %@ subtype wasn't weights", savedExercise.name)
         case .weights(let saved):
             switch saved.subtype {
-            case .reps(let savedSubtype): super.sync(program, savedSubtype, sameSets: same)
-            default: os_log("saved %@ subtype wasn't Reps", savedExercise.name)
+            case .cyclic(let savedSubtype):
+                cycleIndex = savedSubtype.cycleIndex
+                super.sync(program, savedSubtype, sameSets: cycles.count == savedSubtype.cycles.count)
+            default:
+                os_log("saved %@ subtype wasn't cyclic", savedExercise.name)
             }
         }
     }
     
     func errors() -> [String] {
-        return sets.errors()
+        var problems: [String] = []
+        for sets in cycles {
+            problems += sets.errors()
+        }
+        return problems
     }
     
     // ---- ExerciseInfo ----------------------------------------------------------------------
     func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
-        let weight = aweight.getWorkingWeight()
-        if weight == 0 {
+        if aweight.getWorkingWeight() == 0 {
             let newExercise = exercise.clone()
             switch newExercise.type {
             case .weights(let type):
@@ -90,7 +108,7 @@ class RepsSubType: BaseApparatusSubtype, ExerciseInfo {
         }
         amrapReps = nil
         amrapTag = nil
-
+        
         index = 0
         currentWorkout = workout.name
         updated(exercise)
@@ -105,23 +123,27 @@ class RepsSubType: BaseApparatusSubtype, ExerciseInfo {
     }
     
     func updated(_ exercise: Exercise) {
-        (numWarmups, activities) = getActivities(exercise)
+        let weight = aweight.getWorkingWeight()
+        switch exercise.type {
+        case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight, minimum: workingReps)
+        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, minimum: workingReps)
+        }
     }
     
     func sublabel(_ exercise: Exercise) -> String {
         let weight = aweight.getWorkingWeight()
         switch exercise.type {
-        case .body(_): return sets.sublabel(nil, weight, workingReps)
-        case .weights(let type): return sets.sublabel(type.apparatus, weight, workingReps)
+        case .body(_): return cycles[cycleIndex].sublabel(nil, weight, workingReps)
+        case .weights(let type): return cycles[cycleIndex].sublabel(type.apparatus, weight, workingReps)
         }
     }
     
     func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
-        if let myResults = Self.results[exercise.formalName], let last = myResults.last, let workset = sets.worksets.last {
+        if let myResults = doGetResults(exercise.formalName), let last = myResults.last, let workset = cycles[cycleIndex].worksets.last {
             if workset.amrap {
                 // History will include the AMRAP reps and the tag is inferred from that so don't think we want anything here.
                 return ("", UIColor.black)
-
+                
             } else {
                 var count = 0
                 for result in myResults.reversed() {
@@ -143,7 +165,7 @@ class RepsSubType: BaseApparatusSubtype, ExerciseInfo {
     }
     
     func historyLabel(_ exercise: Exercise) -> String {
-        if let myResults = Self.results[exercise.formalName] {
+        if let myResults = doGetResults(exercise.formalName) {
             let history = myResults.map {($0.reps, $0.weight)}
             return historyLabel1(history)
         }
@@ -152,40 +174,31 @@ class RepsSubType: BaseApparatusSubtype, ExerciseInfo {
     
     func restSecs() -> RestTime {
         // note that autoStart is only used after index is incremented
-        return RestTime(autoStart: sets.set(index > 0 ? index-1 : 0).rest, secs: restTime)
+        return RestTime(autoStart: cycles[cycleIndex].set(index > 0 ? index-1 : 0).rest, secs: restTime)
     }
     
     func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {
         if let reps = amrapReps, let tag = amrapTag {
             self.doFinalize(exercise, tag, reps, view, completion)
-
+            
         } else {
             let (_, max, _) = getBaseRepRange()
             getDifficultly(view, {self.doFinalize(exercise, $0, self.workingReps ?? max, view, completion)})
         }
     }
     
-    private func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        let weight: Double
-        switch exercise.type {
-        case .body(_): weight = aweight.getWorkingWeight()
-        case .weights(let type):
-            let w = Weight(aweight.getWorkingWeight(), type.apparatus).closest()
-            weight = w.weight
-        }
-
-        let result = Result(tag, weight: weight, reps: reps)
-        
-        var myResults = Self.results[exercise.formalName] ?? []
-        myResults.append(result)
-        Self.results[exercise.formalName] = myResults
-        
-        super.finalize(exercise, tag, view, completion )
+    func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
+        assert(false)
+    }
+    
+    func doGetResults(_ formalName: String) -> [CyclicResult]? {
+        assert(false)
+        return []
     }
     
     override func getBaseRepRange() -> (Int, Int, Int?) {
-        let (min, max) = sets.repRange(minimum: nil)
-        if let last = sets.worksets.last, last.amrap {
+        let (min, max) = cycles[cycleIndex].repRange(minimum: nil)
+        if let last = cycles[cycleIndex].worksets.last, last.amrap {
             return (min, max, last.maxReps)
         } else {
             return (min, max, nil)
@@ -193,18 +206,9 @@ class RepsSubType: BaseApparatusSubtype, ExerciseInfo {
     }
     
     override func isWorkset(_ index: Int) -> Bool {
-        return index > sets.warmups.count && index < sets.warmups.count + sets.worksets.count
+        return index > cycles[cycleIndex].warmups.count && index < cycles[cycleIndex].warmups.count + cycles[cycleIndex].worksets.count
     }
     
-    private func getActivities(_ exercise: Exercise) -> (Int, [Activity]) {
-        let weight = aweight.getWorkingWeight()
-        switch exercise.type {
-        case .body(_): return sets.activities(weight, minimum: workingReps)
-        case .weights(let type): return sets.activities(weight, type.apparatus, minimum: workingReps)
-        }
-    }
-    
-    var sets: Sets
-    static var results: [String: [Result]] = [:]
+    var cycleIndex: Int
+    var cycles: [Sets]
 }
-

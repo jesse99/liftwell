@@ -259,23 +259,26 @@ func addStrDict(_ store: Store, _ key: String, _ value: [String: [Storable]]) {
 }
 
 func getStrDict<T: Storable>(_ store: Store, _ key: String) -> [String: [T]] {
-    let keys = store.getStrArray(key + "-keys")
-    let counts = store.getIntArray(key + "-counts")
-    let entries: [T] = store.getObjArray(key + "-values")
-    var index = 0
-    
     var results: [String: [T]] = [:]
-    for (i, k) in keys.enumerated() {
-        let count = counts[i]
+    
+    if store.hasKey(key + "-keys") {
+        let keys = store.getStrArray(key + "-keys")
+        let counts = store.getIntArray(key + "-counts")
+        let entries: [T] = store.getObjArray(key + "-values")
+        var index = 0
         
-        var items: [T] = []
-        items.reserveCapacity(count)
-        for _ in 0..<count {
-            items.append(entries[index])
-            index += 1
+        for (i, k) in keys.enumerated() {
+            let count = counts[i]
+            
+            var items: [T] = []
+            items.reserveCapacity(count)
+            for _ in 0..<count {
+                items.append(entries[index])
+                index += 1
+            }
+            
+            results[k] = items
         }
-        
-        results[k] = items
     }
     
     return results

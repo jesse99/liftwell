@@ -363,7 +363,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 MaxRepsSubType.results = getStrDict(store, "max-reps-results")
                 RepsSubType.results = getStrDict(store, "reps-results")
                 TimedSubType.results = getStrDict(store, "timed-results")
-                
+                T1RepsSubtype.results = getStrDict(store, "t1-results")
+                T2RepsSubType.results = getStrDict(store, "t2-results")
+
             } catch {
                 os_log("failed to decode results from %@: %@", type: .error, path, error.localizedDescription)
             }

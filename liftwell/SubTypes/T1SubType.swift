@@ -5,214 +5,129 @@ import Foundation
 import UIKit           // for UIColor
 import os.log
 
-/// GZCLP scheme where volume is dropped on failure and then Training Max is reset.
-class T1RepsSubtype: ApparatusSubtype, ExerciseInfo {
+/// GZCLP scheme where weight is added to each cycle until the user fails at which point the next
+/// cycle is used. When cycles run out they are reset to the first cycle and a new Training Max
+/// is chosen.
+class T1RepsSubtype: BaseCyclicRepsSubtype {
     private typealias `Self` = T1RepsSubtype
     
-    class Result: BaseResult, Storable {
-        init(_ tag: ResultTag, weight: Double, cycleIndex: Int, reps: Int) {
-            self.weight = weight
-            self.cycleIndex = cycleIndex
-            self.reps = reps
-            super.init(tag)
+    class Result: CyclicResult {
+        init(_ tag: ResultTag, weight: Double, cycleIndex: Int, _ sets: String, goalReps: Int, actualReps: Int) {
+            self.sets = sets
+            self.goalReps = goalReps
+            super.init(tag, weight: weight, cycleIndex: cycleIndex, reps: actualReps)
         }
         
         required init(from store: Store) {
-            self.weight = store.getDbl("weight")
-            self.cycleIndex = store.getInt("cycleIndex")
-            self.reps = store.getInt("reps")
+            self.sets = store.getStr("sets")
+            self.goalReps = store.getInt("goalReps")
             super.init(from: store)
         }
         
         override func save(_ store: Store) {
-            store.addDbl("weight", weight)
-            store.addInt("cycleIndex", cycleIndex)
-            store.addInt("reps", reps)
+            store.addStr("sets", sets)
+            store.addInt("goalReps", goalReps)
             super.save(store)
         }
         
-        var weight: Double
-        var cycleIndex: Int
-        var reps: Int
+        var sets: String        // "5x3"
+        var goalReps: Int       // for the AMRAP set (as is base.reps)
     }
     
-    /// trainingMaxPercent is a percent of 1RM
-    init(_ cycles: [Sets], restSecs: Int, trainingMaxPercent: Double? = nil) {
-        self.cycleIndex = 0
-        self.cycles = cycles
-        
-        let (minReps, maxReps) = cycles[0].repRange(minimum: nil)
-        let reps: Int? = minReps < maxReps ? maxReps : nil
-        super.init(reps: reps, restTime: restSecs, trainingMaxPercent: trainingMaxPercent)
+    // GZCLP says to set the training max to 85% of the 5RM which is 87% of 1RM
+    // and 0.85 * 0.87 == 0.74 which is what we use for the percent of 1RM.
+    init(_ cycles: [Sets], restSecs: Int, trainingMaxPercent: Double = 0.74) {
+        super.init(cycles, restSecs: restSecs, trainingMaxPercent: trainingMaxPercent)
     }
     
     required init(from store: Store) {
-        cycleIndex = store.getInt("cycleIndex")
-        
-        cycles = []
-        let count = store.getInt("cyclesCount")
-        for i in 0..<count {
-            let cycle: Sets = store.getObj("cycle\(i)")
-            cycles.append(cycle)
-        }
-        
         super.init(from: store)
     }
     
-    override func save(_ store: Store) {
-        store.addInt("cycleIndex", cycleIndex)
-        
-        store.addInt("cyclesCount", cycles.count)
-        for (i, cycle) in cycles.enumerated() {
-            store.addObj("cycle\(i)", cycle)
-        }
-        
-        super.save(store)
-    }
-    
-    func sync(_ program: Program, _ savedExercise: Exercise) {
-        switch savedExercise.type {
-        case .body(_):
-            os_log("saved %@ subtype wasn't weights", savedExercise.name)
-        case .weights(let saved):
-            switch saved.subtype {
-            case .cyclic(let savedSubtype):
-                cycleIndex = savedSubtype.cycleIndex
-                super.sync(program, savedSubtype, sameSets: cycles.count == savedSubtype.cycles.count)
-            default:
-                os_log("saved %@ subtype wasn't cyclic", savedExercise.name)
-            }
-        }
-    }
-    
-    func errors() -> [String] {
-        var problems: [String] = []
+    override func errors() -> [String] {
+        var problems: [String] = super.errors()
         for sets in cycles {
-            problems += sets.errors()
+            if let last = sets.worksets.last, !last.amrap {
+                problems.append("Last set in each cycle should be AMRAP.")
+            }
         }
         return problems
     }
     
     // ---- ExerciseInfo ----------------------------------------------------------------------
-    func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
-        if aweight.getWorkingWeight() == 0 {
-            let newExercise = exercise.clone()
-            switch newExercise.type {
-            case .weights(let type):
-                let newSubtype = FindWeightSubType(reps: getBaseRepRange().1, restSecs: restTime)
-                type.subtype = .find(newSubtype)
-                return newExercise
-            default:
-                break
-            }
-        }
-        amrapReps = nil
-        amrapTag = nil
-        
-        index = 0
-        currentWorkout = workout.name
-        updated(exercise)
-        return nil
+    override func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
+        // History will include the AMRAP reps and the tag is inferred from that so don't think we want anything here.
+        return ("", UIColor.black)
     }
     
-    func clone() -> ExerciseInfo {
-        let store = Store()
-        store.addObj("self", self)
-        let result: Self = store.getObj("self")
-        return result
-    }
-    
-    func updated(_ exercise: Exercise) {
-        let weight = aweight.getWorkingWeight()
-        switch exercise.type {
-        case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight, minimum: workingReps)
-        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, minimum: workingReps)
-        }
-    }
-    
-    func sublabel(_ exercise: Exercise) -> String {
-        let weight = aweight.getWorkingWeight()
-        switch exercise.type {
-        case .body(_): return cycles[cycleIndex].sublabel(nil, weight, workingReps)
-        case .weights(let type): return cycles[cycleIndex].sublabel(type.apparatus, weight, workingReps)
-        }
-    }
-    
-    func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
-        if let myResults = Self.results[exercise.formalName], let last = myResults.last {
-            var count = 0
-            for result in myResults.reversed() {
-                if result.tag == last.tag {
-                    count += 1
+    override func historyLabel(_ exercise: Exercise) -> String {
+        if let myResults = Self.results[exercise.formalName] {
+            var labels: [String] = []
+            
+            for result in myResults {
+                let delta = result.reps - result.goalReps
+                if delta > 0 {
+                    labels.append("\(result.sets)(+\(delta)) @ \(Weight.friendlyUnitsStr(result.weight))")
                 } else {
-                    break
+                    labels.append("\(result.sets)(\(delta)) @ \(Weight.friendlyUnitsStr(result.weight))")
                 }
             }
-            if count > 1 {
-                return ("Previous was \(last.tag) x\(count)", UIColor.black)
-            } else {
-                return ("Previous was \(last.tag)", UIColor.black)
-            }
-        } else {
-            return ("", UIColor.black)
-        }
-    }
-    
-    func historyLabel(_ exercise: Exercise) -> String {
-        if let myResults = Self.results[exercise.formalName] {
-            let history = myResults.map {($0.reps, $0.weight)}
-            return historyLabel1(history)
+            
+            return makeHistoryFromLabels(labels)
         }
         return ""
     }
     
-    func restSecs() -> RestTime {
-        // note that autoStart is only used after index is incremented
-        return RestTime(autoStart: cycles[cycleIndex].set(index > 0 ? index-1 : 0).rest, secs: restTime)
-    }
-    
-    func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        if let reps = amrapReps, let tag = amrapTag {
-            self.doFinalize(exercise, tag, reps, view, completion)
-            
-        } else {
-            let (_, max, _) = getBaseRepRange()
-            getDifficultly(view, {self.doFinalize(exercise, $0, self.workingReps ?? max, view, completion)})
+    override func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {
+        let weight: Double
+        switch exercise.type {
+        case .body(_): weight = aweight.getWorkingWeight()
+        case .weights(let type):
+            let w = Weight(aweight.getWorkingWeight(), type.apparatus).closest()
+            weight = w.weight
         }
-    }
-    
-    private func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        let weight = aweight.getWorkingWeight()
-        let result = Result(tag, weight: weight, cycleIndex: cycleIndex, reps: reps)
+
+        let worksets = cycles[cycleIndex].worksets
+        let requestedReps = worksets.last?.maxReps ?? 0
+        let label = "\(worksets.count)x\(requestedReps)"
+        let result = Result(amrapTag!, weight: weight, cycleIndex: cycleIndex, label, goalReps: requestedReps, actualReps: amrapReps!)
         
         var myResults = Self.results[exercise.formalName] ?? []
         myResults.append(result)
         Self.results[exercise.formalName] = myResults
         
-        cycleIndex = (cycleIndex + 1) % cycles.count
-        if cycleIndex == 0 {
-            // Prompt user for advancement
-            super.finalize(exercise, tag, view, completion)
+        if amrapReps! >= requestedReps {
+            switch exercise.type {
+            case .body(_): break
+            case .weights(let type):
+                var weight = aweight.getWorkingWeight()
+                let w = Weight(weight, type.apparatus)
+                weight = w.nextWeight()
+                setWorkingWeight(weight)
+            }
+            completion()
+            
+        } else if cycleIndex+1 >= cycles.count {
+            cycleIndex = 0
+            setWorkingWeight(0.0)
+            completion()
+            
+            let worksets = cycles[0].worksets
+            let reps = worksets.last?.maxReps ?? 0
+            let alert = UIAlertController(title: "Resetting Training Max to zero to find a new \(reps)RM.", message: "Wait 2-3 days before finding the new max.", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default, handler: {_ in completion()})
+            alert.addAction(action)
+            view.present(alert, animated: true, completion:nil)
+            
         } else {
+            cycleIndex = (cycleIndex + 1) % cycles.count
             completion()
         }
     }
     
-    override func getBaseRepRange() -> (Int, Int, Int?) {
-        let (min, max) = cycles[cycleIndex].repRange(minimum: nil)
-        if let last = cycles[cycleIndex].worksets.last, last.amrap {
-            return (min, max, last.maxReps)
-        } else {
-            return (min, max, nil)
-        }
+    override func doGetResults(_ formalName: String) -> [CyclicResult]? {
+        return Self.results[formalName]
     }
     
-    override func isWorkset(_ index: Int) -> Bool {
-        return index > cycles[cycleIndex].warmups.count && index < cycles[cycleIndex].warmups.count + cycles[cycleIndex].worksets.count
-    }
-    
-    var cycleIndex: Int
-    
-    var cycles: [Sets]
     static var results: [String: [Result]] = [:]
 }
