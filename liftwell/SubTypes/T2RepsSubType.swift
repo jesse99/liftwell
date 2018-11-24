@@ -10,10 +10,8 @@ import os.log
 class T2RepsSubType: BaseCyclicRepsSubtype {
     private typealias `Self` = T2RepsSubType
     
-    // GZCLP says to set the training max to 85% of the 5RM which is 87% of 1RM
-    // and 0.85 * 0.87 == 0.74 which is what we use for the percent of 1RM.
-    init(_ cycles: [Sets], restSecs: Int, trainingMaxPercent: Double = 0.74) {
-        super.init(cycles, restSecs: restSecs, trainingMaxPercent: trainingMaxPercent)
+    init(_ cycles: [Sets], restSecs: Int) {
+        super.init(cycles, restSecs: restSecs, trainingMaxPercent: nil)
     }
     
     required init(from store: Store) {
@@ -39,16 +37,8 @@ class T2RepsSubType: BaseCyclicRepsSubtype {
         if case .failed = tag {
             if cycleIndex+1 >= cycles.count {
                 cycleIndex = 0
-                setWorkingWeight(0.0)
-                completion()
-            
-                let worksets = cycles[0].worksets
-                let reps = worksets.last?.maxReps ?? 0
-                let alert = UIAlertController(title: "Resetting Training Max to zero to find a new \(reps)RM.", message: "Wait 2-3 days before finding the new max.", preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default, handler: {_ in completion()})
-                alert.addAction(action)
-                view.present(alert, animated: true, completion:nil)
-            
+                super.finalize(exercise, .veryEasy, view, completion)   // veryEasy because we advance based on what the user lifted at the start of the cycle
+
             } else {
                 cycleIndex = (cycleIndex + 1) % cycles.count
                 completion()
@@ -65,16 +55,19 @@ class T2RepsSubType: BaseCyclicRepsSubtype {
             }
             completion()
         }
-        
-        cycleIndex = (cycleIndex + 1) % cycles.count
-        if cycleIndex == 0 {
-            // Prompt user for advancement
-            super.finalize(exercise, tag, view, completion)
-        } else {
-            completion()
-        }
     }
 
+    override func doGetAdvanceWeight(_ exercise: Exercise) -> Double {
+        if let myResults = Self.results[exercise.formalName] {
+            for result in myResults.reversed() {
+                if result.cycleIndex == 0 {
+                    return result.weight
+                }
+            }
+        }
+        return 0.0
+    }
+    
     override func doGetResults(_ formalName: String) -> [CyclicResult]? {
         return Self.results[formalName]
     }

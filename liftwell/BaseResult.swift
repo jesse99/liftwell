@@ -4,6 +4,7 @@ import Foundation
 import os.log
 
 enum ResultTag {
+    case veryEasy
     case easy
     case normal
     case hard
@@ -21,6 +22,7 @@ class BaseResult {
         
         let tag = store.getStr("tag")
         switch tag {
+        case "veryEasy": self.tag = .veryEasy
         case "easy": self.tag = .easy
         case "normal": self.tag = .normal
         case "hard": self.tag = .hard
@@ -32,6 +34,7 @@ class BaseResult {
     func save(_ store: Store) {
         store.addDate("date", date)
         switch tag {
+        case .veryEasy: store.addStr("tag", "veryEasy")
         case .easy: store.addStr("tag", "easy")
         case .normal: store.addStr("tag", "normal")
         case .hard: store.addStr("tag", "hard")

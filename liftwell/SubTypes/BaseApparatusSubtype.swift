@@ -189,16 +189,22 @@ class BaseApparatusSubtype {
             let dlabel2 = variableReps ? "2 reps" : advanceWeightLabel(exercise, weight, by: -2)
             let dlabel3 = variableReps ? "3 reps" : advanceWeightLabel(exercise, weight, by: -3)
             
-            let advance4 = UIAlertAction(title: "Advance by \(label4)", style: .default) {_ in self.doAdvance(type.apparatus, 4); completion()}
-            let advance3 = UIAlertAction(title: "Advance by \(label3)", style: .default) {_ in self.doAdvance(type.apparatus, 3); completion()}
-            let advance2 = UIAlertAction(title: "Advance by \(label2)", style: .default) {_ in self.doAdvance(type.apparatus, 2); completion()}
-            let advance = UIAlertAction(title: "Advance by \(label1)", style: .default) {_ in self.doAdvance(type.apparatus, 1); completion()}
+            let advance4 = UIAlertAction(title: "Advance by \(label4)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 4); completion()}
+            let advance3 = UIAlertAction(title: "Advance by \(label3)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 3); completion()}
+            let advance2 = UIAlertAction(title: "Advance by \(label2)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 2); completion()}
+            let advance = UIAlertAction(title: "Advance by \(label1)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 1); completion()}
             let maintain = UIAlertAction(title: "Maintain", style: .default) {_ in completion()}
-            let deload = UIAlertAction(title: "Deload by \(dlabel1)", style: .default) {_ in self.doAdvance(type.apparatus, -1); completion()}
-            let deload2 = UIAlertAction(title: "Deload by \(dlabel2)", style: .default) {_ in self.doAdvance(type.apparatus, -2); completion()}
-            let deload3 = UIAlertAction(title: "Deload by \(dlabel3)", style: .default) {_ in self.doAdvance(type.apparatus, -3); completion()}
+            let deload = UIAlertAction(title: "Deload by \(dlabel1)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, -1); completion()}
+            let deload2 = UIAlertAction(title: "Deload by \(dlabel2)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, -2); completion()}
+            let deload3 = UIAlertAction(title: "Deload by \(dlabel3)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, -3); completion()}
             
             switch tag {
+            case .veryEasy:
+                alert.addAction(advance4)
+                alert.addAction(advance3)
+                alert.addAction(advance2)
+                alert.preferredAction = advance2
+                
             case .easy:
                 alert.addAction(advance4)
                 alert.addAction(advance3)
@@ -241,8 +247,12 @@ class BaseApparatusSubtype {
         return (0, 0, nil)
     }
     
-    private func doAdvance(_ apparatus: Apparatus, _ amount: Int) {
-        var weight = aweight.getWorkingWeight()
+    func doGetAdvanceWeight(_ exercise: Exercise) -> Double {
+        return aweight.getWorkingWeight()
+    }
+    
+    private func doAdvance(_ exercise: Exercise, _ apparatus: Apparatus, _ amount: Int) {
+        var weight = doGetAdvanceWeight(exercise)
         
         let delta = amount.signum()
         if var reps = workingReps {

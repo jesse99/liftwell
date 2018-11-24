@@ -271,7 +271,7 @@ class MaxRepsSubType: ExerciseInfo {
         let sum = completed.reduce(0, {$0 + $1})
         if sum > currentReps {
             switch tag {
-            case .easy, .normal:
+            case .veryEasy, .easy, .normal:
                 currentReps = sum
                 completion()
                 
