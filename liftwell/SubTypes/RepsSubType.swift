@@ -27,9 +27,9 @@ class RepsSubType: BaseRepsSubType {
     override func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let weight: Double
         switch exercise.type {
-        case .body(_): weight = aweight.getWorkingWeight()
+        case .body(_): weight = aweight.getBaseWorkingWeight()
         case .weights(let type):
-            let w = Weight(aweight.getWorkingWeight(), type.apparatus).closest()
+            let w = Weight(aweight.getBaseWorkingWeight(), type.apparatus).closest()
             weight = w.weight
         }
         

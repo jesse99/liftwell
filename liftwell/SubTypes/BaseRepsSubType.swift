@@ -77,7 +77,7 @@ class BaseRepsSubType: BaseApparatusSubtype, ExerciseInfo {
     
     // ---- ExerciseInfo ----------------------------------------------------------------------
     func start(_ workout: Workout, _ exercise: Exercise) -> (Exercise, String)? {
-        let weight = aweight.getWorkingWeight()
+        let weight = aweight.getBaseWorkingWeight()
         if weight == 0 {
             let newExercise = exercise.clone()
             switch newExercise.type {
@@ -108,7 +108,7 @@ class BaseRepsSubType: BaseApparatusSubtype, ExerciseInfo {
     }
     
     func sublabel(_ exercise: Exercise) -> String {
-        let weight = aweight.getWorkingWeight()
+        let weight = aweight.getBaseWorkingWeight()
         switch exercise.type {
         case .body(_): return sets.sublabel(nil, weight, workingReps)
         case .weights(let type): return sets.sublabel(type.apparatus, weight, workingReps)
@@ -182,7 +182,7 @@ class BaseRepsSubType: BaseApparatusSubtype, ExerciseInfo {
     }
     
     private func getActivities(_ exercise: Exercise) -> (Int, [Activity]) {
-        let weight = aweight.getWorkingWeight()
+        let weight = aweight.getBaseWorkingWeight()
         switch exercise.type {
         case .body(_): return sets.activities(weight, minimum: workingReps)
         case .weights(let type): return sets.activities(weight, type.apparatus, minimum: workingReps)

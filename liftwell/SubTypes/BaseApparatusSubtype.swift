@@ -13,7 +13,7 @@ public enum ApparatusWeight {
 }
 
 extension ApparatusWeight {
-    func getWorkingWeight() -> Double {
+    func getBaseWorkingWeight() -> Double {
         switch self {
         case .weight(let weight):
             return weight
@@ -172,7 +172,7 @@ class BaseApparatusSubtype {
     }
     
     func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        let weight = aweight.getWorkingWeight()
+        let weight = aweight.getBaseWorkingWeight()
         
         switch exercise.type {
         case .body(_): completion()
@@ -248,7 +248,7 @@ class BaseApparatusSubtype {
     }
     
     func doGetAdvanceWeight(_ exercise: Exercise) -> Double {
-        return aweight.getWorkingWeight()
+        return aweight.getBaseWorkingWeight()
     }
     
     private func doAdvance(_ exercise: Exercise, _ apparatus: Apparatus, _ amount: Int) {

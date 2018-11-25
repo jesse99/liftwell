@@ -101,7 +101,7 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
     
     // ---- ExerciseInfo ----------------------------------------------------------------------
     func start(_ workout: Workout, _ exercise: Exercise) -> (Exercise, String)? {
-        if aweight.getWorkingWeight() == 0 {
+        if aweight.getBaseWorkingWeight() == 0 {
             let newExercise = exercise.clone()
             switch newExercise.type {
             case .weights(let type):
@@ -131,7 +131,7 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
     }
     
     func updated(_ exercise: Exercise) {
-        let weight = aweight.getWorkingWeight()
+        let weight = aweight.getBaseWorkingWeight()
         switch exercise.type {
         case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight, minimum: workingReps)
         case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, minimum: workingReps)
@@ -139,7 +139,7 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
     }
     
     func sublabel(_ exercise: Exercise) -> String {
-        let weight = aweight.getWorkingWeight()
+        let weight = aweight.getBaseWorkingWeight()
         switch exercise.type {
         case .body(_): return cycles[cycleIndex].sublabel(nil, weight, workingReps)
         case .weights(let type): return cycles[cycleIndex].sublabel(type.apparatus, weight, workingReps)

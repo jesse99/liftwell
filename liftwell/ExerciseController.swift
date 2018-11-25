@@ -484,7 +484,7 @@ class ExerciseController: UIViewController {
             switch type.subtype {
             case .maxReps(let subtype):
                 subtype.restTime = options.rest
-                subtype.weight = options.aweight.getWorkingWeight()
+                subtype.weight = options.aweight.getBaseWorkingWeight()
                 subtype.currentReps = options.reps!
                 subtype.updated(exercise)
             case .reps(let subtype):
@@ -505,7 +505,7 @@ class ExerciseController: UIViewController {
                 subtype.updated(exercise)
             case .find(let subtype):
                 subtype.restTime = options.rest
-                subtype.weight = options.aweight.getWorkingWeight()
+                subtype.weight = options.aweight.getBaseWorkingWeight()
                 subtype.reps = options.reps!
                 subtype.updated(exercise)
             case .reps(let subtype):
