@@ -79,6 +79,12 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
             case .cyclic(let savedSubtype):
                 cycleIndex = savedSubtype.cycleIndex
                 super.sync(program, savedSubtype, sameSets: cycles.count == savedSubtype.cycles.count)
+            case .t1(let savedSubtype):
+                cycleIndex = savedSubtype.cycleIndex
+                super.sync(program, savedSubtype, sameSets: cycles.count == savedSubtype.cycles.count)
+            case .t2(let savedSubtype):
+                cycleIndex = savedSubtype.cycleIndex
+                super.sync(program, savedSubtype, sameSets: cycles.count == savedSubtype.cycles.count)
             default:
                 os_log("saved %@ subtype wasn't cyclic", savedExercise.name)
             }
@@ -94,14 +100,14 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
     }
     
     // ---- ExerciseInfo ----------------------------------------------------------------------
-    func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
+    func start(_ workout: Workout, _ exercise: Exercise) -> (Exercise, String)? {
         if aweight.getWorkingWeight() == 0 {
             let newExercise = exercise.clone()
             switch newExercise.type {
             case .weights(let type):
-                let newSubtype = FindWeightSubType(reps: getBaseRepRange().1, restSecs: restTime)
+                let newSubtype = doCreateFindWeights(exercise)
                 type.subtype = .find(newSubtype)
-                return newExercise
+                return (newExercise, "Not completed")
             default:
                 break
             }
@@ -115,11 +121,13 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
         return nil
     }
     
+    func doCreateFindWeights(_ exercise: Exercise) -> FindWeightSubType {
+        return FindWeightSubType(reps: getBaseRepRange().1, restSecs: restTime)
+    }
+    
     func clone() -> ExerciseInfo {
-        let store = Store()
-        store.addObj("self", self)
-        let result: Self = store.getObj("self")
-        return result
+        assert(false)
+        return self
     }
     
     func updated(_ exercise: Exercise) {
@@ -139,7 +147,7 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
     }
     
     func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
-        if let myResults = doGetResults(exercise.formalName), let last = myResults.last, let workset = cycles[cycleIndex].worksets.last {
+        if let myResults = doGetResults(exercise), let last = myResults.last, let workset = cycles[cycleIndex].worksets.last {
             if workset.amrap {
                 // History will include the AMRAP reps and the tag is inferred from that so don't think we want anything here.
                 return ("", UIColor.black)
@@ -165,7 +173,7 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
     }
     
     func historyLabel(_ exercise: Exercise) -> String {
-        if let myResults = doGetResults(exercise.formalName) {
+        if let myResults = doGetResults(exercise) {
             let history = myResults.map {($0.reps, $0.weight)}
             return historyLabel1(history)
         }
@@ -191,7 +199,7 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
         assert(false)
     }
     
-    func doGetResults(_ formalName: String) -> [CyclicResult]? {
+    func doGetResults(_ exercise: Exercise) -> [CyclicResult]? {
         assert(false)
         return []
     }

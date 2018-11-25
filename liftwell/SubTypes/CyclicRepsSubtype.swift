@@ -18,6 +18,13 @@ class CyclicRepsSubtype: BaseCyclicRepsSubtype {
         super.init(from: store)
     }
     
+    override func clone() -> ExerciseInfo {
+        let store = Store()
+        store.addObj("self", self)
+        let result: Self = store.getObj("self")
+        return result
+    }
+    
     override func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let weight: Double
         switch exercise.type {
@@ -42,8 +49,8 @@ class CyclicRepsSubtype: BaseCyclicRepsSubtype {
         }
     }
     
-    override func doGetResults(_ formalName: String) -> [CyclicResult]? {
-        return Self.results[formalName]
+    override func doGetResults(_ exercise: Exercise) -> [CyclicResult]? {
+        return Self.results[exercise.formalName]
     }
     
     static var results: [String: [CyclicResult]] = [:]

@@ -111,7 +111,7 @@ class TimedSubType: ExerciseInfo {
         }
     }
     
-    func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
+    func start(_ workout: Workout, _ exercise: Exercise) -> (Exercise, String)? {
         index = 0
         currentWorkout = workout.name
         updated(exercise)

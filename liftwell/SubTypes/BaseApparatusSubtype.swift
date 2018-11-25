@@ -290,8 +290,16 @@ class BaseApparatusSubtype {
         case .weight(_):
             aweight = .weight(weight)
         case .trainingMax(percent: let percent, oneRepMax: _):
-            let (_, maxReps, _) = getBaseRepRange()
-            let reps = workingReps ?? maxReps
+            let max = weight/percent
+            aweight = .trainingMax(percent: percent, oneRepMax: max)
+        }
+    }
+    
+    func setNRM(_ reps: Int, _ weight: Double) {
+        switch aweight {
+        case .weight(_):
+            aweight = .weight(weight)
+        case .trainingMax(percent: let percent, oneRepMax: _):
             if let max = get1RM(weight, reps) {
                 aweight = .trainingMax(percent: percent, oneRepMax: max)
             } else {
@@ -299,7 +307,7 @@ class BaseApparatusSubtype {
             }
         }
     }
-    
+
     func isWorkset(_ index: Int) -> Bool {
         assert(false)       // subclasses implement this
         return false

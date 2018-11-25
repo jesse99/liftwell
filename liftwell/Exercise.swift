@@ -107,6 +107,9 @@ class Exercise: Storable {
             case .cyclic(let subtype): return subtype
             case .find(let subtype): return subtype
             case .reps(let subtype): return subtype
+            case .t1(let subtype): return subtype
+            case .t2(let subtype): return subtype
+            case .t3(let subtype): return subtype
             case .timed(let subtype): return subtype
             }
         }
@@ -146,13 +149,13 @@ class Exercise: Storable {
             }
         case .weights(let type):
             switch type.subtype {
-            case .cyclic(_):
+            case .cyclic(_), .t1(_), .t2(_):
                 if let result = CyclicRepsSubtype.results[formalName]?.last {
                     weight = result.weight
                 }
             case .find(_), .timed(_):
                 break
-            case .reps(_):
+            case .reps(_), .t3(_):
                 if let result = RepsSubType.results[formalName]?.last {
                     weight = result.weight
                 }
@@ -185,13 +188,13 @@ class Exercise: Storable {
             }
         case .weights(let type):
             switch type.subtype {
-            case .cyclic(_):
+            case .cyclic(_), .t1(_), .t2(_):
                 if let result = CyclicRepsSubtype.results[formalName]?.last {
                     return result.reps
                 }
             case .find(_), .timed(_):
                 break
-            case .reps(_):
+            case .reps(_), .t3(_):
                 if let result = RepsSubType.results[formalName]?.last {
                     return result.reps
                 }

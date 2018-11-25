@@ -9,9 +9,10 @@ import os.log
 class FindWeightSubType: ExerciseInfo {
     private typealias `Self` = FindWeightSubType
     
-    init(reps: Int, restSecs: Int) {
+    init(reps: Int, restSecs: Int, subtitle: String = "") {
         self.reps = reps
         self.restTime = restSecs
+        self.subtitle = subtitle
         self.weight = 0
         self.set = .notStarted
     }
@@ -20,6 +21,7 @@ class FindWeightSubType: ExerciseInfo {
         self.reps = store.getInt("reps")
         self.restTime = store.getInt("restTime")
         self.weight = store.getDbl("weight")
+        self.subtitle = store.getStr("subtitle", ifMissing: "")
         
         let index = store.getInt("index")
         if index > 0 {
@@ -35,6 +37,7 @@ class FindWeightSubType: ExerciseInfo {
         store.addInt("reps", reps)
         store.addInt("restTime", restTime)
         store.addDbl("weight", weight)
+        store.addStr("subtitle", subtitle)
         
         switch set {
         case .notStarted: store.addInt("index", 0)
@@ -61,7 +64,7 @@ class FindWeightSubType: ExerciseInfo {
         }
     }
     
-    func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
+    func start(_ workout: Workout, _ exercise: Exercise) -> (Exercise, String)? {
         set = .started(1)
         currentWorkout = workout.name
         updated(exercise)
@@ -108,7 +111,7 @@ class FindWeightSubType: ExerciseInfo {
             let currentWeight = Weight(weight, type.apparatus).closest()
             return Activity(
                 title: "Set \(index)",
-                subtitle: "",
+                subtitle: subtitle,
                 amount: "\(reps) @ \(currentWeight.text)",
                 details: currentWeight.plates,
                 buttonName: finished ? "Done" : "Next",
@@ -147,9 +150,12 @@ class FindWeightSubType: ExerciseInfo {
             switch original.type {
             case .weights(let type):    // this is the only one with an apparatus
                 switch type.subtype {
-                case .cyclic(let subtype): subtype.setWorkingWeight(weight)
+                case .cyclic(let subtype): subtype.setNRM(reps, weight)
                 case .find(_): assert(false)
-                case .reps(let subtype): subtype.setWorkingWeight(weight)
+                case .reps(let subtype): subtype.setNRM(reps, weight)
+                case .t1(let subtype): subtype.setNRM(reps, weight)
+                case .t2(let subtype): subtype.setNRM(reps, weight)
+                case .t3(let subtype): subtype.setNRM(reps, weight)
                 case .timed(let subtype): subtype.weight = weight
                 }
             default:
@@ -196,6 +202,7 @@ class FindWeightSubType: ExerciseInfo {
     var weight: Double
     var reps: Int
     var restTime: Int
+    var subtitle: String
     private var set: Set
     private var currentWorkout = ""
 }

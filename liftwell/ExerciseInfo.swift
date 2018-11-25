@@ -114,7 +114,7 @@ protocol ExerciseInfo: Storable {
 
     /// If the exercise requires another exercise to be executed then a new Exercise will be returned
     /// and state will be set to blocked.
-    func start(_ workout: Workout, _ exercise: Exercise) -> Exercise?
+    func start(_ workout: Workout, _ exercise: Exercise) -> (Exercise, String)?
     
     /// Options screen updated state.
     func updated(_ exercise: Exercise)

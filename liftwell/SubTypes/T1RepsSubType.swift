@@ -8,40 +8,63 @@ import os.log
 /// GZCLP scheme where weight is added to each cycle until the user fails at which point the next
 /// cycle is used. When cycles run out they are reset to the first cycle and a new Training Max
 /// is chosen.
-class T1RepsSubtype: BaseCyclicRepsSubtype {
-    private typealias `Self` = T1RepsSubtype
+class T1RepsSubType: BaseCyclicRepsSubtype {
+    private typealias `Self` = T1RepsSubType
     
     class Result: CyclicResult {
-        init(_ tag: ResultTag, weight: Double, cycleIndex: Int, _ sets: String, goalReps: Int, actualReps: Int) {
+        init(_ tag: ResultTag, weight: Double, cycleIndex: Int, _ sets: String, goalReps: Int, actualReps: Int, percent: Double, oneMax: Double) {
             self.sets = sets
             self.goalReps = goalReps
+            self.percent = percent
+            self.oneMax = oneMax
             super.init(tag, weight: weight, cycleIndex: cycleIndex, reps: actualReps)
         }
         
         required init(from store: Store) {
             self.sets = store.getStr("sets")
             self.goalReps = store.getInt("goalReps")
+            self.percent = store.getDbl("percent")
+            self.oneMax = store.getDbl("oneMax")
             super.init(from: store)
         }
         
         override func save(_ store: Store) {
             store.addStr("sets", sets)
             store.addInt("goalReps", goalReps)
+            store.addDbl("percent", percent)
+            store.addDbl("oneMax", oneMax)
             super.save(store)
         }
         
         var sets: String        // "5x3"
         var goalReps: Int       // for the AMRAP set (as is base.reps)
+        var percent: Double
+        var oneMax: Double
     }
     
-    // GZCLP says to set the training max to 85% of the 5RM which is 87% of 1RM
-    // and 0.85 * 0.87 == 0.74 which is what we use for the percent of 1RM.
-    init(_ cycles: [Sets], restSecs: Int, trainingMaxPercent: Double = 0.74) {
+    // GZCLP says to set the training max to 85% of the 5RM. SO we have:
+    // TM = 0.85 * 5RM
+    // TM = percent * 1RM
+    // 1RM = 5RM * (2 - 0.87)
+    //
+    // TM = percent * (5RM * (2 - 0.87))
+    // 0.85 * 5RM = percent * (5RM * (2 - 0.87))
+    // percent = (0.85 * 5RM)/(5RM * (2 - 0.87))
+    // percent = 0.85/(2 - 0.87)
+    // percent = 0.752
+    init(_ cycles: [Sets], restSecs: Int, trainingMaxPercent: Double = 0.752) {
         super.init(cycles, restSecs: restSecs, trainingMaxPercent: trainingMaxPercent)
     }
     
     required init(from store: Store) {
         super.init(from: store)
+    }
+    
+    override func clone() -> ExerciseInfo {
+        let store = Store()
+        store.addObj("self", self)
+        let result: Self = store.getObj("self")
+        return result
     }
     
     override func errors() -> [String] {
@@ -55,6 +78,19 @@ class T1RepsSubtype: BaseCyclicRepsSubtype {
     }
     
     // ---- ExerciseInfo ----------------------------------------------------------------------
+    override func start(_ workout: Workout, _ exercise: Exercise) -> (Exercise, String)? {
+        if let (newExercise, oldLabel) = super.start(workout, exercise) {
+            if let myResults = Self.results[exercise.formalName], !myResults.isEmpty {
+                return (newExercise, "Reset 5RM")
+            } else {
+                return (newExercise, oldLabel)
+            }
+
+        } else {
+            return nil
+        }
+    }
+    
     override func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
         // History will include the AMRAP reps and the tag is inferred from that so don't think we want anything here.
         return ("", UIColor.black)
@@ -87,10 +123,22 @@ class T1RepsSubtype: BaseCyclicRepsSubtype {
             weight = w.weight
         }
 
+        let percent: Double
+        let oneMax: Double
+        switch aweight {
+        case .weight(_):
+            assert(false)
+            percent = 0.0
+            oneMax = 0.0
+        case .trainingMax(percent: let p, oneRepMax: let max):
+            percent = p
+            oneMax = max
+        }
+
         let worksets = cycles[cycleIndex].worksets
         let requestedReps = worksets.last?.maxReps ?? 0
         let label = "\(worksets.count)x\(requestedReps)"
-        let result = Result(amrapTag!, weight: weight, cycleIndex: cycleIndex, label, goalReps: requestedReps, actualReps: amrapReps!)
+        let result = Result(amrapTag!, weight: weight, cycleIndex: cycleIndex, label, goalReps: requestedReps, actualReps: amrapReps!, percent: percent, oneMax: oneMax)
         
         var myResults = Self.results[exercise.formalName] ?? []
         myResults.append(result)
@@ -125,8 +173,28 @@ class T1RepsSubtype: BaseCyclicRepsSubtype {
         }
     }
     
-    override func doGetResults(_ formalName: String) -> [CyclicResult]? {
-        return Self.results[formalName]
+    // TM = 0.85 * 5RM
+    // TM = percent * 1RM
+    //
+    // 0.85 * 5RM = percent * 1RM
+    // 5RM = (percent * 1RM)/0.85
+    override func doCreateFindWeights(_ exercise: Exercise) -> FindWeightSubType {
+        var subtitle = ""
+        if let myResults = Self.results[exercise.formalName], let last = myResults.last, last.oneMax > 0.0 {
+            let fiveMax = (last.percent * last.oneMax)/0.85
+            switch exercise.type {
+            case .body(_):
+                assert(false)
+            case .weights(let type):
+                let w = Weight(fiveMax, type.apparatus).closest()
+                subtitle = "5RM was \(w.text)"
+            }
+        }
+        return FindWeightSubType(reps: 5, restSecs: restTime, subtitle: subtitle)
+    }
+    
+    override func doGetResults(_ exercise: Exercise) -> [CyclicResult]? {
+        return Self.results[exercise.formalName]
     }
     
     static var results: [String: [Result]] = [:]

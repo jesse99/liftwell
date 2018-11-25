@@ -40,7 +40,7 @@ func getAMRAPResult(_ view: UIViewController, _ goalReps: Int, _ completion: @es
         alert.addAction(action)
     }
     
-    for reps in goalReps+3..<goalReps+10 {
+    for reps in goalReps+3..<goalReps+11 {
         action = UIAlertAction(title: "\(reps) Reps", style: .default) {_ in completion(reps, .easy)}
         alert.addAction(action)
     }

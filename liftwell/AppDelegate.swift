@@ -205,24 +205,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return date !=  nil ? (date!, partial || (skipped > 0 && skipped != notSkipped), skipped > 0) : nil
     }
 
-    func saveResults() {
-        let path = getPath(fileName: "results")
-        let store = Store()
-        addStrDict(store, "cyclic-results", CyclicRepsSubtype.results)
-        addStrDict(store, "max-reps-results", MaxRepsSubType.results)
-        addStrDict(store, "reps-results", RepsSubType.results)
-        addStrDict(store, "timed-results", TimedSubType.results)
-        
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .secondsSince1970
-        do {
-            let data = try encoder.encode(store)
-            saveObject(data as AnyObject, path)
-        } catch {
-            os_log("Error encoding program %@: %@", type: .error, program.name, error.localizedDescription)
-        }
-    }
-    
     func scheduleTimerNotification(_ fireDate: Date) {
         let content = UNMutableNotificationContent()
         content.title = "Finished resting."
@@ -350,6 +332,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func findBuiltIn(_ name: String) -> Program? {
         return programs.first(where: {$0.name == name}) 
     }
+    
+    private func loadAchievements() {
+        achievements.removeAll()
+        achievements.append(BodyPercentAchievement(self))
+        achievements.append(LiftTotalAchievement(self))
+        achievements.append(OneRepMaxAchievement(self))
+        achievements.append(WorkoutDaysAchievement(self))
+    }
 
     private func loadResults() {
         let path = getPath(fileName: "results")
@@ -363,9 +353,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 MaxRepsSubType.results = getStrDict(store, "max-reps-results")
                 RepsSubType.results = getStrDict(store, "reps-results")
                 TimedSubType.results = getStrDict(store, "timed-results")
-                T1RepsSubtype.results = getStrDict(store, "t1-results")
+                T1RepsSubType.results = getStrDict(store, "t1b-results")
                 T2RepsSubType.results = getStrDict(store, "t2-results")
-
+                T3RepsSubType.results = getStrDict(store, "t3-results")
+                
             } catch {
                 os_log("failed to decode results from %@: %@", type: .error, path, error.localizedDescription)
             }
@@ -373,15 +364,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             os_log("failed to unarchive program from %@", type: .error, path)
         }
     }
-    
-    private func loadAchievements() {
-        achievements.removeAll()
-        achievements.append(BodyPercentAchievement(self))
-        achievements.append(LiftTotalAchievement(self))
-        achievements.append(OneRepMaxAchievement(self))
-        achievements.append(WorkoutDaysAchievement(self))
+
+    func saveResults() {
+        let path = getPath(fileName: "results")
+        let store = Store()
+        addStrDict(store, "cyclic-results", CyclicRepsSubtype.results)
+        addStrDict(store, "max-reps-results", MaxRepsSubType.results)
+        addStrDict(store, "reps-results", RepsSubType.results)
+        addStrDict(store, "timed-results", TimedSubType.results)
+        addStrDict(store, "t1b-results", T1RepsSubType.results)
+        addStrDict(store, "t2-results", T2RepsSubType.results)
+        addStrDict(store, "t3-results", T1RepsSubType.results)
+
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .secondsSince1970
+        do {
+            let data = try encoder.encode(store)
+            saveObject(data as AnyObject, path)
+        } catch {
+            os_log("Error encoding program %@: %@", type: .error, program.name, error.localizedDescription)
+        }
     }
     
+    let programs = [FiveThreeOneBeginner(), GZCLP3(), GZCLP4(), Mine2(), PhraksGreyskull()]
+
     var window: UIWindow?
     var program: Program!
     var notificationsAreEnabled = false
@@ -390,8 +396,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var bodyWeight: Int = 0
     
     var achievements: [Achievement] = []
-    
-    let programs = [FiveThreeOneBeginner(), Mine2(), PhraksGreyskull()]
 }
 
 func assert(_ predicate: Bool, _ message: String) {

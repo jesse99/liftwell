@@ -30,12 +30,13 @@
 		373CCFBD21A7900E00096291 /* MaxRepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFBC21A7900E00096291 /* MaxRepsSubType.swift */; };
 		373CCFBF21A7901A00096291 /* RepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFBE21A7901A00096291 /* RepsSubType.swift */; };
 		373CCFC121A7902700096291 /* TimedSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFC021A7902700096291 /* TimedSubType.swift */; };
-		373CCFC321A792CA00096291 /* T1SubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFC221A792CA00096291 /* T1SubType.swift */; };
+		373CCFC321A792CA00096291 /* T1RepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFC221A792CA00096291 /* T1RepsSubType.swift */; };
 		373CCFC521A7B22800096291 /* SubTypeHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFC421A7B22800096291 /* SubTypeHelpers.swift */; };
 		373CCFC721A9B2A400096291 /* T2RepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFC621A9B2A400096291 /* T2RepsSubType.swift */; };
 		373CCFC921A9C4BA00096291 /* BaseCyclicRepsSubtype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFC821A9C4BA00096291 /* BaseCyclicRepsSubtype.swift */; };
 		373CCFCB21A9DF6000096291 /* T3RepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFCA21A9DF6000096291 /* T3RepsSubType.swift */; };
 		373CCFCD21A9E73200096291 /* BaseRepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFCC21A9E73200096291 /* BaseRepsSubType.swift */; };
+		373CCFCF21AA309A00096291 /* GZCLP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFCE21AA309A00096291 /* GZCLP.swift */; };
 		374D3EDA217BFBD100AC828D /* DateExtensionw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3ED9217BFBD100AC828D /* DateExtensionw.swift */; };
 		374D3EDC217D4F4E00AC828D /* ExerciseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3EDB217D4F4E00AC828D /* ExerciseController.swift */; };
 		374D3EDE217D50EF00AC828D /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3EDD217D50EF00AC828D /* ColorExtensions.swift */; };
@@ -117,12 +118,13 @@
 		373CCFBC21A7900E00096291 /* MaxRepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxRepsSubType.swift; sourceTree = "<group>"; };
 		373CCFBE21A7901A00096291 /* RepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsSubType.swift; sourceTree = "<group>"; };
 		373CCFC021A7902700096291 /* TimedSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedSubType.swift; sourceTree = "<group>"; };
-		373CCFC221A792CA00096291 /* T1SubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = T1SubType.swift; sourceTree = "<group>"; };
+		373CCFC221A792CA00096291 /* T1RepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = T1RepsSubType.swift; sourceTree = "<group>"; };
 		373CCFC421A7B22800096291 /* SubTypeHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTypeHelpers.swift; sourceTree = "<group>"; };
 		373CCFC621A9B2A400096291 /* T2RepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = T2RepsSubType.swift; sourceTree = "<group>"; };
 		373CCFC821A9C4BA00096291 /* BaseCyclicRepsSubtype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCyclicRepsSubtype.swift; sourceTree = "<group>"; };
 		373CCFCA21A9DF6000096291 /* T3RepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = T3RepsSubType.swift; sourceTree = "<group>"; };
 		373CCFCC21A9E73200096291 /* BaseRepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepsSubType.swift; sourceTree = "<group>"; };
+		373CCFCE21AA309A00096291 /* GZCLP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GZCLP.swift; sourceTree = "<group>"; };
 		374D3ED9217BFBD100AC828D /* DateExtensionw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionw.swift; sourceTree = "<group>"; };
 		374D3EDB217D4F4E00AC828D /* ExerciseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseController.swift; sourceTree = "<group>"; };
 		374D3EDD217D50EF00AC828D /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				37DE95FF219D1D3300D60101 /* FiveThreeOneBeginner.swift */,
+				373CCFCE21AA309A00096291 /* GZCLP.swift */,
 				37286858216842C8005F6FD0 /* Mine2.swift */,
 				37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */,
 			);
@@ -302,7 +305,7 @@
 				373CCFBE21A7901A00096291 /* RepsSubType.swift */,
 				373CCFC421A7B22800096291 /* SubTypeHelpers.swift */,
 				373CCFC021A7902700096291 /* TimedSubType.swift */,
-				373CCFC221A792CA00096291 /* T1SubType.swift */,
+				373CCFC221A792CA00096291 /* T1RepsSubType.swift */,
 				373CCFC621A9B2A400096291 /* T2RepsSubType.swift */,
 				373CCFCA21A9DF6000096291 /* T3RepsSubType.swift */,
 			);
@@ -506,6 +509,7 @@
 				373CCFB921A78FF100096291 /* CyclicRepsSubtype.swift in Sources */,
 				37E7BF122197E6CF0087E7FE /* BodyPercentAchievement.swift in Sources */,
 				373CCFBB21A78FFF00096291 /* FindWeightSubType.swift in Sources */,
+				373CCFCF21AA309A00096291 /* GZCLP.swift in Sources */,
 				374FE943218536F500CFC284 /* RepsOptionsController.swift in Sources */,
 				37E6577D218CC01200ED8BD0 /* EditNoteController.swift in Sources */,
 				37EFD6DC217A2D9000F60880 /* Set.swift in Sources */,
@@ -536,7 +540,7 @@
 				3728685F21699C17005F6FD0 /* Types.swift in Sources */,
 				37DE95FE219A5E0B00D60101 /* MarkdownController.swift in Sources */,
 				37E7BF07219750DF0087E7FE /* OptionsTabController.swift in Sources */,
-				373CCFC321A792CA00096291 /* T1SubType.swift in Sources */,
+				373CCFC321A792CA00096291 /* T1RepsSubType.swift in Sources */,
 				373CCFC721A9B2A400096291 /* T2RepsSubType.swift in Sources */,
 				374FE9402183D10700CFC284 /* BaseResult.swift in Sources */,
 				37EFD6DA21780EDC00F60880 /* LabelExtensions.swift in Sources */,

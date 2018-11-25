@@ -17,6 +17,13 @@ class RepsSubType: BaseRepsSubType {
         super.init(from: store)
     }
     
+    override func clone() -> ExerciseInfo {
+        let store = Store()
+        store.addObj("self", self)
+        let result: Self = store.getObj("self")
+        return result
+    }
+    
     override func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let weight: Double
         switch exercise.type {
@@ -28,15 +35,15 @@ class RepsSubType: BaseRepsSubType {
         
         let result = RepsResult(tag, weight: weight, reps: reps)
         
-        var myResults = doGetResults(exercise.formalName) ?? []
+        var myResults = doGetResults(exercise) ?? []
         myResults.append(result)
         Self.results[exercise.formalName] = myResults
         
         super.finalize(exercise, tag, view, completion )
     }
 
-    override func doGetResults(_ formalName: String) -> [RepsResult]? {
-        return Self.results[formalName]
+    override func doGetResults(_ exercise: Exercise) -> [RepsResult]? {
+        return Self.results[exercise.formalName]
     }
 
     static var results: [String: [RepsResult]] = [:]

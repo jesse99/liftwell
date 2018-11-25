@@ -72,7 +72,7 @@ class ExerciseController: UIViewController {
         // When plans load they can reset to waiting if it's been too long so we need to re-start
         // the plan if that happened.
         if case .waiting = info.state {
-            if let newExercise = info.start(workout, exercise) {
+            if let (newExercise, _) = info.start(workout, exercise) {
                 exercise = newExercise
                 info = exercise.getInfo()
                 let newerExercise = info.start(workout, exercise)
@@ -463,6 +463,9 @@ class ExerciseController: UIViewController {
             case .cyclic(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: subtype.cycleIndex, apparatus: type.apparatus))
             case .find(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: .weight(subtype.weight), reps: subtype.reps, cycleIndex: nil, apparatus: type.apparatus))
             case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: nil, apparatus: type.apparatus))
+            case .t1(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: subtype.cycleIndex, apparatus: type.apparatus))
+            case .t2(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: subtype.cycleIndex, apparatus: type.apparatus))
+            case .t3(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: nil, apparatus: type.apparatus))
             case .timed(let subtype): setTimedOptions(TimedOptions(time: subtype.currentTime, weight: subtype.weight, apparatus: type.apparatus))
             }
         }
@@ -506,6 +509,23 @@ class ExerciseController: UIViewController {
                 subtype.reps = options.reps!
                 subtype.updated(exercise)
             case .reps(let subtype):
+                subtype.restTime = options.rest
+                subtype.aweight = options.aweight
+                subtype.workingReps = options.reps
+                subtype.updated(exercise)
+            case .t1(let subtype):
+                subtype.restTime = options.rest
+                subtype.aweight = options.aweight
+                subtype.workingReps = options.reps
+                subtype.cycleIndex = options.cycleIndex!
+                subtype.updated(exercise)
+            case .t2(let subtype):
+                subtype.restTime = options.rest
+                subtype.aweight = options.aweight
+                subtype.workingReps = options.reps
+                subtype.cycleIndex = options.cycleIndex!
+                subtype.updated(exercise)
+            case .t3(let subtype):
                 subtype.restTime = options.rest
                 subtype.aweight = options.aweight
                 subtype.workingReps = options.reps

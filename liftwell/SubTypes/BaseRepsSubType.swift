@@ -65,6 +65,7 @@ class BaseRepsSubType: BaseApparatusSubtype, ExerciseInfo {
         case .weights(let saved):
             switch saved.subtype {
             case .reps(let savedSubtype): super.sync(program, savedSubtype, sameSets: same)
+            case .t3(let savedSubtype): super.sync(program, savedSubtype, sameSets: same)
             default: os_log("saved %@ subtype wasn't Reps", savedExercise.name)
             }
         }
@@ -75,7 +76,7 @@ class BaseRepsSubType: BaseApparatusSubtype, ExerciseInfo {
     }
     
     // ---- ExerciseInfo ----------------------------------------------------------------------
-    func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
+    func start(_ workout: Workout, _ exercise: Exercise) -> (Exercise, String)? {
         let weight = aweight.getWorkingWeight()
         if weight == 0 {
             let newExercise = exercise.clone()
@@ -83,7 +84,7 @@ class BaseRepsSubType: BaseApparatusSubtype, ExerciseInfo {
             case .weights(let type):
                 let newSubtype = FindWeightSubType(reps: getBaseRepRange().1, restSecs: restTime)
                 type.subtype = .find(newSubtype)
-                return newExercise
+                return (newExercise, "Not completed")
             default:
                 break
             }
@@ -98,10 +99,8 @@ class BaseRepsSubType: BaseApparatusSubtype, ExerciseInfo {
     }
     
     func clone() -> ExerciseInfo {
-        let store = Store()
-        store.addObj("self", self)
-        let result: Self = store.getObj("self")
-        return result
+        assert(false)
+        return self
     }
     
     func updated(_ exercise: Exercise) {
@@ -117,7 +116,7 @@ class BaseRepsSubType: BaseApparatusSubtype, ExerciseInfo {
     }
     
     func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
-        if let myResults = doGetResults(exercise.formalName), let last = myResults.last, let workset = sets.worksets.last {
+        if let myResults = doGetResults(exercise), let last = myResults.last, let workset = sets.worksets.last {
             if workset.amrap {
                 // History will include the AMRAP reps and the tag is inferred from that so don't think we want anything here.
                 return ("", UIColor.black)
@@ -143,7 +142,7 @@ class BaseRepsSubType: BaseApparatusSubtype, ExerciseInfo {
     }
     
     func historyLabel(_ exercise: Exercise) -> String {
-        if let myResults = doGetResults(exercise.formalName) {
+        if let myResults = doGetResults(exercise) {
             let history = myResults.map {($0.reps, $0.weight)}
             return historyLabel1(history)
         }
@@ -190,7 +189,7 @@ class BaseRepsSubType: BaseApparatusSubtype, ExerciseInfo {
         }
     }
     
-    func doGetResults(_ formalName: String) -> [RepsResult]? {
+    func doGetResults(_ exercise: Exercise) -> [RepsResult]? {
         assert(false)
         return []
     }

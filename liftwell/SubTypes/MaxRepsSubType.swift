@@ -118,7 +118,7 @@ class MaxRepsSubType: ExerciseInfo {
         }
     }
     
-    func start(_ workout: Workout, _ exercise: Exercise) -> Exercise? {
+    func start(_ workout: Workout, _ exercise: Exercise) -> (Exercise, String)? {
         setIndex = 0
         completed = []
         currentWorkout = workout.name

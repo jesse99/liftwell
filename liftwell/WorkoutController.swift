@@ -111,7 +111,13 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
                 
             } else {
                 info = info.clone()
-                if info.start(workout, exercise) == nil {
+                if let (_, details) = info.start(workout, exercise) {
+                    cell.textLabel!.text = info.label(exercise)
+                    cell.detailTextLabel!.text = details
+                    cell.textLabel?.setColor(.black)
+                    cell.detailTextLabel?.setColor(.black)
+                    
+                } else {
                     if case let .error(err) = info.state {
                         cell.textLabel!.text = name
                         cell.detailTextLabel!.text = err
@@ -130,12 +136,6 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
                             cell.detailTextLabel?.setColor(.black)
                         }
                     }
-                    
-                } else {
-                    cell.textLabel!.text = info.label(exercise)
-                    cell.detailTextLabel!.text = "Not completed"
-                    cell.textLabel?.setColor(.black)
-                    cell.detailTextLabel?.setColor(.black)
                 }
             }
         } else {
@@ -204,7 +204,7 @@ class WorkoutController: UIViewController, UITableViewDataSource, UITableViewDel
             } else {
                 // If we're started but not underway we want to re-start to ensure that we pickup
                 // on any changes from a base exercise.
-                if let newExercise = info.start(workout, exercise) {
+                if let (newExercise, _) = info.start(workout, exercise) {
                     info = newExercise.getInfo()
                     let newerExercise = info.start(workout, newExercise)
                     assert(newerExercise == nil)

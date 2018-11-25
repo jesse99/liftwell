@@ -18,6 +18,13 @@ class T2RepsSubType: BaseCyclicRepsSubtype {
         super.init(from: store)
     }
     
+    override func clone() -> ExerciseInfo {
+        let store = Store()
+        store.addObj("self", self)
+        let result: Self = store.getObj("self")
+        return result
+    }
+    
     override func errors() -> [String] {
         var problems: [String] = super.errors()
         for sets in cycles {
@@ -78,8 +85,8 @@ class T2RepsSubType: BaseCyclicRepsSubtype {
         return 0.0
     }
     
-    override func doGetResults(_ formalName: String) -> [CyclicResult]? {
-        return Self.results[formalName]
+    override func doGetResults(_ exercise: Exercise) -> [CyclicResult]? {
+        return Self.results[exercise.formalName]
     }
     
     static var results: [String: [CyclicResult]] = [:]
