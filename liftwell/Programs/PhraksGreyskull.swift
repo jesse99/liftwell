@@ -65,6 +65,6 @@ press, squat, and deadlift) then switch to either [5/3/1 for Beginners](https://
 * It is recommended to include cardio work.
 * Avoid making other changes to the program.
 """
-    return Program("Phrak's Greyskull", workouts, exercises, tags, description, maxWorkouts: 3*12, nextProgram: nil)
+    return Program("Phrak's Greyskull", workouts, exercises, tags, description, maxWorkouts: 3*12, nextProgram: "5/3/1 Beginner or GZCLP3 or GZCLP4")
 }
 
