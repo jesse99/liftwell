@@ -12,12 +12,12 @@ class T1RepsSubType: BaseCyclicRepsSubtype {
     private typealias `Self` = T1RepsSubType
     
     class Result: CyclicResult {
-        init(_ tag: ResultTag, weight: Double, cycleIndex: Int, _ sets: String, goalReps: Int, actualReps: Int, percent: Double, oneMax: Double) {
+        init(_ tag: ResultTag, baseWeight: Double, liftedWeight: Double, cycleIndex: Int, _ sets: String, goalReps: Int, actualReps: Int, percent: Double, oneMax: Double) {
             self.sets = sets
             self.goalReps = goalReps
             self.percent = percent
             self.oneMax = oneMax
-            super.init(tag, weight: weight, cycleIndex: cycleIndex, reps: actualReps)
+            super.init(tag, baseWeight: baseWeight, liftedWeight: liftedWeight, cycleIndex: cycleIndex, reps: actualReps)
         }
         
         required init(from store: Store) {
@@ -103,9 +103,9 @@ class T1RepsSubType: BaseCyclicRepsSubtype {
             for result in myResults {
                 let delta = result.reps - result.goalReps
                 if delta > 0 {
-                    labels.append("\(result.sets)(+\(delta)) @ \(Weight.friendlyUnitsStr(result.weight))")
+                    labels.append("\(result.sets)(+\(delta)) @ \(Weight.friendlyUnitsStr(result.liftedWeight))")
                 } else {
-                    labels.append("\(result.sets)(\(delta)) @ \(Weight.friendlyUnitsStr(result.weight))")
+                    labels.append("\(result.sets)(\(delta)) @ \(Weight.friendlyUnitsStr(result.liftedWeight))")
                 }
             }
             
@@ -115,14 +115,15 @@ class T1RepsSubType: BaseCyclicRepsSubtype {
     }
     
     override func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        let weight: Double
-        switch exercise.type {
-        case .body(_): weight = aweight.getBaseWorkingWeight()
-        case .weights(let type):
-            let w = Weight(aweight.getBaseWorkingWeight(), type.apparatus).closest()
-            weight = w.weight
+        let baseWeight = aweight.getBaseWorkingWeight()
+        var liftedWeight = baseWeight
+        if let last = cycles[cycleIndex].worksets.last {
+            if case .weights(let type) = exercise.type {
+                let w = Weight(baseWeight*last.percent, type.apparatus).closest()
+                liftedWeight = w.weight
+            }
         }
-
+        
         let percent: Double
         let oneMax: Double
         switch aweight {
@@ -138,7 +139,7 @@ class T1RepsSubType: BaseCyclicRepsSubtype {
         let worksets = cycles[cycleIndex].worksets
         let requestedReps = worksets.last?.maxReps ?? 0
         let label = "\(worksets.count)x\(requestedReps)"
-        let result = Result(amrapTag!, weight: weight, cycleIndex: cycleIndex, label, goalReps: requestedReps, actualReps: amrapReps!, percent: percent, oneMax: oneMax)
+        let result = Result(amrapTag!, baseWeight: baseWeight, liftedWeight: liftedWeight, cycleIndex: cycleIndex, label, goalReps: requestedReps, actualReps: amrapReps!, percent: percent, oneMax: oneMax)
         
         var myResults = Self.results[exercise.formalName] ?? []
         myResults.append(result)

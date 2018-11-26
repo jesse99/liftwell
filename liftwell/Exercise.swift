@@ -142,7 +142,7 @@ class Exercise: Storable {
                 break
             case .reps(_):
                 if let result = RepsSubType.results[formalName]?.last {
-                    weight = result.weight
+                    weight = result.liftedWeight
                 }
             case .timed(_):
                 break
@@ -151,13 +151,13 @@ class Exercise: Storable {
             switch type.subtype {
             case .cyclic(_), .t1(_), .t2(_):
                 if let result = CyclicRepsSubtype.results[formalName]?.last {
-                    weight = result.weight
+                    weight = result.liftedWeight
                 }
             case .find(_), .timed(_):
                 break
             case .reps(_), .t3(_):
                 if let result = RepsSubType.results[formalName]?.last {
-                    weight = result.weight
+                    weight = result.liftedWeight
                 }
             }
 

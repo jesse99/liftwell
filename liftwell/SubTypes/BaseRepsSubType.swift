@@ -10,25 +10,29 @@ class BaseRepsSubType: BaseApparatusSubtype, ExerciseInfo {
     private typealias `Self` = BaseRepsSubType
     
     class RepsResult: BaseResult, Storable {
-        init(_ tag: ResultTag, weight: Double, reps: Int) {
-            self.weight = weight
+        init(_ tag: ResultTag, baseWeight: Double, liftedWeight: Double, reps: Int) {
+            self.baseWeight = baseWeight
+            self.liftedWeight = liftedWeight
             self.reps = reps
             super.init(tag)
         }
         
         required init(from store: Store) {
-            self.weight = store.getDbl("weight")
+            self.baseWeight = store.getDbl("weight")
+            self.liftedWeight = store.getDbl("liftedWeight", ifMissing: baseWeight)
             self.reps = store.getInt("reps")
             super.init(from: store)
         }
         
         override func save(_ store: Store) {
-            store.addDbl("weight", weight)
+            store.addDbl("weight", baseWeight)
+            store.addDbl("liftedWeight", liftedWeight)
             store.addInt("reps", reps)
             super.save(store)
         }
         
-        var weight: Double
+        var baseWeight: Double
+        var liftedWeight: Double
         var reps: Int
     }
     
@@ -143,7 +147,7 @@ class BaseRepsSubType: BaseApparatusSubtype, ExerciseInfo {
     
     func historyLabel(_ exercise: Exercise) -> String {
         if let myResults = doGetResults(exercise) {
-            let history = myResults.map {($0.reps, $0.weight)}
+            let history = myResults.map {($0.reps, $0.liftedWeight)}
             return historyLabel1(history)
         }
         return ""

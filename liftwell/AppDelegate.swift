@@ -353,9 +353,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 MaxRepsSubType.results = getStrDict(store, "max-reps-results")
                 RepsSubType.results = getStrDict(store, "reps-results")
                 TimedSubType.results = getStrDict(store, "timed-results")
-                T1RepsSubType.results = getStrDict(store, "t1b-results")
-                T2RepsSubType.results = getStrDict(store, "t2-results")
-                T3RepsSubType.results = getStrDict(store, "t3-results")
+                T1RepsSubType.results = getStrDict(store, "t1c-results")
+                T2RepsSubType.results = getStrDict(store, "t2b-results")
+                T3RepsSubType.results = getStrDict(store, "t3b-results")
                 
             } catch {
                 os_log("failed to decode results from %@: %@", type: .error, path, error.localizedDescription)
@@ -372,9 +372,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         addStrDict(store, "max-reps-results", MaxRepsSubType.results)
         addStrDict(store, "reps-results", RepsSubType.results)
         addStrDict(store, "timed-results", TimedSubType.results)
-        addStrDict(store, "t1b-results", T1RepsSubType.results)
-        addStrDict(store, "t2-results", T2RepsSubType.results)
-        addStrDict(store, "t3-results", T1RepsSubType.results)
+        addStrDict(store, "t1c-results", T1RepsSubType.results)
+        addStrDict(store, "t2b-results", T2RepsSubType.results)
+        addStrDict(store, "t3b-results", T1RepsSubType.results)
 
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .secondsSince1970

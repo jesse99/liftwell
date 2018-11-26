@@ -96,7 +96,7 @@ Tier 2 are exercises that directly support your main lifts. These start with 3x1
 Tier 3 is designed to address individual body parts and is done with 3x15+. Weight is increased automatically once you're able to do 25 reps on the AMRAP set.
 """
 
-fileprivate let workouts = """
+fileprivate let workoutDetails = """
 **Squat**
 * T1: Squat 5x3+, 6x2+, 10x1+
 * T2: Bench 3x10, 3x8. 3x6
@@ -157,7 +157,7 @@ func GZCLP4() -> Program {
 
 This is a four day version of the program:
 
-\(workouts)
+\(workoutDetails)
 
 \(notes)
 """
@@ -224,7 +224,7 @@ func GZCLP3() -> Program {
     
 This is a three day version of the program where you cycle through these four workouts:
 
-\(workouts)
+\(workoutDetails)
 
 \(notes)
 """

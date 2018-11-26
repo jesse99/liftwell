@@ -26,15 +26,16 @@ class CyclicRepsSubtype: BaseCyclicRepsSubtype {
     }
     
     override func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        let weight: Double
-        switch exercise.type {
-        case .body(_): weight = aweight.getBaseWorkingWeight()
-        case .weights(let type):
-            let w = Weight(aweight.getBaseWorkingWeight(), type.apparatus).closest()
-            weight = w.weight
+        let baseWeight = aweight.getBaseWorkingWeight()
+        var liftedWeight = baseWeight
+        if let last = cycles[cycleIndex].worksets.last {
+            if case .weights(let type) = exercise.type {
+                let w = Weight(baseWeight*last.percent, type.apparatus).closest()
+                liftedWeight = w.weight
+            }
         }
-
-        let result = CyclicResult(tag, weight: weight, cycleIndex: cycleIndex, reps: reps)
+        
+        let result = CyclicResult(tag, baseWeight: baseWeight, liftedWeight: liftedWeight, cycleIndex: cycleIndex, reps: reps)
         
         var myResults = Self.results[exercise.formalName] ?? []
         myResults.append(result)
