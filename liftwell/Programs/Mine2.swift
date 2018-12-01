@@ -39,7 +39,7 @@ func Mine2() -> Program {
     let workouts = [
         Workout("Light", ["Dumbbell OHP", "Chinups", "Back Extensions", "Farmer's Walk", "Static Hold", "Cable Crunches"], scheduled: true, optional: ["Static Hold", "Back Extensions", "Cable Crunches"]),
         Workout("Medium", ["Dumbbell Bench", "Split Squat", "Chinups", "Farmer's Walk", "Static Hold", "Dips"], scheduled: true, optional: ["Static Hold", "Dips"]),
-        Workout("Heavy", ["Split Squat", "Dumbbell Bench", "Deadlift", "Dumbbell Flyes"], scheduled: true),
+        Workout("Heavy", ["Split Squat", "Dumbbell Bench", "Deadlift", "Back Extensions", "Dumbbell Flyes"], scheduled: true, optional: ["Back Extensions"]),
         
         Workout("Mobility", ["Foam Rolling", "Shoulder Dislocates", "Bent-knee Iron Cross", "Roll-over into V-sit", "Rocking Frog Stretch", "Fire Hydrant Hip Circle", "Mountain Climber", "Cossack Squat", "Piriformis Stretch", "Hip Flexor Stretch"], scheduled: false),
         ]
