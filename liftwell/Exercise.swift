@@ -141,7 +141,7 @@ class Exercise: Storable {
             case .maxReps(_):
                 break
             case .reps(_):
-                if let result = RepsSubType.results[formalName]?.last {
+                if let result = RepsApparatusSubType.results[formalName]?.last {
                     weight = result.liftedWeight
                 }
             case .timed(_):
@@ -156,7 +156,7 @@ class Exercise: Storable {
             case .find(_), .timed(_):
                 break
             case .reps(_), .t3(_):
-                if let result = RepsSubType.results[formalName]?.last {
+                if let result = RepsApparatusSubType.results[formalName]?.last {
                     weight = result.liftedWeight
                 }
             }
@@ -180,7 +180,7 @@ class Exercise: Storable {
                     return result.completed.first
                 }
             case .reps(_):
-                if let result = RepsSubType.results[formalName]?.last {
+                if let result = RepsApparatusSubType.results[formalName]?.last {
                     return result.reps
                 }
             case .timed(_):
@@ -195,7 +195,7 @@ class Exercise: Storable {
             case .find(_), .timed(_):
                 break
             case .reps(_), .t3(_):
-                if let result = RepsSubType.results[formalName]?.last {
+                if let result = RepsApparatusSubType.results[formalName]?.last {
                     return result.reps
                 }
             }

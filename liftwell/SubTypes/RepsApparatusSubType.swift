@@ -6,8 +6,8 @@ import UIKit           // for UIColor
 import os.log
 
 /// Simple scheme where number of sets is fixed.
-class RepsSubType: BaseRepsSubType {
-    private typealias `Self` = RepsSubType
+class RepsApparatusSubType: BaseRepsApparatusSubType {
+    private typealias `Self` = RepsApparatusSubType
     
     override init(_ sets: Sets, restSecs: Int, trainingMaxPercent: Double? = nil) {
         super.init(sets, restSecs: restSecs, trainingMaxPercent: trainingMaxPercent)

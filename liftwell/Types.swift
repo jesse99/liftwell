@@ -13,7 +13,7 @@ class WeightsType: Storable {
     enum SubType {
         case cyclic(CyclicRepsSubtype)
         case find(FindWeightSubType)
-        case reps(RepsSubType)
+        case reps(RepsApparatusSubType)
         case t1(T1RepsSubType)
         case t2(T2RepsSubType)
         case t3(T3RepsSubType)
@@ -93,7 +93,7 @@ class WeightsType: Storable {
 /// or chains or a plate or a dumbbell).
 class BodyType: Storable {
     enum SubType {
-        case reps(RepsSubType)
+        case reps(RepsApparatusSubType)
         case maxReps(MaxRepsSubType)
         case timed(TimedSubType)
     }

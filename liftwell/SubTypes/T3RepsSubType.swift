@@ -5,7 +5,7 @@ import UIKit
 
 /// GZCLP scheme with fixed sets and reps but where the last set is AMRAP. Weight goes up when can
 /// do 25 reps on the AMRAP set.
-class T3RepsSubType: BaseRepsSubType {
+class T3RepsSubType: BaseRepsApparatusSubType {
     private typealias `Self` = T3RepsSubType
     
     override init(_ sets: Sets, restSecs: Int, trainingMaxPercent: Double? = nil) {

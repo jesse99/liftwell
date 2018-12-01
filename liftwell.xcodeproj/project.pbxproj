@@ -28,14 +28,14 @@
 		373CCFB921A78FF100096291 /* CyclicRepsSubtype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFB821A78FF100096291 /* CyclicRepsSubtype.swift */; };
 		373CCFBB21A78FFF00096291 /* FindWeightSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFBA21A78FFF00096291 /* FindWeightSubType.swift */; };
 		373CCFBD21A7900E00096291 /* MaxRepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFBC21A7900E00096291 /* MaxRepsSubType.swift */; };
-		373CCFBF21A7901A00096291 /* RepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFBE21A7901A00096291 /* RepsSubType.swift */; };
+		373CCFBF21A7901A00096291 /* RepsApparatusSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFBE21A7901A00096291 /* RepsApparatusSubType.swift */; };
 		373CCFC121A7902700096291 /* TimedSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFC021A7902700096291 /* TimedSubType.swift */; };
 		373CCFC321A792CA00096291 /* T1RepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFC221A792CA00096291 /* T1RepsSubType.swift */; };
 		373CCFC521A7B22800096291 /* SubTypeHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFC421A7B22800096291 /* SubTypeHelpers.swift */; };
 		373CCFC721A9B2A400096291 /* T2RepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFC621A9B2A400096291 /* T2RepsSubType.swift */; };
 		373CCFC921A9C4BA00096291 /* BaseCyclicRepsSubtype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFC821A9C4BA00096291 /* BaseCyclicRepsSubtype.swift */; };
 		373CCFCB21A9DF6000096291 /* T3RepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFCA21A9DF6000096291 /* T3RepsSubType.swift */; };
-		373CCFCD21A9E73200096291 /* BaseRepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFCC21A9E73200096291 /* BaseRepsSubType.swift */; };
+		373CCFCD21A9E73200096291 /* BaseRepsApparatusSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFCC21A9E73200096291 /* BaseRepsApparatusSubType.swift */; };
 		373CCFCF21AA309A00096291 /* GZCLP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CCFCE21AA309A00096291 /* GZCLP.swift */; };
 		374D3EDA217BFBD100AC828D /* DateExtensionw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3ED9217BFBD100AC828D /* DateExtensionw.swift */; };
 		374D3EDC217D4F4E00AC828D /* ExerciseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D3EDB217D4F4E00AC828D /* ExerciseController.swift */; };
@@ -117,14 +117,14 @@
 		373CCFB821A78FF100096291 /* CyclicRepsSubtype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyclicRepsSubtype.swift; sourceTree = "<group>"; };
 		373CCFBA21A78FFF00096291 /* FindWeightSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindWeightSubType.swift; sourceTree = "<group>"; };
 		373CCFBC21A7900E00096291 /* MaxRepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxRepsSubType.swift; sourceTree = "<group>"; };
-		373CCFBE21A7901A00096291 /* RepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsSubType.swift; sourceTree = "<group>"; };
+		373CCFBE21A7901A00096291 /* RepsApparatusSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsApparatusSubType.swift; sourceTree = "<group>"; };
 		373CCFC021A7902700096291 /* TimedSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedSubType.swift; sourceTree = "<group>"; };
 		373CCFC221A792CA00096291 /* T1RepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = T1RepsSubType.swift; sourceTree = "<group>"; };
 		373CCFC421A7B22800096291 /* SubTypeHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTypeHelpers.swift; sourceTree = "<group>"; };
 		373CCFC621A9B2A400096291 /* T2RepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = T2RepsSubType.swift; sourceTree = "<group>"; };
 		373CCFC821A9C4BA00096291 /* BaseCyclicRepsSubtype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCyclicRepsSubtype.swift; sourceTree = "<group>"; };
 		373CCFCA21A9DF6000096291 /* T3RepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = T3RepsSubType.swift; sourceTree = "<group>"; };
-		373CCFCC21A9E73200096291 /* BaseRepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepsSubType.swift; sourceTree = "<group>"; };
+		373CCFCC21A9E73200096291 /* BaseRepsApparatusSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepsApparatusSubType.swift; sourceTree = "<group>"; };
 		373CCFCE21AA309A00096291 /* GZCLP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GZCLP.swift; sourceTree = "<group>"; };
 		374D3ED9217BFBD100AC828D /* DateExtensionw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionw.swift; sourceTree = "<group>"; };
 		374D3EDB217D4F4E00AC828D /* ExerciseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseController.swift; sourceTree = "<group>"; };
@@ -301,11 +301,11 @@
 			children = (
 				373CCFB621A78FE100096291 /* BaseApparatusSubtype.swift */,
 				373CCFC821A9C4BA00096291 /* BaseCyclicRepsSubtype.swift */,
-				373CCFCC21A9E73200096291 /* BaseRepsSubType.swift */,
+				373CCFCC21A9E73200096291 /* BaseRepsApparatusSubType.swift */,
 				373CCFB821A78FF100096291 /* CyclicRepsSubtype.swift */,
 				373CCFBA21A78FFF00096291 /* FindWeightSubType.swift */,
 				373CCFBC21A7900E00096291 /* MaxRepsSubType.swift */,
-				373CCFBE21A7901A00096291 /* RepsSubType.swift */,
+				373CCFBE21A7901A00096291 /* RepsApparatusSubType.swift */,
 				373CCFC421A7B22800096291 /* SubTypeHelpers.swift */,
 				373CCFC021A7902700096291 /* TimedSubType.swift */,
 				373CCFC221A792CA00096291 /* T1RepsSubType.swift */,
@@ -523,7 +523,7 @@
 				37E7BF0921975DCD0087E7FE /* Achievement.swift in Sources */,
 				373CCFCB21A9DF6000096291 /* T3RepsSubType.swift in Sources */,
 				374FE9452185FE3C00CFC284 /* TimedOptionsController.swift in Sources */,
-				373CCFCD21A9E73200096291 /* BaseRepsSubType.swift in Sources */,
+				373CCFCD21A9E73200096291 /* BaseRepsApparatusSubType.swift in Sources */,
 				37286859216842C8005F6FD0 /* Mine2.swift in Sources */,
 				3728684B21631202005F6FD0 /* Store.swift in Sources */,
 				374D3EDA217BFBD100AC828D /* DateExtensionw.swift in Sources */,
@@ -560,7 +560,7 @@
 				37EFD6DE217A679F00F60880 /* Sets.swift in Sources */,
 				37E7BF03219750AF0087E7FE /* AchievementsTabController.swift in Sources */,
 				374FE955218BD10300CFC284 /* Notes.swift in Sources */,
-				373CCFBF21A7901A00096291 /* RepsSubType.swift in Sources */,
+				373CCFBF21A7901A00096291 /* RepsApparatusSubType.swift in Sources */,
 				373CCFB721A78FE100096291 /* BaseApparatusSubtype.swift in Sources */,
 				374D3EDC217D4F4E00AC828D /* ExerciseController.swift in Sources */,
 				37DE95FA219A48E200D60101 /* ProgramHelpers.swift in Sources */,

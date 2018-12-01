@@ -6,8 +6,8 @@ import UIKit           // for UIColor
 import os.log
 
 /// Simple scheme where number of sets is fixed.
-class BaseRepsSubType: BaseApparatusSubtype, ExerciseInfo {
-    private typealias `Self` = BaseRepsSubType
+class BaseRepsApparatusSubType: BaseApparatusSubtype, ExerciseInfo {
+    private typealias `Self` = BaseRepsApparatusSubType
     
     class RepsResult: BaseResult, Storable {
         init(_ tag: ResultTag, baseWeight: Double, liftedWeight: Double, reps: Int) {
