@@ -55,7 +55,7 @@ class T2RepsSubType: BaseCyclicRepsSubtype {
         if case .failed = tag {
             if cycleIndex+1 >= cycles.count {
                 cycleIndex = 0
-                super.finalize(exercise, .veryEasy, view, completion)   // veryEasy because we advance based on what the user lifted at the start of the cycle
+                super.presentFinalize(exercise, .veryEasy, view, completion)   // veryEasy because we advance based on what the user lifted at the start of the cycle
 
             } else {
                 cycleIndex = (cycleIndex + 1) % cycles.count

@@ -171,7 +171,7 @@ class BaseApparatusSubtype {
         }
     }
     
-    func finalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
+    func presentFinalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let weight = aweight.getBaseWorkingWeight()
         
         switch exercise.type {

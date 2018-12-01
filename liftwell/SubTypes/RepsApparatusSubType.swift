@@ -40,7 +40,7 @@ class RepsApparatusSubType: BaseRepsApparatusSubType {
         myResults.append(result)
         Self.results[exercise.formalName] = myResults
         
-        super.finalize(exercise, tag, view, completion )
+        super.presentFinalize(exercise, tag, view, completion )
     }
 
     override func doGetResults(_ exercise: Exercise) -> [RepsResult]? {

@@ -44,7 +44,7 @@ class CyclicRepsSubtype: BaseCyclicRepsSubtype {
         cycleIndex = (cycleIndex + 1) % cycles.count
         if cycleIndex == 0 {
             // Prompt user for advancement
-            super.finalize(exercise, tag, view, completion)
+            super.presentFinalize(exercise, tag, view, completion)
         } else {
             completion()
         }
