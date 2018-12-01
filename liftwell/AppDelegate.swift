@@ -386,7 +386,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    let programs = [FiveThreeOneBeginner(), GZCLP3(), GZCLP4(), Mine2(), PhraksGreyskull()]
+    let programs = [BestButt14(), BestButt58(), BestButt912(), FiveThreeOneBeginner(), GZCLP3(), GZCLP4(), Mine2(), PhraksGreyskull()]
 
     var window: UIWindow?
     var program: Program!

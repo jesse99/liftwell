@@ -52,6 +52,7 @@
 		374FE951218A7E8C00CFC284 /* WorkoutOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FE950218A7E8C00CFC284 /* WorkoutOptionsController.swift */; };
 		374FE953218BD0DD00CFC284 /* NotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FE952218BD0DD00CFC284 /* NotesController.swift */; };
 		374FE955218BD10300CFC284 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FE954218BD10300CFC284 /* Notes.swift */; };
+		37B4352121B2194000EDC53E /* BestButt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352021B2194000EDC53E /* BestButt.swift */; };
 		37C2D3B9218D142500D9AF0E /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C2D3B8218D142500D9AF0E /* Workout.swift */; };
 		37DE95F8219A1E7600D60101 /* SAConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95F7219A1E7600D60101 /* SAConfettiView.swift */; };
 		37DE95FA219A48E200D60101 /* ProgramHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95F9219A48E200D60101 /* ProgramHelpers.swift */; };
@@ -140,6 +141,7 @@
 		374FE950218A7E8C00CFC284 /* WorkoutOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutOptionsController.swift; sourceTree = "<group>"; };
 		374FE952218BD0DD00CFC284 /* NotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesController.swift; sourceTree = "<group>"; };
 		374FE954218BD10300CFC284 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
+		37B4352021B2194000EDC53E /* BestButt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestButt.swift; sourceTree = "<group>"; };
 		37C2D3B8218D142500D9AF0E /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		37DE95F7219A1E7600D60101 /* SAConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConfettiView.swift; sourceTree = "<group>"; };
 		37DE95F9219A48E200D60101 /* ProgramHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramHelpers.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 		3728685721684231005F6FD0 /* Programs */ = {
 			isa = PBXGroup;
 			children = (
+				37B4352021B2194000EDC53E /* BestButt.swift */,
 				37DE95FF219D1D3300D60101 /* FiveThreeOneBeginner.swift */,
 				373CCFCE21AA309A00096291 /* GZCLP.swift */,
 				37286858216842C8005F6FD0 /* Mine2.swift */,
@@ -566,6 +569,7 @@
 				373CCFBD21A7900E00096291 /* MaxRepsSubType.swift in Sources */,
 				37286828216259AE005F6FD0 /* WorkoutsTabController.swift in Sources */,
 				373CCFC521A7B22800096291 /* SubTypeHelpers.swift in Sources */,
+				37B4352121B2194000EDC53E /* BestButt.swift in Sources */,
 				373CCFC121A7902700096291 /* TimedSubType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

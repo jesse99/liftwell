@@ -39,8 +39,8 @@ func barbell(_ name: String, _ formalName: String, _ cycles: [(String, String, S
     return Exercise(name, formalName, .weights(type), main: main)
 }
 
-func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, secs: Int, main: Bool = false) -> Exercise {
-    let subtype = TimedSubType(numSets: numSets, currentTime: secs, targetTime: nil)
+func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, secs: Int, targetSecs: Int? = nil, main: Bool = false) -> Exercise {
+    let subtype = TimedSubType(numSets: numSets, currentTime: secs, targetSecs: targetSecs)
     let type = BodyType(.timed(subtype))
     return Exercise(name, formalName, .body(type), main: main)
 }

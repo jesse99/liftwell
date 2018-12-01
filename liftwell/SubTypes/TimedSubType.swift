@@ -32,12 +32,12 @@ class TimedSubType: ExerciseInfo {
         var currentTime: Int
     }
     
-    init(numSets: Int, currentTime: Int, targetTime: Int?) {
+    init(numSets: Int, currentTime: Int, targetSecs: Int?) {
         self.weight = 0.0
         self.currentTime = currentTime
         
         self.numSets = numSets
-        self.targetTime = targetTime
+        self.targetTime = targetSecs
     }
     
     required init(from store: Store) {

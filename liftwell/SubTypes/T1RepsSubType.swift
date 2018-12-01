@@ -162,11 +162,20 @@ class T1RepsSubType: BaseCyclicRepsSubtype {
             completion()
             
             let worksets = cycles[0].worksets
-            let reps = worksets.last?.maxReps ?? 0
+            let reps = worksets.last?.maxReps ?? 0  // TODO: this alert isn't working, maybe we're already in an alert?
             let alert = UIAlertController(title: "Resetting Training Max to zero to find a new \(reps)RM.", message: "Wait 2-3 days before finding the new max.", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default, handler: {_ in completion()})
             alert.addAction(action)
-            view.present(alert, animated: true, completion:nil)
+            
+            if var topController = UIApplication.shared.keyWindow?.rootViewController {
+                while let presentedViewController = topController.presentedViewController {
+                    topController = presentedViewController
+                }
+                topController.present(alert, animated: true, completion:nil)
+            } else {
+                completion()
+            }
+            //view.present(alert, animated: true, completion:nil)
             
         } else {
             cycleIndex = (cycleIndex + 1) % cycles.count
