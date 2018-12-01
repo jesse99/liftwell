@@ -142,25 +142,4 @@ class ParserTests: XCTestCase {
             XCTAssert(false)
         }
     }
-    
-    func testParser6() {
-        let parser = Parser(text: "5 3 5/5 3 3")
-        switch parser.parseCycles() {
-        case .left(let err): XCTAssert(false, "\(err.mesg) at \(err.offset)")
-        case .right(let cycles):
-            XCTAssertEqual(cycles.count, 2)
-            
-            let cycle1 = cycles[0]
-            XCTAssertEqual(cycle1.sets.count, 3)
-            XCTAssertEqual(cycle1.sets[0].minReps, 5)
-            XCTAssertEqual(cycle1.sets[1].minReps, 3)
-            XCTAssertEqual(cycle1.sets[2].minReps, 5)
-            
-            let cycle2 = cycles[1]
-            XCTAssertEqual(cycle2.sets.count, 3)
-            XCTAssertEqual(cycle2.sets[0].minReps, 5)
-            XCTAssertEqual(cycle2.sets[1].minReps, 3)
-            XCTAssertEqual(cycle2.sets[2].minReps, 3)
-        }
-    }
 }
