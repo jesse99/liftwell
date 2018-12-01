@@ -45,7 +45,7 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
         self.cycleIndex = 0
         self.cycles = cycles
         
-        let (minReps, maxReps) = cycles[0].repRange(minimum: nil)
+        let (minReps, maxReps) = cycles[0].repRange(currentReps: nil)
         let reps: Int? = minReps < maxReps ? maxReps : nil
         super.init(reps: reps, restTime: restSecs, trainingMaxPercent: trainingMaxPercent)
     }
@@ -137,8 +137,8 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
     func updated(_ exercise: Exercise) {
         let weight = aweight.getBaseWorkingWeight()
         switch exercise.type {
-        case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight, minimum: workingReps)
-        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, minimum: workingReps)
+        case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight, currentReps: workingReps)
+        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, currentReps: workingReps)
         }
     }
     
@@ -209,7 +209,7 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
     }
     
     override func getBaseRepRange() -> (Int, Int, Int?) {
-        let (min, max) = cycles[cycleIndex].repRange(minimum: nil)
+        let (min, max) = cycles[cycleIndex].repRange(currentReps: nil)
         if let last = cycles[cycleIndex].worksets.last, last.amrap {
             return (min, max, last.maxReps)
         } else {

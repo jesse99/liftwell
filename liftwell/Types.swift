@@ -93,7 +93,7 @@ class WeightsType: Storable {
 /// or chains or a plate or a dumbbell).
 class BodyType: Storable {
     enum SubType {
-        case reps(RepsApparatusSubType)
+        case reps(RepsBodySubType)
         case maxReps(MaxRepsSubType)
         case timed(TimedSubType)
     }
@@ -114,7 +114,8 @@ class BodyType: Storable {
         let name = store.getStr("subtypeName")
         switch name {
         case "maxReps": self.subtype = .maxReps(store.getObj("subtype"))
-        case "reps": self.subtype = .reps(store.getObj("subtype"))
+        case "repsB": self.subtype = .reps(store.getObj("subtype"))
+        case "reps": self.subtype = .reps(RepsBodySubType(Sets([], []), restSecs: 30))  // sync will fix this up
         case "timed": self.subtype = .timed(store.getObj("subtype"))
         default: assert(false, "bad subtype name: \(name)"); abort()
         }
@@ -123,7 +124,7 @@ class BodyType: Storable {
     func save(_ store: Store) {
         switch subtype {
         case .maxReps(let subtype): store.addStr("subtypeName", "maxReps"); store.addObj("subtype", subtype)
-        case .reps(let subtype): store.addStr("subtypeName", "reps"); store.addObj("subtype", subtype)
+        case .reps(let subtype): store.addStr("subtypeName", "repsB"); store.addObj("subtype", subtype)
         case .timed(let subtype): store.addStr("subtypeName", "timed"); store.addObj("subtype", subtype)
         }
     }

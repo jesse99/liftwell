@@ -38,7 +38,7 @@ class BaseRepsApparatusSubType: BaseApparatusSubtype, ExerciseInfo {
     
     init(_ sets: Sets, restSecs: Int, trainingMaxPercent: Double? = nil) {
         self.sets = sets
-        let (minReps, maxReps) = sets.repRange(minimum: nil)
+        let (minReps, maxReps) = sets.repRange(currentReps: nil)
         let reps = minReps < maxReps ? maxReps : nil
         super.init(reps: reps, restTime: restSecs, trainingMaxPercent: trainingMaxPercent)
     }
@@ -61,11 +61,8 @@ class BaseRepsApparatusSubType: BaseApparatusSubtype, ExerciseInfo {
         let same = exeActivities.count == savedActivities.count
         
         switch savedExercise.type {
-        case .body(let saved):
-            switch saved.subtype {
-            case .reps(let savedSubtype): super.sync(program, savedSubtype, sameSets: same)
-            default: os_log("saved %@ subtype wasn't Reps", savedExercise.name)
-            }
+        case .body(_):
+            assert(false)
         case .weights(let saved):
             switch saved.subtype {
             case .reps(let savedSubtype): super.sync(program, savedSubtype, sameSets: same)
@@ -173,7 +170,7 @@ class BaseRepsApparatusSubType: BaseApparatusSubtype, ExerciseInfo {
     }
     
     override func getBaseRepRange() -> (Int, Int, Int?) {
-        let (min, max) = sets.repRange(minimum: nil)
+        let (min, max) = sets.repRange(currentReps: nil)
         if let last = sets.worksets.last, last.amrap {
             return (min, max, last.maxReps)
         } else {
@@ -188,8 +185,8 @@ class BaseRepsApparatusSubType: BaseApparatusSubtype, ExerciseInfo {
     private func getActivities(_ exercise: Exercise) -> (Int, [Activity]) {
         let weight = aweight.getBaseWorkingWeight()
         switch exercise.type {
-        case .body(_): return sets.activities(weight, minimum: workingReps)
-        case .weights(let type): return sets.activities(weight, type.apparatus, minimum: workingReps)
+        case .body(_): return sets.activities(weight, currentReps: workingReps)
+        case .weights(let type): return sets.activities(weight, type.apparatus, currentReps: workingReps)
         }
     }
     

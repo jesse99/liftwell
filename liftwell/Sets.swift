@@ -81,20 +81,21 @@ struct Sets: Storable {
         return backoff[i]
     }
     
-    // So here we need to return the minimum and maximum we're supposed to use for worksets.
+    // So here we need to return the currentReps and maximum we're supposed to use for worksets.
     // In general, we can't really do this but hopefully there are no programs that do stuff
     // like have worksets at [4-8, 3-5]. TODO: should we warn for that?
-    func repRange(minimum: Int?) -> (Int, Int) {
+    func repRange(currentReps: Int?) -> (Int, Int) {
         var minReps = 1
         var maxReps = 1
         
         if let set = worksets.first(where: {$0.minReps < $0.maxReps}) {
-            if let min = minimum {            // minimum only applies if set.minReps < set.maxReps
-                minReps = min
+            if let current = currentReps {            // currentReps only applies if set.minReps < set.maxReps
+                minReps = current
+                maxReps = current < set.maxReps ? set.maxReps : current
             } else {
                 minReps = set.minReps
+                maxReps = set.maxReps
             }
-            maxReps = set.maxReps
 
         } else if let last = worksets.last {
             minReps = last.minReps
@@ -110,8 +111,12 @@ struct Sets: Storable {
     func sublabel(_ apparatus: Apparatus?, _ targetWeight: Double, _ currentReps: Int?) -> String {
         func repsStr(_ reps: Set) -> String {
             let suffix = reps.amrap ? "+" : ""
-            if let current = currentReps, current < reps.maxReps {
-                return "\(current)-\(reps.maxReps)\(suffix)"
+            if let current = currentReps {
+                if current < reps.maxReps {
+                    return "\(current)-\(reps.maxReps)\(suffix)"
+                } else {
+                    return "\(current)\(suffix)"
+                }
             } else {
                 return "\(reps.maxReps)\(suffix)"
             }
@@ -149,7 +154,7 @@ struct Sets: Storable {
         return ""
     }
 
-    func activities(_ weight: Double, _ apparatus: Apparatus, minimum: Int?) -> (Int, [Activity]) {
+    func activities(_ weight: Double, _ apparatus: Apparatus, currentReps: Int?) -> (Int, [Activity]) {
         var result: [Activity] = []
         let maxWeight = Weight(weight, apparatus).closest()
         for (i, reps) in warmups.enumerated() {
@@ -168,7 +173,7 @@ struct Sets: Storable {
             result.append(Activity(
                 title: "Workset \(i+1) of \(worksets.count)",
                 subtitle: "\(Int(100*reps.percent))% of \(maxWeight.text)",
-                amount: "\(reps.label(minimum: minimum)) @ \(setWeight.text)",
+                amount: "\(reps.label(currentReps: currentReps)) @ \(setWeight.text)",
                 details: setWeight.plates,
                 buttonName: i+1 == worksets.count && backoff.isEmpty ? "Done" : "Next",
                 showStartButton: true,
@@ -188,36 +193,59 @@ struct Sets: Storable {
         return (warmups.count, result)
     }
     
-    func activities(_ weight: Double, minimum: Int?) -> (Int, [Activity]) {
+    func activities(_ weight: Double, currentReps: Int?) -> (Int, [Activity]) {
+        func getSubtitle(_ reps: Set) -> String {
+            if weight > 0.0 || reps.percent < 1.0 {
+                return "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))"
+            } else {
+                return ""
+            }
+        }
+        
+        func getAmount(_ reps: Set) -> String {
+            if weight > 0.0 {
+                let w = Weight.friendlyUnitsStr(reps.percent*weight)
+                return "\(reps) @ \(w)"
+            } else {
+                return "\(reps)"
+            }
+        }
+        
+        func getWorksetAmount(_ reps: Set) -> String {
+            if weight > 0.0 {
+                let w = Weight.friendlyUnitsStr(reps.percent*weight)
+                return "\(reps.label(currentReps: currentReps)) @ \(w)"
+            } else {
+                return reps.label(currentReps: currentReps)
+            }
+        }
+        
         var result: [Activity] = []
         for (i, reps) in warmups.enumerated() {
-            let w = Weight.friendlyUnitsStr(reps.percent*weight)
             result.append(Activity(
                 title: "Warmup \(i+1) of \(warmups.count)",
-                subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
-                amount: "\(reps) @ \(w)",
+                subtitle: getSubtitle(reps),
+                amount: getAmount(reps),
                 details: "",
                 buttonName: "Next",
                 showStartButton: true,
                 color: nil))
         }
         for (i, reps) in worksets.enumerated() {
-            let w = Weight.friendlyUnitsStr(reps.percent*weight)
             result.append(Activity(
                 title: "Workset \(i+1) of \(worksets.count)",
-                subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
-                amount: "\(reps.label(minimum: minimum)) @ \(w)",
+                subtitle: getSubtitle(reps),
+                amount: getWorksetAmount(reps),
                 details: "",
                 buttonName: i+1 == worksets.count && backoff.isEmpty ? "Done" : "Next",
                 showStartButton: true,
                 color: nil))
         }
         for (i, reps) in backoff.enumerated() {
-            let w = Weight.friendlyUnitsStr(reps.percent*weight)
             result.append(Activity(
                 title: "Backoff \(i+1) of \(backoff.count)",
-                subtitle: "\(Int(100*reps.percent))% of \(Weight.friendlyUnitsStr(weight))",
-                amount: "\(reps) @ \(w)",
+                subtitle: getSubtitle(reps),
+                amount: getAmount(reps),
                 details: "",
                 buttonName: i+1 == backoff.count ? "Done" : "Next",
                 showStartButton: true,

@@ -63,13 +63,13 @@ struct Set: Storable, CustomStringConvertible {
         return problems
     }
     
-    func label(minimum: Int?) -> String {
+    func label(currentReps: Int?) -> String {
         if minReps < maxReps {
-            if let min = minimum {
-                if min < maxReps {
-                    return amrap ? "\(min)-\(maxReps)+ reps" : "\(min)-\(maxReps) reps"
+            if let current = currentReps {
+                if current < maxReps {
+                    return amrap ? "\(current)-\(maxReps)+ reps" : "\(current)-\(maxReps) reps"
                 } else {
-                    return amrap ? "\(maxReps)+ reps" : "\(maxReps) reps"
+                    return amrap ? "\(current)+ reps" : "\(current) reps"
                 }
             } else {
                 return amrap ? "\(minReps)-\(maxReps)+ reps" : "\(minReps)-\(maxReps) reps"
@@ -85,7 +85,7 @@ struct Set: Storable, CustomStringConvertible {
 
     var description: String {
         get {
-            return label(minimum: nil)
+            return label(currentReps: nil)
         }
     }
 }

@@ -175,7 +175,7 @@ class BaseApparatusSubtype {
         let weight = aweight.getBaseWorkingWeight()
         
         switch exercise.type {
-        case .body(_): completion()
+        case .body(_): assert(false); completion()
         case .weights(let type):
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             let (minReps, maxReps, _) = getBaseRepRange()
