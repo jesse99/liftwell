@@ -2,7 +2,7 @@
 //  Copyright © 2018 MushinApps. All rights reserved.
 import Foundation
 
-fileprivate let bestButtNotes = """
+fileprivate let notes = """
 * This is a three day a week program designed to be performed at home.
 * You'll need a bit of equipment for this program: an exercise mat, a swiss ball, valslides (or a towel if you have smooth floors). a chin-up bar, and a PVC pipe/dowel/broomstick.
 * Don't be too aggressive about upping the rep ranges: the first and last reps you do should feel the same.
@@ -97,7 +97,7 @@ This is the weeks 1-4 of the at home beginner program from [Strong Curves: A Wom
 
 **Notes**
     
-\(bestButtNotes)
+\(notes)
 """
     return Program("Best Butt 1-4", workouts, exercises, tags, description, maxWorkouts: 3*4, nextProgram: "Best Butt 5-8")
 }
@@ -187,7 +187,7 @@ This is weeks 5-8 of the at home beginner program from [Strong Curves: A Woman's
 
 **Notes**
 
-\(bestButtNotes)
+\(notes)
 """
     return Program("Best Butt 5-8", workouts, exercises, tags, description, maxWorkouts: 3*4, nextProgram: "Best Butt 9-12")
 }
@@ -278,7 +278,7 @@ This is weeks 9-12 of the at home beginner program from [Strong Curves: A Woman'
 
 **Notes**
 
-\(bestButtNotes)
+\(notes)
 * After finishing the four weeks Brett recommends that you do a deload week, e.g. by reducing weights 20-50%.
 """
     return Program("Best Butt 9-12", workouts, exercises, tags, description)
