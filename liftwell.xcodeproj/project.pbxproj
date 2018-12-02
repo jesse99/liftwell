@@ -55,6 +55,7 @@
 		37B4352121B2194000EDC53E /* BestButt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352021B2194000EDC53E /* BestButt.swift */; };
 		37B4352321B30D5B00EDC53E /* RepsBodySubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */; };
 		37B4352521B34CEF00EDC53E /* Bootyful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352421B34CEF00EDC53E /* Bootyful.swift */; };
+		37B4352721B357EF00EDC53E /* Gluteal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352621B357EF00EDC53E /* Gluteal.swift */; };
 		37C2D3B9218D142500D9AF0E /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C2D3B8218D142500D9AF0E /* Workout.swift */; };
 		37DE95F8219A1E7600D60101 /* SAConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95F7219A1E7600D60101 /* SAConfettiView.swift */; };
 		37DE95FA219A48E200D60101 /* ProgramHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95F9219A48E200D60101 /* ProgramHelpers.swift */; };
@@ -146,6 +147,7 @@
 		37B4352021B2194000EDC53E /* BestButt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestButt.swift; sourceTree = "<group>"; };
 		37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsBodySubType.swift; sourceTree = "<group>"; };
 		37B4352421B34CEF00EDC53E /* Bootyful.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootyful.swift; sourceTree = "<group>"; };
+		37B4352621B357EF00EDC53E /* Gluteal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gluteal.swift; sourceTree = "<group>"; };
 		37C2D3B8218D142500D9AF0E /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		37DE95F7219A1E7600D60101 /* SAConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConfettiView.swift; sourceTree = "<group>"; };
 		37DE95F9219A48E200D60101 /* ProgramHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramHelpers.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				373CCFCE21AA309A00096291 /* GZCLP.swift */,
 				37286858216842C8005F6FD0 /* Mine2.swift */,
 				37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */,
+				37B4352621B357EF00EDC53E /* Gluteal.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				37EFD6D22172C54500F60880 /* Weight.swift in Sources */,
 				374FE94B21869E1C00CFC284 /* BarbellController.swift in Sources */,
 				3728685421644C0C005F6FD0 /* Apparatus.swift in Sources */,
+				37B4352721B357EF00EDC53E /* Gluteal.swift in Sources */,
 				37B4352321B30D5B00EDC53E /* RepsBodySubType.swift in Sources */,
 				374FE94F218A5B8900CFC284 /* PlatesController.swift in Sources */,
 				37286826216259AE005F6FD0 /* AppDelegate.swift in Sources */,

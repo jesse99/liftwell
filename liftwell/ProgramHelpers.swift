@@ -120,3 +120,16 @@ func pairedPlates(_ name: String, _ formalName: String, _ warmups: String, _ wor
     
     return Exercise(name, formalName, .weights(type), main: main)
 }
+
+func singlePlates(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", restMins: Double, main: Bool = false) -> Exercise {
+    let rest = Int(restMins*60.0)
+    let warmupSets = parseSets(warmups)
+    let workSets = parseSets(worksets)
+    let backoffSets = parseSets(backoff)
+    let subtype = RepsApparatusSubType(Sets(warmupSets, workSets, backoffSets), restSecs: rest)
+    
+    let apparatus = Apparatus.singlePlates(plates: defaultPlates())
+    let type = WeightsType(apparatus, .reps(subtype))
+    
+    return Exercise(name, formalName, .weights(type), main: main)
+}
