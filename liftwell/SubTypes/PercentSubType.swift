@@ -66,7 +66,7 @@ class PercentSubType: BaseRepsApparatusSubType {
             assert(false)
         case .weights(let type):
             let baseWeight = otherWeight() ?? 0.0
-            let liftedWeight = sets.bweight(percent*baseWeight, type.apparatus, worksetBias())
+            let liftedWeight = sets.bweight(percent*baseWeight, type.apparatus, baseWeight, worksetBias())
             let result = RepsResult(tag, baseWeight: baseWeight, liftedWeight: liftedWeight.weight, reps: reps)
             
             var myResults = doGetResults(exercise) ?? []
@@ -83,6 +83,10 @@ class PercentSubType: BaseRepsApparatusSubType {
     
     override func getBaseWorkingWeight() -> Double {
         return percent*(otherWeight() ?? 0.0)
+    }
+    
+    override func limitWeight() -> Double {
+        return otherWeight() ?? 0.0
     }
     
     override func needToFindWeight() -> Bool {

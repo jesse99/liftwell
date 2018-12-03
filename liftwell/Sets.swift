@@ -108,7 +108,7 @@ struct Sets: Storable {
     /// 3x5 @ 195 lbs     if reps are all the same
     /// 5,3,1+ @ 195 lbs  if percentages are all the same
     /// 1+ @ 195 lbs      otherwise
-    func sublabel(_ apparatus: Apparatus?, _ targetWeight: Double, _ currentReps: Int?, worksetBias: Int) -> String {
+    func sublabel(_ apparatus: Apparatus?, _ targetWeight: Double, _ currentReps: Int?, limit: Double, worksetBias: Int) -> String {
         func repsStr(_ reps: Set) -> String {
             let suffix = reps.amrap ? "+" : ""
             if let current = currentReps {
@@ -127,7 +127,7 @@ struct Sets: Storable {
             if targetWeight > 0.0 {
                 let suffix = reps.percent < 1.0 ? " (\(Int(reps.percent*100))%)" : ""
                 if let apparatus = apparatus {
-                    weight = " @ " + bweight(targetWeight*reps.percent, apparatus, worksetBias).text + suffix
+                    weight = " @ " + bweight(targetWeight*reps.percent, apparatus, limit, worksetBias).text + suffix
                 } else {
                     weight = " @ " + Weight.friendlyUnitsStr(targetWeight*reps.percent) + suffix
                 }
@@ -154,9 +154,9 @@ struct Sets: Storable {
         return ""
     }
 
-    func activities(_ weight: Double, _ apparatus: Apparatus, worksetBias: Int, currentReps: Int?) -> (Int, [Activity]) {
+    func activities(_ weight: Double, _ apparatus: Apparatus, limit: Double, worksetBias: Int, currentReps: Int?) -> (Int, [Activity]) {
         var result: [Activity] = []
-        let maxWeight = bweight(weight, apparatus, worksetBias)
+        let maxWeight = bweight(weight, apparatus, limit, worksetBias)
         for (i, reps) in warmups.enumerated() {
             let setWeight = Weight(reps.percent*weight, apparatus).closest(below: weight)
             result.append(Activity(
@@ -169,7 +169,7 @@ struct Sets: Storable {
                 color: nil))
         }
         for (i, reps) in worksets.enumerated() {
-            let setWeight = bweight(reps.percent*weight, apparatus, worksetBias)
+            let setWeight = bweight(reps.percent*weight, apparatus, limit, worksetBias)
             result.append(Activity(
                 title: "Workset \(i+1) of \(worksets.count)",
                 subtitle: "\(Int(100*reps.percent))% of \(maxWeight.text)",
@@ -193,13 +193,13 @@ struct Sets: Storable {
         return (warmups.count, result)
     }
     
-    func bweight(_ target: Double, _ apparatus: Apparatus, _ worksetBias: Int) -> Weight.Info {
+    func bweight(_ weight: Double, _ apparatus: Apparatus, _ limit: Double, _ worksetBias: Int) -> Weight.Info {
         if worksetBias == 0 {
-            return Weight(target, apparatus).closest()
+            return Weight(weight, apparatus).closest()
         } else if worksetBias < 0 {
-            return Weight(target, apparatus).closest(below: target)
+            return Weight(weight, apparatus).closest(below: limit)
         } else {
-            return Weight(target, apparatus).closest(above: target)
+            return Weight(weight, apparatus).closest(above: limit)
         }
     }
     
