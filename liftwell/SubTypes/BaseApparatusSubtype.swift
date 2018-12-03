@@ -172,7 +172,7 @@ class BaseApparatusSubtype {
     }
     
     func presentFinalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        let weight = aweight.getBaseWorkingWeight()
+        let weight = getBaseWorkingWeight()
         
         switch exercise.type {
         case .body(_): assert(false); completion()
@@ -251,6 +251,10 @@ class BaseApparatusSubtype {
         return aweight.getBaseWorkingWeight()
     }
     
+    func getBaseWorkingWeight() -> Double {
+        return aweight.getBaseWorkingWeight()
+    }
+    
     private func doAdvance(_ exercise: Exercise, _ apparatus: Apparatus, _ amount: Int) {
         var weight = doGetAdvanceWeight(exercise)
         
@@ -311,6 +315,10 @@ class BaseApparatusSubtype {
     func isWorkset(_ index: Int) -> Bool {
         assert(false)       // subclasses implement this
         return false
+    }
+    
+    func worksetBias() -> Int {
+        return 0
     }
     
     var aweight: ApparatusWeight  // starts out at 0.0

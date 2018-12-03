@@ -108,6 +108,19 @@ func dumbbell2(_ name: String, _ formalName: String, _ warmups: String, _ workse
     return Exercise(name, formalName, .weights(type), main: main)
 }
 
+func dumbbell2(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", percent: Double, other: String, restMins: Double, main: Bool = false) -> Exercise {
+    let rest = Int(restMins*60.0)
+    let warmupSets = parseSets(warmups)
+    let workSets = parseSets(worksets)
+    let backoffSets = parseSets(backoff)
+    let subtype = PercentSubType(Sets(warmupSets, workSets, backoffSets), percent: percent, other: other, restSecs: rest)
+    
+    let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: defaultMagnets(), paired: true)
+    let type = WeightsType(apparatus, .percent(subtype))
+    
+    return Exercise(name, formalName, .weights(type), main: main)
+}
+
 func pairedPlates(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", restMins: Double, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     let warmupSets = parseSets(warmups)

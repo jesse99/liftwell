@@ -138,7 +138,7 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
         let weight = aweight.getBaseWorkingWeight()
         switch exercise.type {
         case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight, currentReps: workingReps)
-        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, currentReps: workingReps)
+        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, worksetBias: worksetBias(), currentReps: workingReps)
         }
     }
     

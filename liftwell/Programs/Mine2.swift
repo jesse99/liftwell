@@ -5,21 +5,21 @@ import Foundation
 func Mine2() -> Program {
     let exercises = [
         // Heavy
-        dumbbell2("Heavy Bench",    "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "6-12@100% R 6-12@100% R 6-12@100% R", restMins: 4.0, main: true),
-        dumbbell2("Heavy Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75%",        "4-8@100% R 4-8@100% R 4-8@100% R", restMins: 4.0, main: true),
-        dumbbell1("Kroc Row",       "Kroc Row",                        "5@50% 3@75%",        "6-12@100% R 6-12@100% R 6-12@100% R", restMins: 3.0, main: true),
-        dumbbell2("Dumbbell Flyes", "Dumbbell Flyes",                  "10@50% ",            "6-12@100% R 6-12@100% R 6-12@100%", restMins: 3.0),
+        dumbbell2("Heavy Bench",    "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "6-12 R 6-12 R 6-12 R", restMins: 4.0, main: true),
+        dumbbell2("Heavy Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75%",        "4-8 R 4-8 R 4-8 R", restMins: 4.0, main: true),
+        dumbbell1("Kroc Row",       "Kroc Row",                        "5@50% 3@75%",        "5-10 R 5-10 R 5-10 R", restMins: 3.0, main: true),
+        dumbbell2("Dumbbell Flyes", "Dumbbell Flyes",                  "10@50% ",            "6-12 R 6-12 R 6-12", restMins: 3.0),
 
         // Light
-        dumbbell2("Dumbbell OHP",    "Dumbbell Shoulder Press", "10@50% 3@70% 1@90%", "5-10@100% R 5-10@100% R 5-10@100% R", restMins: 3.5, main: true),
-        dumbbell1("Back Extensions", "Back Extensions",         "10@50%",             "6-12@100% R 6-12@100% R 6-12@100%", restMins: 3.0, main: true),
+        dumbbell2("Dumbbell OHP",    "Dumbbell Shoulder Press", "10@50% 3@70% 1@90%", "5-10 R 5-10 R 5-10 R", restMins: 3.5, main: true),
+        dumbbell1("Back Extensions", "Back Extensions",         "10@50%",             "6-12 R 6-12 R 6-12", restMins: 3.0, main: true),
         bodyweight("Chinups",        "Chinup", numSets: 4, goalReps: 25, restMins: 3.5, restAtEnd: true, main: true),
-        dumbbell2("Farmer's Walk",   "Farmer's Walk",           "",                   "1@100% R 1@100%", restMins: 3.0),
-        cable("Cable Crunches",      "Cable Crunch",            "",                   "6-12@100% R 6-12@100% R 6-12@100%", restMins: 3.0),
+        dumbbell2("Farmer's Walk",   "Farmer's Walk",           "",                   "1 R 1", restMins: 3.0),
+        cable("Cable Crunches",      "Cable Crunch",            "",                   "6-12 R 6-12 R 6-12", restMins: 3.0),
 
         // Medium
-        dumbbell2("Medium Bench",    "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "6-12@100% R 6-12@100% R 6-12@100% R", restMins: 4.0, main: true),
-        dumbbell2("Medium Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75%",        "4-8@100% R 4-8@100% R 4-8@100% R", restMins: 4.0, main: true),
+        dumbbell2("Medium Bench",    "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "10 R 10 R 10 R", percent: 0.94, other: "Heavy Bench", restMins: 4.0),
+        dumbbell2("Medium Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75%",        "6 R 6 R 6 R", percent: 0.94, other: "Heavy Squat", restMins: 4.0),
         bodyweight("Dips",           "Dips", numSets: 3, goalReps: 36, restMins: 3.5, restAtEnd: false),
         
         bodyweight("Foam Rolling",            "IT-Band Foam Roll",         1, by: 15),
@@ -46,7 +46,7 @@ func Mine2() -> Program {
     let description = """
 This is one of the programs I use when I don't have access to a gym with barbells. It's a three day a week program and the days look like this:
 
-**Heavy (should be a struggle to finish all the reps**
+**Heavy** (should be a struggle to finish all the reps)
 * Dumbbell Bench 3x6-12
 * Bulgarian Split Squat 3x4-8
 * Chinups to 25 reps
@@ -57,7 +57,7 @@ This is one of the programs I use when I don't have access to a gym with barbell
 * Back Extensions 3x6-12
 * Dumbbell Flyes 3x6-12
 
-**Medium (should feel like you are working hard but in no danger of missing a rep)**
+**Medium**  (should feel like you are working hard but in no danger of missing a rep)
 * Dumbbell Bench 3x10 @ 94%
 * Bulgarian Split Squat 3x8 @ 94%
 * Chinups to 25 reps

@@ -106,6 +106,7 @@ class Exercise: Storable {
             switch type.subtype {
             case .cyclic(let subtype): return subtype
             case .find(let subtype): return subtype
+            case .percent(let subtype): return subtype
             case .reps(let subtype): return subtype
             case .t1(let subtype): return subtype
             case .t2(let subtype): return subtype
@@ -155,7 +156,7 @@ class Exercise: Storable {
                 }
             case .find(_), .timed(_):
                 break
-            case .reps(_), .t3(_):
+            case .percent(_), .reps(_), .t3(_):
                 if let result = RepsApparatusSubType.results[formalName]?.last {
                     weight = result.liftedWeight
                 }
@@ -194,7 +195,7 @@ class Exercise: Storable {
                 }
             case .find(_), .timed(_):
                 break
-            case .reps(_), .t3(_):
+            case .percent(_), .reps(_), .t3(_):
                 if let result = RepsApparatusSubType.results[formalName]?.last {
                     return result.reps
                 }

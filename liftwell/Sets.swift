@@ -154,7 +154,7 @@ struct Sets: Storable {
         return ""
     }
 
-    func activities(_ weight: Double, _ apparatus: Apparatus, currentReps: Int?) -> (Int, [Activity]) {
+    func activities(_ weight: Double, _ apparatus: Apparatus, worksetBias: Int, currentReps: Int?) -> (Int, [Activity]) {
         var result: [Activity] = []
         let maxWeight = Weight(weight, apparatus).closest()
         for (i, reps) in warmups.enumerated() {
@@ -169,7 +169,14 @@ struct Sets: Storable {
                 color: nil))
         }
         for (i, reps) in worksets.enumerated() {
-            let setWeight = Weight(reps.percent*weight, apparatus).closest()
+            let setWeight: Weight.Info
+            if worksetBias == 0 {
+                setWeight = Weight(reps.percent*weight, apparatus).closest()
+            } else if worksetBias < 0 {
+                setWeight = Weight(reps.percent*weight, apparatus).closest(below: weight)
+            } else {
+                setWeight = Weight(reps.percent*weight, apparatus).closest(above: weight)
+            }
             result.append(Activity(
                 title: "Workset \(i+1) of \(worksets.count)",
                 subtitle: "\(Int(100*reps.percent))% of \(maxWeight.text)",

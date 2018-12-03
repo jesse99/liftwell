@@ -462,6 +462,7 @@ class ExerciseController: UIViewController {
             switch type.subtype {
             case .cyclic(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: subtype.cycleIndex, apparatus: type.apparatus))
             case .find(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: .weight(subtype.weight), reps: subtype.reps, cycleIndex: nil, apparatus: type.apparatus))
+            case .percent(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: nil, apparatus: type.apparatus))
             case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: nil, apparatus: type.apparatus))
             case .t1(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: subtype.cycleIndex, apparatus: type.apparatus))
             case .t2(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: subtype.cycleIndex, apparatus: type.apparatus))
@@ -484,12 +485,12 @@ class ExerciseController: UIViewController {
             switch type.subtype {
             case .maxReps(let subtype):
                 subtype.restTime = options.rest
-                subtype.weight = options.aweight.getBaseWorkingWeight()
+                subtype.weight = options.aweight!.getBaseWorkingWeight()
                 subtype.currentReps = options.reps!
                 subtype.updated(exercise)
             case .reps(let subtype):
                 subtype.restTime = options.rest
-                subtype.weight = options.aweight.getBaseWorkingWeight()
+                subtype.weight = options.aweight!.getBaseWorkingWeight()
                 subtype.workingReps = options.reps
                 subtype.updated(exercise)
             case .timed(_): assert(false)
@@ -499,35 +500,38 @@ class ExerciseController: UIViewController {
             switch type.subtype {
             case .cyclic(let subtype):
                 subtype.restTime = options.rest
-                subtype.aweight = options.aweight
+                subtype.aweight = options.aweight!
                 subtype.workingReps = options.reps
                 subtype.cycleIndex = options.cycleIndex!
                 subtype.updated(exercise)
             case .find(let subtype):
                 subtype.restTime = options.rest
-                subtype.weight = options.aweight.getBaseWorkingWeight()
+                subtype.weight = options.aweight!.getBaseWorkingWeight()
                 subtype.reps = options.reps!
+                subtype.updated(exercise)
+            case .percent(let subtype):
+                subtype.restTime = options.rest
                 subtype.updated(exercise)
             case .reps(let subtype):
                 subtype.restTime = options.rest
-                subtype.aweight = options.aweight
+                subtype.aweight = options.aweight!
                 subtype.workingReps = options.reps
                 subtype.updated(exercise)
             case .t1(let subtype):
                 subtype.restTime = options.rest
-                subtype.aweight = options.aweight
+                subtype.aweight = options.aweight!
                 subtype.workingReps = options.reps
                 subtype.cycleIndex = options.cycleIndex!
                 subtype.updated(exercise)
             case .t2(let subtype):
                 subtype.restTime = options.rest
-                subtype.aweight = options.aweight
+                subtype.aweight = options.aweight!
                 subtype.workingReps = options.reps
                 subtype.cycleIndex = options.cycleIndex!
                 subtype.updated(exercise)
             case .t3(let subtype):
                 subtype.restTime = options.rest
-                subtype.aweight = options.aweight
+                subtype.aweight = options.aweight!
                 subtype.workingReps = options.reps
                 subtype.updated(exercise)
             case .timed(_): assert(false)
