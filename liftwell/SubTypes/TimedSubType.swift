@@ -169,6 +169,10 @@ class TimedSubType: ExerciseInfo {
     }
     
     func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
+        var suffix = ""
+        if let target = targetTime, target > 0 {
+            suffix = ". Target is \(target)s."
+        }
         if let myResults = Self.results[exercise.formalName], let last = myResults.last {
             var count = 0
             for result in myResults.reversed() {
@@ -179,9 +183,9 @@ class TimedSubType: ExerciseInfo {
                 }
             }
             if count > 1 {
-                return ("Previous was \(last.tag) x\(count)", UIColor.black)
+                return ("Previous was \(last.tag) x\(count)\(suffix)", UIColor.black)
             } else {
-                return ("Previous was \(last.tag)", UIColor.black)
+                return ("Previous was \(last.tag)\(suffix)", UIColor.black)
             }
         } else {
             return ("", UIColor.black)

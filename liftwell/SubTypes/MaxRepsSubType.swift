@@ -153,6 +153,7 @@ class MaxRepsSubType: ExerciseInfo {
     }
     
     func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
+        let suffix = goalReps > 0 ? ". Goal is \(goalReps) reps." : ""
         if let myResults = Self.results[exercise.formalName], let last = myResults.last {
             var count = 0
             for result in myResults.reversed() {
@@ -163,9 +164,9 @@ class MaxRepsSubType: ExerciseInfo {
                 }
             }
             if count > 1 {
-                return ("Previous was \(last.tag) x\(count)", UIColor.black)
+                return ("Previous was \(last.tag) x\(count)\(suffix)", UIColor.black)
             } else {
-                return ("Previous was \(last.tag)", UIColor.black)
+                return ("Previous was \(last.tag)\(suffix)", UIColor.black)
             }
         } else {
             return ("", UIColor.black)
