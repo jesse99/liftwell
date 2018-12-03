@@ -133,7 +133,7 @@ class RepsBodySubType: ExerciseInfo {
     
     func sublabel(_ exercise: Exercise) -> String {
         switch exercise.type {
-        case .body(_): return sets.sublabel(nil, weight, workingReps)
+        case .body(_): return sets.sublabel(nil, weight, workingReps, worksetBias: 0)
         case .weights(_): assert(false); return ""
         }
     }

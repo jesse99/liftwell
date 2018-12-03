@@ -36,7 +36,6 @@ class RepsOptionController: UIViewController {
         if let aweight = options.aweight {
             weightLabel.isHidden = false
             weightTextbox.isHidden = false
-            adjustButton.isHidden = false
 
             switch aweight {
             case .weight(let weight):
@@ -69,7 +68,18 @@ class RepsOptionController: UIViewController {
         } else {
             weightLabel.isHidden = true
             weightTextbox.isHidden = true
-            adjustButton.isHidden = true
+            tm1RMLabel.isHidden = true
+            tm1RMTextbox.isHidden = true
+            tmSubtitle.isHidden = true
+
+            if let reps = options.reps {
+                repsLabel.isHidden = false
+                repsTextbox.isHidden = false
+                repsTextbox.text = "\(reps)"
+            } else {
+                repsLabel.isHidden = true
+                repsTextbox.isHidden = true
+            }
         }
         
         if let cycle = options.cycleIndex {
@@ -81,7 +91,7 @@ class RepsOptionController: UIViewController {
             cycleTextbox.isHidden = true
         }
         
-        if options.apparatus != nil {
+        if options.apparatus != nil && options.aweight != nil {
             adjustButton.isHidden = false
             apparatusButton.isEnabled = true
 

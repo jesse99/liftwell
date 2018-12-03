@@ -4,6 +4,8 @@ import UIKit
 import UserNotifications
 import os.log
 
+var currentProgram: Program! = nil
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     override init() {
@@ -17,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if program == nil {
             os_log("failed to load program from %@", type: .info, path)
             program = PhraksGreyskull()
+            currentProgram = program
         }
         
         let defaults = UserDefaults.standard
@@ -143,6 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             self.program = program
         }
+        currentProgram = self.program
         
         loadAchievements()
     }
@@ -315,9 +319,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let savedProgram = Program(from: store)
                 if let builtin = findBuiltIn(savedProgram.name) {
                     // We use the built-in version so that updates to the exe actually take effect.
+                    currentProgram = builtin
                     builtin.sync(savedProgram)
                     return builtin
                 } else {
+                    currentProgram = savedProgram
                     return savedProgram
                 }
             } catch {

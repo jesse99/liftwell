@@ -61,12 +61,20 @@ class PercentSubType: BaseRepsApparatusSubType {
     }
     
     override func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        let baseWeight = otherWeight() ?? 0.0
-        let result = RepsResult(tag, baseWeight: baseWeight, liftedWeight: percent*baseWeight, reps: reps)
+        switch exercise.type {
+        case .body(_):
+            assert(false)
+        case .weights(let type):
+            let baseWeight = otherWeight() ?? 0.0
+            let liftedWeight = sets.bweight(percent*baseWeight, type.apparatus, worksetBias())
+            let result = RepsResult(tag, baseWeight: baseWeight, liftedWeight: liftedWeight.weight, reps: reps)
+            
+            var myResults = doGetResults(exercise) ?? []
+            myResults.append(result)
+            Self.results[exercise.formalName] = myResults
+        }
         
-        var myResults = doGetResults(exercise) ?? []
-        myResults.append(result)
-        Self.results[exercise.formalName] = myResults
+        completion()
     }
     
     override func doGetResults(_ exercise: Exercise) -> [RepsResult]? {
@@ -86,8 +94,7 @@ class PercentSubType: BaseRepsApparatusSubType {
     }
     
     private func otherWeight() -> Double? {
-        let app = UIApplication.shared.delegate as! AppDelegate
-        if let other = app.program.findExercise(otherName) {
+        if let other = currentProgram.findExercise(otherName) {
             switch other.type {
             case .body(_):
                 return 0.0
