@@ -35,9 +35,9 @@ class weightTests: XCTestCase {
     func testBumpers() {
         let a: Apparatus = .barbell(bar: 45.0, collar: 0, plates: defaultPlates(), bumpers: defaultBumpers(), magnets: [])
         var w = Weight(0.0, a)
-        XCTAssertEqual(w.closest().weight, 75.0)
-        XCTAssertEqual(w.closest().text, "75 lbs")
-        XCTAssertEqual(w.closest().plates, "15 lb bumper")
+        XCTAssertEqual(w.closest().weight, 95.0)
+        XCTAssertEqual(w.closest().text, "95 lbs")
+        XCTAssertEqual(w.closest().plates, "25 lb bumper")
         
         w = Weight(135.0, a)
         XCTAssertEqual(w.closest().weight, 135)
@@ -69,7 +69,7 @@ class weightTests: XCTestCase {
     }
     
     func testDumbbells() {
-        let a: Apparatus = .dumbbells(weights: [5, 10, 15, 20], magnets: [])
+        let a: Apparatus = .dumbbells(weights: [5, 10, 15, 20], magnets: [], paired: true)
         var w = Weight(0.0, a)
         XCTAssertEqual(w.closest().weight, 5.0)
         XCTAssertEqual(w.closest().text, "5 lbs")
@@ -97,7 +97,7 @@ class weightTests: XCTestCase {
     }
     
     func testDumbbellMagnets() {
-        let a: Apparatus = .dumbbells(weights: [5, 10, 15, 20], magnets: [0.25, 0.5])
+        let a: Apparatus = .dumbbells(weights: [5, 10, 15, 20], magnets: [0.25, 0.5], paired: true)
         var w = Weight(0.0, a)
         XCTAssertEqual(w.closest().weight, 5.0)
         XCTAssertEqual(w.closest().text, "5 lbs")
