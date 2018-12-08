@@ -15,8 +15,14 @@ class liftwellTests: XCTestCase {
         super.tearDown()
     }
     
-//    func testPerformanceExample() {
-//        self.measure {
-//        }
-//    }    
+    func testX() {
+        XCTAssertEqual("5".x(3, rest: .none, amrap: false), "5 5 5")
+        XCTAssertEqual("5".x(3, rest: .none, amrap: true), "5 5 5+")
+
+        XCTAssertEqual("5".x(3, rest: .normal, amrap: false), "5 R 5 R 5")
+        XCTAssertEqual("5".x(3, rest: .normal, amrap: true), "5 R 5 R 5+")
+
+        XCTAssertEqual("5-10".x(3, rest: .atEnd, amrap: false), "5-10 R 5-10 R 5-10 R")
+        XCTAssertEqual("5-10".x(3, rest: .atEnd, amrap: true), "5-10 R 5-10 R 5-10+ R")
+    }
 }

@@ -15,21 +15,21 @@ fileprivate let notes = """
 func GorgeousGlutes1() -> Program {
     let exercises = [
         // A
-        bodyweight("Hip Thrust",      "Hip Thrust",         "20 R 20 R 20", restMins: 1.5, main: true),
-        bodyweight("Squat",           "Body-weight Squat",  "20 R 20 R 20", restMins: 1.5, main: true),
-        bodyweight("Back Extension",  "Back Extension",     "20 R 20 R 20", restMins: 1.0),
+        bodyweight("Hip Thrust",      "Hip Thrust",         "20".x(3), restMins: 1.5, main: true),
+        bodyweight("Squat",           "Body-weight Squat",  "20".x(3), restMins: 1.5, main: true),
+        bodyweight("Back Extension",  "Back Extension",     "20".x(3), restMins: 1.0),
         bodyweight("Side Lying Clam", "Clam",               "30", restMins: 0.5),
         
         // B
-        bodyweight("Single-leg Glute Bridge", "Single Leg Glute Bridge",   "20 R 20 R 20", restMins: 1.5, main: true),
-        bodyweight("Walking Lunge",           "Body-weight Walking Lunge", "10-20 R 10-20 R 10-20", restMins: 1.0, main: true),
-        bodyweight("Reverse Hyperextension",  "Reverse Hyperextension",    "20 R 20 R 20", restMins: 1.0),
+        bodyweight("Single-leg Glute Bridge", "Single Leg Glute Bridge",   "20".x(3), restMins: 1.5, main: true),
+        bodyweight("Walking Lunge",           "Body-weight Walking Lunge", "10-20".x(3), restMins: 1.0, main: true),
+        bodyweight("Reverse Hyperextension",  "Reverse Hyperextension",    "20".x(3), restMins: 1.0),
         bodyweight("Side Lying Abduction",    "Side Lying Abduction",      "30", restMins: 1.0),
         
         // C
-        barbell("Glute Bridge",       "Glute Bridge",               "", "10 R 10 R 10", restMins: 2.0, main: true),
-        dumbbell1("Goblet Squat",      "Goblet Squat",               "", "10 R 10 R 10", restMins: 2.0, main: true),
-        dumbbell2("Romanian Deadlift", "Dumbbell Romanian Deadlift", "", "10 R 10 R 10", restMins: 2.0, main: true),
+        barbell("Glute Bridge",       "Glute Bridge",               "", "10".x(3), restMins: 2.0, main: true),
+        dumbbell1("Goblet Squat",      "Goblet Squat",               "", "10".x(3), restMins: 2.0, main: true),
+        dumbbell2("Romanian Deadlift", "Dumbbell Romanian Deadlift", "", "10".x(3), restMins: 2.0, main: true),
         cable("Cable Hip Rotation", "Cable Hip Rotation",         "", "10", restMins: 1.0)]
     
     let aExercises = ["Hip Thrust", "Squat", "Back Extension", "Side Lying Clam"]
@@ -81,21 +81,21 @@ This is weeks 1-4 of the stripped down beginner program from [Strong Curves: A W
 func GorgeousGlutes2() -> Program {
     let exercises = [
         // A
-        barbell("Hip Thrust",               "Hip Thrust",            "", "8-12 R 8-12 R 8-12", restMins: 2.0, main: true),
-        barbell("Front Squat",              "Front Squat",           "", "8-12 R 8-12 R 8-12", restMins: 2.0, main: true),
-        barbell("Romanian Deadlift",        "Romanian Deadlift",     "", "8-12 R 8-12 R 8-12", restMins: 2.0, main: true),
+        barbell("Hip Thrust",               "Hip Thrust",            "", "8-12".x(3), restMins: 2.0, main: true),
+        barbell("Front Squat",              "Front Squat",           "", "8-12".x(3), restMins: 2.0, main: true),
+        barbell("Romanian Deadlift",        "Romanian Deadlift",     "", "8-12".x(3), restMins: 2.0, main: true),
         bodyweight("Band Seated Abduction", "Band Seated Abduction", "30", restMins: 1.0),
         
         // B
-        bodyweight("Single-leg Hip Thrust",      "Body-weight Single Leg Hip Thrust",  "8-12 R 8-12 R 8-12", restMins: 1.5, main: true),
-        bodyweight("Skater Squat",               "Skater Squat",                       "8-12 R 8-12 R 8-12", restMins: 1.5, main: true),
-        dumbbell2("Single-leg Romanian Deadlift", "Single Leg Romanian Deadlift",       "", "8-12 R 8-12 R 8-12", restMins: 1.5, main: true),
+        bodyweight("Single-leg Hip Thrust",      "Body-weight Single Leg Hip Thrust",  "8-12".x(3), restMins: 1.5, main: true),
+        bodyweight("Skater Squat",               "Skater Squat",                       "8-12".x(3), restMins: 1.5, main: true),
+        dumbbell2("Single-leg Romanian Deadlift", "Single Leg Romanian Deadlift",       "", "8-12".x(3), restMins: 1.5, main: true),
         cable("Cable Hip Abduction",           "Cable Hip Abduction",                "", "30", restMins: 0.5),
         
         // C
-        barbell("Glute Bridge",            "Glute Bridge",         "", "10 R 10 R 10", restMins: 1.5, main: true),
-        barbell("Zercher Squat",           "Zercher Squat",        "", "10 R 10 R 10", restMins: 1.5, main: true),
-        dumbbell1("Back Extension",         "Back Extension",       "", "10 R 10 R 10", restMins: 1.0),
+        barbell("Glute Bridge",            "Glute Bridge",         "", "10".x(3), restMins: 1.5, main: true),
+        barbell("Zercher Squat",           "Zercher Squat",        "", "10".x(3), restMins: 1.5, main: true),
+        dumbbell1("Back Extension",         "Back Extension",       "", "10".x(3), restMins: 1.0),
         bodyweight("Side Lying Hip Raise", "Side Lying Hip Raise", "12", restMins: 1.0)]
     
     let aExercises = ["Hip Thrust", "Front Squat", "Romanian Deadlift", "Band Seated Abduction"]
@@ -147,21 +147,21 @@ This is weeks 5-8 of the stripped down beginner program from [Strong Curves: A W
 func GorgeousGlutes3() -> Program {
     let exercises = [
         // A
-        barbell("Hip Thrust (constant tension)",  "Hip Thrust (constant tension)",           "", "20 R 20 R 20", restMins: 2.0, main: true),
-        dumbbell2("Deficit Bulgarian Split Squat", "Dumbbell Single Leg Split Squat",         "", "12 R 12 R 12", restMins: 2.0, main: true),
-        barbell("Deadlift",                       "Deadlift",                                "", "8 R 8 R 8", restMins: 2.0, main: true),
+        barbell("Hip Thrust (constant tension)",  "Hip Thrust (constant tension)",           "", "20".x(3), restMins: 2.0, main: true),
+        dumbbell2("Deficit Bulgarian Split Squat", "Dumbbell Single Leg Split Squat",         "", "12".x(3), restMins: 2.0, main: true),
+        barbell("Deadlift",                       "Deadlift",                                "", "8".x(3), restMins: 2.0, main: true),
         cable("Anti-Rotation Press",            "Half-kneeling Cable Anti-Rotation Press", "", "15", restMins: 1.0),
         
         // B
-        bodyweight("Elevated Single-leg Hip Thrust (pause rep)", "Body-weight Single Leg Hip Thrust", "6 R 6 R 6", restMins: 1.5, main: true),
-        barbell("Box Squat",                    "Box Squat",           "", "6 R 6 R 6", restMins: 1.5, main: true),
-        bodyweight("Single-leg Back Extension", "Back Extension",      "12 R 12 R 12", restMins: 1.0),
+        bodyweight("Elevated Single-leg Hip Thrust (pause rep)", "Body-weight Single Leg Hip Thrust", "6".x(3), restMins: 1.5, main: true),
+        barbell("Box Squat",                    "Box Squat",           "", "6".x(3), restMins: 1.5, main: true),
+        bodyweight("Single-leg Back Extension", "Back Extension",      "12".x(3), restMins: 1.0),
         cable("Cable Hip Abduction",          "Cable Hip Abduction", "", "15", restMins: 0.5),
         
         // C
-        barbell("Hip Thrust (rest pause)", "Hip Thrust (rest pause)",  "", "10 R 10 R 10", restMins: 2.0, main: true),
-        dumbbell2("Step Ups",               "Step-ups",                 "", "8 R 8 R 8", restMins: 1.5, main: true),
-        barbell("Kettlebell Swing",        "Kettlebell Two Arm Swing", "", "20 R 20 R 20", restMins: 1.5),
+        barbell("Hip Thrust (rest pause)", "Hip Thrust (rest pause)",  "", "10".x(3), restMins: 2.0, main: true),
+        dumbbell2("Step Ups",               "Step-ups",                 "", "8".x(3), restMins: 1.5, main: true),
+        barbell("Kettlebell Swing",        "Kettlebell Two Arm Swing", "", "20".x(3), restMins: 1.5),
         bodyweight("Side Lying Hip Raise", "Side Lying Hip Raise",     "15", restMins: 1.0)]
     
     let aExercises = ["Elevated Single-leg Hip Thrust (pause rep)", "Box Squat", "Single-leg Back Extension", "Cable Hip Abduction"]

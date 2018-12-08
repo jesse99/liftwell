@@ -23,7 +23,7 @@ extension String {
             switch rest {
             case .none: if i + 1 < count {result += " "}
             case .normal: if i + 1 < count {result += " R "}
-            case .atEnd: result += " R "
+            case .atEnd: if i + 1 < count {result += " R "} else {result += " R"}
             }
         }
         return result

@@ -6,15 +6,15 @@ func FiveThreeOneBeginner() -> Program {
     let warmup    = "5@40% 5@50% 3@60%"
 
     let worksets1 = "5@65% R 5@75% R 5+@85% R"
-    let backoff1  = "5@65% 5@65% 5@65% 5@65% 5@65%"
+    let backoff1  = "5@65%".x(4, rest: .none)
     let sets1     = (warmup, worksets1, backoff1)
 
     let worksets2 = "3@70% R 3@80% R 3+@90% R"
-    let backoff2  = "5@70% 5@70% 5@70% 5@70% 5@70%"
+    let backoff2  = "5@70%".x(4, rest: .none)
     let sets2     = (warmup, worksets2, backoff2)
 
     let worksets3 = "5@75% R 3@85% R 1+@95% R"
-    let backoff3  = "5@75% 5@75% 5@75% 5@75% 5@75%"
+    let backoff3  = "5@75%".x(4, rest: .none)
     let sets3     = (warmup, worksets3, backoff3)
     
     let sets = [sets1, sets2, sets3]

@@ -59,13 +59,13 @@ func dumbbellT3(_ name: String, _ formalName: String, _ worksets: String, restMi
 fileprivate func t1Cycles() -> [(String, String, String)] {
     let warmup    = "10@0% 5@50% 3@75% 1@90%"
     
-    let worksets1 = "3 R 3 R 3 R 3 R 3+"
+    let worksets1 = "3".x(5, amrap: true)
     let sets1     = (warmup, worksets1, "")
     
-    let worksets2 = "2 R 2 R 2 R 2 R 2 R 2+"
+    let worksets2 = "2".x(6, amrap: true)
     let sets2     = (warmup, worksets2, "")
     
-    let worksets3 = "1 R 1 R 1 R 1 R 1 R 1 R 1 R 1 R 1 R 1+"
+    let worksets3 = "1".x(10, amrap: true)
     let sets3     = (warmup, worksets3, "")
     
     return [sets1, sets2, sets3]
@@ -74,13 +74,13 @@ fileprivate func t1Cycles() -> [(String, String, String)] {
 fileprivate func t2Cycles() -> [(String, String, String)] {
     let warmup    = "10@0% 5@50% 3@75% 1@90%"   // these are upper if T1 is lower and vice versa so probably a good idea to do a full warmup
 
-    let worksets1 = "10 R 10 R 10"
+    let worksets1 = "10".x(3)
     let sets1     = (warmup, worksets1, "")
 
-    let worksets2 = "8 R 8 R 8"
+    let worksets2 = "8".x(3)
     let sets2     = (warmup, worksets2, "")
 
-    let worksets3 = "6 R 6 R 6"
+    let worksets3 = "6".x(3)
     let sets3     = (warmup, worksets3, "")
 
     return [sets1, sets2, sets3]

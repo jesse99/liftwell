@@ -303,11 +303,11 @@
 				37B4352021B2194000EDC53E /* BestButt.swift */,
 				37B4352421B34CEF00EDC53E /* Bootyful.swift */,
 				37DE95FF219D1D3300D60101 /* FiveThreeOneBeginner.swift */,
+				37B4352621B357EF00EDC53E /* Gluteal.swift */,
 				37B4352821B382CD00EDC53E /* Gorgeous.swift */,
 				373CCFCE21AA309A00096291 /* GZCLP.swift */,
 				37286858216842C8005F6FD0 /* Mine2.swift */,
 				37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */,
-				37B4352621B357EF00EDC53E /* Gluteal.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
