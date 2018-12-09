@@ -20,7 +20,7 @@
 		3728684E21631314005F6FD0 /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728684D21631314005F6FD0 /* SequenceExtensions.swift */; };
 		3728685021631462005F6FD0 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728684F21631462005F6FD0 /* Exercise.swift */; };
 		3728685421644C0C005F6FD0 /* Apparatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728685321644C0C005F6FD0 /* Apparatus.swift */; };
-		37286859216842C8005F6FD0 /* Mine2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286858216842C8005F6FD0 /* Mine2.swift */; };
+		37286859216842C8005F6FD0 /* MastersDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286858216842C8005F6FD0 /* MastersDB.swift */; };
 		3728685F21699C17005F6FD0 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728685E21699C17005F6FD0 /* Types.swift */; };
 		37286863216A6C42005F6FD0 /* RepsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286862216A6C42005F6FD0 /* RepsParser.swift */; };
 		37286865216A83A5005F6FD0 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286864216A83A5005F6FD0 /* Either.swift */; };
@@ -115,7 +115,7 @@
 		3728684D21631314005F6FD0 /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
 		3728684F21631462005F6FD0 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		3728685321644C0C005F6FD0 /* Apparatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apparatus.swift; sourceTree = "<group>"; };
-		37286858216842C8005F6FD0 /* Mine2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mine2.swift; sourceTree = "<group>"; };
+		37286858216842C8005F6FD0 /* MastersDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastersDB.swift; sourceTree = "<group>"; };
 		3728685E21699C17005F6FD0 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		37286862216A6C42005F6FD0 /* RepsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsParser.swift; sourceTree = "<group>"; };
 		37286864216A83A5005F6FD0 /* Either.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
@@ -306,7 +306,7 @@
 				37B4352621B357EF00EDC53E /* Gluteal.swift */,
 				37B4352821B382CD00EDC53E /* Gorgeous.swift */,
 				373CCFCE21AA309A00096291 /* GZCLP.swift */,
-				37286858216842C8005F6FD0 /* Mine2.swift */,
+				37286858216842C8005F6FD0 /* MastersDB.swift */,
 				37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */,
 			);
 			path = Programs;
@@ -544,7 +544,7 @@
 				374FE9452185FE3C00CFC284 /* TimedOptionsController.swift in Sources */,
 				373CCFCD21A9E73200096291 /* BaseRepsApparatusSubType.swift in Sources */,
 				3777DEA921BC63650071D11E /* StringExtensions.swift in Sources */,
-				37286859216842C8005F6FD0 /* Mine2.swift in Sources */,
+				37286859216842C8005F6FD0 /* MastersDB.swift in Sources */,
 				3728684B21631202005F6FD0 /* Store.swift in Sources */,
 				374D3EDA217BFBD100AC828D /* DateExtensionw.swift in Sources */,
 				37286849216311D3005F6FD0 /* Program.swift in Sources */,

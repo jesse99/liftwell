@@ -2,7 +2,7 @@
 //  Copyright © 2018 MushinApps. All rights reserved.
 import Foundation
 
-func Mine2() -> Program {
+func MastersDB() -> Program {
     let exercises = [
         // Heavy
         dumbbell2("Heavy Bench",    "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "6-12".x(3, rest: .atEnd), restMins: 4.0, main: true),
@@ -63,7 +63,7 @@ This is a dumbbell only program for older lifters. It's based on programming pri
 * Chinups to 25 reps
 * Kroc Row 3x6-12
 
-**Limber 11 (these are optional)**
+**Limber 11**
 * Foam Rolling
 * Shoulder Dislocates
 * Bent-knee Iron Cross
@@ -74,5 +74,5 @@ This is a dumbbell only program for older lifters. It's based on programming pri
 * Cossack Squat
 * Piriformis Stretch
 """
-    return Program("Mine2", workouts, exercises, tags, description)
+    return Program("Masters DB", workouts, exercises, tags, description)
 }
