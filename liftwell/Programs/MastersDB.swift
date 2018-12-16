@@ -12,7 +12,7 @@ func MastersDB() -> Program {
 
         // Light
         dumbbell2("Dumbbell OHP",    "Dumbbell Shoulder Press", "10@50% 3@70% 1@90%", "3-8".x(3, rest: .atEnd), restMins: 3.5, main: true),
-        dumbbell1("Back Extensions", "Back Extensions",         "10@50%",             "6-12".x(3), restMins: 3.0, main: true),
+        dumbbell1("Back Extensions", "Back Extensions",         "10@50%",             "6-12".x(3, rest: .atEnd), restMins: 3.0, main: true),
         bodyweight("Chinups",        "Chinup", numSets: 4, goalReps: 25, restMins: 3.5, restAtEnd: true, main: true),
         dumbbell2("Farmer's Walk",   "Farmer's Walk",           "",                   "1".x(2), restMins: 3.0),
         cable("Cable Crunches",      "Cable Crunch",            "",                   "6-12".x(3), restMins: 3.0),
@@ -34,7 +34,7 @@ func MastersDB() -> Program {
     ]
     
     let workouts = [
-        Workout("Heavy", ["Heavy Bench", "Heavy Squat", "Chinups", "Kroc Row", "Back Extensions"], scheduled: true, optional: ["Back Extensions"]),
+        Workout("Heavy", ["Heavy Bench", "Heavy Squat", "Chinups", "Back Extensions", "Kroc Row"], scheduled: true, optional: ["Back Extensions"]),
         Workout("Light", ["Dumbbell OHP", "Back Extensions", "Dumbbell Flyes", "Farmer's Walk", "Cable Crunches"], scheduled: true, optional: ["Farmer's Walk", "Cable Crunches"]),
         Workout("Medium", ["Medium Bench", "Medium Squat", "Chinups", "Kroc Row", "Farmer's Walk", "Dips"], scheduled: true, optional: ["Dips", "Farmer's Walk"]),
         
