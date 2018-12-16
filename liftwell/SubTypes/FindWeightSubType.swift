@@ -152,7 +152,7 @@ class FindWeightSubType: ExerciseInfo {
                 switch type.subtype {
                 case .cyclic(let subtype): subtype.setNRM(reps, weight)
                 case .find(_): assert(false)
-                case .percent(_): assert(false)
+                case .percent1RM(_): assert(false)
                 case .reps(let subtype): subtype.setNRM(reps, weight)
                 case .t1(let subtype): subtype.setNRM(reps, weight)
                 case .t2(let subtype): subtype.setNRM(reps, weight)

@@ -113,10 +113,10 @@ func dumbbell2(_ name: String, _ formalName: String, _ warmups: String, _ workse
     let warmupSets = parseSets(warmups)
     let workSets = parseSets(worksets)
     let backoffSets = parseSets(backoff)
-    let subtype = PercentSubType(Sets(warmupSets, workSets, backoffSets), percent: percent, other: other, restSecs: rest)
+    let subtype = Percent1RMSubType(Sets(warmupSets, workSets, backoffSets), percent: percent, other: other, restSecs: rest)
     
     let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: defaultMagnets(), paired: true)
-    let type = WeightsType(apparatus, .percent(subtype))
+    let type = WeightsType(apparatus, .percent1RM(subtype))
     
     return Exercise(name, formalName, .weights(type), main: main)
 }

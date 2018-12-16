@@ -357,7 +357,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 CyclicRepsSubtype.results = getStrDict(store, "cyclic-results")
                 MaxRepsSubType.results = getStrDict(store, "max-reps-results")
-                PercentSubType.results = getStrDict(store, "percent-results")
+                Percent1RMSubType.results = getStrDict(store, "percent-1rm-results")
                 RepsApparatusSubType.results = getStrDict(store, "reps-results")
                 RepsBodySubType.results = getStrDict(store, "reps-body-results")
                 TimedSubType.results = getStrDict(store, "timed-results")
@@ -378,7 +378,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let store = Store()
         addStrDict(store, "cyclic-results", CyclicRepsSubtype.results)
         addStrDict(store, "max-reps-results", MaxRepsSubType.results)
-        addStrDict(store, "percent-results", PercentSubType.results)
+        addStrDict(store, "percent-1rm-results", Percent1RMSubType.results)
         addStrDict(store, "reps-results", RepsApparatusSubType.results)
         addStrDict(store, "reps-body-results", RepsBodySubType.results)
         addStrDict(store, "timed-results", TimedSubType.results)

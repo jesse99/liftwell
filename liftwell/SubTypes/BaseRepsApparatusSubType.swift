@@ -205,4 +205,3 @@ class BaseRepsApparatusSubType: BaseApparatusSubtype, ExerciseInfo {
 
     var sets: Sets
 }
-

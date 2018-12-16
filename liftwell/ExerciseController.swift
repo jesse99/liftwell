@@ -462,7 +462,7 @@ class ExerciseController: UIViewController {
             switch type.subtype {
             case .cyclic(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: subtype.cycleIndex, apparatus: type.apparatus))
             case .find(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: .weight(subtype.weight), reps: subtype.reps, cycleIndex: nil, apparatus: type.apparatus))
-            case .percent(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: nil, reps: subtype.workingReps, cycleIndex: nil, apparatus: type.apparatus))
+            case .percent1RM(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: nil, reps: nil, cycleIndex: nil, apparatus: nil))
             case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: nil, apparatus: type.apparatus))
             case .t1(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: subtype.cycleIndex, apparatus: type.apparatus))
             case .t2(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: subtype.cycleIndex, apparatus: type.apparatus))
@@ -509,9 +509,8 @@ class ExerciseController: UIViewController {
                 subtype.weight = options.aweight!.getBaseWorkingWeight()
                 subtype.reps = options.reps!
                 subtype.updated(exercise)
-            case .percent(let subtype):
+            case .percent1RM(let subtype):
                 subtype.restTime = options.rest
-                subtype.workingReps = options.reps
                 subtype.updated(exercise)
             case .reps(let subtype):
                 subtype.restTime = options.rest
