@@ -396,7 +396,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    let programs = [BestButt14(), BestButt58(), BestButt912(), Bootyful3a(), Bootyful3b(), Bootyful3c(), Bootyful14a(), Bootyful14b(), Bootyful14c(), FiveThreeOneBeginner(), GlutealGoddess1(), GlutealGoddess2(), GlutealGoddess3(), GorgeousGlutes1(), GorgeousGlutes2(), GorgeousGlutes3(), GZCLP3(), GZCLP4(), MastersDB(), PhraksGreyskull()]
+    let programs = [BestButt14(), BestButt58(), BestButt912(), Bootyful3a(), Bootyful3b(), Bootyful3c(), Bootyful14a(), Bootyful14b(), Bootyful14c(), BoringButBig(), FiveThreeOneBeginner(), GlutealGoddess1(), GlutealGoddess2(), GlutealGoddess3(), GorgeousGlutes1(), GorgeousGlutes2(), GorgeousGlutes3(), GZCLP3(), GZCLP4(), JackShit(), MastersDB(), PhraksGreyskull()]
 
     var window: UIWindow?
     var program: Program!

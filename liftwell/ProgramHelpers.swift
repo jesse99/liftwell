@@ -62,7 +62,7 @@ func bodyweight(_ name: String, _ formalName: String, _ worksets: String, restMi
     return Exercise(name, formalName, .body(type), main: main)
 }
 
-func bodyweight(_ name: String, _ formalName: String, numSets: Int, goalReps: Int, restMins: Double, restAtEnd: Bool, main: Bool = false) -> Exercise {
+func bodyweight(_ name: String, _ formalName: String, numSets: Int, goalReps: Int, restMins: Double, restAtEnd: Bool = false, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     let subtype = MaxRepsSubType(numSets: numSets, goalReps: goalReps, restSecs: rest, restAtEnd: restAtEnd)
     let type = BodyType(.maxReps(subtype))
@@ -117,6 +117,19 @@ func dumbbell2(_ name: String, _ formalName: String, _ warmups: String, _ workse
     
     let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: defaultMagnets(), paired: true)
     let type = WeightsType(apparatus, .percent1RM(subtype))
+    
+    return Exercise(name, formalName, .weights(type), main: main)
+}
+
+func machine(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", restMins: Double, main: Bool = false) -> Exercise {
+    let rest = Int(restMins*60.0)
+    let warmupSets = parseSets(warmups)
+    let workSets = parseSets(worksets)
+    let backoffSets = parseSets(backoff)
+    let subtype = RepsApparatusSubType(Sets(warmupSets, workSets, backoffSets), restSecs: rest)
+    
+    let apparatus = Apparatus.machine(range1: defaultMachine(), range2: zeroMachine(), extra: [])
+    let type = WeightsType(apparatus, .reps(subtype))
     
     return Exercise(name, formalName, .weights(type), main: main)
 }

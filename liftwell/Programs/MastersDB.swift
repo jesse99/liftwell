@@ -7,7 +7,7 @@ func MastersDB() -> Program {
         // Heavy
         dumbbell2("Heavy Bench",    "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "6-12".x(3, rest: .atEnd), restMins: 4.0, main: true),
         dumbbell2("Heavy Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75%",        "4-8".x(3, rest: .atEnd), restMins: 4.0, main: true),
-        dumbbell1("Kroc Row",       "Kroc Row",                        "5@50% 3@75%",        "4-10".x(3, rest: .atEnd), restMins: 3.0, main: true),
+        dumbbell1("Kroc Row",       "Kroc Row",                        "10@50%",             "6-12".x(3, rest: .atEnd), restMins: 3.0, main: true),
         dumbbell2("Dumbbell Flyes", "Dumbbell Flyes",                  "10@50% ",            "6-12".x(3), restMins: 3.0),
 
         // Light

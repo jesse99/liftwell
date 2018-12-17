@@ -89,6 +89,8 @@ And week three:
 * **Workset:** 5@75% 3@85% 1+@95%
 * **Backoff:** 5@75% 5@75% 5@75% 5@75% 5@75%
 
+You'll be asked if you want to increase weights after week three.
+
 The workouts are:
 **A**
 * Squat
@@ -113,7 +115,7 @@ There are a lot of options for assistence work (you can switch them up using the
 * The weights may feel light, especially at first, but it's much better to use a training max that is a bit too small than one that is too large.
 * Don't do the AMRAP sets to failure: try and leave one or two reps in the tank, e.g. stop if the bar speed slows significantly.
 * At the end of the three week cycle you'll be prompted to add weight. Normally you should add 5 pounds to upper body lifts and 10 pounts to lower body lifts. **Don't** adjust weight based on how well you did on the AMRAP sets.
-* If you're consistently missing reps or they are not clean, fast reps then you can lower the tranining max by 3x the amount you used for incrementing.
+* If you're consistently missing reps or they are not clean, fast reps then you can lower the training max by 3x the amount you used for incrementing.
 * It is recommended to include cardio work but not to the point where you start feeling tired on lift days.
 """
     return Program("5/3/1 Beginner", workouts, exercises, tags, description)
