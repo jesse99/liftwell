@@ -10,12 +10,19 @@ class CyclicRepsSubtype: BaseCyclicRepsSubtype {
     private typealias `Self` = CyclicRepsSubtype
     
     /// trainingMaxPercent is a percent of 1RM
-    override init(_ cycles: [Sets], restSecs: Int, trainingMaxPercent: Double? = nil) {
+    init(_ cycles: [Sets], restSecs: Int, trainingMaxPercent: Double? = nil, promptIndex: Int = 0) {
+        self.promptIndex = promptIndex
         super.init(cycles, restSecs: restSecs, trainingMaxPercent: trainingMaxPercent)
     }
     
     required init(from store: Store) {
+        self.promptIndex = store.getInt("promptIndex", ifMissing: 0)
         super.init(from: store)
+    }
+    
+    override func save(_ store: Store) {
+        store.addInt("promptIndex", promptIndex)
+        super.save(store)
     }
     
     override func clone() -> ExerciseInfo {
@@ -23,6 +30,10 @@ class CyclicRepsSubtype: BaseCyclicRepsSubtype {
         store.addObj("self", self)
         let result: Self = store.getObj("self")
         return result
+    }
+    
+    override func fixedDifficulty() -> ResultTag? {
+        return promptIndex < cycles.count ? .normal : nil
     }
     
     override func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
@@ -42,7 +53,7 @@ class CyclicRepsSubtype: BaseCyclicRepsSubtype {
         Self.results[exercise.formalName] = myResults
         
         cycleIndex = (cycleIndex + 1) % cycles.count
-        if cycleIndex == 0 {
+        if cycleIndex == promptIndex {
             // Prompt user for advancement
             super.presentFinalize(exercise, tag, view, completion)
         } else {
@@ -54,5 +65,6 @@ class CyclicRepsSubtype: BaseCyclicRepsSubtype {
         return Self.results[exercise.formalName]
     }
     
+    var promptIndex: Int
     static var results: [String: [CyclicResult]] = [:]
 }

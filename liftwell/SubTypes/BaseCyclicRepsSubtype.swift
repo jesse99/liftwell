@@ -195,8 +195,16 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
             
         } else {
             let (_, max, _) = getBaseRepRange()
-            getDifficultly(view, {self.doFinalize(exercise, $0, self.workingReps ?? max, view, completion)})
+            if let tag = fixedDifficulty() {
+                doFinalize(exercise, tag, self.workingReps ?? max, view, completion)
+            } else {
+                getDifficultly(view, {self.doFinalize(exercise, $0, self.workingReps ?? max, view, completion)})
+            }
         }
+    }
+    
+    func fixedDifficulty() -> ResultTag? {
+        return nil
     }
     
     func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {

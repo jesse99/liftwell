@@ -496,15 +496,16 @@ class ExerciseController: UIViewController {
             case .timed(_): assert(false)
             }
         case .weights(let type):
-            type.apparatus = options.apparatus!
             switch type.subtype {
             case .cyclic(let subtype):
+                type.apparatus = options.apparatus!
                 subtype.restTime = options.rest
                 subtype.aweight = options.aweight!
                 subtype.workingReps = options.reps
                 subtype.cycleIndex = options.cycleIndex!
                 subtype.updated(exercise)
             case .find(let subtype):
+                type.apparatus = options.apparatus!
                 subtype.restTime = options.rest
                 subtype.weight = options.aweight!.getBaseWorkingWeight()
                 subtype.reps = options.reps!
@@ -513,23 +514,27 @@ class ExerciseController: UIViewController {
                 subtype.restTime = options.rest
                 subtype.updated(exercise)
             case .reps(let subtype):
+                type.apparatus = options.apparatus!
                 subtype.restTime = options.rest
                 subtype.aweight = options.aweight!
                 subtype.workingReps = options.reps
                 subtype.updated(exercise)
             case .t1(let subtype):
+                type.apparatus = options.apparatus!
                 subtype.restTime = options.rest
                 subtype.aweight = options.aweight!
                 subtype.workingReps = options.reps
                 subtype.cycleIndex = options.cycleIndex!
                 subtype.updated(exercise)
             case .t2(let subtype):
+                type.apparatus = options.apparatus!
                 subtype.restTime = options.rest
                 subtype.aweight = options.aweight!
                 subtype.workingReps = options.reps
                 subtype.cycleIndex = options.cycleIndex!
                 subtype.updated(exercise)
             case .t3(let subtype):
+                type.apparatus = options.apparatus!
                 subtype.restTime = options.rest
                 subtype.aweight = options.aweight!
                 subtype.workingReps = options.reps

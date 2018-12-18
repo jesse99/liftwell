@@ -17,10 +17,10 @@ func JackShit() -> Program {
     let sets = [sets1, sets2, sets3, sets4]
     
     let exercises: [Exercise] = [
-        barbell("OHP",         "Overhead Press", sets, restMins: 3.0, trainingMaxPercent: 0.9, main: true),
-        barbell("Deadlift",    "Deadlift", sets, restMins: 3.0, bumpers: defaultBumpers(), trainingMaxPercent: 0.9, main: true),
-        barbell("Bench Press", "Bench Press", sets, restMins: 3.0, trainingMaxPercent: 0.9, main: true),
-        barbell("Squat",       "Low bar Squat", sets, restMins: 3.0, trainingMaxPercent: 0.9, main: true)]
+        barbell("OHP",         "Overhead Press", sets, restMins: 3.0, trainingMaxPercent: 0.9, promptIndex: 3, main: true),
+        barbell("Deadlift",    "Deadlift", sets, restMins: 3.0, bumpers: defaultBumpers(), trainingMaxPercent: 0.9, promptIndex: 3, main: true),
+        barbell("Bench Press", "Bench Press", sets, restMins: 3.0, trainingMaxPercent: 0.9, promptIndex: 3, main: true),
+        barbell("Squat",       "Low bar Squat", sets, restMins: 3.0, trainingMaxPercent: 0.9, promptIndex: 3, main: true)]
     
     let workouts = [
         Workout("OHP",      ["OHP"], scheduled: true, optional: []),
@@ -75,10 +75,10 @@ func BoringButBig() -> Program {
     let sets = [sets1, sets2, sets3, sets4]
     
     let exercises: [Exercise] = [
-        barbell("OHP",         "Overhead Press", sets, restMins: 3.0, trainingMaxPercent: 0.9, main: true),
-        barbell("Deadlift",    "Deadlift", sets, restMins: 3.0, bumpers: defaultBumpers(), trainingMaxPercent: 0.9, main: true),
-        barbell("Bench Press", "Bench Press", sets, restMins: 3.0, trainingMaxPercent: 0.9, main: true),
-        barbell("Squat",       "Low bar Squat", sets, restMins: 3.0, trainingMaxPercent: 0.9, main: true),
+        barbell("OHP",         "Overhead Press", sets, restMins: 3.0, trainingMaxPercent: 0.9, promptIndex: 3, main: true),
+        barbell("Deadlift",    "Deadlift", sets, restMins: 3.0, bumpers: defaultBumpers(), trainingMaxPercent: 0.9, promptIndex: 3, main: true),
+        barbell("Bench Press", "Bench Press", sets, restMins: 3.0, trainingMaxPercent: 0.9, promptIndex: 3, main: true),
+        barbell("Squat",       "Low bar Squat", sets, restMins: 3.0, trainingMaxPercent: 0.9, promptIndex: 3, main: true),
     
         bodyweight("Ab Wheel",       "Ab Wheel Rollout", "10".x(5), restMins: 2.5),
         dumbbell1("Back Extensions", "Back Extensions", "10@50%", "5-10".x(5), restMins: 2.5),
