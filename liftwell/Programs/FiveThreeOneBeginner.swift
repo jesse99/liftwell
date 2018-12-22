@@ -19,7 +19,7 @@ func FiveThreeOneBeginner() -> Program {
     
     let sets = [sets1, sets2, sets3]
 
-    let assistence  = "8-12 R 8-12 R 8-12 R 8-12"
+    let assistence  = "8-12".x(4)
 
     let exercises: [Exercise] = [
         barbell("Squat",       "Low bar Squat", sets, restMins: 2.0, trainingMaxPercent: 0.9, main: true),

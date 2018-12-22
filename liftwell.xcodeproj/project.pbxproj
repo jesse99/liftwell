@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3707B8D52172C1D200DF43B2 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3707B8D42172C1D200DF43B2 /* ParserTests.swift */; };
+		3720592821CB4D0B00641BE9 /* Monolith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3720592721CB4D0B00641BE9 /* Monolith.swift */; };
 		37286826216259AE005F6FD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286825216259AE005F6FD0 /* AppDelegate.swift */; };
 		37286828216259AE005F6FD0 /* WorkoutsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286827216259AE005F6FD0 /* WorkoutsTabController.swift */; };
 		3728682A216259AE005F6FD0 /* ProgramsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286829216259AE005F6FD0 /* ProgramsTabController.swift */; };
@@ -100,6 +101,7 @@
 		010C3ABFFFAF5B50B5BBCA80 /* Pods-liftwell.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-liftwell.debug.xcconfig"; path = "Pods/Target Support Files/Pods-liftwell/Pods-liftwell.debug.xcconfig"; sourceTree = "<group>"; };
 		2755A036AB78E243B7E01C33 /* Pods_liftwell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_liftwell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3707B8D42172C1D200DF43B2 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
+		3720592721CB4D0B00641BE9 /* Monolith.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monolith.swift; sourceTree = "<group>"; };
 		37286822216259AE005F6FD0 /* liftwell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = liftwell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37286825216259AE005F6FD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37286827216259AE005F6FD0 /* WorkoutsTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsTabController.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				37B4352821B382CD00EDC53E /* Gorgeous.swift */,
 				373CCFCE21AA309A00096291 /* GZCLP.swift */,
 				37286858216842C8005F6FD0 /* MastersDB.swift */,
+				3720592721CB4D0B00641BE9 /* Monolith.swift */,
 				37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */,
 			);
 			path = Programs;
@@ -559,6 +562,7 @@
 				3728682A216259AE005F6FD0 /* ProgramsTabController.swift in Sources */,
 				37EFD6D22172C54500F60880 /* Weight.swift in Sources */,
 				374FE94B21869E1C00CFC284 /* BarbellController.swift in Sources */,
+				3720592821CB4D0B00641BE9 /* Monolith.swift in Sources */,
 				3728685421644C0C005F6FD0 /* Apparatus.swift in Sources */,
 				37B4352721B357EF00EDC53E /* Gluteal.swift in Sources */,
 				37B4352321B30D5B00EDC53E /* RepsBodySubType.swift in Sources */,
