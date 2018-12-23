@@ -1,6 +1,7 @@
 //  Created by Jesse Jones on 10/1/18.
 //  Copyright © 2018 MushinApps. All rights reserved.
 import Foundation
+import UIKit
 
 class Exercise: Storable {
     init(_ name: String, _ formalName: String, _ type: Type, main: Bool) {
@@ -136,13 +137,14 @@ class Exercise: Storable {
     
     func getLastWeight() -> Double? {
         var weight: Double? = nil
+        let app = UIApplication.shared.delegate as! AppDelegate
         switch type {
         case .body(let type):
             switch type.subtype {
             case .maxReps(_):
                 break
             case .reps(_):
-                if let result = RepsApparatusSubType.results[formalName]?.last, result.tag != .failed {
+                if let result = RepsApparatusSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     weight = result.liftedWeight
                 }
             case .timed(_):
@@ -151,13 +153,13 @@ class Exercise: Storable {
         case .weights(let type):
             switch type.subtype {
             case .cyclic(_), .t1(_), .t2(_):
-                if let result = CyclicRepsSubtype.results[formalName]?.last, result.tag != .failed {
+                if let result = CyclicRepsSubtype.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     weight = result.liftedWeight
                 }
             case .find(_), .timed(_):
                 break
             case .percent1RM(_), .reps(_), .t3(_):
-                if let result = Percent1RMSubType.results[formalName]?.last, result.tag != .failed {
+                if let result = Percent1RMSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     weight = result.weight
                 }
             }
@@ -173,15 +175,16 @@ class Exercise: Storable {
     }
     
     func getLastReps() -> Int? {
+        let app = UIApplication.shared.delegate as! AppDelegate
         switch type {
         case .body(let type):
             switch type.subtype {
             case .maxReps(_):
-                if let result = MaxRepsSubType.results[formalName]?.last {
+                if let result = MaxRepsSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     return result.completed.first
                 }
             case .reps(_):
-                if let result = RepsApparatusSubType.results[formalName]?.last {
+                if let result = RepsApparatusSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     return result.reps
                 }
             case .timed(_):
@@ -190,17 +193,17 @@ class Exercise: Storable {
         case .weights(let type):
             switch type.subtype {
             case .cyclic(_), .t1(_), .t2(_):
-                if let result = CyclicRepsSubtype.results[formalName]?.last {
+                if let result = CyclicRepsSubtype.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     return result.reps
                 }
             case .find(_), .timed(_):
                 break
             case .percent1RM(_):
-                if let result = Percent1RMSubType.results[formalName]?.last {
+                if let result = Percent1RMSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     return result.reps
                 }
             case .reps(_), .t3(_):
-                if let result = RepsApparatusSubType.results[formalName]?.last {
+                if let result = RepsApparatusSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     return result.reps
                 }
             }
