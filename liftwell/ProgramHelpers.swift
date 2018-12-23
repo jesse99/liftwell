@@ -10,12 +10,12 @@ func parseSets(_ text: String) -> [Set] {
     }
 }
 
-func barbell(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", restMins: Double, bumpers: [Double] = [], main: Bool = false) -> Exercise {
+func barbell(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", restMins: Double, bumpers: [Double] = [], trainingMaxPercent: Double? = nil, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     let warmupSets = parseSets(warmups)
     let workSets = parseSets(worksets)
     let backoffSets = parseSets(backoff)
-    let subtype = RepsApparatusSubType(Sets(warmupSets, workSets, backoffSets), restSecs: rest)
+    let subtype = RepsApparatusSubType(Sets(warmupSets, workSets, backoffSets), restSecs: rest, trainingMaxPercent: trainingMaxPercent)
     
     let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: bumpers, magnets: [])
     let type = WeightsType(apparatus, .reps(subtype))
@@ -35,6 +35,32 @@ func barbell(_ name: String, _ formalName: String, _ cycles: [(String, String, S
     
     let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: bumpers, magnets: [])
     let type = WeightsType(apparatus, .cyclic(subtype))
+    
+    return Exercise(name, formalName, .weights(type), main: main)
+}
+
+func barbell(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", advanceBy: [Int], restMins: Double, bumpers: [Double] = [], trainingMaxPercent: Double? = nil, main: Bool = false) -> Exercise {
+    let rest = Int(restMins*60.0)
+    let warmupSets = parseSets(warmups)
+    let workSets = parseSets(worksets)
+    let backoffSets = parseSets(backoff)
+    let subtype = AMRAPSubType(Sets(warmupSets, workSets, backoffSets), advanceBy: advanceBy, restSecs: rest, trainingMaxPercent: trainingMaxPercent)
+    
+    let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: bumpers, magnets: [])
+    let type = WeightsType(apparatus, .amrap(subtype))
+    
+    return Exercise(name, formalName, .weights(type), main: main)
+}
+
+func barbell(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", percent: Double, other: String, restMins: Double, bumpers: [Double] = [], main: Bool = false) -> Exercise {
+    let rest = Int(restMins*60.0)
+    let warmupSets = parseSets(warmups)
+    let workSets = parseSets(worksets)
+    let backoffSets = parseSets(backoff)
+    let subtype = Percent1RMSubType(Sets(warmupSets, workSets, backoffSets), percent: percent, other: other, restSecs: rest)
+    
+    let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: bumpers, magnets: [])
+    let type = WeightsType(apparatus, .percent1RM(subtype))
     
     return Exercise(name, formalName, .weights(type), main: main)
 }

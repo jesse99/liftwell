@@ -80,15 +80,16 @@ class BaseRepsApparatusSubType: BaseApparatusSubtype, ExerciseInfo {
     func start(_ workout: Workout, _ exercise: Exercise) -> (Exercise, String)? {
         if needToFindWeight() {
             let newExercise = exercise.clone()
+            let reps = sets.worksets.max(by: {$0.minReps < $1.minReps})?.minReps ?? 5
             switch newExercise.type {
             case .weights(let type):
                 if let results = doGetResults(exercise), let result = results.last {
-                    let newSubtype = FindWeightSubType(reps: getBaseRepRange().1, restSecs: restTime, prevWeight: result.liftedWeight)
+                    let newSubtype = FindWeightSubType(reps: reps, restSecs: restTime, prevWeight: result.liftedWeight)
                     type.subtype = .find(newSubtype)
                     return (newExercise, "")
 
                 } else {
-                    let newSubtype = FindWeightSubType(reps: getBaseRepRange().1, restSecs: restTime, prevWeight: nil)
+                    let newSubtype = FindWeightSubType(reps: reps, restSecs: restTime, prevWeight: nil)
                     type.subtype = .find(newSubtype)
                     return (newExercise, "Not completed")
                 }

@@ -105,6 +105,7 @@ class Exercise: Storable {
             }
         case .weights(let type):
             switch type.subtype {
+            case .amrap(let subtype): return subtype
             case .cyclic(let subtype): return subtype
             case .find(let subtype): return subtype
             case .percent1RM(let subtype): return subtype
@@ -144,23 +145,43 @@ class Exercise: Storable {
             case .maxReps(_):
                 break
             case .reps(_):
-                if let result = RepsApparatusSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
-                    weight = result.liftedWeight
+                if let result = RepsBodySubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                    weight = result.weight
                 }
             case .timed(_):
                 break
             }
         case .weights(let type):
             switch type.subtype {
-            case .cyclic(_), .t1(_), .t2(_):
+            case .amrap(_):
+                if let result = AMRAPSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                    weight = result.liftedWeight
+                }
+            case .cyclic(_):
                 if let result = CyclicRepsSubtype.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     weight = result.liftedWeight
                 }
             case .find(_), .timed(_):
                 break
-            case .percent1RM(_), .reps(_), .t3(_):
+            case .percent1RM(_):
                 if let result = Percent1RMSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     weight = result.weight
+                }
+            case .reps(_):
+                if let result = RepsApparatusSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                    weight = result.liftedWeight
+                }
+            case .t1(_):
+                if let result = T1RepsSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                    weight = result.liftedWeight
+                }
+            case .t2(_):
+                if let result = T2RepsSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                    weight = result.liftedWeight
+                }
+            case .t3(_):
+                if let result = T3RepsSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                    weight = result.liftedWeight
                 }
             }
 
@@ -184,7 +205,7 @@ class Exercise: Storable {
                     return result.completed.first
                 }
             case .reps(_):
-                if let result = RepsApparatusSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                if let result = RepsBodySubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     return result.reps
                 }
             case .timed(_):
@@ -192,7 +213,11 @@ class Exercise: Storable {
             }
         case .weights(let type):
             switch type.subtype {
-            case .cyclic(_), .t1(_), .t2(_):
+            case .amrap(_):
+                if let result = AMRAPSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                    return result.reps
+                }
+            case .cyclic(_):
                 if let result = CyclicRepsSubtype.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     return result.reps
                 }
@@ -202,8 +227,20 @@ class Exercise: Storable {
                 if let result = Percent1RMSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     return result.reps
                 }
-            case .reps(_), .t3(_):
+            case .reps(_):
                 if let result = RepsApparatusSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                    return result.reps
+                }
+            case .t1(_):
+                if let result = T1RepsSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                    return result.reps
+                }
+            case .t2(_):
+                if let result = T2RepsSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                    return result.reps
+                }
+            case .t3(_):
+                if let result = T3RepsSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     return result.reps
                 }
             }

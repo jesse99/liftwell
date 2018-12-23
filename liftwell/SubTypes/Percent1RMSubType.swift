@@ -90,9 +90,6 @@ class Percent1RMSubType: ExerciseInfo {
         if getOtherType() == nil {
             errors.append("\(otherName) isn't using an apparatus.")
         }
-        if let last = originalSets.worksets.last, last.amrap {
-            errors.append("Percent subtype doesn't support amrap sets.")
-        }
         return errors
     }
 
@@ -203,6 +200,7 @@ class Percent1RMSubType: ExerciseInfo {
         getDifficultly(view, {self.doFinalize(exercise, $0, self.reps, view, completion)})
     }
     
+    // TODO: if AMRAP then should get AMRAP result, prevLabel should not show tag, history should show AMRAP
     func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
         var myResults = doGetResults(exercise) ?? []
         let result = Result(tag, weight: weight, reps: reps)
@@ -287,6 +285,10 @@ class Percent1RMSubType: ExerciseInfo {
     private func otherWeight() -> Double? {
         if let other = currentProgram.findExercise(otherName), let type = getOtherType() {
             switch type.subtype {
+            case .amrap(_):
+                if let results = AMRAPSubType.results[other.formalName], let last = results.last {
+                    return last.liftedWeight
+                }
             case .cyclic(_):
                 if let results = CyclicRepsSubtype.results[other.formalName], let last = results.last {
                     return last.liftedWeight
@@ -324,6 +326,10 @@ class Percent1RMSubType: ExerciseInfo {
     private func otherReps() -> Int? {
         if let other = currentProgram.findExercise(otherName), let type = getOtherType() {
             switch type.subtype {
+            case .amrap(_):
+                if let results = AMRAPSubType.results[other.formalName], let last = results.last {
+                    return last.reps
+                }
             case .cyclic(_):
                 if let results = CyclicRepsSubtype.results[other.formalName], let last = results.last {
                     return last.reps

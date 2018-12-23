@@ -133,7 +133,8 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
     }
     
     func doCreateFindWeights(_ exercise: Exercise, prevWeight: Double?) -> FindWeightSubType {
-        return FindWeightSubType(reps: getBaseRepRange().1, restSecs: restTime, prevWeight: prevWeight)
+        let reps = cycles[0].worksets.max(by: {$0.minReps < $1.minReps})?.minReps ?? 5
+        return FindWeightSubType(reps: reps, restSecs: restTime, prevWeight: prevWeight)
     }
 
     func clone() -> ExerciseInfo {

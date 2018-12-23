@@ -11,6 +11,7 @@ enum Type {
 /// Used for exercises that use plates, or dumbbells, or machines with reps weights.
 class WeightsType: Storable {
     enum SubType {
+        case amrap(AMRAPSubType)
         case cyclic(CyclicRepsSubtype)
         case find(FindWeightSubType)
         case percent1RM(Percent1RMSubType)
@@ -28,6 +29,7 @@ class WeightsType: Storable {
     
     func errors() -> [String] {
         switch subtype {
+        case .amrap(let subtype): return subtype.errors()
         case .cyclic(let subtype): return subtype.errors()
         case .find(let subtype): return subtype.errors()
         case .percent1RM(let subtype): return subtype.errors()
@@ -44,6 +46,7 @@ class WeightsType: Storable {
 
         let name = store.getStr("subtypeName")
         switch name {
+        case "amrap": self.subtype = .amrap(store.getObj("subtype"))
         case "cyclic": self.subtype = .cyclic(store.getObj("subtype"))
         case "find": self.subtype = .find(store.getObj("subtype"))
         case "percent": self.subtype = .percent1RM(store.getObj("subtype"))
@@ -61,6 +64,7 @@ class WeightsType: Storable {
         store.addObj("apparatus", apparatus)
 
         switch subtype {
+        case .amrap(let subtype): store.addStr("subtypeName", "amrap"); store.addObj("subtype", subtype)
         case .cyclic(let subtype): store.addStr("subtypeName", "cyclic"); store.addObj("subtype", subtype)
         case .find(let subtype): store.addStr("subtypeName", "find"); store.addObj("subtype", subtype)
         case .percent1RM(let subtype): store.addStr("subtypeName", "percent-1rm"); store.addObj("subtype", subtype)
@@ -80,6 +84,7 @@ class WeightsType: Storable {
             os_log("%@ wasn't saved as weights", savedExercise.name)
         }
         switch subtype {
+        case .amrap(let builtIn): builtIn.sync(program, savedExercise)
         case .cyclic(let builtIn): builtIn.sync(program, savedExercise)
         case .find(let builtIn): builtIn.sync(program, savedExercise)
         case .percent1RM(let builtIn): builtIn.sync(program, savedExercise)

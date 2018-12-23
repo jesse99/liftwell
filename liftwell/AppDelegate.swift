@@ -355,6 +355,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 decoder.dateDecodingStrategy = .secondsSince1970
                 let store = try decoder.decode(Store.self, from: data)
                 
+                AMRAPSubType.results = getStrDict(store, "amrap-results")
                 CyclicRepsSubtype.results = getStrDict(store, "cyclic-results")
                 MaxRepsSubType.results = getStrDict(store, "max-reps-results")
                 Percent1RMSubType.results = getStrDict(store, "percent-1rm-results")
@@ -376,6 +377,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func saveResults() {
         let path = getPath(fileName: "results")
         let store = Store()
+        addStrDict(store, "amrap-results", AMRAPSubType.results)
         addStrDict(store, "cyclic-results", CyclicRepsSubtype.results)
         addStrDict(store, "max-reps-results", MaxRepsSubType.results)
         addStrDict(store, "percent-1rm-results", Percent1RMSubType.results)
@@ -396,7 +398,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    let programs = [BestButt14(), BestButt58(), BestButt912(), Bootyful3a(), Bootyful3b(), Bootyful3c(), Bootyful14a(), Bootyful14b(), Bootyful14c(), BoringButBig(), FiveThreeOneBeginner(), GlutealGoddess1(), GlutealGoddess2(), GlutealGoddess3(), GorgeousGlutes1(), GorgeousGlutes2(), GorgeousGlutes3(), GZCLP3(), GZCLP4(), JackShit(), MastersDB(), Monolith(), PhraksGreyskull()]
+    let programs = [BestButt14(), BestButt58(), BestButt912(), Bootyful3a(), Bootyful3b(), Bootyful3c(), Bootyful14a(), Bootyful14b(), Bootyful14c(), BoringButBig(), FiveThreeOneBeginner(), GlutealGoddess1(), GlutealGoddess2(), GlutealGoddess3(), GorgeousGlutes1(), GorgeousGlutes2(), GorgeousGlutes3(), GZCLP3(), GZCLP4(), JackShit(), MastersDB(), Monolith(), nSuns5(), PhraksGreyskull()]
 
     var window: UIWindow?
     var program: Program!

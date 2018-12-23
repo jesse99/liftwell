@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3707B8D52172C1D200DF43B2 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3707B8D42172C1D200DF43B2 /* ParserTests.swift */; };
 		3720592821CB4D0B00641BE9 /* Monolith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3720592721CB4D0B00641BE9 /* Monolith.swift */; };
+		3720592A21CF19A500641BE9 /* nSuns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3720592921CF19A500641BE9 /* nSuns.swift */; };
+		3720592C21D0025400641BE9 /* AMRAPSubtype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3720592B21D0025400641BE9 /* AMRAPSubtype.swift */; };
 		37286826216259AE005F6FD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286825216259AE005F6FD0 /* AppDelegate.swift */; };
 		37286828216259AE005F6FD0 /* WorkoutsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286827216259AE005F6FD0 /* WorkoutsTabController.swift */; };
 		3728682A216259AE005F6FD0 /* ProgramsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37286829216259AE005F6FD0 /* ProgramsTabController.swift */; };
@@ -60,7 +62,7 @@
 		37B4352521B34CEF00EDC53E /* Bootyful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352421B34CEF00EDC53E /* Bootyful.swift */; };
 		37B4352721B357EF00EDC53E /* Gluteal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352621B357EF00EDC53E /* Gluteal.swift */; };
 		37B4352921B382CD00EDC53E /* Gorgeous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352821B382CD00EDC53E /* Gorgeous.swift */; };
-		37B4352B21B47DD200EDC53E /* PercentSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352A21B47DD200EDC53E /* PercentSubType.swift */; };
+		37B4352B21B47DD200EDC53E /* Percent1RMSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352A21B47DD200EDC53E /* Percent1RMSubType.swift */; };
 		37C2D3B9218D142500D9AF0E /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C2D3B8218D142500D9AF0E /* Workout.swift */; };
 		37DE95F8219A1E7600D60101 /* SAConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95F7219A1E7600D60101 /* SAConfettiView.swift */; };
 		37DE95FA219A48E200D60101 /* ProgramHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE95F9219A48E200D60101 /* ProgramHelpers.swift */; };
@@ -102,6 +104,8 @@
 		2755A036AB78E243B7E01C33 /* Pods_liftwell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_liftwell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3707B8D42172C1D200DF43B2 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
 		3720592721CB4D0B00641BE9 /* Monolith.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monolith.swift; sourceTree = "<group>"; };
+		3720592921CF19A500641BE9 /* nSuns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nSuns.swift; sourceTree = "<group>"; };
+		3720592B21D0025400641BE9 /* AMRAPSubtype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMRAPSubtype.swift; sourceTree = "<group>"; };
 		37286822216259AE005F6FD0 /* liftwell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = liftwell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37286825216259AE005F6FD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37286827216259AE005F6FD0 /* WorkoutsTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsTabController.swift; sourceTree = "<group>"; };
@@ -157,7 +161,7 @@
 		37B4352421B34CEF00EDC53E /* Bootyful.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootyful.swift; sourceTree = "<group>"; };
 		37B4352621B357EF00EDC53E /* Gluteal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gluteal.swift; sourceTree = "<group>"; };
 		37B4352821B382CD00EDC53E /* Gorgeous.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gorgeous.swift; sourceTree = "<group>"; };
-		37B4352A21B47DD200EDC53E /* PercentSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentSubType.swift; sourceTree = "<group>"; };
+		37B4352A21B47DD200EDC53E /* Percent1RMSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Percent1RMSubType.swift; sourceTree = "<group>"; };
 		37C2D3B8218D142500D9AF0E /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		37DE95F7219A1E7600D60101 /* SAConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConfettiView.swift; sourceTree = "<group>"; };
 		37DE95F9219A48E200D60101 /* ProgramHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramHelpers.swift; sourceTree = "<group>"; };
@@ -313,6 +317,7 @@
 				373CCFCE21AA309A00096291 /* GZCLP.swift */,
 				37286858216842C8005F6FD0 /* MastersDB.swift */,
 				3720592721CB4D0B00641BE9 /* Monolith.swift */,
+				3720592921CF19A500641BE9 /* nSuns.swift */,
 				37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */,
 			);
 			path = Programs;
@@ -321,13 +326,14 @@
 		373CCFB521A78FD100096291 /* SubTypes */ = {
 			isa = PBXGroup;
 			children = (
+				3720592B21D0025400641BE9 /* AMRAPSubtype.swift */,
 				373CCFB621A78FE100096291 /* BaseApparatusSubtype.swift */,
 				373CCFC821A9C4BA00096291 /* BaseCyclicRepsSubtype.swift */,
 				373CCFCC21A9E73200096291 /* BaseRepsApparatusSubType.swift */,
 				373CCFB821A78FF100096291 /* CyclicRepsSubtype.swift */,
 				373CCFBA21A78FFF00096291 /* FindWeightSubType.swift */,
 				373CCFBC21A7900E00096291 /* MaxRepsSubType.swift */,
-				37B4352A21B47DD200EDC53E /* PercentSubType.swift */,
+				37B4352A21B47DD200EDC53E /* Percent1RMSubType.swift */,
 				373CCFBE21A7901A00096291 /* RepsApparatusSubType.swift */,
 				37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */,
 				373CCFC421A7B22800096291 /* SubTypeHelpers.swift */,
@@ -540,7 +546,7 @@
 				374FE943218536F500CFC284 /* RepsOptionsController.swift in Sources */,
 				37E6577D218CC01200ED8BD0 /* EditNoteController.swift in Sources */,
 				37EFD6DC217A2D9000F60880 /* Set.swift in Sources */,
-				37B4352B21B47DD200EDC53E /* PercentSubType.swift in Sources */,
+				37B4352B21B47DD200EDC53E /* Percent1RMSubType.swift in Sources */,
 				374FE94D218A3F4100CFC284 /* MachineController.swift in Sources */,
 				374FE951218A7E8C00CFC284 /* WorkoutOptionsController.swift in Sources */,
 				37E7BF0C219761970087E7FE /* OneRepMaxAchievement.swift in Sources */,
@@ -559,6 +565,7 @@
 				373CCFC921A9C4BA00096291 /* BaseCyclicRepsSubtype.swift in Sources */,
 				37DE9600219D1D3300D60101 /* FiveThreeOneBeginner.swift in Sources */,
 				374FE94921867C4100CFC284 /* WeightsController.swift in Sources */,
+				3720592C21D0025400641BE9 /* AMRAPSubtype.swift in Sources */,
 				3728682A216259AE005F6FD0 /* ProgramsTabController.swift in Sources */,
 				37EFD6D22172C54500F60880 /* Weight.swift in Sources */,
 				374FE94B21869E1C00CFC284 /* BarbellController.swift in Sources */,
@@ -567,6 +574,7 @@
 				37B4352721B357EF00EDC53E /* Gluteal.swift in Sources */,
 				37B4352321B30D5B00EDC53E /* RepsBodySubType.swift in Sources */,
 				374FE94F218A5B8900CFC284 /* PlatesController.swift in Sources */,
+				3720592A21CF19A500641BE9 /* nSuns.swift in Sources */,
 				37286826216259AE005F6FD0 /* AppDelegate.swift in Sources */,
 				374D3EDE217D50EF00AC828D /* ColorExtensions.swift in Sources */,
 				3728685F21699C17005F6FD0 /* Types.swift in Sources */,
