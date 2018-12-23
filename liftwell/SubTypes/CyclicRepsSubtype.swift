@@ -10,18 +10,23 @@ class CyclicRepsSubtype: BaseCyclicRepsSubtype {
     private typealias `Self` = CyclicRepsSubtype
     
     /// trainingMaxPercent is a percent of 1RM
-    init(_ cycles: [Sets], restSecs: Int, trainingMaxPercent: Double? = nil, promptIndex: Int = 0) {
+    /// promptIndex is when to ask the user to advance, -1 for no advancement
+    /// resetIndex is when to automatically reset weight to zero (so that a training max can be re-computed)
+    init(_ cycles: [Sets], restSecs: Int, trainingMaxPercent: Double? = nil, promptIndex: Int = 0, resetIndex: [Int] = []) {
         self.promptIndex = promptIndex
+        self.resetIndexes = resetIndex
         super.init(cycles, restSecs: restSecs, trainingMaxPercent: trainingMaxPercent)
     }
     
     required init(from store: Store) {
         self.promptIndex = store.getInt("promptIndex", ifMissing: 0)
+        self.resetIndexes = store.getIntArray("resetIndexes", ifMissing: [])
         super.init(from: store)
     }
     
     override func save(_ store: Store) {
         store.addInt("promptIndex", promptIndex)
+        store.addIntArray("resetIndexes", resetIndexes)
         super.save(store)
     }
     
@@ -53,6 +58,15 @@ class CyclicRepsSubtype: BaseCyclicRepsSubtype {
         Self.results[exercise.formalName] = myResults
         
         cycleIndex = (cycleIndex + 1) % cycles.count
+        print("cycleIndex = \(cycleIndex), resetIndexes = \(resetIndexes)")
+        if resetIndexes.contains(cycleIndex) {
+            switch aweight {
+            case .trainingMax(percent: let percent, oneRepMax: _):
+                aweight = .trainingMax(percent: percent, oneRepMax: 0.0)
+            case .weight(_):
+                aweight = .weight(0.0)
+            }
+        }
         if cycleIndex == promptIndex {
             // Prompt user for advancement
             super.presentFinalize(exercise, tag, view, completion)
@@ -66,5 +80,6 @@ class CyclicRepsSubtype: BaseCyclicRepsSubtype {
     }
     
     var promptIndex: Int
+    var resetIndexes: [Int] = []
     static var results: [String: [CyclicResult]] = [:]
 }

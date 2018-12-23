@@ -188,7 +188,7 @@ class T1RepsSubType: BaseCyclicRepsSubtype {
     //
     // 0.85 * 5RM = percent * 1RM
     // 5RM = (percent * 1RM)/0.85
-    override func doCreateFindWeights(_ exercise: Exercise) -> FindWeightSubType {
+    override func doCreateFindWeights(_ exercise: Exercise, prevWeight: Double?) -> FindWeightSubType {
         var subtitle = ""
         if let myResults = Self.results[exercise.formalName], let last = myResults.last, last.oneMax > 0.0 {
             let fiveMax = (last.percent * last.oneMax)/0.85
@@ -200,7 +200,7 @@ class T1RepsSubType: BaseCyclicRepsSubtype {
                 subtitle = "5RM was \(w.text)"
             }
         }
-        return FindWeightSubType(reps: 5, restSecs: restTime, subtitle: subtitle)
+        return FindWeightSubType(reps: 5, restSecs: restTime, prevWeight: prevWeight, subtitle: subtitle)
     }
     
     override func doGetResults(_ exercise: Exercise) -> [CyclicResult]? {

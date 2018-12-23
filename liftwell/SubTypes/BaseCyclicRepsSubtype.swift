@@ -109,9 +109,16 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
             let newExercise = exercise.clone()
             switch newExercise.type {
             case .weights(let type):
-                let newSubtype = doCreateFindWeights(exercise)
-                type.subtype = .find(newSubtype)
-                return (newExercise, "Not completed")
+                if let results = doGetResults(exercise), let result = results.first {
+                    let newSubtype = doCreateFindWeights(exercise, prevWeight: result.liftedWeight)
+                    type.subtype = .find(newSubtype)
+                    return (newExercise, "")
+                    
+                } else {
+                    let newSubtype = doCreateFindWeights(exercise, prevWeight: nil)
+                    type.subtype = .find(newSubtype)
+                    return (newExercise, "Not completed")
+                }
             default:
                 break
             }
@@ -125,10 +132,10 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
         return nil
     }
     
-    func doCreateFindWeights(_ exercise: Exercise) -> FindWeightSubType {
-        return FindWeightSubType(reps: getBaseRepRange().1, restSecs: restTime)
+    func doCreateFindWeights(_ exercise: Exercise, prevWeight: Double?) -> FindWeightSubType {
+        return FindWeightSubType(reps: getBaseRepRange().1, restSecs: restTime, prevWeight: prevWeight)
     }
-    
+
     func clone() -> ExerciseInfo {
         assert(false)
         return self
@@ -142,6 +149,10 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
         }
     }
     
+    override func label(_ exercise: Exercise) -> String {
+        return exercise.name + " \(cycleIndex+1) of \(cycles.count)"
+    }
+    
     func sublabel(_ exercise: Exercise) -> String {
         let weight = aweight.getBaseWorkingWeight()
         switch exercise.type {
@@ -151,7 +162,7 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
     }
     
     func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
-        if let myResults = doGetResults(exercise), let last = myResults.last, let workset = cycles[cycleIndex].worksets.last {
+        if let myResults = doGetResults(exercise), let last = myResults.last, let workset = cycles[cycleIndex].worksets.last, fixedDifficulty() == nil {
             if workset.amrap {
                 // History will include the AMRAP reps and the tag is inferred from that so don't think we want anything here.
                 return ("", UIColor.black)

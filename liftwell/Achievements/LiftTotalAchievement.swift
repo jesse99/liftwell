@@ -87,7 +87,7 @@ class LiftTotalAchievement: Achievement {
         let total = findCurrentTotal()
         
         if nextTarget > 0.0 {
-            os_log("total=%.0f nextTarget=%.0f", type: .error, total, nextTarget)
+            //os_log("total=%.0f nextTarget=%.0f", type: .error, total, nextTarget)
             if total >= nextTarget {
                 while total >= advanceTarget(nextTarget) {
                     nextTarget = advanceTarget(nextTarget)

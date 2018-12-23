@@ -9,12 +9,17 @@ import os.log
 class FindWeightSubType: ExerciseInfo {
     private typealias `Self` = FindWeightSubType
     
-    init(reps: Int, restSecs: Int, subtitle: String = "") {
+    init(reps: Int, restSecs: Int, prevWeight: Double?, subtitle: String = "") {
         self.reps = reps
         self.restTime = restSecs
         self.subtitle = subtitle
-        self.weight = 0
         self.set = .notStarted
+        
+        if let weight = prevWeight {
+            self.weight = weight * 0.5
+        } else {
+            self.weight = 0.0
+        }
     }
     
     required init(from store: Store) {

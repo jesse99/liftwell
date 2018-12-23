@@ -112,7 +112,7 @@ class OneRepMaxAchievement: Achievement {
         if app.program.isInUse(exercise) && exercise.main {
             let nextTarget = nextTargets[exercise.formalName] ?? 0.0
             if nextTarget > 0.0 {
-                                os_log("weight=%.0f reps=%d 1RM=%.0f nextTarget=%.0f", type: .error, exercise.getLastWeight() ?? 0.0, exercise.getLastReps() ?? 0, get1RM(exercise.getLastWeight() ?? 0.0, exercise.getLastReps() ?? 0) ?? 0.0, nextTarget)
+                //os_log("weight=%.0f reps=%d 1RM=%.0f nextTarget=%.0f", type: .error, exercise.getLastWeight() ?? 0.0, exercise.getLastReps() ?? 0, get1RM(exercise.getLastWeight() ?? 0.0, exercise.getLastReps() ?? 0) ?? 0.0, nextTarget)
                 if let weight = exercise.getLastWeight(), weight > 0.0, let reps = exercise.getLastReps(), let max = get1RM(weight, reps), max >= nextTarget {
                     let result = Award(
                         key: exercise.formalName + " ccc",

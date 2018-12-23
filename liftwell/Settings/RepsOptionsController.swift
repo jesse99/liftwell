@@ -85,7 +85,7 @@ class RepsOptionController: UIViewController {
         if let cycle = options.cycleIndex {
             cycleLabel.isHidden = false
             cycleTextbox.isHidden = false
-            cycleTextbox.text = "\(cycle)"
+            cycleTextbox.text = "\(cycle+1)"
         } else {
             cycleLabel.isHidden = true
             cycleTextbox.isHidden = true
@@ -157,7 +157,7 @@ class RepsOptionController: UIViewController {
             options.reps = Int(repsTextbox.text!)!
         }
         if options.cycleIndex != nil {
-            options.cycleIndex = Int(cycleTextbox.text!)!
+            options.cycleIndex = Int(cycleTextbox.text!)! - 1
         }
         completion(options)
 

@@ -92,14 +92,14 @@ func Monolith() -> Program {
         let worksets3 = "5@75% R 5@85% R 5@95% R 5@95% R 5@95%"
         let sets3     = (warmup, worksets3, "")
         
-        return [sets1, sets2, sets3]
+        return [sets1, sets2, sets3, sets1, sets2, sets3]
     }
         
     let exercises: [Exercise] = [
-        barbell("Squat",       "Low bar Squat", squatSets(), restMins: 3.0, trainingMaxPercent: 0.85, main: true),
-        barbell("OHP",         "Overhead Press", ohpSets(), restMins: 3.0, trainingMaxPercent: 0.85, main: true),
-        barbell("Deadlift",    "Deadlift", deadSets(), restMins: 3.0, bumpers: defaultBumpers(), trainingMaxPercent: 0.85, main: true),
-        barbell("Bench Press", "Bench Press", benchSets(), restMins: 3.0, trainingMaxPercent: 0.85, main: true),
+        barbell("Squat",       "Low bar Squat", squatSets(), restMins: 3.0, trainingMaxPercent: 0.85, promptIndex: -1, resetIndex: [0, 6], main: true),
+        barbell("OHP",         "Overhead Press", ohpSets(), restMins: 3.0, trainingMaxPercent: 0.85, promptIndex: -1, resetIndex: [0, 6], main: true),
+        barbell("Deadlift",    "Deadlift", deadSets(), restMins: 3.0, bumpers: defaultBumpers(), trainingMaxPercent: 0.85, promptIndex: -1, resetIndex: [0, 3], main: true),
+        barbell("Bench Press", "Bench Press", benchSets(), restMins: 3.0, trainingMaxPercent: 0.85, promptIndex: -1, resetIndex: [0, 3], main: true),
         
         bodyweight("Chins",          "Chinup",        numSets: 10, goalReps: 100, restMins: 2.5),
         cable("Face Pull",           "Face Pull", "", "10-20".x(5), restMins: 2.0),
@@ -143,7 +143,7 @@ The rep ranges and percentages of the main lifts change from week to week but ea
 
 **Notes**
 * When starting the program you need to find your Training Max for each of the main lifts. The program will do this for you: when you start an exercise it will guide you to find the five rep max for that exercise, then it will estimate your one rep max, and use 90% of the 1RM for your training max.
-* Before starting week four find a new training max for the main lifts. To do this reset the weights for Squat, Deadlift, Bench, and OHP to zero using the options screens.
+* Note that the app will automatically reset the traiming max at the end of week three so that you can find a new max.
 * The only exercises that are required are squat, OHP, and deadlift. Feel free to swap in different exercises for the others or even disable some of them.
 """
     return Program("Building the Monolith (5/3/1)", workouts, exercises, tags, description)
