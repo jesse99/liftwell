@@ -107,6 +107,7 @@ class Exercise: Storable {
             switch type.subtype {
             case .amrap(let subtype): return subtype
             case .cyclic(let subtype): return subtype
+            case .derived(let subtype): return subtype
             case .find(let subtype): return subtype
             case .percent1RM(let subtype): return subtype
             case .reps(let subtype): return subtype
@@ -160,6 +161,10 @@ class Exercise: Storable {
             case .cyclic(_):
                 if let result = CyclicRepsSubtype.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     weight = result.liftedWeight
+                }
+            case .derived(_):
+                if let result = DerivedSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                    weight = result.weight
                 }
             case .find(_), .timed(_):
                 break
@@ -219,6 +224,10 @@ class Exercise: Storable {
                 }
             case .cyclic(_):
                 if let result = CyclicRepsSubtype.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                    return result.reps
+                }
+            case .derived(_):
+                if let result = DerivedSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     return result.reps
                 }
             case .find(_), .timed(_):

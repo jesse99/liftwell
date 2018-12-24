@@ -1,14 +1,13 @@
-//  Created by Jesse Jones on 12/2/18.
+//  Created by Jesse Jones on 12/23/18.
 //  Copyright © 2018 MushinApps. All rights reserved.
 import AVFoundation // for kSystemSoundID_Vibrate
 import Foundation
 import UIKit           // for UIColor
 import os.log
 
-/// Uses reps and weight so that the estimated 1RM is a percentage of the 1RM last lifted for another exercise.
-/// Note that this version assumes that Percent1RMSubType is using variable reps.
-class Percent1RMSubType: ExerciseInfo {
-    private typealias `Self` = Percent1RMSubType
+/// Percents are the percents of weight from another exercise.
+class DerivedSubType: ExerciseInfo {
+    private typealias `Self` = DerivedSubType
     
     class Result: BaseResult, Storable {
         init(_ tag: ResultTag, weight: Double, reps: Int) {
@@ -33,26 +32,17 @@ class Percent1RMSubType: ExerciseInfo {
         var reps: Int
     }
     
-    init(_ sets: Sets, percent: Double, other: String, restSecs: Int) {
-        self.percent = percent
+    init(_ sets: Sets, other: String, restSecs: Int) {
+        self.sets = sets
         self.otherName = other
-        self.originalSets = sets
         self.restTime = restSecs
-
-        self.sets = Sets([], [])    // start will set these for real
-        self.weight = 0.0
-        self.reps = 0
     }
     
     required init(from store: Store) {
-        self.percent = store.getDbl("percent", ifMissing: 0.94)
-        self.otherName = store.getStr("otherName")
-        self.originalSets = store.getObj("originalSets", ifMissing: Sets([], []))
         self.sets = store.getObj("sets")
-        self.weight = store.getDbl("weight")
-        self.reps = store.getInt("reps")
+        self.otherName = store.getStr("otherName")
         self.restTime = store.getInt("restTime")
-
+        
         self.activities = store.getObjArray("activities")
         self.numWarmups = store.getInt("numWarmups")
         self.currentWorkout = store.getStr("currentWorkout")
@@ -60,14 +50,10 @@ class Percent1RMSubType: ExerciseInfo {
     }
     
     func save(_ store: Store) {
-        store.addDbl("percent", percent)
-        store.addStr("otherName", otherName)
-        store.addObj("originalSets", originalSets)
         store.addObj("sets", sets)
-        store.addDbl("weight", weight)
-        store.addInt("reps", reps)
+        store.addStr("otherName", otherName)
         store.addInt("restTime", restTime)
-
+        
         store.addObjArray("activities", activities) // TODO: generate
         store.addInt("numWarmups", numWarmups)
         store.addStr("currentWorkout", currentWorkout)
@@ -82,26 +68,17 @@ class Percent1RMSubType: ExerciseInfo {
     }
     
     func errors() -> [String] {
-        var errors = originalSets.errors()
-        let (min, max) = originalSets.repRange(currentReps: nil)
-        if min == max {
-            errors.append("Expected variable reps, e.g. 4-8.")
-        }
-        if let last = originalSets.worksets.last, last.amrap {
-            errors.append("Percent subtype doesn't support amrap sets.")
-        }
+        var errors = sets.errors()
         if getOtherType() == nil {
             errors.append("\(otherName) isn't using an apparatus.")
         }
         return errors
     }
-
+    
     func sync(_ program: Program, _ savedExercise: Exercise) {
-        (sets, weight, reps) = doBuildSets()
     }
     
     func start(_ workout: Workout, _ exercise: Exercise) -> (Exercise, String)? {
-        (sets, weight, reps) = doBuildSets()
         index = 0
         currentWorkout = workout.name
         updated(exercise)
@@ -145,31 +122,15 @@ class Percent1RMSubType: ExerciseInfo {
     }
     
     func sublabel(_ exercise: Exercise) -> String {
-        if let type = getOtherType() {
-            return sets.sublabel(type.apparatus, weight, reps, limit: weight, worksetBias: 0)
+        if let type = getOtherType(), let weight = otherWeight(), weight > 0.0 {
+            return sets.sublabel(type.apparatus, weight, nil, limit: weight, worksetBias: 0)
         } else {
             return ""
         }
     }
     
     func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
-        if let myResults = doGetResults(exercise), let last = myResults.last {
-            var count = 0
-            for result in myResults.reversed() {
-                if result.tag == last.tag {
-                    count += 1
-                } else {
-                    break
-                }
-            }
-            if count > 1 {
-                return ("Previous was \(last.tag) x\(count)", UIColor.black)
-            } else {
-                return ("Previous was \(last.tag)", UIColor.black)
-            }
-        } else {
-            return ("", UIColor.black)
-        }
+        return ("", UIColor.black)
     }
     
     func historyLabel(_ exercise: Exercise) -> String {
@@ -200,14 +161,19 @@ class Percent1RMSubType: ExerciseInfo {
     }
     
     func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        getDifficultly(view, {self.doFinalize(exercise, $0, self.reps, view, completion)})
+        doFinalize(exercise, .normal, view, completion)
     }
     
-    func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        var myResults = doGetResults(exercise) ?? []
-        let result = Result(tag, weight: weight, reps: reps)
-        myResults.append(result)
-        Self.results[exercise.formalName] = myResults
+    // TODO: if AMRAP then should use AMRAP result, also history should show AMRAP
+    func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
+        if let type = getOtherType(), let baseWeight = otherWeight(), let last = sets.worksets.last {
+            let w = Weight(last.percent*baseWeight, type.apparatus).closest()
+
+            var myResults = doGetResults(exercise) ?? []
+            let result = Result(tag, weight: w.weight, reps: last.maxReps)
+            myResults.append(result)
+            Self.results[exercise.formalName] = myResults
+        }
         
         completion()
     }
@@ -239,96 +205,42 @@ class Percent1RMSubType: ExerciseInfo {
     }
     
     private func getActivities(_ exercise: Exercise) -> (Int, [Activity]) {
-        if let type = getOtherType() {
-            return sets.activities(weight, type.apparatus, limit: weight, worksetBias: 0, currentReps: reps)
+        if let type = getOtherType(), let baseWeight = otherWeight() {
+            return sets.activities(baseWeight, type.apparatus, limit: baseWeight, worksetBias: 0, currentReps: nil)
         } else {
             return (0, [])
         }
     }
     
-    private func doBuildSets() -> (Sets, Double, Int) {
-        let (reps, weight) = getRepsAndWeight()
-        
-        let warmups = originalSets.warmups
-        let backoff = originalSets.backoff
-        var worksets: [Set] = []
-        
-        for original in originalSets.worksets {
-            worksets.append(Set(reps: reps, percent: 1.0, amrap: false, rest: original.rest))
-        }
-        
-        return (Sets(warmups, worksets, backoff), weight, reps)
-    }
-    
-    private func getRepsAndWeight() -> (Int, Double) {
-        let (min, max) = originalSets.repRange(currentReps: nil)
-        var currentReps = max
+    private func otherWeight() -> Double? {
         if let type = getOtherType() {
-            if let oR = otherReps() {
-                if var baseWeight = otherWeight(), let oneRepMax = get1RM(baseWeight, oR) {
-                    let targetWeight = percent*oneRepMax
-                    while let currentWeight = get1RM(baseWeight, currentReps), currentWeight > 0.0 {
-                        if currentWeight <= targetWeight {
-                            return (currentReps, baseWeight)
-                        }
-                        
-                        currentReps -= 1
-                        if currentReps < min {
-                            currentReps = max
-                            baseWeight = Weight(baseWeight, type.apparatus).prevWeight()
-                        }
-                    }
-                }
-            }
-        }
-        return (currentReps, percent*(otherWeight() ?? 0.0))
-    }
-    
-    func otherWeight() -> Double? {
-        if let other = currentProgram.findExercise(otherName), let type = getOtherType() {
             switch type.subtype {
-            case .amrap(_):
-                if let results = AMRAPSubType.results[other.formalName], let last = results.last {
-                    return last.liftedWeight
-                }
-            case .cyclic(_):
-                if let results = CyclicRepsSubtype.results[other.formalName], let last = results.last {
-                    return last.liftedWeight
-                }
-            case .derived(_):
-                if let results = DerivedSubType.results[other.formalName], let last = results.last {
-                    return last.weight
-                }
+            case .amrap(let subtype):
+                return subtype.getBaseWorkingWeight()
+            case .cyclic(let subtype):
+                return subtype.getBaseWorkingWeight()
+            case .derived(let subtype):
+                return subtype.otherWeight() ?? 0.0
             case .find(_):
                 assert(false)
                 return 0.0
-            case .percent1RM(_):
-                if let results = Percent1RMSubType.results[other.formalName], let last = results.last {
-                    return last.weight
-                }
-            case .reps(_):
-                if let results = RepsApparatusSubType.results[other.formalName], let last = results.last {
-                    return last.liftedWeight
-                }
-            case .t1(_):
-                if let results = T1RepsSubType.results[other.formalName], let last = results.last {
-                    return last.liftedWeight
-                }
-            case .t2(_):
-                if let results = T2RepsSubType.results[other.formalName], let last = results.last {
-                    return last.liftedWeight
-                }
-            case .t3(_):
-                if let results = T3RepsSubType.results[other.formalName], let last = results.last {
-                    return last.liftedWeight
-                }
+            case .percent1RM(let subtype):
+                return subtype.percent*(subtype.otherWeight() ?? 0.0)
+            case .reps(let subtype):
+                return subtype.getBaseWorkingWeight()
+            case .t1(let subtype):
+                return subtype.getBaseWorkingWeight()
+            case .t2(let subtype):
+                return subtype.getBaseWorkingWeight()
+            case .t3(let subtype):
+                return subtype.getBaseWorkingWeight()
             case .timed(_):
                 return 0.0
             }
         }
         return nil
     }
-
+    
     private func otherReps() -> Int? {
         if let other = currentProgram.findExercise(otherName), let type = getOtherType() {
             switch type.subtype {
@@ -373,7 +285,7 @@ class Percent1RMSubType: ExerciseInfo {
         }
         return nil
     }
-
+    
     private func getOtherType() -> WeightsType? {
         if let other = currentProgram.findExercise(otherName) {
             switch other.type {     // type needs to be something that uses an apparatus
@@ -385,14 +297,9 @@ class Percent1RMSubType: ExerciseInfo {
         }
         return nil
     }
-
-    var percent: Double
+    
+    var sets: Sets
     var otherName: String
-
-    var originalSets: Sets  // as specified in the program, will use variable reps
-    var sets: Sets          // what we want the user to lift, will use constant reps selected to make the 1RM match percent*other.1RM
-    var weight: Double
-    var reps: Int
     var restTime: Int
     
     var activities: [Activity] = []
@@ -401,5 +308,4 @@ class Percent1RMSubType: ExerciseInfo {
     var index: Int = 0
     
     static var results: [String: [Result]] = [:]
-    // TODO: can't we get rid of worksetBias?
 }

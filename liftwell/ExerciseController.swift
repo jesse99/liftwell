@@ -462,6 +462,7 @@ class ExerciseController: UIViewController {
             switch type.subtype {
             case .amrap(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: nil, apparatus: type.apparatus))
             case .cyclic(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: subtype.cycleIndex, apparatus: type.apparatus))
+            case .derived(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: nil, reps: nil, cycleIndex: nil, apparatus: nil))
             case .find(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: .weight(subtype.weight), reps: subtype.reps, cycleIndex: nil, apparatus: type.apparatus))
             case .percent1RM(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: nil, reps: nil, cycleIndex: nil, apparatus: nil))
             case .reps(let subtype): setRepsOptions(RepsOptions(rest: subtype.restTime, aweight: subtype.aweight, reps: subtype.workingReps, cycleIndex: nil, apparatus: type.apparatus))
@@ -510,6 +511,9 @@ class ExerciseController: UIViewController {
                 subtype.aweight = options.aweight!
                 subtype.workingReps = options.reps
                 subtype.cycleIndex = options.cycleIndex!
+                subtype.updated(exercise)
+            case .derived(let subtype):
+                subtype.restTime = options.rest
                 subtype.updated(exercise)
             case .find(let subtype):
                 type.apparatus = options.apparatus!

@@ -13,6 +13,7 @@ class WeightsType: Storable {
     enum SubType {
         case amrap(AMRAPSubType)
         case cyclic(CyclicRepsSubtype)
+        case derived(DerivedSubType)
         case find(FindWeightSubType)
         case percent1RM(Percent1RMSubType)
         case reps(RepsApparatusSubType)
@@ -31,6 +32,7 @@ class WeightsType: Storable {
         switch subtype {
         case .amrap(let subtype): return subtype.errors()
         case .cyclic(let subtype): return subtype.errors()
+        case .derived(let subtype): return subtype.errors()
         case .find(let subtype): return subtype.errors()
         case .percent1RM(let subtype): return subtype.errors()
         case .reps(let subtype): return subtype.errors()
@@ -48,6 +50,7 @@ class WeightsType: Storable {
         switch name {
         case "amrap": self.subtype = .amrap(store.getObj("subtype"))
         case "cyclic": self.subtype = .cyclic(store.getObj("subtype"))
+        case "derived": self.subtype = .derived(store.getObj("subtype"))
         case "find": self.subtype = .find(store.getObj("subtype"))
         case "percent": self.subtype = .percent1RM(store.getObj("subtype"))
         case "percent-1rm": self.subtype = .percent1RM(store.getObj("subtype"))
@@ -66,6 +69,7 @@ class WeightsType: Storable {
         switch subtype {
         case .amrap(let subtype): store.addStr("subtypeName", "amrap"); store.addObj("subtype", subtype)
         case .cyclic(let subtype): store.addStr("subtypeName", "cyclic"); store.addObj("subtype", subtype)
+        case .derived(let subtype): store.addStr("subtypeName", "derived"); store.addObj("subtype", subtype)
         case .find(let subtype): store.addStr("subtypeName", "find"); store.addObj("subtype", subtype)
         case .percent1RM(let subtype): store.addStr("subtypeName", "percent-1rm"); store.addObj("subtype", subtype)
         case .reps(let subtype): store.addStr("subtypeName", "reps"); store.addObj("subtype", subtype)
@@ -86,6 +90,7 @@ class WeightsType: Storable {
         switch subtype {
         case .amrap(let builtIn): builtIn.sync(program, savedExercise)
         case .cyclic(let builtIn): builtIn.sync(program, savedExercise)
+        case .derived(let builtIn): builtIn.sync(program, savedExercise)
         case .find(let builtIn): builtIn.sync(program, savedExercise)
         case .percent1RM(let builtIn): builtIn.sync(program, savedExercise)
         case .reps(let builtIn): builtIn.sync(program, savedExercise)

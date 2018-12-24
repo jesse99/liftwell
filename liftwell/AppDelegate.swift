@@ -56,13 +56,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.notificationsAreEnabled = granted
         }
 
+        let oldProgram = currentProgram
         for p in programs {
+            currentProgram = p
             let problems = p.errors()
             for q in problems {
                 os_log("%@", type: .error, q)
             }
             _assert(problems.isEmpty, "\(p.name) has errors")
         }
+        currentProgram = oldProgram
 
         return true
     }
@@ -357,6 +360,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 AMRAPSubType.results = getStrDict(store, "amrap-results")
                 CyclicRepsSubtype.results = getStrDict(store, "cyclic-results")
+                DerivedSubType.results = getStrDict(store, "derived-results")
                 MaxRepsSubType.results = getStrDict(store, "max-reps-results")
                 Percent1RMSubType.results = getStrDict(store, "percent-1rm-results")
                 RepsApparatusSubType.results = getStrDict(store, "reps-results")
@@ -379,6 +383,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let store = Store()
         addStrDict(store, "amrap-results", AMRAPSubType.results)
         addStrDict(store, "cyclic-results", CyclicRepsSubtype.results)
+        addStrDict(store, "derived-results", DerivedSubType.results)
         addStrDict(store, "max-reps-results", MaxRepsSubType.results)
         addStrDict(store, "percent-1rm-results", Percent1RMSubType.results)
         addStrDict(store, "reps-results", RepsApparatusSubType.results)

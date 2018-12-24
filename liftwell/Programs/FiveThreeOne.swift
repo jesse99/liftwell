@@ -93,7 +93,7 @@ func BoringButBig() -> Program {
         bodyweight("Leg Raise",      "Hanging Leg Raise", "15".x(3), restMins: 2.5)]
 
     let workouts = [
-        Workout("OHP",      ["OHP", "Chinups", "Kroc Row", "Dips", "Dumbbell OHP", "Kroc Row"], scheduled: true, optional: ["Dips", "Dumbbell OHP", "Kroc Row"]),
+        Workout("OHP",      ["OHP", "Chinups", "Kroc Row", "Dips", "Dumbbell OHP", ], scheduled: true, optional: ["Dips", "Dumbbell OHP", "Kroc Row"]),
         Workout("Deadlift", ["Deadlift", "Leg Raise", "Ab Wheel", "Back Extensions", "Barbell Shrug"], scheduled: true, optional: ["Ab Wheel", "Back Extensions", "Barbell Shrug"]),
         Workout("Bench",    ["Bench Press", "Kroc Row", "Chinups", "Dips", "Dumbbell Bench", "Incline Bench"], scheduled: true, optional: ["Chinups", "Dips", "Dumbbell Bench", "Incline Bench"]),
         Workout("Squat",    ["Squat", "Leg Curl", "Ab Wheel", "Back Extensions", "Barbell Shrug", "Chinups"], scheduled: true, optional: ["Ab Wheel", "Back Extensions", "Barbell Shrug", "Chinups"])]

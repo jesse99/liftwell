@@ -65,6 +65,7 @@ class BaseRepsApparatusSubType: BaseApparatusSubtype, ExerciseInfo {
             assert(false)
         case .weights(let saved):
             switch saved.subtype {
+            case .amrap(let savedSubtype): super.sync(program, savedSubtype, sameSets: same)
             case .reps(let savedSubtype): super.sync(program, savedSubtype, sameSets: same)
             case .t3(let savedSubtype): super.sync(program, savedSubtype, sameSets: same)
             default: os_log("saved %@ subtype wasn't Reps", savedExercise.name)

@@ -115,33 +115,6 @@ class Program: Storable {
             problems += ["program.tags has both dumbbell and minimal"]
         }
         
-        // check for threeDays
-        if tags.contains(.threeDays) && tags.contains(.fourDays) {
-            problems += ["program.tags has both threeDays and fourDays"]
-        }
-        
-        if tags.contains(.threeDays) && tags.contains(.fiveDays) {
-            problems += ["program.tags has both threeDays and fiveDays"]
-        }
-        
-        if tags.contains(.threeDays) && tags.contains(.sixDays) {
-            problems += ["program.tags has both threeDays and sixDays"]
-        }
-        
-        // check for fourDays
-        if tags.contains(.fourDays) && tags.contains(.fiveDays) {
-            problems += ["program.tags has both fourDays and fiveDays"]
-        }
-        
-        if tags.contains(.fourDays) && tags.contains(.sixDays) {
-            problems += ["program.tags has both fourDays and sixDays"]
-        }
-        
-        // check for fiveDays
-        if tags.contains(.fiveDays) && tags.contains(.sixDays) {
-            problems += ["program.tags has both fiveDays and sixDays"]
-        }
-        
         if tags.contains(.unisex) && tags.contains(.female) {
             problems += ["program.tags has both unisex and female"]
         }

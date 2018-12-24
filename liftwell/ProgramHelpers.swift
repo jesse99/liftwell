@@ -52,12 +52,25 @@ func barbell(_ name: String, _ formalName: String, _ warmups: String, _ worksets
     return Exercise(name, formalName, .weights(type), main: main)
 }
 
-func barbell(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", percent: Double, other: String, restMins: Double, bumpers: [Double] = [], main: Bool = false) -> Exercise {
+func barbell(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", other: String, restMins: Double, bumpers: [Double] = [], main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     let warmupSets = parseSets(warmups)
     let workSets = parseSets(worksets)
     let backoffSets = parseSets(backoff)
-    let subtype = Percent1RMSubType(Sets(warmupSets, workSets, backoffSets), percent: percent, other: other, restSecs: rest)
+    let subtype = DerivedSubType(Sets(warmupSets, workSets, backoffSets), other: other, restSecs: rest)
+    
+    let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: bumpers, magnets: [])
+    let type = WeightsType(apparatus, .derived(subtype))
+    
+    return Exercise(name, formalName, .weights(type), main: main)
+}
+
+func barbell(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", percent1RM: Double, other: String, restMins: Double, bumpers: [Double] = [], main: Bool = false) -> Exercise {
+    let rest = Int(restMins*60.0)
+    let warmupSets = parseSets(warmups)
+    let workSets = parseSets(worksets)
+    let backoffSets = parseSets(backoff)
+    let subtype = Percent1RMSubType(Sets(warmupSets, workSets, backoffSets), percent: percent1RM, other: other, restSecs: rest)
     
     let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: bumpers, magnets: [])
     let type = WeightsType(apparatus, .percent1RM(subtype))
@@ -134,12 +147,12 @@ func dumbbell2(_ name: String, _ formalName: String, _ warmups: String, _ workse
     return Exercise(name, formalName, .weights(type), main: main)
 }
 
-func dumbbell2(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", percent: Double, other: String, restMins: Double, main: Bool = false) -> Exercise {
+func dumbbell2(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", percent1RM: Double, other: String, restMins: Double, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     let warmupSets = parseSets(warmups)
     let workSets = parseSets(worksets)
     let backoffSets = parseSets(backoff)
-    let subtype = Percent1RMSubType(Sets(warmupSets, workSets, backoffSets), percent: percent, other: other, restSecs: rest)
+    let subtype = Percent1RMSubType(Sets(warmupSets, workSets, backoffSets), percent: percent1RM, other: other, restSecs: rest)
     
     let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: defaultMagnets(), paired: true)
     let type = WeightsType(apparatus, .percent1RM(subtype))

@@ -22,54 +22,23 @@ fileprivate let notes = """
 func nSuns5() -> Program {
     let advance: [Int] = [0, 0, 1, 1, 2, 2, 3]
     
-    let assistence  = "8-12".x(3)
+    //let assistence  = "8-12".x(3)
     
     let exercises: [Exercise] = [
-        barbell("Light Bench",   "Bench Press",    "", "8@65% 6@75% R 4@85% R 4@85% R 4@85% R", "5@80% R 6@75% R 7@70% R 8+@65%", percent: 1.0, other: "Bench", restMins: 2.5, main: false),
-        barbell("Light OHP",     "Overhead Press", "", "6@50% 5@60% R 3@70% R 5@70% R 7@70% R 4@70% R 6@70% R 8@70%", percent: 1.0, other: "OHP", restMins: 2.5, main: false),
+        barbell("Light Bench",   "Bench Press",    "", "8@65% 6@75% R 4@85% R 4@85% R 4@85% R", "5@80% R 6@75% R 7@70% R 8+@65%", other: "Bench", restMins: 2.5, main: false),
+        barbell("Light OHP",     "Overhead Press", "", "6@50% 5@60% R 3@70% R 5@70% R 7@70% R 4@70% R 6@70% R 8@70%", other: "OHP", restMins: 2.5, main: false),
 
         barbell("Squat",         "Low bar Squat", "", "5@75% R 3@85% R 1+@95% R", "3@90% R 3@85% R 3@80% R 5@75% R 5@70% R 5+@65%", advanceBy: advance, restMins: 3.0, trainingMaxPercent: 0.9, main: true),
-        barbell("Sumo Deadlift", "Sumo Deadlift", "", "5@50% 5@60% 3@70% R 5@70% R 7@70% R 4@70% R 6@70% R 8@70%", percent: 1.0, other: "Deadlift", restMins: 3.0, bumpers: defaultBumpers(), main: false),
+        barbell("Sumo Deadlift", "Sumo Deadlift", "", "5@50% 5@60% 3@70% R 5@70% R 7@70% R 4@70% R 6@70% R 8@70%", other: "Deadlift", restMins: 3.0, bumpers: defaultBumpers(), main: false),
 
         barbell("OHP",           "Overhead Press", "", "5@75% R 3@85% R 1+@95% R", "3@90% R 3@85% R 3@80% R 5@75% R 5@70% R 5+@65%", advanceBy: advance, restMins: 2.5, trainingMaxPercent: 0.9, main: true),
-        barbell("Incline Bench", "Incline Bench Press", "", "6@40% 5@50% R 3@60% R 5@60% R 7@60% R 4@60% R 6@60% R 8@60%", percent: 1.0, other: "Bench", restMins: 2.5, main: false),
+        barbell("Incline Bench", "Incline Bench Press", "", "6@40% 5@50% R 3@60% R 5@60% R 7@60% R 4@60% R 6@60% R 8@60%", other: "Bench", restMins: 2.5, main: false),
 
         barbell("Deadlift",      "Deadlift",       "", "5@75% R 3@85% R 1+@95% R", "3@90% R 3@85% R 3@80% R 3@75% R 3@70% R 3+@65%", advanceBy: advance, restMins: 3.0, bumpers: defaultBumpers(), trainingMaxPercent: 0.9, main: true),
-        barbell("Front Squat",   "Front Squat",    "", "5@35% 5@45% R 3@55% R 5@55% R 7@55% R 4@55% R 6@55% R 8@55%", percent: 1.0, other: "Squat", restMins: 3.0, main: false),
+        barbell("Front Squat",   "Front Squat",    "", "5@35% 5@45% R 3@55% R 5@55% R 7@55% R 4@55% R 6@55% R 8@55%", other: "Squat", restMins: 3.0, main: false),
 
         barbell("Bench",         "Bench Press",    "", "5@75% R 3@85% R 1+@95% R", "3@90% R 5@85% R 3@80% R 5@75% R 3@70% R 5+@65%", advanceBy: advance, restMins: 2.5, trainingMaxPercent: 0.9, main: true),
-        barbell("CG Bench",      "Close-Grip Bench Press", "", "6@40% 5@50% R 3@60% R 5@60% R 7@60% R 4@60% R 6@60% R 8@60%", percent: 1.0, other: "Bench", restMins: 2.5, main: false),
-
-        
-        
-        
-        // Push
-        bodyweight("Dips",          "Dips",                        4, by: 12, restMins: 1.5),
-        dumbbell2("Dumbbell Bench", "Dumbbell Bench Press",    "", assistence, restMins: 1.5),
-        dumbbell2("Dumbbell OHP",   "Dumbbell Shoulder Press", "", assistence, restMins: 1.5),
-        bodyweight("Pushup",        "Pushup",                      4, by: 12, restMins: 1.5),
-        cable("Triceps Pushdown",   "Triceps Pushdown (rope)", "", assistence, restMins: 1.5),
-        
-        // Pull
-        bodyweight("Band Pull Apart", "Band Pull Apart",      4, by: 12),
-        bodyweight("Chinups",         "Chinup",               numSets: 4, goalReps: 50, restMins: 2.0, restAtEnd: false),
-        cable("Face Pull",            "Face Pull", "",        assistence, restMins: 1.5),
-        bodyweight("Inverted Row",    "Inverted Row",         4, by: 12, restMins: 1.5),
-        cable("Lat Pulldown",         "Lat Pulldown", "",     assistence, restMins: 1.5),
-        barbell("Preacher Curl",      "Preacher Curl", "",    assistence, restMins: 1.5),
-        cable("Seated Cable Row",     "Seated Cable Row", "", assistence, restMins: 1.5),
-        
-        // Single Leg/Core
-        bodyweight("Ab Wheel Rollout",  "Ab Wheel Rollout",                    4, by: 12, restMins: 1.5),
-        dumbbell1("Back Extensions",    "Back Extensions",                 "", assistence, restMins: 1.5),
-        cable("Cable Crunch",           "Cable Crunch", "",                    assistence, restMins: 1.5),
-        dumbbell2("Dumbbell Lunge",     "Dumbbell Lunge", "",                  assistence, restMins: 1.5),
-        bodyweight("Kettlebell Snatch", "One-Arm Kettlebell Snatch",           4, by: 12, restMins: 1.5),
-        bodyweight("Kettlebell Swing",  "Kettlebell Two Arm Swing",            4, by: 12, restMins: 1.5),
-        bodyweight("Reverse Hyper",     "Reverse Hyperextension",              4, by: 12, restMins: 1.5),
-        dumbbell2("Spell Caster",       "Spell Caster", "",                    assistence, restMins: 1.5),
-        dumbbell2("Split Squat",        "Dumbbell Single Leg Split Squat", "", assistence, restMins: 1.5),
-        dumbbell2("Step-ups",           "Step-ups",                        "", assistence, restMins: 1.5),
+        barbell("CG Bench",      "Close-Grip Bench Press", "", "6@40% 5@50% R 3@60% R 5@60% R 7@60% R 4@60% R 6@60% R 8@60%", other: "Bench", restMins: 2.5, main: false)
         ]
     
     let workouts = [
