@@ -146,7 +146,7 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
         let weight = aweight.getBaseWorkingWeight()
         switch exercise.type {
         case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight, currentReps: workingReps)
-        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, limit: weight, worksetBias: worksetBias(), currentReps: workingReps)
+        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, limit: weight, currentReps: workingReps)
         }
     }
     
@@ -157,8 +157,8 @@ class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
     func sublabel(_ exercise: Exercise) -> String {
         let weight = aweight.getBaseWorkingWeight()
         switch exercise.type {
-        case .body(_): return cycles[cycleIndex].sublabel(nil, weight, workingReps, limit: weight, worksetBias: worksetBias())
-        case .weights(let type): return cycles[cycleIndex].sublabel(type.apparatus, weight, workingReps, limit: weight, worksetBias: worksetBias())
+        case .body(_): return cycles[cycleIndex].sublabel(nil, weight, workingReps, limit: weight)
+        case .weights(let type): return cycles[cycleIndex].sublabel(type.apparatus, weight, workingReps, limit: weight)
         }
     }
     

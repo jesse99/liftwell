@@ -124,8 +124,8 @@ class BaseRepsApparatusSubType: BaseApparatusSubtype, ExerciseInfo {
     func sublabel(_ exercise: Exercise) -> String {
         let weight = getBaseWorkingWeight()
         switch exercise.type {
-        case .body(_): return sets.sublabel(nil, weight, workingReps, limit: limitWeight(), worksetBias: worksetBias())
-        case .weights(let type): return sets.sublabel(type.apparatus, weight, workingReps, limit: limitWeight(), worksetBias: worksetBias())
+        case .body(_): return sets.sublabel(nil, weight, workingReps, limit: limitWeight())
+        case .weights(let type): return sets.sublabel(type.apparatus, weight, workingReps, limit: limitWeight())
         }
     }
     
@@ -203,7 +203,7 @@ class BaseRepsApparatusSubType: BaseApparatusSubtype, ExerciseInfo {
         let weight = getBaseWorkingWeight()
         switch exercise.type {
         case .body(_): return sets.activities(weight, currentReps: workingReps)
-        case .weights(let type): return sets.activities(weight, type.apparatus, limit: limitWeight(), worksetBias: worksetBias(), currentReps: workingReps)
+        case .weights(let type): return sets.activities(weight, type.apparatus, limit: limitWeight(), currentReps: workingReps)
         }
     }
     

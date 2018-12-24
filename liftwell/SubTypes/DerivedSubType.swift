@@ -123,7 +123,7 @@ class DerivedSubType: ExerciseInfo {
     
     func sublabel(_ exercise: Exercise) -> String {
         if let type = getOtherType(), let weight = otherWeight(), weight > 0.0 {
-            return sets.sublabel(type.apparatus, weight, nil, limit: weight, worksetBias: 0)
+            return sets.sublabel(type.apparatus, weight, nil, limit: weight)
         } else {
             return ""
         }
@@ -206,7 +206,7 @@ class DerivedSubType: ExerciseInfo {
     
     private func getActivities(_ exercise: Exercise) -> (Int, [Activity]) {
         if let type = getOtherType(), let baseWeight = otherWeight() {
-            return sets.activities(baseWeight, type.apparatus, limit: baseWeight, worksetBias: 0, currentReps: nil)
+            return sets.activities(baseWeight, type.apparatus, limit: baseWeight, currentReps: nil)
         } else {
             return (0, [])
         }

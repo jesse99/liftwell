@@ -146,7 +146,7 @@ class Percent1RMSubType: ExerciseInfo {
     
     func sublabel(_ exercise: Exercise) -> String {
         if let type = getOtherType() {
-            return sets.sublabel(type.apparatus, weight, reps, limit: weight, worksetBias: 0)
+            return sets.sublabel(type.apparatus, weight, reps, limit: weight)
         } else {
             return ""
         }
@@ -240,7 +240,7 @@ class Percent1RMSubType: ExerciseInfo {
     
     private func getActivities(_ exercise: Exercise) -> (Int, [Activity]) {
         if let type = getOtherType() {
-            return sets.activities(weight, type.apparatus, limit: weight, worksetBias: 0, currentReps: reps)
+            return sets.activities(weight, type.apparatus, limit: weight, currentReps: reps)
         } else {
             return (0, [])
         }
@@ -401,5 +401,4 @@ class Percent1RMSubType: ExerciseInfo {
     var index: Int = 0
     
     static var results: [String: [Result]] = [:]
-    // TODO: can't we get rid of worksetBias?
 }

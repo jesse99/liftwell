@@ -316,11 +316,7 @@ class BaseApparatusSubtype {
         assert(false)       // subclasses implement this
         return false
     }
-    
-    func worksetBias() -> Int {
-        return 0
-    }
-    
+        
     var aweight: ApparatusWeight  // starts out at 0.0
     var workingReps: Int?         // set when minReps < maxReps, also this can be less than minReps
     var restTime: Int
