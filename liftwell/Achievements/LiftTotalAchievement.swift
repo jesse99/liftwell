@@ -104,10 +104,10 @@ class LiftTotalAchievement: Achievement {
             }
             
         } else if nextTarget == 0.0 {
-            os_log("total=%.0f", type: .error, total)
+//            os_log("total=%.0f", type: .error, total)
             if total > 0.0 {
                 newTarget = advanceTarget(total)
-                os_log("   newTarget=%.0f", type: .error, newTarget)
+//                os_log("   newTarget=%.0f", type: .error, newTarget)
             }
         }
         
