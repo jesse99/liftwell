@@ -31,7 +31,7 @@ func barbell(_ name: String, _ formalName: String, _ cycles: [(String, String, S
         let backoff = parseSets($0.2)
         return Sets(warmups, worksets, backoff)
     }
-    let subtype = CyclicRepsSubtype(sets, restSecs: rest, trainingMaxPercent: trainingMaxPercent, promptIndex: promptIndex, resetIndex: resetIndex)
+    let subtype = CyclicRepsSubType(sets, restSecs: rest, trainingMaxPercent: trainingMaxPercent, promptIndex: promptIndex, resetIndex: resetIndex)
     
     let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: bumpers, magnets: [])
     let type = WeightsType(apparatus, .cyclic(subtype))

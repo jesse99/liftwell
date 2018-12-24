@@ -24,7 +24,7 @@ extension ApparatusWeight {
 }
 
 /// Base class for Subtypes that use an apparatus.
-class BaseApparatusSubtype {
+class BaseApparatusSubType {
     init(reps: Int?, restTime: Int, trainingMaxPercent: Double? = nil) {
         if let percent = trainingMaxPercent {
             self.aweight = .trainingMax(percent: percent, oneRepMax: 0.0)
@@ -77,7 +77,7 @@ class BaseApparatusSubtype {
         store.addInt("index", index)
     }
     
-    func sync(_ program: Program, _ savedSubtype: BaseApparatusSubtype, sameSets: Bool) {
+    func sync(_ program: Program, _ savedSubtype: BaseApparatusSubType, sameSets: Bool) {
         aweight = savedSubtype.aweight
         restTime = savedSubtype.restTime
         

@@ -249,7 +249,7 @@ class DerivedSubType: ExerciseInfo {
                     return last.reps
                 }
             case .cyclic(_):
-                if let results = CyclicRepsSubtype.results[other.formalName], let last = results.last {
+                if let results = CyclicRepsSubType.results[other.formalName], let last = results.last {
                     return last.reps
                 }
             case .derived(_):

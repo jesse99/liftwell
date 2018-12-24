@@ -12,7 +12,7 @@ enum Type {
 class WeightsType: Storable {
     enum SubType {
         case amrap(AMRAPSubType)
-        case cyclic(CyclicRepsSubtype)
+        case cyclic(CyclicRepsSubType)
         case derived(DerivedSubType)
         case find(FindWeightSubType)
         case percent1RM(Percent1RMSubType)

@@ -8,7 +8,7 @@ import os.log
 /// GZCLP scheme where weight is added to each cycle until the user fails at which point the next
 /// cycle is used. When cycles run out they are reset to the first cycle and a new Training Max
 /// is chosen.
-class T1RepsSubType: BaseCyclicRepsSubtype {
+class T1RepsSubType: BaseCyclicRepsSubType {
     private typealias `Self` = T1RepsSubType
     
     class Result: CyclicResult {

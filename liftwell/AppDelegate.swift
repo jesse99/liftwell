@@ -359,7 +359,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let store = try decoder.decode(Store.self, from: data)
                 
                 AMRAPSubType.results = getStrDict(store, "amrap-results")
-                CyclicRepsSubtype.results = getStrDict(store, "cyclic-results")
+                CyclicRepsSubType.results = getStrDict(store, "cyclic-results")
                 DerivedSubType.results = getStrDict(store, "derived-results")
                 MaxRepsSubType.results = getStrDict(store, "max-reps-results")
                 Percent1RMSubType.results = getStrDict(store, "percent-1rm-results")
@@ -382,7 +382,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let path = getPath(fileName: "results")
         let store = Store()
         addStrDict(store, "amrap-results", AMRAPSubType.results)
-        addStrDict(store, "cyclic-results", CyclicRepsSubtype.results)
+        addStrDict(store, "cyclic-results", CyclicRepsSubType.results)
         addStrDict(store, "derived-results", DerivedSubType.results)
         addStrDict(store, "max-reps-results", MaxRepsSubType.results)
         addStrDict(store, "percent-1rm-results", Percent1RMSubType.results)

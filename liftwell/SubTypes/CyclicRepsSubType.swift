@@ -6,8 +6,8 @@ import UIKit           // for UIColor
 import os.log
 
 /// Sets/reps/percents vary from week to week.
-class CyclicRepsSubtype: BaseCyclicRepsSubtype {
-    private typealias `Self` = CyclicRepsSubtype
+class CyclicRepsSubType: BaseCyclicRepsSubType {
+    private typealias `Self` = CyclicRepsSubType
     
     /// trainingMaxPercent is a percent of 1RM
     /// promptIndex is when to ask the user to advance, -1 for no advancement

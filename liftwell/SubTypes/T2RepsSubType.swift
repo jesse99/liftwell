@@ -7,7 +7,7 @@ import os.log
 
 /// GZCLP scheme where weight is added to each cycle until the user fails at which point the next
 /// cycle is used. When cycles run out weight is added according to what was used in the first cycle.
-class T2RepsSubType: BaseCyclicRepsSubtype {
+class T2RepsSubType: BaseCyclicRepsSubType {
     private typealias `Self` = T2RepsSubType
     
     init(_ cycles: [Sets], restSecs: Int) {

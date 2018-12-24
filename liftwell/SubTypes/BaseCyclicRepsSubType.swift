@@ -6,8 +6,8 @@ import UIKit           // for UIColor
 import os.log
 
 /// Sets/reps/percents vary from week to week.
-class BaseCyclicRepsSubtype: BaseApparatusSubtype, ExerciseInfo {
-    private typealias `Self` = BaseCyclicRepsSubtype
+class BaseCyclicRepsSubType: BaseApparatusSubType, ExerciseInfo {
+    private typealias `Self` = BaseCyclicRepsSubType
     
     class CyclicResult: BaseResult, Storable {
         init(_ tag: ResultTag, baseWeight: Double, liftedWeight: Double, cycleIndex: Int, reps: Int) {

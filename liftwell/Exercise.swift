@@ -159,7 +159,7 @@ class Exercise: Storable {
                     weight = result.liftedWeight
                 }
             case .cyclic(_):
-                if let result = CyclicRepsSubtype.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                if let result = CyclicRepsSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     weight = result.liftedWeight
                 }
             case .derived(_):
@@ -223,7 +223,7 @@ class Exercise: Storable {
                     return result.reps
                 }
             case .cyclic(_):
-                if let result = CyclicRepsSubtype.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                if let result = CyclicRepsSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     return result.reps
                 }
             case .derived(_):
