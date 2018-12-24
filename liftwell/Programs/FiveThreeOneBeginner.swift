@@ -36,7 +36,7 @@ func FiveThreeOneBeginner() -> Program {
 
         // Pull
         bodyweight("Band Pull Apart", "Band Pull Apart",      4, by: 12),
-        bodyweight("Chinups",         "Chinup",               numSets: 4, goalReps: 50, restMins: 2.0, restAtEnd: false),
+        bodyweight("Chinups",         "Chinup",               numSets: 4, startReps: 5, goalReps: 50, restMins: 2.0, restAtEnd: false),
         cable("Face Pull",            "Face Pull", "",        assistence, restMins: 1.5),
         bodyweight("Inverted Row",    "Inverted Row",         4, by: 12, restMins: 1.5),
         cable("Lat Pulldown",         "Lat Pulldown", "",     assistence, restMins: 1.5),
@@ -53,8 +53,7 @@ func FiveThreeOneBeginner() -> Program {
         bodyweight("Reverse Hyper",     "Reverse Hyperextension",              4, by: 12, restMins: 1.5),
         dumbbell2("Spell Caster",       "Spell Caster", "",                    assistence, restMins: 1.5),
         dumbbell2("Split Squat",        "Dumbbell Single Leg Split Squat", "", assistence, restMins: 1.5),
-        dumbbell2("Step-ups",           "Step-ups",                        "", assistence, restMins: 1.5),
-        ]
+        dumbbell2("Step-ups",           "Step-ups",                        "", assistence, restMins: 1.5)]
     
     let workouts = [
         Workout("A", ["Squat", "Bench Press", "Dips", "Dumbbell Bench",    "Ab Wheel Rollout", "Back Extensions", "Cable Crunch", "Dumbbell Lunge", "Dumbbell OHP", "Kettlebell Snatch", "Kettlebell Swing", "Pushup", "Reverse Hyper", "Spell Caster", "Split Squat", "Step-ups", "Triceps Pushdown"], scheduled: true, optional: ["Ab Wheel Rollout", "Back Extensions", "Cable Crunch", "Dumbbell Lunge", "Dumbbell OHP", "Kettlebell Snatch", "Kettlebell Swing", "Pushup", "Reverse Hyper", "Spell Caster", "Split Squat", "Triceps Pushdown"]),

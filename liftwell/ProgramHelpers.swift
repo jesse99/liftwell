@@ -101,9 +101,9 @@ func bodyweight(_ name: String, _ formalName: String, _ worksets: String, restMi
     return Exercise(name, formalName, .body(type), main: main)
 }
 
-func bodyweight(_ name: String, _ formalName: String, numSets: Int, goalReps: Int, restMins: Double, restAtEnd: Bool = false, main: Bool = false) -> Exercise {
+func bodyweight(_ name: String, _ formalName: String, numSets: Int, startReps: Int, goalReps: Int, restMins: Double, restAtEnd: Bool = false, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
-    let subtype = MaxRepsSubType(numSets: numSets, goalReps: goalReps, restSecs: rest, restAtEnd: restAtEnd)
+    let subtype = MaxRepsSubType(numSets: numSets, startReps: startReps, goalReps: goalReps, restSecs: rest, restAtEnd: restAtEnd)
     let type = BodyType(.maxReps(subtype))
     return Exercise(name, formalName, .body(type), main: main)
 }

@@ -22,7 +22,7 @@ fileprivate let notes = """
 func nSuns5() -> Program {
     let advance: [Int] = [0, 0, 1, 1, 2, 2, 3]
     
-    //let assistence  = "8-12".x(3)
+    let assistence  = "8-12".x(3)
     
     let exercises: [Exercise] = [
         barbell("Light Bench",   "Bench Press",    "", "8@65% 6@75% R 4@85% R 4@85% R 4@85% R", "5@80% R 6@75% R 7@70% R 8+@65%", other: "Bench", restMins: 2.5, main: false),
@@ -38,15 +38,30 @@ func nSuns5() -> Program {
         barbell("Front Squat",   "Front Squat",    "", "5@35% 5@45% R 3@55% R 5@55% R 7@55% R 4@55% R 6@55% R 8@55%", other: "Squat", restMins: 3.0, main: false),
 
         barbell("Bench",         "Bench Press",    "", "5@75% R 3@85% R 1+@95% R", "3@90% R 5@85% R 3@80% R 5@75% R 3@70% R 5+@65%", advanceBy: advance, restMins: 2.5, trainingMaxPercent: 0.9, main: true),
-        barbell("CG Bench",      "Close-Grip Bench Press", "", "6@40% 5@50% R 3@60% R 5@60% R 7@60% R 4@60% R 6@60% R 8@60%", other: "Bench", restMins: 2.5, main: false)
-        ]
+        barbell("CG Bench",      "Close-Grip Bench Press", "", "6@40% 5@50% R 3@60% R 5@60% R 7@60% R 4@60% R 6@60% R 8@60%", other: "Bench", restMins: 2.5, main: false),
+
+        bodyweight("Chinups",        "Chinup",             numSets: 3, startReps: 10, goalReps: 36, restMins: 2.0),
+        dumbbell1("Kroc Row",        "Kroc Row",           "", assistence, restMins: 2.0),
+        dumbbell1("Back Extensions", "Back Extensions",    "", assistence, restMins: 2.0),
+        bodyweight("Dips",           "Dips",               numSets: 3, startReps: 12, goalReps: 36, restMins: 2.0),
+        cable("Seated Cable Row",    "Seated Cable Row",   "", assistence, restMins: 2.0),
+        cable("Cable Crunch",        "Cable Crunch", "",   assistence, restMins: 2.0),
+        dumbbell2("Split Squat",     "Dumbbell Single Leg Split Squat", "", assistence, restMins: 2.0),
+        bodyweight("Ab Wheel",       "Ab Wheel Rollout",   3, by: 12, restMins: 2.0),
+        pairedPlates("Leg Press",    "Leg Press",          "", "12@100%".x(3), restMins: 2.0),
+        cable("Face Pull",           "Face Pull", "",      assistence, restMins: 2.0),
+        dumbbell2("Dumbbell Flyes",  "Dumbbell Flyes",     "", assistence, restMins: 2.0),
+        cable("Incline Cable Flye",  "Incline Cable Flye", "", assistence, restMins: 2.0),
+        barbell("Good Morning",      "Good Morning",       "", "12@100%".x(3), restMins: 2.0),
+        barbell("Barbell Shrug",     "Barbell Shrug",      "", "12@100%".x(3), restMins: 2.0),
+        barbell("Preacher Curl",      "Preacher Curl",     "", assistence, restMins: 2.0)]
     
     let workouts = [
-        Workout("Light", ["Light Bench", "Light OHP"], scheduled: true, optional: []),
-        Workout("Squat", ["Squat", "Sumo Deadlift"], scheduled: true, optional: []),
-        Workout("OHP", ["OHP", "Incline Bench"], scheduled: true, optional: []),
-        Workout("Deadlift", ["Deadlift", "Front Squat"], scheduled: true, optional: []),
-        Workout("Bench", ["Bench", "CG Bench"], scheduled: true, optional: [])]
+        Workout("Light", ["Light Bench", "Light OHP", "Chinups", "Kroc Row", "Back Extensions", "Dips", "Seated Cable Row"], scheduled: true, optional: ["Back Extensions", "Dips", "Seated Cable Row"]),
+        Workout("Squat", ["Squat", "Sumo Deadlift", "Cable Crunch", "Split Squat", "Ab Wheel", "Leg Press"], scheduled: true, optional: ["Ab Wheel", "Leg Press"]),
+        Workout("OHP", ["OHP", "Incline Bench", "Face Pull", "Dumbbell Flyes", "Dips", "Incline Cable Flye"], scheduled: true, optional: ["Dips", "Incline Cable Flye"]),
+        Workout("Deadlift", ["Deadlift", "Front Squat", "Cable Crunch", "Back Extensions", "Good Morning", "Ab Wheel", "Seated Cable Row"], scheduled: true, optional: ["Good Morning", "Ab Wheel", "Seated Cable Row"]),
+        Workout("Bench", ["Bench", "CG Bench", "Chinups", "Kroc Row", "Barbell Shrug", "Face Pull", "Preacher Curl", "Dips", "Back Extensions"], scheduled: true, optional: ["Barbell Shrug", "Face Pull", "Preacher Curl", "Dips", "Back Extensions"])]
     
     let tags: [Program.Tags] = [.intermediate, .strength, .barbell, .unisex, .fiveDays, .ageUnder40, .age40s]
     

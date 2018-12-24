@@ -13,14 +13,14 @@ func MastersDB() -> Program {
         // Light
         dumbbell2("Dumbbell OHP",    "Dumbbell Shoulder Press", "10@50% 3@70% 1@90%", "3-8".x(3, rest: .atEnd), restMins: 3.5, main: true),
         dumbbell1("Back Extensions", "Back Extensions",         "10@50%",             "6-12".x(3, rest: .atEnd), restMins: 3.0, main: true),
-        bodyweight("Chinups",        "Chinup", numSets: 4, goalReps: 25, restMins: 3.5, restAtEnd: true, main: true),
+        bodyweight("Chinups",        "Chinup", numSets: 4, startReps: 10, goalReps: 25, restMins: 3.5, restAtEnd: true, main: true),
         dumbbell2("Farmer's Walk",   "Farmer's Walk",           "",                   "1".x(2), restMins: 3.0),
         cable("Cable Crunches",      "Cable Crunch",            "",                   "6-12".x(3), restMins: 3.0),
 
         // Medium
         dumbbell2("Medium Bench",    "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "4-10".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Bench", restMins: 4.0),
         dumbbell2("Medium Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75%",        "4-8".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Squat", restMins: 4.0),
-        bodyweight("Dips",           "Dips", numSets: 3, goalReps: 36, restMins: 3.5, restAtEnd: false),
+        bodyweight("Dips",           "Dips", numSets: 3, startReps: 10, goalReps: 36, restMins: 3.5, restAtEnd: false),
         
         bodyweight("Foam Rolling",            "IT-Band Foam Roll",         1, by: 15),
         bodyweight("Shoulder Dislocates",     "Shoulder Dislocate",        1, by: 12),

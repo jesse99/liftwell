@@ -36,9 +36,10 @@ class MaxRepsSubType: ExerciseInfo {
         var completed: [Int] = []
     }
     
-    init(numSets: Int, goalReps: Int, restSecs: Int, restAtEnd: Bool) {
+    init(numSets: Int, startReps: Int, goalReps: Int, restSecs: Int, restAtEnd: Bool) {
         self.weight = 0.0
-        self.currentReps = 5*numSets
+        self.startReps = startReps*numSets
+        self.currentReps = 0
         self.restTime = restSecs
         
         self.numSets = numSets
@@ -52,6 +53,7 @@ class MaxRepsSubType: ExerciseInfo {
         restTime = store.getInt("restTime")
         
         self.numSets = store.getInt("numSets")
+        startReps = store.getInt("startReps", ifMissing: 5*self.numSets)
         self.goalReps = store.getInt("goalReps")
         self.restAtEnd = store.getBool("restAtEnd")
         self.completed = store.getIntArray("completed")
@@ -63,6 +65,7 @@ class MaxRepsSubType: ExerciseInfo {
     func save(_ store: Store) {
         store.addDbl("weight", weight)
         store.addInt("currentReps", currentReps)
+        store.addInt("startReps", startReps)
         store.addInt("restTime", restTime)
         
         store.addInt("numSets", numSets)
@@ -146,9 +149,17 @@ class MaxRepsSubType: ExerciseInfo {
     func sublabel(_ exercise: Exercise) -> String {
         let w = weightStr(exercise)
         if w.isEmpty {
-            return "\(currentReps) reps"
+            if currentReps > 0 {
+                return "\(currentReps) reps"
+            } else {
+                return ""
+            }
         } else {
-            return "\(currentReps) reps @ \(w)"
+            if currentReps > 0 {
+                return "\(currentReps) reps @ \(w)"
+            } else {
+                return "\(w)"
+            }
         }
     }
     
@@ -204,12 +215,13 @@ class MaxRepsSubType: ExerciseInfo {
     }
     
     func current(_ exercise: Exercise) -> Activity {
+        let reps = currentReps > 0 ? currentReps : startReps
         let currentTotal = completed.reduce(0, {$0 + $1})
-        var expected = completed.count < numSets ? (currentReps - currentTotal)/(numSets - completed.count) : 0
-        if currentTotal + (numSets - completed.count)*expected < currentReps {
+        var expected = completed.count < numSets ? (reps - currentTotal)/(numSets - completed.count) : 0
+        if currentTotal + (numSets - completed.count)*expected < reps {
             expected += 1
         }
-        let st = (setIndex+1 <= numSets ? "\(expected > 0 ? expected : 1)+ " : "") + "(\(currentReps)) reps"
+        let st = (setIndex+1 <= numSets ? "\(expected > 0 ? expected : 1)+ " : "") + "(\(reps)) reps"
         
         let tt = setIndex+1 <= numSets ? "Set \(setIndex+1) of \(numSets)" : "Set \(numSets) of \(numSets)"
         
@@ -236,10 +248,13 @@ class MaxRepsSubType: ExerciseInfo {
     
     func completions(_ exercise: Exercise) -> [Completion] {
         let currentTotal = completed.reduce(0, {$0 + $1})
-        let expected = (currentReps - currentTotal)/(numSets - completed.count)
-        
+        let reps = currentReps > 0 ? currentReps : startReps
+        let expected = (reps - currentTotal)/(numSets - completed.count)
+        let minReps = currentReps > 0 ? expected - 4 : 0
+        let maxReps = currentReps > 0 ? expected + 4 : expected + 8
+
         var result: [Completion] = []
-        for count in max(expected - 4, 0)...(expected+4) {
+        for count in max(minReps, 0)...maxReps {
             if count <= expected {
                 if count == 1 {
                     result.append(Completion(title: "1 rep", info: "", callback: {_,completion in self.doCompleted(count); completion()}))
@@ -247,7 +262,7 @@ class MaxRepsSubType: ExerciseInfo {
                     result.append(Completion(title: "\(count) reps", info: "", callback: {_,completion in self.doCompleted(count); completion()}))
                 }
             } else {
-                if currentTotal + count <= currentReps {
+                if currentTotal + count <= reps {
                     result.append(Completion(title: "\(count) reps", info: "", callback: {_,completion in self.doCompleted(count); completion()}))
                 } else {
                     result.append(Completion(title: "\(count) reps (extra)", info: "", callback: {_,completion in self.doCompleted(count); completion()}))
@@ -325,6 +340,7 @@ class MaxRepsSubType: ExerciseInfo {
     
     var weight: Double      // starts out at 0.0
     var currentReps: Int
+    var startReps: Int
     var restTime: Int
     
     var completed: [Int] = []

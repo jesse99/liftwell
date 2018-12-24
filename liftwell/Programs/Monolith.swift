@@ -101,12 +101,12 @@ func Monolith() -> Program {
         barbell("Deadlift",    "Deadlift", deadSets(), restMins: 3.0, bumpers: defaultBumpers(), trainingMaxPercent: 0.85, promptIndex: -1, resetIndex: [0, 3], main: true),
         barbell("Bench Press", "Bench Press", benchSets(), restMins: 3.0, trainingMaxPercent: 0.85, promptIndex: -1, resetIndex: [0, 3], main: true),
         
-        bodyweight("Chins",          "Chinup",        numSets: 10, goalReps: 100, restMins: 2.5),
+        bodyweight("Chins",          "Chinup",        numSets: 10, startReps: 10, goalReps: 100, restMins: 2.5),
         cable("Face Pull",           "Face Pull", "", "10-20".x(5), restMins: 2.0),
-        bodyweight("Dips",           "Dips",          numSets: 10, goalReps: 200, restMins: 2.5),
+        bodyweight("Dips",           "Dips",          numSets: 10, startReps: 12, goalReps: 200, restMins: 2.5),
         dumbbell1("Kroc Row",        "Kroc Row",      "10@50%", "10-20".x(5), restMins: 3.0),
         barbell("Preacher Curl",     "Preacher Curl", "", "10-20".x(5), restMins: 2.0),
-        bodyweight("Weighted Chins", "Chinup",        numSets: 5, goalReps: 25, restMins: 2.5),
+        bodyweight("Weighted Chins", "Chinup",        numSets: 5, startReps: 10, goalReps: 25, restMins: 2.5),
         barbell("Barbell Shrug",     "Barbell Shrug", "10@50%", "20".x(5), restMins: 2.5)]
     
     let workouts = [
