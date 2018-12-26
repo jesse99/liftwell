@@ -217,6 +217,8 @@ class DerivedSubType: ExerciseInfo {
             switch type.subtype {
             case .amrap(let subtype):
                 return subtype.getBaseWorkingWeight()
+            case .amrap1RM(let subtype):
+                return subtype.getBaseWorkingWeight()
             case .cyclic(let subtype):
                 return subtype.getBaseWorkingWeight()
             case .derived(let subtype):
@@ -246,6 +248,10 @@ class DerivedSubType: ExerciseInfo {
             switch type.subtype {
             case .amrap(_):
                 if let results = AMRAPSubType.results[other.formalName], let last = results.last {
+                    return last.reps
+                }
+            case .amrap1RM(_):
+                if let results = AMRAP1RMSubType.results[other.formalName], let last = results.last {
                     return last.reps
                 }
             case .cyclic(_):

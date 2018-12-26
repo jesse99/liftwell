@@ -80,6 +80,9 @@ class BaseCyclicRepsSubType: BaseApparatusSubType, ExerciseInfo {
             os_log("saved %@ subtype wasn't weights", savedExercise.name)
         case .weights(let saved):
             switch saved.subtype {
+            case .amrap1RM(let savedSubtype):
+                cycleIndex = savedSubtype.cycleIndex
+                super.sync(program, savedSubtype, sameSets: cycles.count == savedSubtype.cycles.count)
             case .cyclic(let savedSubtype):
                 cycleIndex = savedSubtype.cycleIndex
                 super.sync(program, savedSubtype, sameSets: cycles.count == savedSubtype.cycles.count)
@@ -238,7 +241,11 @@ class BaseCyclicRepsSubType: BaseApparatusSubType, ExerciseInfo {
     }
     
     override func isWorkset(_ index: Int) -> Bool {
-        return index > cycles[cycleIndex].warmups.count && index < cycles[cycleIndex].warmups.count + cycles[cycleIndex].worksets.count
+        if !cycles[cycleIndex].warmups.isEmpty {
+            return index > cycles[cycleIndex].warmups.count && index < cycles[cycleIndex].warmups.count + cycles[cycleIndex].worksets.count
+        } else {
+            return index < cycles[cycleIndex].worksets.count
+        }
     }
     
     var cycleIndex: Int

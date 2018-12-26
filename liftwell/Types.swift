@@ -12,6 +12,7 @@ enum Type {
 class WeightsType: Storable {
     enum SubType {
         case amrap(AMRAPSubType)
+        case amrap1RM(AMRAP1RMSubType)
         case cyclic(CyclicRepsSubType)
         case derived(DerivedSubType)
         case find(FindWeightSubType)
@@ -31,6 +32,7 @@ class WeightsType: Storable {
     func errors() -> [String] {
         switch subtype {
         case .amrap(let subtype): return subtype.errors()
+        case .amrap1RM(let subtype): return subtype.errors()
         case .cyclic(let subtype): return subtype.errors()
         case .derived(let subtype): return subtype.errors()
         case .find(let subtype): return subtype.errors()
@@ -49,6 +51,7 @@ class WeightsType: Storable {
         let name = store.getStr("subtypeName")
         switch name {
         case "amrap": self.subtype = .amrap(store.getObj("subtype"))
+        case "amrap-1rm": self.subtype = .amrap1RM(store.getObj("subtype"))
         case "cyclic": self.subtype = .cyclic(store.getObj("subtype"))
         case "derived": self.subtype = .derived(store.getObj("subtype"))
         case "find": self.subtype = .find(store.getObj("subtype"))
@@ -68,6 +71,7 @@ class WeightsType: Storable {
 
         switch subtype {
         case .amrap(let subtype): store.addStr("subtypeName", "amrap"); store.addObj("subtype", subtype)
+        case .amrap1RM(let subtype): store.addStr("subtypeName", "amrap-1rm"); store.addObj("subtype", subtype)
         case .cyclic(let subtype): store.addStr("subtypeName", "cyclic"); store.addObj("subtype", subtype)
         case .derived(let subtype): store.addStr("subtypeName", "derived"); store.addObj("subtype", subtype)
         case .find(let subtype): store.addStr("subtypeName", "find"); store.addObj("subtype", subtype)
@@ -89,6 +93,7 @@ class WeightsType: Storable {
         }
         switch subtype {
         case .amrap(let builtIn): builtIn.sync(program, savedExercise)
+        case .amrap1RM(let builtIn): builtIn.sync(program, savedExercise)
         case .cyclic(let builtIn): builtIn.sync(program, savedExercise)
         case .derived(let builtIn): builtIn.sync(program, savedExercise)
         case .find(let builtIn): builtIn.sync(program, savedExercise)

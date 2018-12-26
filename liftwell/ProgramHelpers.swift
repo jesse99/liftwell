@@ -39,6 +39,20 @@ func barbell(_ name: String, _ formalName: String, _ cycles: [(String, String, S
     return Exercise(name, formalName, .weights(type), main: main)
 }
 
+func barbell(_ name: String, _ formalName: String, amrap1rm: [String], restMins: Double, bumpers: [Double] = [], main: Bool = false) -> Exercise {
+    let rest = Int(restMins*60.0)
+    let sets: [Sets] = amrap1rm.map {
+        let worksets = parseSets($0)
+        return Sets([], worksets, [])
+    }
+    let subtype = AMRAP1RMSubType(sets, restSecs: rest)
+    
+    let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: bumpers, magnets: [])
+    let type = WeightsType(apparatus, .amrap1RM(subtype))
+    
+    return Exercise(name, formalName, .weights(type), main: main)
+}
+
 func barbell(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", advanceBy: [Int], restMins: Double, bumpers: [Double] = [], trainingMaxPercent: Double? = nil, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     let warmupSets = parseSets(warmups)

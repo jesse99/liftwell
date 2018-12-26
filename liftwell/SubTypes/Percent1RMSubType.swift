@@ -291,6 +291,10 @@ class Percent1RMSubType: ExerciseInfo {
                 if let results = AMRAPSubType.results[other.formalName], let last = results.last {
                     return last.liftedWeight
                 }
+            case .amrap1RM(_):
+                if let results = AMRAP1RMSubType.results[other.formalName], let last = results.last {
+                    return last.liftedWeight
+                }
             case .cyclic(_):
                 if let results = CyclicRepsSubType.results[other.formalName], let last = results.last {
                     return last.liftedWeight
@@ -334,6 +338,10 @@ class Percent1RMSubType: ExerciseInfo {
             switch type.subtype {
             case .amrap(_):
                 if let results = AMRAPSubType.results[other.formalName], let last = results.last {
+                    return last.reps
+                }
+            case .amrap1RM(_):
+                if let results = AMRAP1RMSubType.results[other.formalName], let last = results.last {
                     return last.reps
                 }
             case .cyclic(_):

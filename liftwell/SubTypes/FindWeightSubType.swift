@@ -156,6 +156,7 @@ class FindWeightSubType: ExerciseInfo {
             case .weights(let type):    // this is the only one with an apparatus
                 switch type.subtype {
                 case .amrap(let subtype): subtype.setNRM(reps, weight)
+                case .amrap1RM(let subtype): subtype.setNRM(reps, weight)
                 case .cyclic(let subtype): subtype.setNRM(reps, weight)
                 case .derived(_): assert(false)
                 case .find(_): assert(false)
