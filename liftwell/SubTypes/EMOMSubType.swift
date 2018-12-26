@@ -17,17 +17,20 @@ class EMOMSubType: BaseCyclicRepsSubType {
         required init(from store: Store) {
             requested = store.getIntArray("requested")
             actual = store.getIntArray("actual")
+            advanced = store.getBool("advanced", ifMissing: false)
             super.init(from: store)
         }
         
         override func save(_ store: Store) {
             store.addIntArray("requested", requested)
             store.addIntArray("actual", actual)
+            store.addBool("advanced", advanced)
             super.save(store)
         }
         
         var requested: [Int] = []    // these are for the AMRAP sets
         var actual: [Int] = []
+        var advanced = false
     }
     
     /// trainingMaxPercent is a percent of 1RM
@@ -219,7 +222,11 @@ class EMOMSubType: BaseCyclicRepsSubType {
     }
     
     override func fixedDifficulty() -> ResultTag? {
-        return .normal
+        if isMRS() {
+            return .normal
+        } else {
+            return nil
+        }
     }
     
     override func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
@@ -228,72 +235,111 @@ class EMOMSubType: BaseCyclicRepsSubType {
         Self.results[exercise.formalName] = myResults
         result = nil
         
-        //        let cycle = advancingCycle(cycles[cycleIndex]) ? cycles[cycleIndex] : nil // TODO: make sure that this works when not MRS
+        let mrs = isMRS()
         cycleIndex = (cycleIndex + 1) % cycles.count
-//        if let cycle = cycle {
-//            presentFinalize(exercise, cycle, completion)
-//        } else {
+        if mrs {
+            maybeAdvance(exercise, completion, myResults.last!)
+        } else {
             completion()
-//        }
+        }
+    }
+        
+    private func maybeAdvance(_ exercise: Exercise, _ completion: @escaping () -> Void, _ result: Result) {
+        maybeAdvanceBy1RM(exercise, result)
+        if cycleIndex == 0 && !haveAdvanced(exercise) {
+            if hitRepGoal(exercise) {
+                advanceByMinimum(exercise, result)
+            } else {
+                deload(exercise, result)
+            }
+        }
+        completion()
     }
     
-    // TODO: if new PR then adjust TM, maybe this should be on any of the AMRAP sets?
-    // TODO: if no new PR but hit min reps then adjust TM
-    // TODO: otherwise drop TM
-    // TODO: make sure that thus works when exit and re-enter mindway (eg amrap results aren't lost)
+    private func haveAdvanced(_ exercise: Exercise) -> Bool {
+        var myResults = Self.results[exercise.formalName] ?? []
+        for i in 0..<cycles.count {
+            let index = myResults.count - i - 1
+            if index >= 0 && myResults[index].advanced {
+                return true
+            }
+        }
+        return false
+    }
     
-//    private func presentFinalize(_ exercise: Exercise, _ cycle: Sets, _ completion: @escaping () -> Void) {
-//        if let results = Self.results[exercise.formalName], let result = results.last, let requestedReps = cycle.worksets.last?.maxReps {
-//            var updated = false
-//
-//            // This 1RM formula is from https://drive.google.com/file/d/0B8EbfzFB0mBrYW5Sd3oxRzNRY2M/view. It's not as accurate as our
-//            // get1RM function but we use it to keep as close as possible to what CAP3 wants to use (and also because the formula works
-//            // (more or less) above 15 reps).
-//            if result.reps > requestedReps {
-//                let max = result.liftedWeight*((0.03333*Double(result.reps)) + 1)   // TODO: should we use this with other nSuns stuff?
-//                switch aweight {
-//                case .trainingMax(percent: let percent, oneRepMax: let oldMax):
-//                    if max > oldMax {
-//                        switch exercise.type {
-//                        case .body(_): break
-//                        case .weights(let type):
-//                            let w = Weight(max, type.apparatus)
-//                            let weight = w.closest(above: oldMax).weight
-//                            aweight = .trainingMax(percent: percent, oneRepMax: weight)
-//                            updated = true
-//                        }
-//
-//                    }
-//                default:
-//                    assert(false)
-//                }
-//            }
-//
-//            if !updated {
-//                var weight = aweight.getBaseWorkingWeight()
-//                if result.reps >= requestedReps {
-//                    switch exercise.type {
-//                    case .body(_): break
-//                    case .weights(let type):
-//                        let w = Weight(weight, type.apparatus)
-//                        weight = w.nextWeight()
-//                        setWorkingWeight(weight)
-//                    }
-//
-//                } else {
-//                    switch exercise.type {
-//                    case .body(_): break
-//                    case .weights(let type):
-//                        let w = Weight(weight, type.apparatus)
-//                        weight = w.prevWeight()
-//                        setWorkingWeight(weight)
-//                    }
-//                }
-//            }
-//        }
-//        completion()
-//    }
+    private func hitRepGoal(_ exercise: Exercise) -> Bool {
+        var myResults = Self.results[exercise.formalName] ?? []
+        for i in 0..<cycles.count {
+            let index = myResults.count - i - 1
+            if index >= 0 {
+                let result = myResults[index]
+                if result.tag == .failed {
+                    return false
+                }
+                
+                if result.actual.count > 1 {
+                    for j in 0..<result.actual.count-1 {    // -1 so that we don't count the last MRS set
+                        if result.actual[j] < result.requested[j] {
+                            return false
+                        }
+                    }
+                }
+            }
+        }
+        return true
+    }
     
+    private func maybeAdvanceBy1RM(_ exercise: Exercise, _ result: Result) {
+        for i in 0..<result.actual.count {  // not sure if we're supposed to do this for all the AMRAP sets but that seems reasonable...
+            let actual = result.actual[i]
+            let requested = result.requested[i]
+            if actual > requested { // really this is is only here so that fluff is skipped when we're debugging
+                // This 1RM formula is from https://drive.google.com/file/d/0B8EbfzFB0mBrYW5Sd3oxRzNRY2M/view. It's not as accurate as our
+                // get1RM function but we use it to keep as close as possible to what CAP3 wants to use (and also because the formula works
+                // (more or less) above 15 reps).
+                let max = result.liftedWeight*((0.03333*Double(actual)) + 1)
+                switch aweight {
+                case .trainingMax(percent: let percent, oneRepMax: let oldMax):
+                    if max > oldMax {
+                        switch exercise.type {
+                        case .body(_): break
+                        case .weights(let type):
+                            let w = Weight(max, type.apparatus)
+                            let weight = w.closest(above: oldMax).weight
+                            aweight = .trainingMax(percent: percent, oneRepMax: weight)
+                            result.advanced = true
+                        }
+                    }
+                default:
+                    assert(false)
+                }
+            }
+        }
+    }
+    
+    private func advanceByMinimum(_ exercise: Exercise, _ result: Result) {
+        switch exercise.type {
+        case .body(_): break
+        case .weights(let type):
+            let weight = aweight.getBaseWorkingWeight()
+            let w = Weight(weight, type.apparatus)
+            let next = w.nextWeight()
+            setWorkingWeight(next)
+            result.advanced = true
+        }
+    }
+
+    private func deload(_ exercise: Exercise, _ result: Result) {
+        switch exercise.type {
+        case .body(_): break
+        case .weights(let type):
+            let weight = aweight.getBaseWorkingWeight()
+            let w = Weight(0.925 * weight, type.apparatus)  // CAP3 calls for 5-10%
+            let info = w.closest(below: weight)
+            setWorkingWeight(info.weight)
+        }
+    }
+
     override func doGetResults(_ exercise: Exercise) -> [CyclicResult]? {
         return Self.results[exercise.formalName]
     }

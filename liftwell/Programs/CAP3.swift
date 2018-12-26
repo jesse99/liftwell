@@ -95,6 +95,8 @@ Varaitions of the lifts can be switched in using the Options button in the Worko
 * When starting the program you need to find your Training Max for each of the main lifts. The program will do this for you: when you start an exercise it will guide you to find the five rep max for that exercise, then it will estimate your one rep max, and use 90% of the 1RM for your training max.
 * This program uses a lot of sets at a relatively low intensity so be conservative with your initial weights.
 * It's a good idea to do a few warmup sets before the main lifts.
+* The secondary sets are Max Rep Sets (MRS): the app will continue to ask you to perform sets until you can't do all the requested reps.
+* Don't rest longer than one minute between the max rep sets.
 * Some of the AMRAP sets have a question mark, e.g. 3+?. In that case do extra reps only if you feel like you have enough energy.
 * Don't do the AMRAP sets to failure: try and leave one or two reps in the tank, e.g. stop if the bar speed slows significantly.
 * You can do up to four assistence lifts per workout.
