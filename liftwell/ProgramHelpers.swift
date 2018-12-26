@@ -53,6 +53,20 @@ func barbell(_ name: String, _ formalName: String, amrap1rm: [String], restMins:
     return Exercise(name, formalName, .weights(type), main: main)
 }
 
+func barbell(_ name: String, _ formalName: String, emom: [String], restMins: Double, bumpers: [Double] = [], main: Bool = false) -> Exercise {
+    let rest = Int(restMins*60.0)
+    let sets: [Sets] = emom.map {
+        let worksets = parseSets($0)
+        return Sets([], worksets, [])
+    }
+    let subtype = EMOMSubType(sets, restSecs: rest)
+    
+    let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: bumpers, magnets: [])
+    let type = WeightsType(apparatus, .emom(subtype))
+    
+    return Exercise(name, formalName, .weights(type), main: main)
+}
+
 func barbell(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", advanceBy: [Int], restMins: Double, bumpers: [Double] = [], trainingMaxPercent: Double? = nil, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     let warmupSets = parseSets(warmups)
@@ -170,6 +184,20 @@ func dumbbell2(_ name: String, _ formalName: String, _ warmups: String, _ workse
     
     let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: defaultMagnets(), paired: true)
     let type = WeightsType(apparatus, .percent1RM(subtype))
+    
+    return Exercise(name, formalName, .weights(type), main: main)
+}
+
+func dumbbell2(_ name: String, _ formalName: String, emom: [String], restMins: Double, bumpers: [Double] = [], main: Bool = false) -> Exercise {
+    let rest = Int(restMins*60.0)
+    let sets: [Sets] = emom.map {
+        let worksets = parseSets($0)
+        return Sets([], worksets, [])
+    }
+    let subtype = EMOMSubType(sets, restSecs: rest)
+    
+    let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: defaultMagnets(), paired: true)
+    let type = WeightsType(apparatus, .emom(subtype))
     
     return Exercise(name, formalName, .weights(type), main: main)
 }

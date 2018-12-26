@@ -146,7 +146,7 @@ class Percent1RMSubType: ExerciseInfo {
     
     func sublabel(_ exercise: Exercise) -> String {
         if let type = getOtherType() {
-            return sets.sublabel(type.apparatus, weight, reps, limit: weight)
+            return sets.sublabel(type.apparatus, weight, reps)
         } else {
             return ""
         }
@@ -240,7 +240,7 @@ class Percent1RMSubType: ExerciseInfo {
     
     private func getActivities(_ exercise: Exercise) -> (Int, [Activity]) {
         if let type = getOtherType() {
-            return sets.activities(weight, type.apparatus, limit: weight, currentReps: reps)
+            return sets.activities(weight, type.apparatus, currentReps: reps)
         } else {
             return (0, [])
         }
@@ -303,6 +303,10 @@ class Percent1RMSubType: ExerciseInfo {
                 if let results = DerivedSubType.results[other.formalName], let last = results.last {
                     return last.weight
                 }
+            case .emom(_):
+                if let results = EMOMSubType.results[other.formalName], let last = results.last {
+                    return last.liftedWeight
+                }
             case .find(_):
                 assert(false)
                 return 0.0
@@ -350,6 +354,10 @@ class Percent1RMSubType: ExerciseInfo {
                 }
             case .derived(_):
                 if let results = DerivedSubType.results[other.formalName], let last = results.last {
+                    return last.reps
+                }
+            case .emom(_):
+                if let results = EMOMSubType.results[other.formalName], let last = results.last {
                     return last.reps
                 }
             case .find(_):

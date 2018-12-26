@@ -6,23 +6,37 @@ func CAP3() -> Program {
     func benchSets() -> [String] {
         let week1a = "4@70% 4@70% 4@70% 4@70% 4@80% R 4@80% R 4+@85%"          // TODO: AMRAP is optional
         let week1b = "6@65% 6@65% 6@65% 6@65% 6@65% 5@80% R 5@80% R 5+@85%"  // TODO: AMRAP is optional
-
+        
         let week2a = "3@75% 3@75% 3@75% 3@75% 3@80% R 3@85% R 3@85% R 3+@90%"  // TODO: AMRAP is optional
         let week2b = "5@70% 5@70% 5@70% 5@70% 4@80% R 4@80% R 4@80% R 4@80% R 4+@90%"  // TODO: AMRAP is optional
         
         let week3a = "4+@85%"
         let week3b = "8@60% 8@60% 8@60% 8@60% 6@70% 6@70% R 6+@75%"  // TODO: AMRAP is optional
+        
+        return [week1a, week1b, week2a, week2b, week3a, week3b]
+    }
+    
+    func dbBenchSets() -> [String] {
+        let week1a = "10+@75% R 8+@65% R 5+@65%"
+        let week1b = "8+@80% R 6+@70% R 4+@70%"
+
+        let week2a = "9+@80% R 6+@70% R 4+@70%"
+        let week2b = "5-8@80% R 6@75% R 6@75% R 6@75%"
+        
+        let week3a = "12+@70% R 10+@60% R 6+@60%"
+        let week3b = "12+@75% R 10+@65% R 5+@65%"
 
         return [week1a, week1b, week2a, week2b, week3a, week3b]
     }
     
     let exercises: [Exercise] = [
-        barbell("Flat Bench",         "Bench Press",    amrap1rm: benchSets(), restMins: 3.0, main: true),
+        barbell("Flat Bench",    "Bench Press",           amrap1rm: benchSets(), restMins: 3.0, main: true),
+        dumbbell2("DB Bench",    "Dumbbell Bench Press",  emom: dbBenchSets(), restMins: 1.0),
     ]
     
     let workouts = [
-        Workout("Chest & Biceps 1", ["Flat Bench"], scheduled: true, optional: []),
-        Workout("Chest & Biceps 2", ["Flat Bench"], scheduled: true, optional: []),
+        Workout("Chest & Biceps 1", ["Flat Bench", "DB Bench"], scheduled: true, optional: []),
+        Workout("Chest & Biceps 2", ["Flat Bench", "DB Bench"], scheduled: true, optional: []),
         ]
     
     let tags: [Program.Tags] = [.advanced, .strength, .barbell, .unisex, .fourDays, .fiveDays, .sixDays, .ageUnder40]

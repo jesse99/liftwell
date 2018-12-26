@@ -123,7 +123,7 @@ class DerivedSubType: ExerciseInfo {
     
     func sublabel(_ exercise: Exercise) -> String {
         if let type = getOtherType(), let weight = otherWeight(), weight > 0.0 {
-            return sets.sublabel(type.apparatus, weight, nil, limit: weight)
+            return sets.sublabel(type.apparatus, weight, nil)
         } else {
             return ""
         }
@@ -206,7 +206,7 @@ class DerivedSubType: ExerciseInfo {
     
     private func getActivities(_ exercise: Exercise) -> (Int, [Activity]) {
         if let type = getOtherType(), let baseWeight = otherWeight() {
-            return sets.activities(baseWeight, type.apparatus, limit: baseWeight, currentReps: nil)
+            return sets.activities(baseWeight, type.apparatus, currentReps: nil)
         } else {
             return (0, [])
         }
@@ -223,6 +223,8 @@ class DerivedSubType: ExerciseInfo {
                 return subtype.getBaseWorkingWeight()
             case .derived(let subtype):
                 return subtype.otherWeight() ?? 0.0
+            case .emom(let subtype):
+                return subtype.getBaseWorkingWeight()
             case .find(_):
                 assert(false)
                 return 0.0
@@ -260,6 +262,10 @@ class DerivedSubType: ExerciseInfo {
                 }
             case .derived(_):
                 if let results = DerivedSubType.results[other.formalName], let last = results.last {
+                    return last.reps
+                }
+            case .emom(_):
+                if let results = EMOMSubType.results[other.formalName], let last = results.last {
                     return last.reps
                 }
             case .find(_):

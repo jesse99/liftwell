@@ -124,15 +124,11 @@ class BaseRepsApparatusSubType: BaseApparatusSubType, ExerciseInfo {
     func sublabel(_ exercise: Exercise) -> String {
         let weight = getBaseWorkingWeight()
         switch exercise.type {
-        case .body(_): return sets.sublabel(nil, weight, workingReps, limit: limitWeight())
-        case .weights(let type): return sets.sublabel(type.apparatus, weight, workingReps, limit: limitWeight())
+        case .body(_): return sets.sublabel(nil, weight, workingReps)
+        case .weights(let type): return sets.sublabel(type.apparatus, weight, workingReps)
         }
     }
-    
-    func limitWeight() -> Double {
-        return getBaseWorkingWeight()
-    }
-    
+        
     func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
         if let myResults = doGetResults(exercise), let last = myResults.last, let workset = sets.worksets.last {
             if workset.amrap {
@@ -203,7 +199,7 @@ class BaseRepsApparatusSubType: BaseApparatusSubType, ExerciseInfo {
         let weight = getBaseWorkingWeight()
         switch exercise.type {
         case .body(_): return sets.activities(weight, currentReps: workingReps)
-        case .weights(let type): return sets.activities(weight, type.apparatus, limit: limitWeight(), currentReps: workingReps)
+        case .weights(let type): return sets.activities(weight, type.apparatus, currentReps: workingReps)
         }
     }
     

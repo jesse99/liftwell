@@ -1,14 +1,12 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 AndaleMono;
-\f3\froman\fcharset0 Times-Roman;}
+}
 {\colortbl;\red255\green255\blue255;\red2\green2\blue2;\red0\green0\blue0;\red170\green13\blue145;
 \red92\green38\blue153;\red0\green116\blue0;\red196\green26\blue22;\red63\green110\blue116;\red28\green0\blue207;
-\red255\green0\blue0;\red0\green0\blue0;\red255\green255\blue11;\red108\green108\blue108;\red193\green193\blue193;
-\red207\green207\blue207;\red162\green91\blue55;\red38\green71\blue75;}
+\red233\green233\blue233;\red255\green0\blue0;\red162\green91\blue55;\red38\green71\blue75;}
 {\*\expandedcolortbl;;\csgenericrgb\c784\c784\c784;\csgenericrgb\c0\c0\c0;\csgenericrgb\c66500\c5200\c56900;
 \csgenericrgb\c35900\c14900\c60100;\csgenericrgb\c0\c45600\c0;\csgenericrgb\c77000\c10200\c8600;\csgenericrgb\c24700\c43100\c45600;\csgenericrgb\c11000\c0\c81000;
-\csgenericrgb\c100000\c0\c0;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c0;\cssrgb\c49804\c49804\c49804;\cssrgb\c80000\c80000\c80000;
-\cssrgb\c84706\c84706\c84706;\csgenericrgb\c63573\c35812\c21460;\csgenericrgb\c14900\c27800\c29400;}
+\csgenericrgb\c91180\c91178\c91179;\csgenericrgb\c100000\c0\c0;\csgenericrgb\c63573\c35812\c21460;\csgenericrgb\c14900\c27800\c29400;}
 \deftab864
 \pard\tx864\pardeftab864\pardirnatural\partightenfactor0
 {\field{\*\fldinst{HYPERLINK "https://codewithchris.com/ios-tab-bar-app/"}}{\fldrslt 
@@ -101,9 +99,18 @@ This should go on the program\
 not shown is always enabled?\
 dental ins\
 $100 apple\
+$15 protein powder\
 \
-\
-\
+\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
+
+\f2\fs34 \cf3         \cf4 let\cf3  cycle = \cf8 cycles\cf3 [\cf8 cycleIndex\cf3 ]
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     \cf4 private\cf3  \cf4 func\cf3  getAmrap(cycle.\cf8 warmups\cf3 .\cf5 count\cf5 \cb10  + \cf3 \cb1 cycle.\cf8 worksets\cf3 .\cf5 count\cf5 \cb10  - 1\cf3 \cb1 ) -> \cf8 Set\cf3 ? \{
+\f0\fs24 \cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab864\pardirnatural\partightenfactor0
+
+\fs48 \cf2 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab864\pardirnatural\partightenfactor0
 
 \b \cf2 CAP3\
@@ -122,157 +129,52 @@ add more secondary lifts\
 \b0  	AMRAP\
 
 \b yellow
-\b0  	do at least those reps, option for AMRAP, use \cf10 8+?\cf2  maybe\
+\b0  	do at least those reps, option for AMRAP, use \cf11 8+?\cf2  maybe\
 
 \b red
-\b0  		do the reps if you feel good, \cf10 4?\cf2 \
+\b0  		do the reps if you feel good, \cf11 4?\cf2 \
 \
 
 \b secondary progression (yellow)\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab864\pardirnatural\partightenfactor0
 
-\b0 \cf2 this should be EMOM subtype\
-	every minute on the minute\
-\cf10 keep doing sets\cf2  until can\'92t do the requested reps\
+\b0 \cf11 keep doing sets\cf2  until can\'92t do the requested reps\
 1 minute of rest (emphasize this in notes)\
-	or maybe hard-code it in the subtype\
 \
-if \cf10 set new rep PR then adjust TM\cf2  accordingly\
+if \cf11 set new rep PR then adjust TM\cf2  accordingly\
 	think this applies to the first workset\
 if completed min reps but haven\'92t set a new rep PR by end of 3 weeks \
 	then add 5 pounds\
 	else reduce TM by 5-10%\
-\cf10 support optional reps\cf2 \
+\cf11 support optional reps\cf2 \
+\
+\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
+
+\f2\fs46 \cf4 let\cf3  week1a = \cf7 "10+@75% R 8+@65% R 5+@65%"
+\f0\fs36 \cf0 \
+
+\f2\fs46 \cf4 let\cf3  week1b = \cf7 "8+@80% R 6+@70% R 4+@70%"
+\f0\fs36 \cf0 \
+\
+
+\f2\fs46 \cf4 let\cf3  week2a = \cf7 "9+@80% R 6+@70% R 4+@70%"
+\f0\fs36 \cf0 \
+
+\f2\fs46 \cf4 let\cf3  week2b = \cf7 "5-8@80% R 6@75% R 6@75% R 6@75%"
+\f0\fs36 \cf0 \
+\
+
+\f2\fs46 \cf4 let\cf3  week3a = \cf7 "12+@70% R 10+@60% R 6+@60%"
+\f0\fs36 \cf0 \
+
+\f2\fs46 \cf4 let\cf3  week3b = \cf7 "12+@75% R 10+@65% R 5+@65%"
+\f0\fs36 \cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab864\pardirnatural\partightenfactor0
+
+\fs48 \cf2 		\
 		\
-
-\itap1\trowd \taflags5 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
-\clvertalb \clcbpat12 \clwWidth780\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf13 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcfnil \clpadl60 \clpadr60 \gaph\cellx411
-\clvertalb \clcbpat12 \clwWidth920\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx822
-\clvertalb \clcbpat12 \clwWidth940\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcfnil \clpadl60 \clpadr60 \gaph\cellx1234
-\clvertalb \clcbpat12 \clwWidth820\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx1645
-\clmgf \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx2057
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx2468
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx2880
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx3291
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx3702
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx4114
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx4525
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx4937
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx5348
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx5760
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx6171
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx6582
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx6994
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx7405
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx7817
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx8228
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl340\qr\partightenfactor0
-
-\f3\fs41\fsmilli20667 \cf11 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec11 80\cell 
-\pard\intbl\itap1\pardeftab720\sl340\partightenfactor0
-\cf11 x 8+\cell 
-\pard\intbl\itap1\pardeftab720\sl340\qr\partightenfactor0
-\cf11 MRS:6+\cell 
-\pard\intbl\itap1\pardeftab720\sl340\partightenfactor0
-\cf11 @ 70\cell 
-\pard\intbl\itap1\pardeftab720\sl340\partightenfactor0
-\cf11 Repeat: EMOM until you fail to complete 4 reps\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell \lastrow\row
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab864\pardirnatural\partightenfactor0
-
-\f0\fs48 \cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 	\
-
-\fs68 	
-\f3\fs49\fsmilli24667 \cf11 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec11 80\
-
-\itap1\trowd \taflags5 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
-\clvertalb \clcbpat15 \clwWidth920\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx2160
-\clvertalb \clcbpat15 \clwWidth940\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcfnil \clpadl60 \clpadr60 \gaph\cellx4320
-\clvertalb \clcbpat15 \clwWidth820\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx6480
-\clvertalb \clcbpat15 \clwWidth820\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx8640
-\pard\intbl\itap1\cell
-\pard\intbl\itap1\pardeftab720\sl340\partightenfactor0
-\cf11 x 5-8\cell 
-\pard\intbl\itap1\pardeftab720\sl340\qr\partightenfactor0
-\cf11 3x6\cell 
-\pard\intbl\itap1\pardeftab720\sl340\partightenfactor0
-\cf11 @ 75\cell \lastrow\row
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab864\pardirnatural\partightenfactor0
-
-\f0\fs48 \cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
-
-\itap1\trowd \taflags5 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
-\clvertalb \clcbpat12 \clwWidth780\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf13 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcfnil \clpadl60 \clpadr60 \gaph\cellx411
-\clvertalb \clcbpat12 \clwWidth920\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx822
-\clvertalb \clcbpat12 \clwWidth940\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcfnil \clpadl60 \clpadr60 \gaph\cellx1234
-\clvertalb \clcbpat12 \clwWidth820\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx1645
-\clmgf \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx2057
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx2468
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx2880
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx3291
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx3702
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx4114
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx4525
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx4937
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx5348
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx5760
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx6171
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx6582
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx6994
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx7405
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx7817
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx8228
-\clmrg \clvertalb \clcbpat12 \clwWidth13380\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf13 \clbrdrl\brdrs\brdrw20\brdrcf14 \clbrdrb\brdrs\brdrw20\brdrcf11 \clbrdrr\brdrs\brdrw20\brdrcf13 \clpadl60 \clpadr60 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\sl340\qr\partightenfactor0
-
-\f3\fs45\fsmilli22667 \cf11 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec11 75\cell 
-\pard\intbl\itap1\pardeftab720\sl340\partightenfactor0
-\cf11 x 10+\cell 
-\pard\intbl\itap1\pardeftab720\sl340\qr\partightenfactor0
-\cf11 MRS:10+\cell 
-\pard\intbl\itap1\pardeftab720\sl340\partightenfactor0
-\cf11 @ 65\cell 
-\pard\intbl\itap1\pardeftab720\sl340\partightenfactor0
-\cf11 Repeat: EMOM until you fail to complete 5 reps\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell 
-\pard\intbl\itap1\cell \lastrow\row
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab864\pardirnatural\partightenfactor0
-
-\f0\fs48 \cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
-* Maybe CAP3, see https://www.reddit.com/r/nSuns/\
+* Maybe cycle info should be in the breadcrumb\
+	- or append it to the subtitle?\
 * 531 beginner called for resetting TM\
 * I don\'92t have 1RM achievement for main exercises\
 * Why don\'92t I have a 1RM achievement?\
@@ -398,7 +300,7 @@ cardio\
 \
 \pard\tx864\pardeftab864\pardirnatural\partightenfactor0
 
-\f2\fs36 \cf16 /// Masters program with cycles of 3x5, 3x3,and 3x1.
+\f2\fs36 \cf12 /// Masters program with cycles of 3x5, 3x3,and 3x1.
 \f0\fs24 \cf0 \
 \pard\tx864\pardeftab864\pardirnatural\partightenfactor0
 
@@ -431,32 +333,32 @@ cardio\
 \f2\fs36 \cf3         \cf6 // Heavy
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 dumbbell\cf3 (\cf7 "Dumbbell Bench"\cf3 , \cf7 "Dumbbell Bench Press"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: dumbbellWarmup, restMins: \cf9 4.0\cf3 ),
+\f2\fs36 \cf3         \cf13 dumbbell\cf3 (\cf7 "Dumbbell Bench"\cf3 , \cf7 "Dumbbell Bench Press"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: dumbbellWarmup, restMins: \cf9 4.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 dumbbell\cf3 (\cf7 "Split Squat"\cf3 ,    \cf7 "Dumbbell Single Leg Split Squat"\cf3 , \cf9 3\cf3 , minReps: \cf9 4\cf3 , maxReps: \cf9 8\cf3 , warmups: dumbbellWarmup, restMins: \cf9 3.5\cf3 ),
+\f2\fs36 \cf3         \cf13 dumbbell\cf3 (\cf7 "Split Squat"\cf3 ,    \cf7 "Dumbbell Single Leg Split Squat"\cf3 , \cf9 3\cf3 , minReps: \cf9 4\cf3 , maxReps: \cf9 8\cf3 , warmups: dumbbellWarmup, restMins: \cf9 3.5\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 dumbbell\cf3 (\cf7 "Dumbbell Flyes"\cf3 , \cf7 "Dumbbell Flyes"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: noWarmup, restMins: \cf9 3.0\cf3 ),
+\f2\fs36 \cf3         \cf13 dumbbell\cf3 (\cf7 "Dumbbell Flyes"\cf3 , \cf7 "Dumbbell Flyes"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: noWarmup, restMins: \cf9 3.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 barbell\cf3 (\cf7 "Deadlift"\cf3 ,        \cf7 "Deadlift"\cf3 , \cf9 1\cf3 , by: \cf9 5\cf3 , warmups: deadWarmup, useBumpers: \cf4 true\cf3 , restMins: \cf9 3.5\cf3 ),
+\f2\fs36 \cf3         \cf13 barbell\cf3 (\cf7 "Deadlift"\cf3 ,        \cf7 "Deadlift"\cf3 , \cf9 1\cf3 , by: \cf9 5\cf3 , warmups: deadWarmup, useBumpers: \cf4 true\cf3 , restMins: \cf9 3.5\cf3 ),
 \f0\fs24 \cf0 \
 \
 
 \f2\fs36 \cf3         \cf6 // Light
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 dumbbell\cf3 (\cf7 "Dumbbell OHP"\cf3 ,  \cf7 "Dumbbell Shoulder Press"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: dumbbellWarmup, restMins: \cf9 3.5\cf3 ),
+\f2\fs36 \cf3         \cf13 dumbbell\cf3 (\cf7 "Dumbbell OHP"\cf3 ,  \cf7 "Dumbbell Shoulder Press"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: dumbbellWarmup, restMins: \cf9 3.5\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 bodyWeight\cf3 (\cf7 "Chinups"\cf3 ,     \cf7 "Chinup"\cf3 , requestedReps: \cf9 12\cf3 , targetReps: \cf9 30\cf3 , restMins: \cf9 3.5\cf3 ),
+\f2\fs36 \cf3         \cf13 bodyWeight\cf3 (\cf7 "Chinups"\cf3 ,     \cf7 "Chinup"\cf3 , requestedReps: \cf9 12\cf3 , targetReps: \cf9 30\cf3 , restMins: \cf9 3.5\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 dumbbell\cf3 (\cf7 "Farmer's Walk"\cf3 , \cf7 "Farmer's Walk"\cf3 , \cf9 2\cf3 , by: \cf9 1\cf3 , warmups: noWarmup, restMins: \cf9 3.0\cf3 ),
+\f2\fs36 \cf3         \cf13 dumbbell\cf3 (\cf7 "Farmer's Walk"\cf3 , \cf7 "Farmer's Walk"\cf3 , \cf9 2\cf3 , by: \cf9 1\cf3 , warmups: noWarmup, restMins: \cf9 3.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 barbell\cf3 (\cf7 "Static Hold"\cf3 ,    \cf7 "Static Hold"\cf3 , \cf9 3\cf3 , by: \cf9 1\cf3 , warmups: \cf4 nil\cf3 , restMins: \cf9 3.0\cf3 ),
+\f2\fs36 \cf3         \cf13 barbell\cf3 (\cf7 "Static Hold"\cf3 ,    \cf7 "Static Hold"\cf3 , \cf9 3\cf3 , by: \cf9 1\cf3 , warmups: \cf4 nil\cf3 , restMins: \cf9 3.0\cf3 ),
 \f0\fs24 \cf0 \
 \
 
@@ -473,34 +375,34 @@ cardio\
 \f0\fs24 \cf0 \
 \
 
-\f2\fs36 \cf3         \cf17 bodyWeight\cf3 (\cf7 "Foam Rolling"\cf3 ,            \cf7 "IT-Band Foam Roll"\cf3 ,         \cf9 1\cf3 , by: \cf9 15\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf13 bodyWeight\cf3 (\cf7 "Foam Rolling"\cf3 ,            \cf7 "IT-Band Foam Roll"\cf3 ,         \cf9 1\cf3 , by: \cf9 15\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 bodyWeight\cf3 (\cf7 "Shoulder Dislocates"\cf3 ,     \cf7 "Shoulder Dislocate"\cf3 ,        \cf9 1\cf3 , by: \cf9 12\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf13 bodyWeight\cf3 (\cf7 "Shoulder Dislocates"\cf3 ,     \cf7 "Shoulder Dislocate"\cf3 ,        \cf9 1\cf3 , by: \cf9 12\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 bodyWeight\cf3 (\cf7 "Bent-knee Iron Cross"\cf3 ,    \cf7 "Bent-knee Iron Cross"\cf3 ,      \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf13 bodyWeight\cf3 (\cf7 "Bent-knee Iron Cross"\cf3 ,    \cf7 "Bent-knee Iron Cross"\cf3 ,      \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 bodyWeight\cf3 (\cf7 "Roll-over into V-sit"\cf3 ,    \cf7 "Roll-over into V-sit"\cf3 ,      \cf9 1\cf3 , by: \cf9 15\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf13 bodyWeight\cf3 (\cf7 "Roll-over into V-sit"\cf3 ,    \cf7 "Roll-over into V-sit"\cf3 ,      \cf9 1\cf3 , by: \cf9 15\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 bodyWeight\cf3 (\cf7 "Rocking Frog Stretch"\cf3 ,    \cf7 "Rocking Frog Stretch"\cf3 ,      \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf13 bodyWeight\cf3 (\cf7 "Rocking Frog Stretch"\cf3 ,    \cf7 "Rocking Frog Stretch"\cf3 ,      \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 bodyWeight\cf3 (\cf7 "Fire Hydrant Hip Circle"\cf3 , \cf7 "Fire Hydrant Hip Circle"\cf3 ,   \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf13 bodyWeight\cf3 (\cf7 "Fire Hydrant Hip Circle"\cf3 , \cf7 "Fire Hydrant Hip Circle"\cf3 ,   \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 bodyWeight\cf3 (\cf7 "Mountain Climber"\cf3 ,        \cf7 "Mountain Climber"\cf3 ,          \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf13 bodyWeight\cf3 (\cf7 "Mountain Climber"\cf3 ,        \cf7 "Mountain Climber"\cf3 ,          \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 bodyWeight\cf3 (\cf7 "Cossack Squat"\cf3 ,           \cf7 "Cossack Squat"\cf3 ,             \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf13 bodyWeight\cf3 (\cf7 "Cossack Squat"\cf3 ,           \cf7 "Cossack Squat"\cf3 ,             \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 bodyWeight\cf3 (\cf7 "Piriformis Stretch"\cf3 ,      \cf7 "Seated Piriformis Stretch"\cf3 , \cf9 2\cf3 , secs: \cf9 30\cf3 ),
+\f2\fs36 \cf3         \cf13 bodyWeight\cf3 (\cf7 "Piriformis Stretch"\cf3 ,      \cf7 "Seated Piriformis Stretch"\cf3 , \cf9 2\cf3 , secs: \cf9 30\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf17 bodyWeight\cf3 (\cf7 "Hip Flexor Stretch"\cf3 ,      \cf7 "Rear-foot-elevated Hip Flexor Stretch"\cf3 , \cf9 2\cf3 , secs: \cf9 30\cf3 )
+\f2\fs36 \cf3         \cf13 bodyWeight\cf3 (\cf7 "Hip Flexor Stretch"\cf3 ,      \cf7 "Rear-foot-elevated Hip Flexor Stretch"\cf3 , \cf9 2\cf3 , secs: \cf9 30\cf3 )
 \f0\fs24 \cf0 \
 
 \f2\fs36 \cf3     ]
@@ -533,7 +435,7 @@ cardio\
 \f2\fs36 \cf3     
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3     \cf4 let\cf3  tags: [\cf8 Program\cf3 .\cf8 Tags\cf3 ] = [.\cf17 intermediate\cf3 , .\cf17 strength\cf3 , .\cf17 barbell\cf3 , .\cf17 unisex\cf3 , .\cf17 threeDays\cf3 , .\cf17 age40s\cf3 , .\cf17 age50s\cf3 ]
+\f2\fs36 \cf3     \cf4 let\cf3  tags: [\cf8 Program\cf3 .\cf8 Tags\cf3 ] = [.\cf13 intermediate\cf3 , .\cf13 strength\cf3 , .\cf13 barbell\cf3 , .\cf13 unisex\cf3 , .\cf13 threeDays\cf3 , .\cf13 age40s\cf3 , .\cf13 age50s\cf3 ]
 \f0\fs24 \cf0 \
 
 \f2\fs36 \cf3     \cf4 let\cf3  description = \cf7 """

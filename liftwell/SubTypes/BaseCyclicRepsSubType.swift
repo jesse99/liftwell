@@ -86,6 +86,9 @@ class BaseCyclicRepsSubType: BaseApparatusSubType, ExerciseInfo {
             case .cyclic(let savedSubtype):
                 cycleIndex = savedSubtype.cycleIndex
                 super.sync(program, savedSubtype, sameSets: cycles.count == savedSubtype.cycles.count)
+            case .emom(let savedSubtype):
+                cycleIndex = savedSubtype.cycleIndex
+                super.sync(program, savedSubtype, sameSets: cycles.count == savedSubtype.cycles.count)
             case .t1(let savedSubtype):
                 cycleIndex = savedSubtype.cycleIndex
                 super.sync(program, savedSubtype, sameSets: cycles.count == savedSubtype.cycles.count)
@@ -149,7 +152,7 @@ class BaseCyclicRepsSubType: BaseApparatusSubType, ExerciseInfo {
         let weight = aweight.getBaseWorkingWeight()
         switch exercise.type {
         case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight, currentReps: workingReps)
-        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, limit: weight, currentReps: workingReps)
+        case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, currentReps: workingReps)
         }
     }
     
@@ -160,8 +163,8 @@ class BaseCyclicRepsSubType: BaseApparatusSubType, ExerciseInfo {
     func sublabel(_ exercise: Exercise) -> String {
         let weight = aweight.getBaseWorkingWeight()
         switch exercise.type {
-        case .body(_): return cycles[cycleIndex].sublabel(nil, weight, workingReps, limit: weight)
-        case .weights(let type): return cycles[cycleIndex].sublabel(type.apparatus, weight, workingReps, limit: weight)
+        case .body(_): return cycles[cycleIndex].sublabel(nil, weight, workingReps)
+        case .weights(let type): return cycles[cycleIndex].sublabel(type.apparatus, weight, workingReps)
         }
     }
     

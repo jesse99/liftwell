@@ -7,7 +7,7 @@ import UIKit           // for UIColor
 /// Generic description of what the user needs to do for a particular activity within an ExerciseController.
 struct Activity: Storable {
     /// "Warmup 3 of 6"
-    let title: String
+    var title: String
     
     /// "60% of 300 lbs"
     let subtitle: String
@@ -19,7 +19,7 @@ struct Activity: Storable {
     let details: String
     
     /// Usually "Next". If empty then GUIs should auto-complete once restSecs expire.
-    let buttonName: String
+    var buttonName: String
     
     /// Usually true
     let showStartButton: Bool
@@ -57,6 +57,13 @@ struct Activity: Storable {
         store.addStr("buttonName", buttonName)
         store.addBool("showStartButton", showStartButton)
         store.addStr("color", color ?? "")
+    }
+
+    func clone() -> Activity {
+        let store = Store()
+        store.addObj("self", self)
+        let result: Activity = store.getObj("self")
+        return result
     }
 }
 
