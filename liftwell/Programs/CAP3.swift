@@ -4,27 +4,27 @@ import Foundation
 
 func CAP3() -> Program {
     func benchSets() -> [String] {
-        let week1a = "4@70% 4@70% 4@70% 4@70% 4@80% R 4@80% R 4+@85%"          // TODO: AMRAP is optional
-        let week1b = "6@65% 6@65% 6@65% 6@65% 6@65% 5@80% R 5@80% R 5+@85%"  // TODO: AMRAP is optional
+        let week1a = "4@70% 4@70% 4@70% 4@70% 4@80% R 4@80% R 4+?@85%"
+        let week1b = "6@65% 6@65% 6@65% 6@65% 6@65% 5@80% R 5@80% R 5+?@85%"
         
-        let week2a = "3@75% 3@75% 3@75% 3@75% 3@80% R 3@85% R 3@85% R 3+@90%"  // TODO: AMRAP is optional
-        let week2b = "5@70% 5@70% 5@70% 5@70% 4@80% R 4@80% R 4@80% R 4@80% R 4+@90%"  // TODO: AMRAP is optional
+        let week2a = "3@75% 3@75% 3@75% 3@75% 3@80% R 3@85% R 3@85% R 3+?@90%"
+        let week2b = "5@70% 5@70% 5@70% 5@70% 4@80% R 4@80% R 4@80% R 4@80% R 4?@90%"
         
         let week3a = "4+@85%"
-        let week3b = "8@60% 8@60% 8@60% 8@60% 6@70% 6@70% R 6+@75%"  // TODO: AMRAP is optional
+        let week3b = "8@60% 8@60% 8@60% 8@60% 6@70% 6@70% R 6+?@75%"
         
         return [week1a, week1b, week2a, week2b, week3a, week3b]
     }
     
     func dbBenchSets() -> [String] {
-        let week1a = "10+@75% R 8+@65% R 5+@65%"
-        let week1b = "8+@80% R 6+@70% R 4+@70%"
+        let week1a = "10+?@75% R 8+?@65% R 5+?@65%"
+        let week1b = "8+?@80% R 6+?@70% R 4+?@70%"
 
-        let week2a = "9+@80% R 6+@70% R 4+@70%"
+        let week2a = "9+?@80% R 6+?@70% R 4+?@70%"
         let week2b = "5-8@80% R 6@75% R 6@75% R 6@75%"
         
-        let week3a = "12+@70% R 10+@60% R 6+@60%"
-        let week3b = "12+@75% R 10+@65% R 5+@65%"
+        let week3a = "12+?@70% R 10+?@60% R 6+?@60%"
+        let week3b = "12+?@75% R 10+?@65% R 5+?@65%"
 
         return [week1a, week1b, week2a, week2b, week3a, week3b]
     }
@@ -98,6 +98,7 @@ Varaitions of the lifts can be switched in using the Options button in the Worko
 * The secondary sets are Max Rep Sets (MRS): the app will continue to ask you to perform sets until you can't do all the requested reps.
 * Don't rest longer than one minute between the max rep sets.
 * Some of the AMRAP sets have a question mark, e.g. 3+?. In that case do extra reps only if you feel like you have enough energy.
+* A few sets are optional (do them only if you're feeling good), these look like: 5?.
 * Don't do the AMRAP sets to failure: try and leave one or two reps in the tank, e.g. stop if the bar speed slows significantly.
 * You can do up to four assistence lifts per workout.
 * The assistence lifts should be tailored to address your weak areas.

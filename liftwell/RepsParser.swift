@@ -45,7 +45,7 @@ class Parser {
         return .right(result)
     }
 
-    // Reps := Int ('-' Int)? '+'? ('@' Int '%')? 'R'? 
+    // Reps := Int ('-' Int)? '+'? '?'? ('@' Int '%')? 'R'?
     private func parseReps() -> Either<Parser.Error, Set> {
         // Int
         let minOffset = lexer.tokenOffset()
@@ -71,6 +71,18 @@ class Parser {
             if case .plus = lexer.token() {
                 lexer.advance()
                 amrap = true
+            }
+            
+            // '?'?
+            var optionalAmrap = false
+            var optionalSet = false
+            if case .question = lexer.token() {
+                lexer.advance()
+                if amrap {
+                    optionalAmrap = true
+                } else {
+                    optionalSet = true
+                }
             }
 
             // ('@' Int '%')?
@@ -111,7 +123,7 @@ class Parser {
             if percent > 100 {
                 return .left(Error("percentage should be less than or equal to 100", percentOffset))
             }
-            return .right(Set(minReps: minReps, maxReps: maxReps, percent: Double(percent)/100.0, amrap: amrap, rest: rest))
+            return .right(Set(minReps: minReps, maxReps: maxReps, percent: Double(percent)/100.0, amrap: amrap, optionalAMRAP: optionalAmrap, optionalSet: optionalSet, rest: rest))
 
         } else {
             return .left(Error(expected: "minReps", lexer))
@@ -127,6 +139,7 @@ enum Token: Equatable {
     case rest
     case dash
     case plus
+    case question
     case slash
     case at
     case percent
@@ -168,6 +181,7 @@ class Lexer {
         case "-": currentToken = .dash; currentOffset = offset; offset += 1
         case "+": currentToken = .plus; currentOffset = offset; offset += 1
         case "/": currentToken = .slash; currentOffset = offset; offset += 1
+        case "?": currentToken = .question; currentOffset = offset; offset += 1
         case "@": currentToken = .at; currentOffset = offset; offset += 1
         case "%": currentToken = .percent; currentOffset = offset; offset += 1
         default: currentToken = .unexpected(text[index]); currentOffset = offset; offset += 1

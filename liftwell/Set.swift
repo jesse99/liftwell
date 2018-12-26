@@ -8,29 +8,37 @@ struct Set: Storable, CustomStringConvertible {
     let percent: Double
     let amrap: Bool
     let rest: Bool
+    let optionalAMRAP: Bool
+    let optionalSet: Bool
     
-    init(reps: Int, percent: Double = 1.0, amrap: Bool = false, rest: Bool = false) {
+    init(reps: Int, percent: Double = 1.0, amrap: Bool = false, optionalAMRAP: Bool = false, optionalSet: Bool = false, rest: Bool = false) {
         self.minReps = reps
         self.maxReps = reps
         self.percent = percent
         self.amrap = amrap
         self.rest = rest
+        self.optionalAMRAP = optionalAMRAP
+        self.optionalSet = optionalSet
     }
     
-    init(minReps: Int, maxReps: Int, amrap: Bool = false, rest: Bool = false) {
+    init(minReps: Int, maxReps: Int, amrap: Bool = false, optionalAMRAP: Bool = false, optionalSet: Bool = false, rest: Bool = false) {
         self.minReps = minReps
         self.maxReps = maxReps
         self.percent = 1.0
         self.amrap = amrap
         self.rest = rest
+        self.optionalAMRAP = optionalAMRAP
+        self.optionalSet = optionalSet
     }
     
-    init(minReps: Int, maxReps: Int, percent: Double, amrap: Bool = false, rest: Bool = false) {
+    init(minReps: Int, maxReps: Int, percent: Double, amrap: Bool = false, optionalAMRAP: Bool = false, optionalSet: Bool = false, rest: Bool = false) {
         self.minReps = minReps
         self.maxReps = maxReps
         self.percent = percent
         self.amrap = amrap
         self.rest = rest
+        self.optionalAMRAP = optionalAMRAP
+        self.optionalSet = optionalSet
     }
     
     init(from store: Store) {
@@ -39,6 +47,8 @@ struct Set: Storable, CustomStringConvertible {
         self.percent = store.getDbl("percent")
         self.amrap = store.getBool("amrap")
         self.rest = store.getBool("rest")
+        self.optionalAMRAP = store.getBool("optionalAMRAP", ifMissing: false)
+        self.optionalSet = store.getBool("optionalSet", ifMissing: false)
     }
     
     func save(_ store: Store) {
@@ -47,6 +57,8 @@ struct Set: Storable, CustomStringConvertible {
         store.addDbl("percent", percent)
         store.addBool("amrap", amrap)
         store.addBool("rest", rest)
+        store.addBool("optionalAMRAP", optionalAMRAP)
+        store.addBool("optionalSet", optionalSet)
     }
     
     func errors() -> [String] {
@@ -64,21 +76,23 @@ struct Set: Storable, CustomStringConvertible {
     }
     
     func label(currentReps: Int?) -> String {
+        let alabel = optionalAMRAP ? "+?" : "+"
+        let slabel = optionalSet ? "?" : ""
         if minReps < maxReps {
             if let current = currentReps {
                 if current < maxReps {
-                    return amrap ? "\(current)-\(maxReps)+ reps" : "\(current)-\(maxReps) reps"
+                    return amrap ? "\(current)-\(maxReps)\(slabel)\(alabel) reps" : "\(current)-\(maxReps)\(slabel) reps"
                 } else {
-                    return amrap ? "\(current)+ reps" : "\(current) reps"
+                    return amrap ? "\(current)\(slabel)\(alabel) reps" : "\(current)\(slabel) reps"
                 }
             } else {
-                return amrap ? "\(minReps)-\(maxReps)+ reps" : "\(minReps)-\(maxReps) reps"
+                return amrap ? "\(minReps)-\(maxReps)\(slabel)\(alabel) reps" : "\(minReps)-\(maxReps)\(slabel) reps"
             }
         } else {
             if minReps == 1 {
-                return amrap ? "1+ reps" : "1 rep"
+                return amrap ? "1\(slabel)\(alabel) reps" : "1\(slabel) rep"
             } else {
-                return amrap ? "\(minReps)+ reps" : "\(minReps) reps"
+                return amrap ? "\(minReps)\(slabel)\(alabel) reps" : "\(minReps)\(slabel) reps"
             }
         }
     }
