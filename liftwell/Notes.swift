@@ -2140,6 +2140,13 @@ let builtInNotes: [String: String] = [
             "As you're rocking bring your knees inward a bit."],
         links: ["Video": "https://www.youtube.com/watch?v=aVRidEHlbMA"]),
     
+    "T-Bar Row": createNote(
+        notes: [
+            "Keep your back straight.",
+            "Pull the bar towards you by flexing your elbows and retracting your shoulder blades.",
+            "Pull the weight to your chest."],
+        links: ["Link": "https://www.bodybuilding.com/exercises/t-bar-row"]),
+
     "Third World Squat": createNote(
         notes: [
             "Look straight ahead and hold hands straight out.",
@@ -2343,6 +2350,16 @@ let builtInNotes: [String: String] = [
             "Walk back to your starting position."],
         links: ["Link": "https://www.exercise.com/exercises/x-resistance-band-walk"]),
     
+    "Z Press": createNote(
+        notes: [
+            "Sit inside a power rack.",
+            "Adjust the pins so that the bar is a couple of inches below your shoulders.",
+            "Extend your legs out straight in front of you.",
+            "Keep your back straight: don't slouch.",
+            "Keep the bar over your center of mass.",
+            "Try not to move your feet or legs."],
+        links: ["Link": "https://www.t-nation.com/training/z-press-advanced-overhead-pressing"]),
+
     "Zercher Squat": createNote(
         notes: [
             "Load a bar on a squat rack where the bar is above your waist but below your chest.",

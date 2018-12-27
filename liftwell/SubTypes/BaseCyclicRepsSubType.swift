@@ -156,10 +156,6 @@ class BaseCyclicRepsSubType: BaseApparatusSubType, ExerciseInfo {
         }
     }
     
-    override func label(_ exercise: Exercise) -> String {
-        return exercise.name + " \(cycleIndex+1) of \(cycles.count)"
-    }
-    
     func sublabel(_ exercise: Exercise) -> String {
         let weight = aweight.getBaseWorkingWeight()
         switch exercise.type {

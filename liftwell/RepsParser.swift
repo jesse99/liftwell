@@ -120,8 +120,8 @@ class Parser {
             if maxReps < minReps {
                 return .left(Error("maxReps is less than minReps", maxOffset))
             }
-            if percent > 100 {
-                return .left(Error("percentage should be less than or equal to 100", percentOffset))
+            if percent > 150 {  // a few programs do things like use 105% (with a TM) but this shouldn't go crazy
+                return .left(Error("percentage should be less than or equal to 150", percentOffset))
             }
             return .right(Set(minReps: minReps, maxReps: maxReps, percent: Double(percent)/100.0, amrap: amrap, optionalAMRAP: optionalAmrap, optionalSet: optionalSet, rest: rest))
 

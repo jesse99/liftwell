@@ -149,6 +149,20 @@ func cable(_ name: String, _ formalName: String, _ warmups: String, _ worksets: 
     return Exercise(name, formalName, .weights(type), main: main)
 }
 
+func cable(_ name: String, _ formalName: String, emom: [String], restMins: Double, main: Bool = false) -> Exercise {
+    let rest = Int(restMins*60.0)
+    let sets: [Sets] = emom.map {
+        let worksets = parseSets($0)
+        return Sets([], worksets, [])
+    }
+    let subtype = EMOMSubType(sets, restSecs: rest)
+    
+    let apparatus = Apparatus.machine(range1: defaultMachine(), range2: zeroMachine(), extra: [])
+    let type = WeightsType(apparatus, .emom(subtype))
+    
+    return Exercise(name, formalName, .weights(type), main: main)
+}
+
 func dumbbell1(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", restMins: Double, main: Bool = false) -> Exercise {
     let rest = Int(restMins*60.0)
     let warmupSets = parseSets(warmups)
@@ -158,6 +172,20 @@ func dumbbell1(_ name: String, _ formalName: String, _ warmups: String, _ workse
     
     let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: defaultMagnets(), paired: false)
     let type = WeightsType(apparatus, .reps(subtype))
+    
+    return Exercise(name, formalName, .weights(type), main: main)
+}
+
+func dumbbell1(_ name: String, _ formalName: String, emom: [String], restMins: Double, bumpers: [Double] = [], main: Bool = false) -> Exercise {
+    let rest = Int(restMins*60.0)
+    let sets: [Sets] = emom.map {
+        let worksets = parseSets($0)
+        return Sets([], worksets, [])
+    }
+    let subtype = EMOMSubType(sets, restSecs: rest)
+    
+    let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: defaultMagnets(), paired: false)
+    let type = WeightsType(apparatus, .emom(subtype))
     
     return Exercise(name, formalName, .weights(type), main: main)
 }
@@ -237,6 +265,20 @@ func singlePlates(_ name: String, _ formalName: String, _ warmups: String, _ wor
     
     let apparatus = Apparatus.singlePlates(plates: defaultPlates())
     let type = WeightsType(apparatus, .reps(subtype))
+    
+    return Exercise(name, formalName, .weights(type), main: main)
+}
+
+func singlePlates(_ name: String, _ formalName: String, emom: [String], restMins: Double, main: Bool = false) -> Exercise {
+    let rest = Int(restMins*60.0)
+    let sets: [Sets] = emom.map {
+        let worksets = parseSets($0)
+        return Sets([], worksets, [])
+    }
+    let subtype = EMOMSubType(sets, restSecs: rest)
+    
+    let apparatus = Apparatus.singlePlates(plates: defaultPlates())
+    let type = WeightsType(apparatus, .emom(subtype))
     
     return Exercise(name, formalName, .weights(type), main: main)
 }
