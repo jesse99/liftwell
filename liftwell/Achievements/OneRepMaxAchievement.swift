@@ -122,14 +122,14 @@ class OneRepMaxAchievement: Achievement {
                         date: Date())
                     new.append(result)
                     newTarget = advanceTarget(max)
-                                        os_log("   adding award '%@', newTarget=%.0f", type: .error, result.title, newTarget)
+                    os_log("   adding award '%@', newTarget=%.0f", type: .error, result.title, newTarget)
                 }
                 
             } else if nextTarget == 0.0 {
                                 os_log("weight=%.0f reps=%d 1RM=%.0f", type: .error, exercise.getLastWeight() ?? 0.0, exercise.getLastReps() ?? 0, get1RM(exercise.getLastWeight() ?? 0.0, exercise.getLastReps() ?? 0) ?? 0.0)
                 if let weight = exercise.getLastWeight(), weight > 0.0, let reps = exercise.getLastReps(), let max = get1RM(weight, reps), max > 0.0 {
                     newTarget = advanceTarget(max)
-                                        os_log("   newTarget=%.0f", type: .error, newTarget)
+                    os_log("   newTarget=%.0f", type: .error, newTarget)
                 }
             }
         }

@@ -69,8 +69,8 @@ struct Set: Storable, CustomStringConvertible {
         if percent < 0.0 {
             problems += ["reps.percent is less than zero."]
         }
-        if percent > 1.0 {
-            problems += ["reps.percent is greater than one."]
+        if percent > 1.5 {
+            problems += ["reps.percent is greater than 150%."]
         }
         return problems
     }

@@ -6,7 +6,7 @@ import os.log
 
 class LiftTotalAchievement: Achievement {
     init(_ app: AppDelegate) {
-        let path = app.getPath(fileName: "LiftTotalAchievement-" + app.program.name)
+        let path = app.getPath(fileName: "LiftTotalAchievement-\(app.program.name)-\(LiftTotalAchievement.mainHash(app))")
         if let data = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? Data {
             do {
                 let decoder = JSONDecoder()
@@ -28,7 +28,7 @@ class LiftTotalAchievement: Achievement {
     }
     
     func save(_ app: AppDelegate) {
-        let path = app.getPath(fileName: "LiftTotalAchievement-" + app.program.name)
+        let path = app.getPath(fileName: "LiftTotalAchievement-\(app.program.name)-\(LiftTotalAchievement.mainHash(app))")
         let store = Store()
         store.addObjArray("completed", completed)
         store.addDbl("nextTarget", nextTarget)
@@ -130,6 +130,19 @@ class LiftTotalAchievement: Achievement {
             }
         }
         return total
+    }
+    
+    // This way if the main lifts change then we'll re-compute the achievement.
+    private static func mainHash(_ app: AppDelegate) -> Int {
+        var hash: Int = 0
+        
+        for exercise in app.program.exercises {
+            if app.program.isInUse(exercise) && exercise.main {
+                hash = hash &+ exercise.name.hash
+            }
+        }
+        
+        return hash
     }
 
     private var completed: [Award]
