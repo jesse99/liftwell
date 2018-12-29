@@ -228,7 +228,7 @@ class ExerciseController: UIViewController {
 //            case .normal(let results):
                 if results.count == 1 {
                     results[0].callback(self, {self.handleNext("default")})
-                } else {
+                } else if results.count > 1 {
                     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
                     
                     for result in results {
