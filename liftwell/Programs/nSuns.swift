@@ -19,7 +19,7 @@ fileprivate let notes = """
 * Wendler recommends a 10% deload for a lift if you think you've stalled on it.
 """
 
-fileprivate let advance: [Int] = [0, 0, 1, 1, 2, 2, 3]
+fileprivate let advance: [Int] = [-1, 0, 1, 1, 2, 2, 3]
 
 fileprivate let assistence  = "8-12".x(3)
 
