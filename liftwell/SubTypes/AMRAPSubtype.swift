@@ -83,22 +83,19 @@ class AMRAPSubType: BaseRepsApparatusSubType {
                     }
                     let maintain = UIAlertAction(title: "Maintain", style: .default) {_ in completion()}
                     alert.addAction(maintain)
+                    view.present(alert, animated: true, completion: nil)
 
                 } else if by < 0 {
                     let maintain = UIAlertAction(title: "Maintain", style: .default) {_ in completion()}
                     alert.addAction(maintain)
 
-                    for i in stride(from: -1, through: by, by: -1) {
-                        let label = advanceWeightLabel(exercise, weight, by: i)
-                        let action = UIAlertAction(title: "Deload by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, i); completion()}
-                        alert.addAction(action)
-                        if i == by {
-                            alert.preferredAction = action
-                        }
+                    let deloads = exercise.findDeloads(weight, 0.10).map {label, amount in UIAlertAction(title: "Deload by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, amount); completion()}}
+                    for deload in deloads {
+                        alert.addAction(deload)
                     }
+                    view.present(alert, animated: true, completion: nil)
                 }
                 
-                view.present(alert, animated: true, completion: nil)
             } else {
                 assert(false)
                 completion()

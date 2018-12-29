@@ -284,6 +284,33 @@ class Exercise: Storable {
         return nil
     }
 
+    // For variable reps we don't change the current reps so this should be fine.
+    func findDeloads(_ weight: Double, _ maxPercent: Double) -> [(String, Int)] {
+        switch type {
+        case .body(_):
+            assert(false)
+            abort()
+        case .weights(let type):
+            var result: [(String, Int)] = []
+            
+            let currentWeight = Weight(weight, type.apparatus).closest().weight
+            var newWeight = currentWeight
+            for i in stride(from: -1, through: -8, by: -1) {
+                newWeight = Weight(newWeight, type.apparatus).prevWeight()
+                
+                let percent = 1.0 - newWeight/currentWeight
+                let label = "\(String(format: "%.0f", currentWeight - newWeight)) lbs (\(String(format: "%.0f", 100*percent))%)"
+                result.append((label, i))
+                
+                if percent + 0.005 >= maxPercent {
+                    break
+                }
+            }
+            
+            return result
+        }
+    }
+    
     var name: String             // "Heavy Bench"
     var formalName: String       // "Bench Press"
     var type: Type

@@ -185,18 +185,12 @@ class BaseApparatusSubType {
             let label3 = variableReps ? "3 reps" : advanceWeightLabel(exercise, weight, by: 3)
             let label2 = variableReps ? "2 reps" : advanceWeightLabel(exercise, weight, by: 2)
             let label1 = variableReps ? "1 rep" : advanceWeightLabel(exercise, weight, by: 1)
-            let dlabel1 = variableReps ? "1 rep" : advanceWeightLabel(exercise, weight, by: -1)
-            let dlabel2 = variableReps ? "2 reps" : advanceWeightLabel(exercise, weight, by: -2)
-            let dlabel3 = variableReps ? "3 reps" : advanceWeightLabel(exercise, weight, by: -3)
             
             let advance4 = UIAlertAction(title: "Advance by \(label4)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 4); completion()}
             let advance3 = UIAlertAction(title: "Advance by \(label3)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 3); completion()}
             let advance2 = UIAlertAction(title: "Advance by \(label2)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 2); completion()}
             let advance = UIAlertAction(title: "Advance by \(label1)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 1); completion()}
             let maintain = UIAlertAction(title: "Maintain", style: .default) {_ in completion()}
-            let deload = UIAlertAction(title: "Deload by \(dlabel1)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, -1); completion()}
-            let deload2 = UIAlertAction(title: "Deload by \(dlabel2)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, -2); completion()}
-            let deload3 = UIAlertAction(title: "Deload by \(dlabel3)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, -3); completion()}
             
             switch tag {
             case .veryEasy:
@@ -222,16 +216,19 @@ class BaseApparatusSubType {
             case .hard:
                 alert.addAction(advance)
                 alert.addAction(maintain)
-                alert.addAction(deload)
-                alert.preferredAction = maintain
+
+                let deloads = exercise.findDeloads(weight, 0.05).map {label, amount in UIAlertAction(title: "Deload by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, amount); completion()}}
+                for deload in deloads {
+                    alert.addAction(deload)
+                }
                 
             case .failed:
-                alert.addAction(advance)
                 alert.addAction(maintain)
-                alert.addAction(deload)
-                alert.addAction(deload2)
-                alert.addAction(deload3)
-                alert.preferredAction = deload
+
+                let deloads = exercise.findDeloads(weight, 0.10).map {label, amount in UIAlertAction(title: "Deload by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, amount); completion()}}
+                for deload in deloads {
+                    alert.addAction(deload)
+                }
             }
             
             view.present(alert, animated: true, completion: nil)
