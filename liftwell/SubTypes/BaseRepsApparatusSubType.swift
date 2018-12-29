@@ -38,9 +38,8 @@ class BaseRepsApparatusSubType: BaseApparatusSubType, ExerciseInfo {
     
     init(_ sets: Sets, restSecs: Int, trainingMaxPercent: Double? = nil) {
         self.sets = sets
-        let (minReps, maxReps) = sets.repRange(currentReps: nil)
-        let reps = minReps < maxReps ? maxReps : nil
-        super.init(reps: reps, restTime: restSecs, trainingMaxPercent: trainingMaxPercent)
+        let (minReps, _) = sets.repRange(currentReps: nil)
+        super.init(reps: minReps, restTime: restSecs, trainingMaxPercent: trainingMaxPercent)
     }
     
     required init(from store: Store) {

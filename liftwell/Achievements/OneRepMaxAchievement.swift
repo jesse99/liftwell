@@ -77,7 +77,7 @@ class OneRepMaxAchievement: Achievement {
                 os_log("   setting nextTarget to %.0f (had awards)", type: .error, newTarget)
             } else if nextTarget == 0.0 {
                 nextTargets[exercise.formalName] = newTarget
-                os_log("   setting nextTarget to %.0f (no award)", type: .error, newTarget)
+                //os_log("   setting nextTarget to %.0f (no award)", type: .error, newTarget)
             }
         }
     }
