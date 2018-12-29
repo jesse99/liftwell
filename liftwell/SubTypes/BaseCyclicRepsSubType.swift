@@ -92,6 +92,9 @@ class BaseCyclicRepsSubType: BaseApparatusSubType, ExerciseInfo {
             case .t1(let savedSubtype):
                 cycleIndex = savedSubtype.cycleIndex
                 super.sync(program, savedSubtype, sameSets: cycles.count == savedSubtype.cycles.count)
+            case .t1LP(let savedSubtype):
+                cycleIndex = savedSubtype.cycleIndex
+                super.sync(program, savedSubtype, sameSets: cycles.count == savedSubtype.cycles.count)
             case .t2(let savedSubtype):
                 cycleIndex = savedSubtype.cycleIndex
                 super.sync(program, savedSubtype, sameSets: cycles.count == savedSubtype.cycles.count)

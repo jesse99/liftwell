@@ -164,6 +164,7 @@ class FindWeightSubType: ExerciseInfo {
                 case .percent1RM(_): assert(false)
                 case .reps(let subtype): subtype.setNRM(reps, weight)
                 case .t1(let subtype): subtype.setNRM(reps, weight)
+                case .t1LP(let subtype): subtype.setNRM(reps, weight)
                 case .t2(let subtype): subtype.setNRM(reps, weight)
                 case .t3(let subtype): subtype.setNRM(reps, weight)
                 case .timed(let subtype): subtype.weight = weight

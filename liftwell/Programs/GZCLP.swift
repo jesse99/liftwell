@@ -2,7 +2,7 @@
 //  Copyright © 2018 MushinApps. All rights reserved.
 import Foundation
 
-func barbellT1(_ name: String, _ formalName: String, _ cycles: [(String, String, String)], restMins: Double, bumpers: [Double] = []) -> Exercise {
+fileprivate func barbellT1(_ name: String, _ formalName: String, _ cycles: [(String, String, String)], restMins: Double, bumpers: [Double] = []) -> Exercise {
     let rest = Int(restMins*60.0)
     let sets: [Sets] = cycles.map {
         let warmups = parseSets($0.0)
@@ -10,15 +10,15 @@ func barbellT1(_ name: String, _ formalName: String, _ cycles: [(String, String,
         let backoff = parseSets($0.2)
         return Sets(warmups, worksets, backoff)
     }
-    let subtype = T1RepsSubType(sets, restSecs: rest)
+    let subtype = T1LPRepsSubType(sets, restSecs: rest)
     
     let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: bumpers, magnets: [])
-    let type = WeightsType(apparatus, .t1(subtype))
+    let type = WeightsType(apparatus, .t1LP(subtype))
     
     return Exercise(name, formalName, .weights(type), main: true)
 }
 
-func barbellT2(_ name: String, _ formalName: String, _ cycles: [(String, String, String)], restMins: Double, bumpers: [Double] = []) -> Exercise {
+fileprivate func barbellT2(_ name: String, _ formalName: String, _ cycles: [(String, String, String)], restMins: Double, bumpers: [Double] = []) -> Exercise {
     let rest = Int(restMins*60.0)
     let sets: [Sets] = cycles.map {
         let warmups = parseSets($0.0)

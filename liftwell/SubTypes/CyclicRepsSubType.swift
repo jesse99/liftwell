@@ -5,27 +5,44 @@ import Foundation
 import UIKit           // for UIColor
 import os.log
 
+enum AdvanceOn {
+    case dont           // -1
+    case always         // -2
+    case lastCycle      // -3
+    case onCycle(Int)   // 0,,<n
+}
+
 /// Sets/reps/percents vary from week to week.
 class CyclicRepsSubType: BaseCyclicRepsSubType {
     private typealias `Self` = CyclicRepsSubType
     
     /// trainingMaxPercent is a percent of 1RM
-    /// promptIndex is when to ask the user to advance, -1 for no advancement
     /// resetIndex is when to automatically reset weight to zero (so that a training max can be re-computed)
-    init(_ cycles: [Sets], restSecs: Int, trainingMaxPercent: Double? = nil, promptIndex: Int = 0, resetIndex: [Int] = []) {
-        self.promptIndex = promptIndex
+    init(_ cycles: [Sets], restSecs: Int, advance: AdvanceOn, trainingMaxPercent: Double? = nil, resetIndex: [Int] = []) {
+        self.advance = advance
         self.resetIndexes = resetIndex
         super.init(cycles, restSecs: restSecs, trainingMaxPercent: trainingMaxPercent)
     }
     
     required init(from store: Store) {
-        self.promptIndex = store.getInt("promptIndex", ifMissing: 0)
+        let i = store.getInt("promptIndex", ifMissing: 0)
+        switch i {
+        case -1: self.advance = .dont
+        case -2: self.advance = .always
+        case -3: self.advance = .lastCycle
+        default: self.advance = .onCycle(i)
+        }
         self.resetIndexes = store.getIntArray("resetIndexes", ifMissing: [])
         super.init(from: store)
     }
     
     override func save(_ store: Store) {
-        store.addInt("promptIndex", promptIndex)
+        switch advance {
+        case .dont: store.addInt("promptIndex", -1)
+        case .always: store.addInt("promptIndex", -2)
+        case .lastCycle: store.addInt("promptIndex", -3)
+        case .onCycle(let n): store.addInt("promptIndex", n)
+        }
         store.addIntArray("resetIndexes", resetIndexes)
         super.save(store)
     }
@@ -38,7 +55,7 @@ class CyclicRepsSubType: BaseCyclicRepsSubType {
     }
     
     override func fixedDifficulty() -> ResultTag? {
-        return promptIndex < cycles.count ? .normal : nil
+        return canAdvance(cycleIndex) ? nil : .normal
     }
     
     override func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
@@ -57,8 +74,8 @@ class CyclicRepsSubType: BaseCyclicRepsSubType {
         myResults.append(result)
         Self.results[exercise.formalName] = myResults
         
+        let oldIndex = cycleIndex
         cycleIndex = (cycleIndex + 1) % cycles.count
-        print("cycleIndex = \(cycleIndex), resetIndexes = \(resetIndexes)")
         if resetIndexes.contains(cycleIndex) {
             switch aweight {
             case .trainingMax(percent: let percent, oneRepMax: _):
@@ -67,7 +84,7 @@ class CyclicRepsSubType: BaseCyclicRepsSubType {
                 aweight = .weight(0.0)
             }
         }
-        if cycleIndex == promptIndex {
+        if canAdvance(oldIndex) {
             // Prompt user for advancement
             super.presentFinalize(exercise, tag, view, completion)
         } else {
@@ -75,11 +92,20 @@ class CyclicRepsSubType: BaseCyclicRepsSubType {
         }
     }
     
+    private func canAdvance(_ index: Int) -> Bool {
+        switch advance {
+        case .dont: return false
+        case .always: return true
+        case .lastCycle: return index + 1 == cycles.count
+        case .onCycle(let n): return index == n
+        }
+    }
+
     override func doGetResults(_ exercise: Exercise) -> [CyclicResult]? {
         return Self.results[exercise.formalName]
     }
     
-    var promptIndex: Int
+    var advance: AdvanceOn
     var resetIndexes: [Int] = []
     static var results: [String: [CyclicResult]] = [:]
 }

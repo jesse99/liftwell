@@ -5,55 +5,12 @@ import Foundation
 import UIKit           // for UIColor
 import os.log
 
-/// GZCLP scheme where weight is added to each cycle until the user fails at which point the next
-/// cycle is used. When cycles run out they are reset to the first cycle and a new Training Max
-/// is chosen.
+/// GZCL scheme where weight added according to how well the user did on the AMRAP set.
 class T1RepsSubType: BaseCyclicRepsSubType {
     private typealias `Self` = T1RepsSubType
     
-    class Result: CyclicResult {
-        init(_ tag: ResultTag, baseWeight: Double, liftedWeight: Double, cycleIndex: Int, _ sets: String, goalReps: Int, actualReps: Int, percent: Double, oneMax: Double) {
-            self.sets = sets
-            self.goalReps = goalReps
-            self.percent = percent
-            self.oneMax = oneMax
-            super.init(tag, baseWeight: baseWeight, liftedWeight: liftedWeight, cycleIndex: cycleIndex, reps: actualReps)
-        }
-        
-        required init(from store: Store) {
-            self.sets = store.getStr("sets")
-            self.goalReps = store.getInt("goalReps")
-            self.percent = store.getDbl("percent")
-            self.oneMax = store.getDbl("oneMax")
-            super.init(from: store)
-        }
-        
-        override func save(_ store: Store) {
-            store.addStr("sets", sets)
-            store.addInt("goalReps", goalReps)
-            store.addDbl("percent", percent)
-            store.addDbl("oneMax", oneMax)
-            super.save(store)
-        }
-        
-        var sets: String        // "5x3"
-        var goalReps: Int       // for the AMRAP set (as is base.reps)
-        var percent: Double
-        var oneMax: Double
-    }
-    
-    // GZCLP says to set the training max to 85% of the 5RM. SO we have:
-    // TM = 0.85 * 5RM
-    // TM = percent * 1RM
-    // 1RM = 5RM * (2 - 0.87)
-    //
-    // TM = percent * (5RM * (2 - 0.87))
-    // 0.85 * 5RM = percent * (5RM * (2 - 0.87))
-    // percent = (0.85 * 5RM)/(5RM * (2 - 0.87))
-    // percent = 0.85/(2 - 0.87)
-    // percent = 0.752
-    init(_ cycles: [Sets], restSecs: Int, trainingMaxPercent: Double = 0.752) {
-        super.init(cycles, restSecs: restSecs, trainingMaxPercent: trainingMaxPercent)
+    init(_ cycles: [Sets], restSecs: Int) {
+        super.init(cycles, restSecs: restSecs)
     }
     
     required init(from store: Store) {
@@ -69,10 +26,16 @@ class T1RepsSubType: BaseCyclicRepsSubType {
     
     override func errors() -> [String] {
         var problems: [String] = super.errors()
+        var found = false
         for sets in cycles {
-            if let last = sets.worksets.last, !last.amrap {
-                problems.append("Last set in each cycle should be AMRAP.")
+            for set in sets.worksets {
+                if set.amrap {
+                    found = true
+                }
             }
+        }
+        if !found {
+            problems.append("At least one workset should be AMRAP.")
         }
         return problems
     }
@@ -81,7 +44,7 @@ class T1RepsSubType: BaseCyclicRepsSubType {
     override func start(_ workout: Workout, _ exercise: Exercise) -> (Exercise, String)? {
         if let (newExercise, oldLabel) = super.start(workout, exercise) {
             if let myResults = Self.results[exercise.formalName], !myResults.isEmpty {
-                return (newExercise, "Reset 5RM")
+                return (newExercise, "Reset 3RM")
             } else {
                 return (newExercise, oldLabel)
             }
@@ -91,30 +54,30 @@ class T1RepsSubType: BaseCyclicRepsSubType {
         }
     }
     
-    override func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
-        // History will include the AMRAP reps and the tag is inferred from that so don't think we want anything here.
-        return ("", UIColor.black)
-    }
+//    override func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
+//        // History will include the AMRAP reps and the tag is inferred from that so don't think we want anything here.
+//        return ("", UIColor.black)
+//    }
     
-    override func historyLabel(_ exercise: Exercise) -> String {
-        if let myResults = Self.results[exercise.formalName] {
-            var labels: [String] = []
-            
-            for result in myResults {
-                let delta = result.reps - result.goalReps
-                if delta > 0 {
-                    labels.append("\(result.sets)(+\(delta)) @ \(Weight.friendlyUnitsStr(result.liftedWeight))")
-                } else {
-                    labels.append("\(result.sets)(\(delta)) @ \(Weight.friendlyUnitsStr(result.liftedWeight))")
-                }
-            }
-            
-            return makeHistoryFromLabels(labels)
-        }
-        return ""
-    }
+//    override func historyLabel(_ exercise: Exercise) -> String {
+//        if let myResults = Self.results[exercise.formalName] {
+//            var labels: [String] = []
+//
+//            for result in myResults {
+//                let delta = result.reps - result.goalReps
+//                if delta > 0 {
+//                    labels.append("\(result.sets)(+\(delta)) @ \(Weight.friendlyUnitsStr(result.liftedWeight))")
+//                } else {
+//                    labels.append("\(result.sets)(\(delta)) @ \(Weight.friendlyUnitsStr(result.liftedWeight))")
+//                }
+//            }
+//
+//            return makeHistoryFromLabels(labels)
+//        }
+//        return ""
+//    }
     
-    override func finalize(_ exercise: Exercise, _ view: UIViewController, _ completion: @escaping () -> Void) {
+    override func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let baseWeight = aweight.getBaseWorkingWeight()
         var liftedWeight = baseWeight
         if let last = cycles[cycleIndex].worksets.last {
@@ -123,89 +86,119 @@ class T1RepsSubType: BaseCyclicRepsSubType {
                 liftedWeight = w.weight
             }
         }
-        
-        let percent: Double
-        let oneMax: Double
-        switch aweight {
-        case .weight(_):
-            assert(false)
-            percent = 0.0
-            oneMax = 0.0
-        case .trainingMax(percent: let p, oneRepMax: let max):
-            percent = p
-            oneMax = max
-        }
 
         let worksets = cycles[cycleIndex].worksets
         let requestedReps = worksets.last?.maxReps ?? 0
-        let label = "\(worksets.count)x\(requestedReps)"
-        let result = Result(amrapTag!, baseWeight: baseWeight, liftedWeight: liftedWeight, cycleIndex: cycleIndex, label, goalReps: requestedReps, actualReps: amrapReps!, percent: percent, oneMax: oneMax)
+//        let label = "\(worksets.count)x\(requestedReps)"
+        
+        let result: CyclicResult
+        if let reps = amrapReps, let tag = amrapTag {
+            result = CyclicResult(tag, baseWeight: baseWeight, liftedWeight: liftedWeight, cycleIndex: cycleIndex, reps: reps)
+        } else {
+            result = CyclicResult(tag, baseWeight: baseWeight, liftedWeight: liftedWeight, cycleIndex: cycleIndex, reps: reps)
+        }
         
         var myResults = Self.results[exercise.formalName] ?? []
         myResults.append(result)
         Self.results[exercise.formalName] = myResults
         
-        if amrapReps! >= requestedReps {
-            switch exercise.type {
-            case .body(_): break
-            case .weights(let type):
-                var weight = aweight.getBaseWorkingWeight()
-                let w = Weight(weight, type.apparatus)
-                weight = w.nextWeight()
-                setWorkingWeight(weight)
-            }
-            completion()
-            
-        } else if cycleIndex+1 >= cycles.count {
-            cycleIndex = 0
-            setWorkingWeight(0.0)
-            completion()
-            
-            let worksets = cycles[0].worksets
-            let reps = worksets.last?.maxReps ?? 0  // TODO: this alert isn't working, maybe we're already in an alert?
-            let alert = UIAlertController(title: "Resetting Training Max to zero to find a new \(reps)RM.", message: "Wait 2-3 days before finding the new max.", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: {_ in completion()})
-            alert.addAction(action)
-            
-            if var topController = UIApplication.shared.keyWindow?.rootViewController {
-                while let presentedViewController = topController.presentedViewController {
-                    topController = presentedViewController
-                }
-                topController.present(alert, animated: true, completion:nil)
-            } else {
-                completion()
-            }
-            //view.present(alert, animated: true, completion:nil)
-            
+        cycleIndex = (cycleIndex + 1) % cycles.count
+        if let reps = amrapReps {
+            maybeAdvance(exercise, requestedReps, reps, view, completion)
         } else {
-            cycleIndex = (cycleIndex + 1) % cycles.count
             completion()
         }
     }
     
-    // TM = 0.85 * 5RM
-    // TM = percent * 1RM
-    //
-    // 0.85 * 5RM = percent * 1RM
-    // 5RM = (percent * 1RM)/0.85
+    private func maybeAdvance(_ exercise: Exercise, _ requestedReps: Int, _ actualReps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
+        let weight = getBaseWorkingWeight()
+        
+        switch exercise.type {
+        case .body(_): assert(false); completion()
+        case .weights(let type):
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            
+            let by = actualReps - requestedReps
+            if by == 1 {
+                let label = advanceWeightLabel(exercise, weight, by: 1)
+                let action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 1); completion()}
+                alert.addAction(action)
+                alert.preferredAction = action
+            
+            } else if by == 2 {
+                var label = advanceWeightLabel(exercise, weight, by: 2)
+                var action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 2); completion()}
+                alert.addAction(action)
+                alert.preferredAction = action
+                
+                label = advanceWeightLabel(exercise, weight, by: 1)
+                action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 1); completion()}
+                alert.addAction(action)
+            
+            } else if by >= 3 {
+                var label = advanceWeightLabel(exercise, weight, by: 3)
+                var action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 3); completion()}
+                alert.addAction(action)
+                alert.preferredAction = action
+                
+                label = advanceWeightLabel(exercise, weight, by: 2)
+                action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 2); completion()}
+                alert.addAction(action)
+                
+                label = advanceWeightLabel(exercise, weight, by: 1)
+                action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 1); completion()}
+                alert.addAction(action)
+            }
+            
+            if by >= 1 {
+                let maintain = UIAlertAction(title: "Maintain", style: .default) {_ in completion()}
+                alert.addAction(maintain)
+                
+                view.present(alert, animated: true, completion: nil)
+            } else {
+                completion()
+            }
+        }
+    }
+    
+    private func doAdvance(_ exercise: Exercise, _ apparatus: Apparatus, _ amount: Int) {
+        var weight = doGetAdvanceWeight(exercise)
+        
+        let delta = amount.signum()
+        for _ in 0..<abs(amount) {
+            let w = Weight(weight, apparatus)
+            if delta > 0 {
+                weight = w.nextWeight()
+            } else {
+                weight = w.prevWeight()
+            }
+        }
+        
+        setWorkingWeight(weight)
+    }
+
     override func doCreateFindWeights(_ exercise: Exercise, prevWeight: Double?) -> FindWeightSubType {
         var subtitle = ""
-        if let myResults = Self.results[exercise.formalName], let last = myResults.last, last.oneMax > 0.0 {
-            let fiveMax = (last.percent * last.oneMax)/0.85
+        if let myResults = Self.results[exercise.formalName], let last = myResults.last, last.liftedWeight > 0.0 {
+            var threeMax = 0.0
             switch exercise.type {
             case .body(_):
                 assert(false)
             case .weights(let type):
-                let w = Weight(fiveMax, type.apparatus).closest()
-                subtitle = "5RM was \(w.text)"
+                if let oneMax = get1RM(last.liftedWeight, last.reps) {
+                    threeMax = oneMax * 0.93
+                    
+                    let w = Weight(threeMax, type.apparatus).closest()
+                    subtitle = "3RM was \(w.text)"
+                }
             }
         }
-        return FindWeightSubType(reps: 5, restSecs: restTime, prevWeight: prevWeight, subtitle: subtitle)
+        return FindWeightSubType(reps: 3, restSecs: restTime, prevWeight: prevWeight, subtitle: subtitle)
     }
     
     override func doGetResults(_ exercise: Exercise) -> [CyclicResult]? {
         return Self.results[exercise.formalName]
     }
     
-    static var results: [String: [Result]] = [:]
+    static var results: [String: [CyclicResult]] = [:]
 }

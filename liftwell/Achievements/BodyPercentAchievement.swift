@@ -101,7 +101,7 @@ class BodyPercentAchievement: Achievement {
                     let result = Award(
                         key: exercise.formalName + " aaa",
                         title: "\(exercise.formalName) @ body weight x \(Int(nextPercent*100))%",
-                        details: "Currently at \(Int(100*currentPercent))% of body weight",
+                        details: "Current is \(Int(100*currentPercent))% of body weight",
                         formalName: exercise.formalName,
                         date: nil)
                     completions.append(result)

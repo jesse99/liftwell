@@ -96,10 +96,10 @@ func Monolith() -> Program {
     }
         
     let exercises: [Exercise] = [
-        barbell("Squat",       "Low bar Squat", squatSets(), restMins: 3.0, trainingMaxPercent: 0.85, promptIndex: -1, resetIndex: [0, 6], main: true),
-        barbell("OHP",         "Overhead Press", ohpSets(), restMins: 3.0, trainingMaxPercent: 0.85, promptIndex: -1, resetIndex: [0, 6], main: true),
-        barbell("Deadlift",    "Deadlift", deadSets(), restMins: 3.0, bumpers: defaultBumpers(), trainingMaxPercent: 0.85, promptIndex: -1, resetIndex: [0, 3], main: true),
-        barbell("Bench Press", "Bench Press", benchSets(), restMins: 3.0, trainingMaxPercent: 0.85, promptIndex: -1, resetIndex: [0, 3], main: true),
+        barbell("Squat",       "Low bar Squat", squatSets(), restMins: 3.0, advance: .dont, trainingMaxPercent: 0.85, resetIndex: [0, 6], main: true),
+        barbell("OHP",         "Overhead Press", ohpSets(), restMins: 3.0, advance: .dont, trainingMaxPercent: 0.85, resetIndex: [0, 6], main: true),
+        barbell("Deadlift",    "Deadlift", deadSets(), restMins: 3.0, bumpers: defaultBumpers(), advance: .dont, trainingMaxPercent: 0.85, resetIndex: [0, 3], main: true),
+        barbell("Bench Press", "Bench Press", benchSets(), restMins: 3.0, advance: .dont, trainingMaxPercent: 0.85, resetIndex: [0, 3], main: true),
         
         bodyweight("Chins",          "Chinup",        numSets: 10, startReps: 10, goalReps: 100, restMins: 2.5),
         cable("Face Pull",           "Face Pull", "", "10-20".x(5), restMins: 2.0),

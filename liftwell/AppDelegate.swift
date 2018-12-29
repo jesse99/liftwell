@@ -368,7 +368,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 RepsApparatusSubType.results = getStrDict(store, "reps-results")
                 RepsBodySubType.results = getStrDict(store, "reps-body-results")
                 TimedSubType.results = getStrDict(store, "timed-results")
-                T1RepsSubType.results = getStrDict(store, "t1c-results")
+                T1RepsSubType.results = getStrDict(store, "t1d-results")
+                T1LPRepsSubType.results = getStrDict(store, "t1e-results")
                 T2RepsSubType.results = getStrDict(store, "t2b-results")
                 T3RepsSubType.results = getStrDict(store, "t3b-results")
                 
@@ -393,9 +394,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         addStrDict(store, "reps-results", RepsApparatusSubType.results)
         addStrDict(store, "reps-body-results", RepsBodySubType.results)
         addStrDict(store, "timed-results", TimedSubType.results)
-        addStrDict(store, "t1c-results", T1RepsSubType.results)
+        addStrDict(store, "t1d-results", T1RepsSubType.results)
+        addStrDict(store, "t1e-results", T1LPRepsSubType.results)
         addStrDict(store, "t2b-results", T2RepsSubType.results)
-        addStrDict(store, "t3b-results", T1RepsSubType.results)
+        addStrDict(store, "t3b-results", T3RepsSubType.results)
 
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .secondsSince1970
@@ -407,7 +409,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    let programs = [BestButt14(), BestButt58(), BestButt912(), Bootyful3a(), Bootyful3b(), Bootyful3c(), Bootyful14a(), Bootyful14b(), Bootyful14c(), BoringButBig(), CAP3(), FiveThreeOneBeginner(), GlutealGoddess1(), GlutealGoddess2(), GlutealGoddess3(), GorgeousGlutes1(), GorgeousGlutes2(), GorgeousGlutes3(), GZCLP3(), GZCLP4(), JackShit(), MastersDB(), Monolith(), nSuns4(), nSuns5(), PhraksGreyskull()]
+    let programs = [BestButt14(), BestButt58(), BestButt912(), Bootyful3a(), Bootyful3b(), Bootyful3c(), Bootyful14a(), Bootyful14b(), Bootyful14c(), BoringButBig(), CAP3(), FiveThreeOneBeginner(), GlutealGoddess1(), GlutealGoddess2(), GlutealGoddess3(), GorgeousGlutes1(), GorgeousGlutes2(), GorgeousGlutes3(), GZCL(), GZCLP3(), GZCLP4(), JackShit(), MastersDB(), Monolith(), nSuns4(), nSuns5(), PhraksGreyskull()]
 
     var window: UIWindow?
     var program: Program!

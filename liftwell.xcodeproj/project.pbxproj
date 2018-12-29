@@ -61,6 +61,8 @@
 		374FE953218BD0DD00CFC284 /* NotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FE952218BD0DD00CFC284 /* NotesController.swift */; };
 		374FE955218BD10300CFC284 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374FE954218BD10300CFC284 /* Notes.swift */; };
 		3777DEA921BC63650071D11E /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777DEA821BC63650071D11E /* StringExtensions.swift */; };
+		377AAA5A21D68D0D00BD661F /* GZCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA5921D68D0D00BD661F /* GZCL.swift */; };
+		377AAA5C21D6AACC00BD661F /* T1LPRepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA5B21D6AACC00BD661F /* T1LPRepsSubType.swift */; };
 		37B4352121B2194000EDC53E /* BestButt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352021B2194000EDC53E /* BestButt.swift */; };
 		37B4352321B30D5B00EDC53E /* RepsBodySubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */; };
 		37B4352521B34CEF00EDC53E /* Bootyful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352421B34CEF00EDC53E /* Bootyful.swift */; };
@@ -164,6 +166,8 @@
 		374FE952218BD0DD00CFC284 /* NotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesController.swift; sourceTree = "<group>"; };
 		374FE954218BD10300CFC284 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
 		3777DEA821BC63650071D11E /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		377AAA5921D68D0D00BD661F /* GZCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GZCL.swift; sourceTree = "<group>"; };
+		377AAA5B21D6AACC00BD661F /* T1LPRepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = T1LPRepsSubType.swift; sourceTree = "<group>"; };
 		37B4352021B2194000EDC53E /* BestButt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestButt.swift; sourceTree = "<group>"; };
 		37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsBodySubType.swift; sourceTree = "<group>"; };
 		37B4352421B34CEF00EDC53E /* Bootyful.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootyful.swift; sourceTree = "<group>"; };
@@ -323,6 +327,7 @@
 				37DE95FF219D1D3300D60101 /* FiveThreeOneBeginner.swift */,
 				37B4352621B357EF00EDC53E /* Gluteal.swift */,
 				37B4352821B382CD00EDC53E /* Gorgeous.swift */,
+				377AAA5921D68D0D00BD661F /* GZCL.swift */,
 				373CCFCE21AA309A00096291 /* GZCLP.swift */,
 				37286858216842C8005F6FD0 /* MastersDB.swift */,
 				3720592721CB4D0B00641BE9 /* Monolith.swift */,
@@ -351,6 +356,7 @@
 				373CCFC421A7B22800096291 /* SubTypeHelpers.swift */,
 				373CCFC021A7902700096291 /* TimedSubType.swift */,
 				373CCFC221A792CA00096291 /* T1RepsSubType.swift */,
+				377AAA5B21D6AACC00BD661F /* T1LPRepsSubType.swift */,
 				373CCFC621A9B2A400096291 /* T2RepsSubType.swift */,
 				373CCFCA21A9DF6000096291 /* T3RepsSubType.swift */,
 			);
@@ -617,10 +623,12 @@
 				374FE955218BD10300CFC284 /* Notes.swift in Sources */,
 				373CCFBF21A7901A00096291 /* RepsApparatusSubType.swift in Sources */,
 				373CCFB721A78FE100096291 /* BaseApparatusSubType.swift in Sources */,
+				377AAA5A21D68D0D00BD661F /* GZCL.swift in Sources */,
 				374D3EDC217D4F4E00AC828D /* ExerciseController.swift in Sources */,
 				37DE95FA219A48E200D60101 /* ProgramHelpers.swift in Sources */,
 				374D3EE0217D510E00AC828D /* FontExtensions.swift in Sources */,
 				374FE947218627AC00CFC284 /* DumbbellController.swift in Sources */,
+				377AAA5C21D6AACC00BD661F /* T1LPRepsSubType.swift in Sources */,
 				373CCFBD21A7900E00096291 /* MaxRepsSubType.swift in Sources */,
 				37286828216259AE005F6FD0 /* WorkoutsTabController.swift in Sources */,
 				373CCFC521A7B22800096291 /* SubTypeHelpers.swift in Sources */,

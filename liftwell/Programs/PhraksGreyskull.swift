@@ -4,7 +4,7 @@ import Foundation
 
 func PhraksGreyskull() -> Program {
     let exercises = [
-        bodyweight("Chinups",  "Chinup",                                    "5".x(3, amrap: true), restMins: 2.5, main: false),
+        bodyweight("Chinups",  "Chinup",                                    "5".x(3, amrap: true), restMins: 2.5),
         barbell("OHP",         "Overhead Press", "10@0% 5@50% 3@75% 1@90%", "5".x(3, amrap: true), restMins: 2.5, main: true),
         barbell("Squat",       "Low bar Squat",  "10@0% 5@50% 3@75% 1@90%", "5".x(3, amrap: true), restMins: 2.5, main: true),
         barbell("Rows",        "Pendlay Row",    "10@50%",                  "5".x(3, amrap: true), restMins: 2.5, main: true),

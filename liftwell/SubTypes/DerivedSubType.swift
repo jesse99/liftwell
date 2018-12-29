@@ -234,6 +234,8 @@ class DerivedSubType: ExerciseInfo {
                 return subtype.getBaseWorkingWeight()
             case .t1(let subtype):
                 return subtype.getBaseWorkingWeight()
+            case .t1LP(let subtype):
+                return subtype.getBaseWorkingWeight()
             case .t2(let subtype):
                 return subtype.getBaseWorkingWeight()
             case .t3(let subtype):
@@ -281,6 +283,10 @@ class DerivedSubType: ExerciseInfo {
                 }
             case .t1(_):
                 if let results = T1RepsSubType.results[other.formalName], let last = results.last {
+                    return last.reps
+                }
+            case .t1LP(_):
+                if let results = T1LPRepsSubType.results[other.formalName], let last = results.last {
                     return last.reps
                 }
             case .t2(_):

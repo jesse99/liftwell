@@ -322,6 +322,10 @@ class Percent1RMSubType: ExerciseInfo {
                 if let results = T1RepsSubType.results[other.formalName], let last = results.last {
                     return last.liftedWeight
                 }
+            case .t1LP(_):
+                if let results = T1LPRepsSubType.results[other.formalName], let last = results.last {
+                    return last.liftedWeight
+                }
             case .t2(_):
                 if let results = T2RepsSubType.results[other.formalName], let last = results.last {
                     return last.liftedWeight
@@ -373,6 +377,10 @@ class Percent1RMSubType: ExerciseInfo {
                 }
             case .t1(_):
                 if let results = T1RepsSubType.results[other.formalName], let last = results.last {
+                    return last.reps
+                }
+            case .t1LP(_):
+                if let results = T1LPRepsSubType.results[other.formalName], let last = results.last {
                     return last.reps
                 }
             case .t2(_):

@@ -114,6 +114,7 @@ class Exercise: Storable {
             case .percent1RM(let subtype): return subtype
             case .reps(let subtype): return subtype
             case .t1(let subtype): return subtype
+            case .t1LP(let subtype): return subtype
             case .t2(let subtype): return subtype
             case .t3(let subtype): return subtype
             case .timed(let subtype): return subtype
@@ -190,6 +191,10 @@ class Exercise: Storable {
                 if let result = T1RepsSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     weight = result.liftedWeight
                 }
+            case .t1LP(_):
+                if let result = T1LPRepsSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                    weight = result.liftedWeight
+                }
             case .t2(_):
                 if let result = T2RepsSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     weight = result.liftedWeight
@@ -260,6 +265,10 @@ class Exercise: Storable {
                 }
             case .t1(_):
                 if let result = T1RepsSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
+                    return result.reps
+                }
+            case .t1LP(_):
+                if let result = T1LPRepsSubType.results[formalName]?.last, result.tag != .failed, result.pname == app.program.name {
                     return result.reps
                 }
             case .t2(_):

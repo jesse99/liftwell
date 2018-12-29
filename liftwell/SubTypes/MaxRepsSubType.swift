@@ -99,10 +99,7 @@ class MaxRepsSubType: ExerciseInfo {
     }
     
     func errors() -> [String] {
-        var problems: [String] = []
-        if goalReps <= 0 {
-            problems += ["subtype.goalReps should be greater than zero."]
-        }
+        let problems: [String] = []
         return problems
     }
     
