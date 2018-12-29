@@ -32,7 +32,7 @@ fileprivate func barbellT2(_ name: String, _ formalName: String, _ cycles: [(Str
     let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: bumpers, magnets: [])
     let type = WeightsType(apparatus, .cyclic(subtype))
     
-    return Exercise(name, formalName, .weights(type), main: true)
+    return Exercise(name, formalName, .weights(type), main: false)
 }
 
 fileprivate func dumbbell2T2(_ name: String, _ formalName: String, _ cycles: [(String, String, String)], restMins: Double) -> Exercise {
@@ -48,7 +48,7 @@ fileprivate func dumbbell2T2(_ name: String, _ formalName: String, _ cycles: [(S
     let apparatus = Apparatus.dumbbells(weights: defaultDumbbells(), magnets: defaultMagnets(), paired: true)
     let type = WeightsType(apparatus, .cyclic(subtype))
     
-    return Exercise(name, formalName, .weights(type), main: true)
+    return Exercise(name, formalName, .weights(type), main: false)
 }
 
 func GZCL() -> Program {

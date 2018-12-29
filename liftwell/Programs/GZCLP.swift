@@ -31,7 +31,7 @@ fileprivate func barbellT2(_ name: String, _ formalName: String, _ cycles: [(Str
     let apparatus = Apparatus.barbell(bar: 45.0, collar: 0.0, plates: defaultPlates(), bumpers: bumpers, magnets: [])
     let type = WeightsType(apparatus, .t2(subtype))
     
-    return Exercise(name, formalName, .weights(type), main: true)
+    return Exercise(name, formalName, .weights(type), main: false)
 }
 
 func cableT3(_ name: String, _ formalName: String, _ worksets: String, restMins: Double, main: Bool = false) -> Exercise {
