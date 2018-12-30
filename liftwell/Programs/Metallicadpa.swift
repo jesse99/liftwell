@@ -22,9 +22,9 @@ func Metallicadpa() -> Program {
         barbell("Volume OHP",         "Overhead Press",          "",  assistence, restMins: 2.0),
         dumbbell2("DB Incline Press", "Dumbbell Incline Press",  "", assistence, restMins: 2.0),
         cable("Triceps Pushdown",     "Triceps Pushdown (rope)", "", assistence, restMins: 2.0),
-        dumbbell2("Lateral Raise 1",   "Side Lateral Raise",      "", "15-20".x(3), restMins: 2.0),
-        dumbbell2("Skull Crushers",   "Skull Crushers",          "", assistence, restMins: 2.0),
-        dumbbell2("Lateral Raise 2",   "Side Lateral Raise",      "", "15-20".x(3), restMins: 2.0),
+        dumbbell2("Lateral Raise 1",  "Side Lateral Raise",      "", "15-20".x(3), restMins: 2.0),
+        barbell("Skull Crushers",     "Skull Crushers",          "", assistence, restMins: 2.0),
+        dumbbell2("Lateral Raise 2",  "Side Lateral Raise",      "", "15-20".x(3), restMins: 2.0),
 
         // Leg 1
         barbell("Squat",             "Low bar Squat",        warmup,  "5".x(3, amrap: true), restMins: 3.0, main: true),

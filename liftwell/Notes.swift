@@ -1063,14 +1063,6 @@ let builtInNotes: [String: String] = [
             "Don't let your shoulders shrug up."],
         links: ["Link": "https://www.youtube.com/watch?v=dvkIaarnf0g", "Body Weight Rows": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/row"]),
     
-    "Incline Cable Flye": createNote(
-        notes: [
-            "Position a bench between two low pulleys.",
-            "Grab the cable attachments and bring your hands above your head.",
-            "Lower your hands until you feel a stretch in your chest.",
-            "Keep elbows slightly bent."],
-        links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/incline-cable-flye"]),
-    
     "Incline Bench Press": createNote(
         notes: [
             "Use a bench incline such that your head is higher than your hips.",
@@ -1078,6 +1070,14 @@ let builtInNotes: [String: String] = [
             "Lower bar to sternum.",
             "Keep elbows slightly in."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/barbell-incline-bench-press-medium-grip"]),
+    
+    "Incline Cable Flye": createNote(
+        notes: [
+            "Position a bench between two low pulleys.",
+            "Grab the cable attachments and bring your hands above your head.",
+            "Lower your hands until you feel a stretch in your chest.",
+            "Keep elbows slightly bent."],
+        links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/incline-cable-flye"]),
     
     "Incline Dumbbell Bench Press": createNote(
         notes: [

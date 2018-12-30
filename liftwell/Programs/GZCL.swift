@@ -123,7 +123,7 @@ func GZCL() -> Program {
         bodyweight("T3 Ab Wheel",     "Ab Wheel Rollout",   t3, restMins: 1.0),
         cable("T3 Cable Row",         "Seated Cable Row",   "", t3, restMins: 1.0),
         cable("T3 Cable Crunch",      "Cable Crunch",       "", t3, restMins: 1.0),
-        dumbbell2("T3 Skullcrusher",  "Skull Crushers",     "", t3b, restMins: 1.0),
+        barbell("T3 Skullcrusher",    "Skull Crushers",     "", t3b, restMins: 1.0),
         dumbbell2("T3 Arnold Press",  "Arnold Press",       "", t3b, restMins: 1.0),
         dumbbell2("T3 Lateral Raise", "Side Lateral Raise", "", t3b, restMins: 1.0),
         dumbbell1("T3 DB Row",        "Kroc Row",           "", t3b, restMins: 1.0),
