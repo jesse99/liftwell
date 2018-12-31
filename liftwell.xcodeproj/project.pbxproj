@@ -65,6 +65,7 @@
 		377AAA5C21D6AACC00BD661F /* T1LPRepsSubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA5B21D6AACC00BD661F /* T1LPRepsSubType.swift */; };
 		377AAA5E21D7DEB800BD661F /* Metallicadpa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA5D21D7DEB800BD661F /* Metallicadpa.swift */; };
 		377AAA6021D83F0500BD661F /* PHUL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA5F21D83F0500BD661F /* PHUL.swift */; };
+		377AAA6221D9353600BD661F /* PHAT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA6121D9353600BD661F /* PHAT.swift */; };
 		37B4352121B2194000EDC53E /* BestButt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352021B2194000EDC53E /* BestButt.swift */; };
 		37B4352321B30D5B00EDC53E /* RepsBodySubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */; };
 		37B4352521B34CEF00EDC53E /* Bootyful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352421B34CEF00EDC53E /* Bootyful.swift */; };
@@ -172,6 +173,7 @@
 		377AAA5B21D6AACC00BD661F /* T1LPRepsSubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = T1LPRepsSubType.swift; sourceTree = "<group>"; };
 		377AAA5D21D7DEB800BD661F /* Metallicadpa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metallicadpa.swift; sourceTree = "<group>"; };
 		377AAA5F21D83F0500BD661F /* PHUL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHUL.swift; sourceTree = "<group>"; };
+		377AAA6121D9353600BD661F /* PHAT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAT.swift; sourceTree = "<group>"; };
 		37B4352021B2194000EDC53E /* BestButt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestButt.swift; sourceTree = "<group>"; };
 		37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsBodySubType.swift; sourceTree = "<group>"; };
 		37B4352421B34CEF00EDC53E /* Bootyful.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootyful.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				377AAA5D21D7DEB800BD661F /* Metallicadpa.swift */,
 				3720592721CB4D0B00641BE9 /* Monolith.swift */,
 				3720592921CF19A500641BE9 /* nSuns.swift */,
+				377AAA6121D9353600BD661F /* PHAT.swift */,
 				37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */,
 				377AAA5F21D83F0500BD661F /* PHUL.swift */,
 			);
@@ -601,6 +604,7 @@
 				37B4352721B357EF00EDC53E /* Gluteal.swift in Sources */,
 				37B4352321B30D5B00EDC53E /* RepsBodySubType.swift in Sources */,
 				374FE94F218A5B8900CFC284 /* PlatesController.swift in Sources */,
+				377AAA6221D9353600BD661F /* PHAT.swift in Sources */,
 				3720592A21CF19A500641BE9 /* nSuns.swift in Sources */,
 				37286826216259AE005F6FD0 /* AppDelegate.swift in Sources */,
 				374D3EDE217D50EF00AC828D /* ColorExtensions.swift in Sources */,
