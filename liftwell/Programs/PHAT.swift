@@ -132,7 +132,6 @@ func PHAT() -> Program {
 **Notes**
 * This program has a lot of volume: until you adapt to the work load you may want to skip some of the assistence exercises.
 * For the power lifts focus on lifting heavy and don't be afraid to take long rests (up to six minutes).
-* It can be a good idea to rotate through power lifts (use the Options screen in a workout).
 * For the speed lifts focus on explosive movements and don't rest longer than ninety seconds.
 * Layne recommends deloading every 6-12 weeks: for 1-3 weeks lift at 60-70% of normal.
 """

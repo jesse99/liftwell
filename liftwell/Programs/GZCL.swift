@@ -142,7 +142,7 @@ func GZCL() -> Program {
     let tags: [Program.Tags] = [.advanced, .strength, .barbell, .unisex, .threeDays, .fourDays, .ageUnder40]
     
     let description = """
-[GZCL](http://swoleateveryheight.blogspot.com/2014/07/the-gzcl-method-simplified_13.html) isn't really a program but more of a template describing how to organize your [workouts](http://swoleateveryheight.blogspot.com/2012/11/the-gzcl-method-for-powerlifting.html). The workouts are organized into tiers:
+[GZCL](http://swoleateveryheight.blogspot.com/2014/07/the-gzcl-method-simplified_13.html) from Cody Lefever isn't really a program but more of a template describing how to organize your [workouts](http://swoleateveryheight.blogspot.com/2012/11/the-gzcl-method-for-powerlifting.html). The workouts are organized into tiers:
 
 **Tier 1**
 These are the exercises that you think are the most important, typically squat, bench press, deadlift, and perhaps OHP. Tier 1 exercises are performed first within a workout for 10-15 total reps with 1-3 reps per set. All the reps should be completed without too much grinding. If not drop the weight and finish your reps (this can be done just for that workout if the problem is due to something like a bad night's rest or for the mesocycle if it's a persistent problem).

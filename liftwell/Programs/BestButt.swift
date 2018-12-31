@@ -54,7 +54,7 @@ func BestButt14() -> Program {
     
     let tags: [Program.Tags] = [.beginner, .hypertrophy, .minimal, .threeDays, .female, .ageUnder40, .age40s, .age50s]
     let description = """
-This is the weeks 1-4 of the at home beginner program from [Strong Curves: A Woman's Guide to Building a Better Butt and Body](https://www.amazon.com/Strong-Curves-Womans-Building-Better-ebook/dp/B00C4XI0QM/ref=sr_1_1?ie=UTF8&qid=1516764374&sr=8-1&keywords=strong+curves). The program is as follows:
+This is the weeks 1-4 of the at home beginner program from [Strong Curves: A Woman's Guide to Building a Better Butt and Body](https://www.amazon.com/Strong-Curves-Womans-Building-Better-ebook/dp/B00C4XI0QM/ref=sr_1_1?ie=UTF8&qid=1516764374&sr=8-1&keywords=strong+curves) by Bret Contreras. The program is as follows:
 
 **Workout A**
 * Glute Bridge 3x10-20
@@ -145,7 +145,7 @@ func BestButt58() -> Program {
     
     let tags: [Program.Tags] = [.beginner, .hypertrophy, .minimal, .threeDays, .female, .ageUnder40, .age40s, .age50s]
     let description = """
-This is weeks 5-8 of the at home beginner program from [Strong Curves: A Woman's Guide to Building a Better Butt and Body](https://www.amazon.com/Strong-Curves-Womans-Building-Better-ebook/dp/B00C4XI0QM/ref=sr_1_1?ie=UTF8&qid=1516764374&sr=8-1&keywords=strong+curves). The program is as follows::
+This is weeks 5-8 of the at home beginner program from [Strong Curves: A Woman's Guide to Building a Better Butt and Body](https://www.amazon.com/Strong-Curves-Womans-Building-Better-ebook/dp/B00C4XI0QM/ref=sr_1_1?ie=UTF8&qid=1516764374&sr=8-1&keywords=strong+curves) by Bret Contreras. The program is as follows::
 
 **Workout A**
 * Hip Thrust 3x10-30
@@ -235,7 +235,7 @@ func BestButt912() -> Program {
     
     let tags: [Program.Tags] = [.beginner, .hypertrophy, .minimal, .threeDays, .female, .ageUnder40, .age40s, .age50s]
     let description = """
-This is weeks 9-12 of the at home beginner program from [Strong Curves: A Woman's Guide to Building a Better Butt and Body](https://www.amazon.com/Strong-Curves-Womans-Building-Better-ebook/dp/B00C4XI0QM/ref=sr_1_1?ie=UTF8&qid=1516764374&sr=8-1&keywords=strong+curves). The program is as follows:
+This is weeks 9-12 of the at home beginner program from [Strong Curves: A Woman's Guide to Building a Better Butt and Body](https://www.amazon.com/Strong-Curves-Womans-Building-Better-ebook/dp/B00C4XI0QM/ref=sr_1_1?ie=UTF8&qid=1516764374&sr=8-1&keywords=strong+curves) by Bret Contreras. The program is as follows:
 
 **Workout A**
 * Shoulder Elevated Single-leg Hip Thrust 3x8-20 (per side)

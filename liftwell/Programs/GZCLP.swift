@@ -87,7 +87,7 @@ fileprivate func t2Cycles() -> [(String, String, String)] {
 }
 
 fileprivate let details = """
-[This program](https://www.reddit.com/r/Fitness/wiki/gzclp) and [5/3/1](https://old.reddit.com/r/Fitness/wiki/531-beginners) are the two programs recommended by reddit/fitness if you're familiar with the barbell lifts or if you have run [Phrak's Greyskull](https://old.reddit.com/r/Fitness/wiki/phraks-gslp) program for a few months. This program is a bit more complex than most other beginner programs but offers a more balanced selection of exercises and more sophisticated weight progression.
+[This program](https://www.reddit.com/r/Fitness/wiki/gzclp) and [5/3/1](https://old.reddit.com/r/Fitness/wiki/531-beginners) are the two programs recommended by reddit/fitness if you're familiar with the barbell lifts or if you have run [Phrak's Greyskull](https://old.reddit.com/r/Fitness/wiki/phraks-gslp) program for a few months. This program is from Cody Lefever and is a bit more complex than most other beginner programs but offers a more balanced selection of exercises and more sophisticated weight progression.
 
 The exercises are divided up into three [tiers](http://swoleateveryheight.blogspot.com/2014/07/the-gzcl-method-simplified_13.html), Tier 1 are the main lifts. They are done as 5x3+ (where the plus means As Many Reps As Possible for the last set). If you are able to do 3 or more reps in the last set the weight is automatically increased. If you can't do 3 reps on the AMRAP set then the next time 6x2+ is used. When you fail on that 10x1+ is used. When that fails the app will ask you to rest 2-3 days and then help you find a new five rep max to start the cycle over again.
 

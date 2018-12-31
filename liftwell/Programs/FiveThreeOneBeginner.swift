@@ -67,7 +67,7 @@ func FiveThreeOneBeginner() -> Program {
     // TODO: this did call for re-checking the training max after every third cycle. If we do this we should ask the user if he really wants
     // to do that and we'll need to make sure that this can be edited.
     let description = """
-[This program](https://old.reddit.com/r/Fitness/wiki/531-beginners) and [GZCLP](https://www.reddit.com/r/Fitness/wiki/gzclp) are the two programs recommended by reddit/fitness if you're familiar with the barbell lifts or if you have run [Phrak's Greyskull](https://old.reddit.com/r/Fitness/wiki/phraks-gslp) program for a few months. This program is based on three week cycles where each week the volume goes down but percentages go up. After the third week the weight should normally go up. It's a three days a week program.
+[This program](https://old.reddit.com/r/Fitness/wiki/531-beginners) and [GZCLP](https://www.reddit.com/r/Fitness/wiki/gzclp) are the two programs recommended by reddit/fitness if you're familiar with the barbell lifts or if you have run [Phrak's Greyskull](https://old.reddit.com/r/Fitness/wiki/phraks-gslp) program for a few months. This program is by Jim Wendler and is based on three week cycles where each week the volume goes down but percentages go up. After the third week the weight should normally go up. It's a three days a week program.
 
 Before each workout do 10-15 reps over 3 sets of Box Jumps, Broad Jumps, or Medicine Ball Throws.
 
