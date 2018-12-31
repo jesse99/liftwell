@@ -19,7 +19,7 @@ func PHUL() -> Program {
 
         // Lower Power
         barbell("Squat",          "Low bar Squat",        warmup, "3-5".x(4), restMins: 3.0, main: true),
-        barbell("Deadlift",       "Deadlift",             warmup, "3-5".x(4), restMins: 3.0, main: true),
+        barbell("Deadlift",       "Deadlift",             warmup, "3-5".x(4), restMins: 3.0, bumpers: defaultBumpers(), main: true),
         pairedPlates("Leg Press", "Leg Press",            "", "10-15".x(4), restMins: 2.0),
         machine("Leg Curl",       "Seated Leg Curl",      "", "6-10".x(4), restMins: 2.0),
         barbell("Calf Raises",    "Standing Calf Raises", "", "6-10".x(4), restMins: 2.0),
