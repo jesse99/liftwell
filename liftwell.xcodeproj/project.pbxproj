@@ -66,6 +66,7 @@
 		377AAA5E21D7DEB800BD661F /* Metallicadpa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA5D21D7DEB800BD661F /* Metallicadpa.swift */; };
 		377AAA6021D83F0500BD661F /* PHUL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA5F21D83F0500BD661F /* PHUL.swift */; };
 		377AAA6221D9353600BD661F /* PHAT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA6121D9353600BD661F /* PHAT.swift */; };
+		377AAA6421DADCC800BD661F /* Stopgap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA6321DADCC800BD661F /* Stopgap.swift */; };
 		37B4352121B2194000EDC53E /* BestButt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352021B2194000EDC53E /* BestButt.swift */; };
 		37B4352321B30D5B00EDC53E /* RepsBodySubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */; };
 		37B4352521B34CEF00EDC53E /* Bootyful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352421B34CEF00EDC53E /* Bootyful.swift */; };
@@ -174,6 +175,7 @@
 		377AAA5D21D7DEB800BD661F /* Metallicadpa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metallicadpa.swift; sourceTree = "<group>"; };
 		377AAA5F21D83F0500BD661F /* PHUL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHUL.swift; sourceTree = "<group>"; };
 		377AAA6121D9353600BD661F /* PHAT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAT.swift; sourceTree = "<group>"; };
+		377AAA6321DADCC800BD661F /* Stopgap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopgap.swift; sourceTree = "<group>"; };
 		37B4352021B2194000EDC53E /* BestButt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestButt.swift; sourceTree = "<group>"; };
 		37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsBodySubType.swift; sourceTree = "<group>"; };
 		37B4352421B34CEF00EDC53E /* Bootyful.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootyful.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				377AAA6121D9353600BD661F /* PHAT.swift */,
 				37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */,
 				377AAA5F21D83F0500BD661F /* PHUL.swift */,
+				377AAA6321DADCC800BD661F /* Stopgap.swift */,
 			);
 			path = Programs;
 			sourceTree = "<group>";
@@ -642,6 +645,7 @@
 				374FE947218627AC00CFC284 /* DumbbellController.swift in Sources */,
 				377AAA5C21D6AACC00BD661F /* T1LPRepsSubType.swift in Sources */,
 				373CCFBD21A7900E00096291 /* MaxRepsSubType.swift in Sources */,
+				377AAA6421DADCC800BD661F /* Stopgap.swift in Sources */,
 				37286828216259AE005F6FD0 /* WorkoutsTabController.swift in Sources */,
 				373CCFC521A7B22800096291 /* SubTypeHelpers.swift in Sources */,
 				37B4352521B34CEF00EDC53E /* Bootyful.swift in Sources */,
