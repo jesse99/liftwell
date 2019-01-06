@@ -146,12 +146,7 @@ class T1LPRepsSubType: BaseCyclicRepsSubType {
         Self.results[exercise.formalName] = myResults
         
         if amrapReps! >= requestedReps {
-            switch exercise.type {
-            case .body(_): break
-            case .weights(let type):
-                var weight = aweight.getBaseWorkingWeight()
-                let w = Weight(weight, type.apparatus)
-                weight = w.nextWeight()
+            if let weight = exercise.getNextWeight() {
                 setWorkingWeight(weight)
             }
             completion()
@@ -192,11 +187,8 @@ class T1LPRepsSubType: BaseCyclicRepsSubType {
         var subtitle = ""
         if let myResults = Self.results[exercise.formalName], let last = myResults.last, last.oneMax > 0.0 {
             let fiveMax = (last.percent * last.oneMax)/0.85
-            switch exercise.type {
-            case .body(_):
-                assert(false)
-            case .weights(let type):
-                let w = Weight(fiveMax, type.apparatus).closest()
+            if let apparatus = exercise.getApparatus() {
+                let w = Weight(fiveMax, apparatus).closest()
                 subtitle = "5RM was \(w.text)"
             }
         }

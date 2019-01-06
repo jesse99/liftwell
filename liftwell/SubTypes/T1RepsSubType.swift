@@ -113,40 +113,38 @@ class T1RepsSubType: BaseCyclicRepsSubType {
     private func maybeAdvance(_ exercise: Exercise, _ requestedReps: Int, _ actualReps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let weight = getBaseWorkingWeight()
         
-        switch exercise.type {
-        case .body(_): assert(false); completion()
-        case .weights(let type):
+        if let apparatus = exercise.getApparatus() {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             
             let by = actualReps - requestedReps
             if by == 1 {
                 let label = advanceWeightLabel(exercise, weight, by: 1)
-                let action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 1); completion()}
+                let action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, apparatus, 1); completion()}
                 alert.addAction(action)
                 alert.preferredAction = action
             
             } else if by == 2 {
                 var label = advanceWeightLabel(exercise, weight, by: 2)
-                var action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 2); completion()}
+                var action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, apparatus, 2); completion()}
                 alert.addAction(action)
                 alert.preferredAction = action
                 
                 label = advanceWeightLabel(exercise, weight, by: 1)
-                action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 1); completion()}
+                action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, apparatus, 1); completion()}
                 alert.addAction(action)
             
             } else if by >= 3 {
                 var label = advanceWeightLabel(exercise, weight, by: 3)
-                var action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 3); completion()}
+                var action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, apparatus, 3); completion()}
                 alert.addAction(action)
                 alert.preferredAction = action
                 
                 label = advanceWeightLabel(exercise, weight, by: 2)
-                action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 2); completion()}
+                action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, apparatus, 2); completion()}
                 alert.addAction(action)
                 
                 label = advanceWeightLabel(exercise, weight, by: 1)
-                action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 1); completion()}
+                action = UIAlertAction(title: "Advance by \(label)", style: .default) {_ in self.doAdvance(exercise, apparatus, 1); completion()}
                 alert.addAction(action)
             }
             

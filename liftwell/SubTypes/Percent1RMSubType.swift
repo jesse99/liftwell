@@ -90,7 +90,7 @@ class Percent1RMSubType: ExerciseInfo {
         if let last = originalSets.worksets.last, last.amrap {
             errors.append("Percent subtype doesn't support amrap sets.")
         }
-        if getOtherType() == nil {
+        if getOtherType(otherName) == nil {
             errors.append("\(otherName) isn't using an apparatus.")
         }
         return errors
@@ -145,7 +145,7 @@ class Percent1RMSubType: ExerciseInfo {
     }
     
     func sublabel(_ exercise: Exercise) -> String {
-        if let type = getOtherType() {
+        if let type = getOtherType(otherName) {
             return sets.sublabel(type.apparatus, weight, reps)
         } else {
             return ""
@@ -239,7 +239,7 @@ class Percent1RMSubType: ExerciseInfo {
     }
     
     private func getActivities(_ exercise: Exercise) -> (Int, [Activity]) {
-        if let type = getOtherType() {
+        if let type = getOtherType(otherName) {
             return sets.activities(weight, type.apparatus, currentReps: reps)
         } else {
             return (0, [])
@@ -260,10 +260,10 @@ class Percent1RMSubType: ExerciseInfo {
         return (Sets(warmups, worksets, backoff), weight, reps)
     }
     
-    private func getRepsAndWeight() -> (Int, Double) {
+    func getRepsAndWeight() -> (Int, Double) {
         let (min, max) = originalSets.repRange(currentReps: nil)
         var currentReps = max
-        if let type = getOtherType() {
+        if let type = getOtherType(otherName) {
             if let oR = otherReps() {
                 if var baseWeight = otherWeight(), let oneRepMax = get1RM(baseWeight, oR) {
                     let targetWeight = percent*oneRepMax
@@ -285,7 +285,7 @@ class Percent1RMSubType: ExerciseInfo {
     }
     
     func otherWeight() -> Double? {
-        if let other = currentProgram.findExercise(otherName), let type = getOtherType() {
+        if let other = currentProgram.findExercise(otherName), let type = getOtherType(otherName) {
             switch type.subtype {
             case .amrap(_):
                 if let results = AMRAPSubType.results[other.formalName], let last = results.last {
@@ -342,7 +342,7 @@ class Percent1RMSubType: ExerciseInfo {
     }
 
     private func otherReps() -> Int? {
-        if let other = currentProgram.findExercise(otherName), let type = getOtherType() {
+        if let other = currentProgram.findExercise(otherName), let type = getOtherType(otherName) {
             switch type.subtype {
             case .amrap(_):
                 if let results = AMRAPSubType.results[other.formalName], let last = results.last {
@@ -398,8 +398,8 @@ class Percent1RMSubType: ExerciseInfo {
         return nil
     }
 
-    private func getOtherType() -> WeightsType? {
-        if let other = currentProgram.findExercise(otherName) {
+    private func getOtherType(_ name: String) -> WeightsType? {
+        if let other = currentProgram.findExercise(name) {
             switch other.type {     // type needs to be something that uses an apparatus
             case .weights(let type):
                 return type

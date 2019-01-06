@@ -68,6 +68,7 @@
 		377AAA6221D9353600BD661F /* PHAT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA6121D9353600BD661F /* PHAT.swift */; };
 		377AAA6421DADCC800BD661F /* Stopgap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA6321DADCC800BD661F /* Stopgap.swift */; };
 		377AAA6621DAE9E900BD661F /* DB_PPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA6521DAE9E900BD661F /* DB_PPL.swift */; };
+		377AAA6E21DF091300BD661F /* BodyWeightFitness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA6D21DF091300BD661F /* BodyWeightFitness.swift */; };
 		37B4352121B2194000EDC53E /* BestButt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352021B2194000EDC53E /* BestButt.swift */; };
 		37B4352321B30D5B00EDC53E /* RepsBodySubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */; };
 		37B4352521B34CEF00EDC53E /* Bootyful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352421B34CEF00EDC53E /* Bootyful.swift */; };
@@ -178,6 +179,7 @@
 		377AAA6121D9353600BD661F /* PHAT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAT.swift; sourceTree = "<group>"; };
 		377AAA6321DADCC800BD661F /* Stopgap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopgap.swift; sourceTree = "<group>"; };
 		377AAA6521DAE9E900BD661F /* DB_PPL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB_PPL.swift; sourceTree = "<group>"; };
+		377AAA6D21DF091300BD661F /* BodyWeightFitness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyWeightFitness.swift; sourceTree = "<group>"; };
 		37B4352021B2194000EDC53E /* BestButt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestButt.swift; sourceTree = "<group>"; };
 		37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsBodySubType.swift; sourceTree = "<group>"; };
 		37B4352421B34CEF00EDC53E /* Bootyful.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootyful.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				37B4352021B2194000EDC53E /* BestButt.swift */,
+				377AAA6D21DF091300BD661F /* BodyWeightFitness.swift */,
 				37B4352421B34CEF00EDC53E /* Bootyful.swift */,
 				3720592F21D156F600641BE9 /* CAP3.swift */,
 				377AAA6521DAE9E900BD661F /* DB_PPL.swift */,
@@ -588,6 +591,7 @@
 				37E7BF0921975DCD0087E7FE /* Achievement.swift in Sources */,
 				377AAA6021D83F0500BD661F /* PHUL.swift in Sources */,
 				373CCFCB21A9DF6000096291 /* T3RepsSubType.swift in Sources */,
+				377AAA6E21DF091300BD661F /* BodyWeightFitness.swift in Sources */,
 				374FE9452185FE3C00CFC284 /* TimedOptionsController.swift in Sources */,
 				373CCFCD21A9E73200096291 /* BaseRepsApparatusSubType.swift in Sources */,
 				3720592E21D0222C00641BE9 /* DerivedSubType.swift in Sources */,

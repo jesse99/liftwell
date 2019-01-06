@@ -61,7 +61,7 @@ class BaseRepsApparatusSubType: BaseApparatusSubType, ExerciseInfo {
         
         switch savedExercise.type {
         case .body(_):
-            assert(false)
+            break               // there's nothing that we can use to sync with if the saved exercise doesn't have an apparatus
         case .weights(let saved):
             switch saved.subtype {
             case .amrap(let savedSubtype): super.sync(program, savedSubtype, sameSets: same)
@@ -121,11 +121,11 @@ class BaseRepsApparatusSubType: BaseApparatusSubType, ExerciseInfo {
     }
     
     func sublabel(_ exercise: Exercise) -> String {
-        let weight = getBaseWorkingWeight()
-        switch exercise.type {
-        case .body(_): return sets.sublabel(nil, weight, workingReps)
-        case .weights(let type): return sets.sublabel(type.apparatus, weight, workingReps)
+        if let apparatus = exercise.getApparatus() {
+            let weight = getBaseWorkingWeight()
+            return sets.sublabel(apparatus, weight, workingReps)
         }
+        return ""
     }
         
     func prevLabel(_ exercise: Exercise) -> (String, UIColor) {
@@ -195,11 +195,11 @@ class BaseRepsApparatusSubType: BaseApparatusSubType, ExerciseInfo {
     }
     
     private func getActivities(_ exercise: Exercise) -> (Int, [Activity]) {
-        let weight = getBaseWorkingWeight()
-        switch exercise.type {
-        case .body(_): return sets.activities(weight, currentReps: workingReps)
-        case .weights(let type): return sets.activities(weight, type.apparatus, currentReps: workingReps)
+        if let apparatus = exercise.getApparatus() {
+            let weight = getBaseWorkingWeight()
+            return sets.activities(weight, apparatus, currentReps: workingReps)
         }
+        return (0, [])
     }
     
     func doGetResults(_ exercise: Exercise) -> [RepsResult]? {

@@ -63,12 +63,7 @@ class T2RepsSubType: BaseCyclicRepsSubType {
             }
 
         } else {
-            switch exercise.type {
-            case .body(_): break
-            case .weights(let type):
-                var weight = aweight.getBaseWorkingWeight()
-                let w = Weight(weight, type.apparatus)
-                weight = w.nextWeight()
+            if let weight = exercise.getNextWeight() {
                 setWorkingWeight(weight)
             }
             completion()

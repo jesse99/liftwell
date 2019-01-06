@@ -71,15 +71,12 @@ class AMRAP1RMSubType: BaseCyclicRepsSubType {
                 switch aweight {
                 case .trainingMax(percent: let percent, oneRepMax: let oldMax):
                     if max > oldMax {
-                        switch exercise.type {
-                        case .body(_): break
-                        case .weights(let type):
-                            let w = Weight(max, type.apparatus)
+                        if let apparatus = exercise.getApparatus() {
+                            let w = Weight(max, apparatus)
                             let weight = w.closest(above: oldMax).weight
                             aweight = .trainingMax(percent: percent, oneRepMax: weight)
                             updated = true
                         }
-
                     }
                 default:
                     assert(false)
@@ -89,19 +86,15 @@ class AMRAP1RMSubType: BaseCyclicRepsSubType {
             if !updated {
                 var weight = aweight.getBaseWorkingWeight()
                 if result.reps >= requestedReps {
-                    switch exercise.type {
-                    case .body(_): break
-                    case .weights(let type):
-                        let w = Weight(weight, type.apparatus)
+                    if let apparatus = exercise.getApparatus() {
+                        let w = Weight(weight, apparatus)
                         weight = w.nextWeight()
                         setWorkingWeight(weight)
                     }
                     
                 } else {
-                    switch exercise.type {
-                    case .body(_): break
-                    case .weights(let type):
-                        let w = Weight(weight, type.apparatus)
+                    if let apparatus = exercise.getApparatus() {
+                        let w = Weight(weight, apparatus)
                         weight = w.prevWeight()
                         setWorkingWeight(weight)
                     }

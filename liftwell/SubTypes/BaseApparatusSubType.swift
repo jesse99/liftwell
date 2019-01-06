@@ -174,9 +174,7 @@ class BaseApparatusSubType {
     func presentFinalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
         let weight = getBaseWorkingWeight()
         
-        switch exercise.type {
-        case .body(_): assert(false); completion()
-        case .weights(let type):
+        if let apparatus = exercise.getApparatus() {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             let (minReps, maxReps, _) = getBaseRepRange()
             let variableReps = minReps != maxReps
@@ -186,10 +184,10 @@ class BaseApparatusSubType {
             let label2 = variableReps ? "2 reps" : advanceWeightLabel(exercise, weight, by: 2)
             let label1 = variableReps ? "1 rep" : advanceWeightLabel(exercise, weight, by: 1)
             
-            let advance4 = UIAlertAction(title: "Advance by \(label4)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 4); completion()}
-            let advance3 = UIAlertAction(title: "Advance by \(label3)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 3); completion()}
-            let advance2 = UIAlertAction(title: "Advance by \(label2)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 2); completion()}
-            let advance = UIAlertAction(title: "Advance by \(label1)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, 1); completion()}
+            let advance4 = UIAlertAction(title: "Advance by \(label4)", style: .default) {_ in self.doAdvance(exercise, apparatus, 4); completion()}
+            let advance3 = UIAlertAction(title: "Advance by \(label3)", style: .default) {_ in self.doAdvance(exercise, apparatus, 3); completion()}
+            let advance2 = UIAlertAction(title: "Advance by \(label2)", style: .default) {_ in self.doAdvance(exercise, apparatus, 2); completion()}
+            let advance = UIAlertAction(title: "Advance by \(label1)", style: .default) {_ in self.doAdvance(exercise, apparatus, 1); completion()}
             let maintain = UIAlertAction(title: "Maintain", style: .default) {_ in completion()}
             
             switch tag {
@@ -217,7 +215,7 @@ class BaseApparatusSubType {
                 alert.addAction(advance)
                 alert.addAction(maintain)
 
-                let deloads = exercise.findDeloads(weight, 0.05).map {label, amount in UIAlertAction(title: "Deload by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, amount); completion()}}
+                let deloads = exercise.findDeloads(weight, 0.05).map {label, amount in UIAlertAction(title: "Deload by \(label)", style: .default) {_ in self.doAdvance(exercise, apparatus, amount); completion()}}
                 for deload in deloads {
                     alert.addAction(deload)
                 }
@@ -225,7 +223,7 @@ class BaseApparatusSubType {
             case .failed:
                 alert.addAction(maintain)
 
-                let deloads = exercise.findDeloads(weight, 0.10).map {label, amount in UIAlertAction(title: "Deload by \(label)", style: .default) {_ in self.doAdvance(exercise, type.apparatus, amount); completion()}}
+                let deloads = exercise.findDeloads(weight, 0.10).map {label, amount in UIAlertAction(title: "Deload by \(label)", style: .default) {_ in self.doAdvance(exercise, apparatus, amount); completion()}}
                 for deload in deloads {
                     alert.addAction(deload)
                 }

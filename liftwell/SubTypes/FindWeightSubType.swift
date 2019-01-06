@@ -107,13 +107,9 @@ class FindWeightSubType: ExerciseInfo {
     }
     
     func current(_ exercise: Exercise) -> Activity {
-        let (index, finished) = getState()
-        switch exercise.type {
-        case .body(_):
-            assert(false)
-            abort()
-        case .weights(let type):
-            let currentWeight = Weight(weight, type.apparatus).closest()
+        if let apparatus = exercise.getApparatus() {
+            let (index, finished) = getState()
+            let currentWeight = Weight(weight, apparatus).closest()
             return Activity(
                 title: "Set \(index)",
                 subtitle: subtitle,
@@ -122,6 +118,9 @@ class FindWeightSubType: ExerciseInfo {
                 buttonName: finished ? "Done" : "Next",
                 showStartButton: true,
                 color: nil)
+        } else {
+            assert(false)
+            abort()
         }
     }
     
@@ -184,13 +183,9 @@ class FindWeightSubType: ExerciseInfo {
     }
     
     private func doAdvance(_ exercise: Exercise, _ index: Int, _ amount: Int) {
-        switch exercise.type {
-        case .body(_):
-            assert(false)
-            abort()
-        case .weights(let type):
+        if let apparatus = exercise.getApparatus() {
             for _ in 0..<amount {
-                weight = Weight(weight, type.apparatus).nextWeight()
+                weight = Weight(weight, apparatus).nextWeight()
             }
             set = .started(index + 1)
         }

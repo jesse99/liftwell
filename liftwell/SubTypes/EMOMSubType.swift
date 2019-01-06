@@ -301,10 +301,8 @@ class EMOMSubType: BaseCyclicRepsSubType {
                 switch aweight {
                 case .trainingMax(percent: let percent, oneRepMax: let oldMax):
                     if max > oldMax {
-                        switch exercise.type {
-                        case .body(_): break
-                        case .weights(let type):
-                            let w = Weight(max, type.apparatus)
+                        if let apparatus = exercise.getApparatus() {
+                            let w = Weight(max, apparatus)
                             let weight = w.closest(above: oldMax).weight
                             aweight = .trainingMax(percent: percent, oneRepMax: weight)
                             result.advanced = true
@@ -318,23 +316,16 @@ class EMOMSubType: BaseCyclicRepsSubType {
     }
     
     private func advanceByMinimum(_ exercise: Exercise, _ result: Result) {
-        switch exercise.type {
-        case .body(_): break
-        case .weights(let type):
-            let weight = aweight.getBaseWorkingWeight()
-            let w = Weight(weight, type.apparatus)
-            let next = w.nextWeight()
+        if let next = exercise.getNextWeight() {
             setWorkingWeight(next)
             result.advanced = true
         }
     }
 
     private func deload(_ exercise: Exercise, _ result: Result) {
-        switch exercise.type {
-        case .body(_): break
-        case .weights(let type):
+        if let apparatus = exercise.getApparatus() {
             let weight = aweight.getBaseWorkingWeight()
-            let w = Weight(0.925 * weight, type.apparatus)  // CAP3 calls for 5-10%
+            let w = Weight(0.925 * weight, apparatus)  // CAP3 calls for 5-10%
             let info = w.closest(below: weight)
             setWorkingWeight(info.weight)
         }

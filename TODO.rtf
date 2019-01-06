@@ -3,10 +3,10 @@
 }
 {\colortbl;\red255\green255\blue255;\red2\green2\blue2;\red0\green0\blue0;\red170\green13\blue145;
 \red92\green38\blue153;\red0\green116\blue0;\red196\green26\blue22;\red63\green110\blue116;\red28\green0\blue207;
-\red233\green233\blue233;\red162\green91\blue55;\red38\green71\blue75;}
+\red38\green71\blue75;\red233\green233\blue233;\red162\green91\blue55;}
 {\*\expandedcolortbl;;\csgenericrgb\c784\c784\c784;\csgenericrgb\c0\c0\c0;\csgenericrgb\c66500\c5200\c56900;
 \csgenericrgb\c35900\c14900\c60100;\csgenericrgb\c0\c45600\c0;\csgenericrgb\c77000\c10200\c8600;\csgenericrgb\c24700\c43100\c45600;\csgenericrgb\c11000\c0\c81000;
-\csgenericrgb\c91180\c91178\c91179;\csgenericrgb\c63573\c35812\c21460;\csgenericrgb\c14900\c27800\c29400;}
+\csgenericrgb\c14900\c27800\c29400;\csgenericrgb\c91180\c91178\c91179;\csgenericrgb\c63573\c35812\c21460;}
 \deftab864
 \pard\tx864\pardeftab864\pardirnatural\partightenfactor0
 {\field{\*\fldinst{HYPERLINK "https://codewithchris.com/ios-tab-bar-app/"}}{\fldrslt 
@@ -104,24 +104,206 @@ apocalypse\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab864\pardirnatural\partightenfactor0
 
 \b0 \cf2 $100 apple\
+$7 veggies, bananas\
+$5 printing\
 \
 \
+\
+\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
+
+\f2\fs34 \cf4 class\cf3  Progression: \cf5 NSObject\cf3 , \cf5 NSCoding
+\f0\fs24 \cf0 \
+\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
+
+\f2\fs34 \cf3     \cf4 init\cf3 (name: \cf5 String\cf3 , formalName: \cf5 String\cf3 , level: \cf5 String\cf3 , numSets: \cf5 Int\cf3 ?, numReps: \cf5 Int\cf3 ?, lastReps: \cf5 Int\cf3 ?)
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     \cf4 convenience\cf3  \cf4 init\cf3 (name: \cf5 String\cf3 , formalName: \cf5 String\cf3 , level: \cf5 String\cf3 , numSets: \cf5 Int\cf3 ?, numReps: \cf5 Int\cf3 ?)
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     \cf4 convenience\cf3  \cf4 init\cf3 (name: \cf5 String\cf3 , formalName: \cf5 String\cf3 , level: \cf5 String\cf3 )
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     \cf4 convenience\cf3  \cf4 init\cf3 (name: \cf5 String\cf3 , level: \cf5 String\cf3 )
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     \cf4 var\cf3  name: \cf5 String
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     \cf4 var\cf3  formalName: \cf5 String
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     \cf4 var\cf3  level: \cf5 String
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     \cf4 var\cf3  numSets: \cf5 Int\cf3 ?
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     \cf4 var\cf3  numReps: \cf5 Int\cf3 ?
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     \cf4 var\cf3  lastReps: \cf5 Int\cf3 ?\
+    \
+\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
+\cf4 class\cf3  BodyWeightExercise: \cf8 Exercise
+\f0\fs24 \cf0 \
+\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
+
+\f2\fs34 \cf3     \cf4 var\cf3  progression: [\cf8 Progression\cf3 ]
+\f0\fs24 \cf0 \
+\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
+
+\f2\fs34 \cf4 \
+class\cf3  BodyWeightSetting: \cf8 Setting
+\f0\fs24 \cf0 \
+\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
+
+\f2\fs34 \cf3     \cf4 var\cf3  progressionIndex: \cf5 Int
+\f0\fs24 \cf0 \
+\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
+
+\f2\fs34 \cf4 \
+class\cf3  BodyWeightResult: \cf8 ExerciseResult
+\f0\fs24 \cf0 \
+\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
+
+\f2\fs34 \cf3     \cf4 var\cf3  progressionIndex: \cf5 Int
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3    
+\f0\fs24 \cf0 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab864\pardirnatural\partightenfactor0
 
-\b \cf2 DB PPL\
+\fs48 \cf2 \
+\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
+
+\f2\fs34 \cf4 func\cf3  squat() -> \cf8 Exercise
+\f0\fs24 \cf0 \
+\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
+
+\f2\fs34 \cf3 \{
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     \cf4 return\cf3  \cf8 BodyWeightExercise\cf3 (numSets: \cf9 3\cf3 , numReps: \cf9 5\cf3 , targetReps: \cf9 8\cf3 , restSecs: \cf9 90\cf3 , formalName: \cf7 ""\cf3 , progression:
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3         [\cf8 BodyWeightExercise\cf3 .\cf8 Progression\cf3 (name: \cf7 "Assisted Squat"\cf3 , level: \cf7 "$INDEX $NAME"\cf3 ),
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3          \cf8 BodyWeightExercise\cf3 .\cf8 Progression\cf3 (name: \cf7 "Squat"\cf3 , formalName: \cf7 "Body-weight Squat"\cf3 , level: \cf7 "$INDEX $NAME"\cf3 ),
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3          \cf8 BodyWeightExercise\cf3 .\cf8 Progression\cf3 (name: \cf7 "Step-ups"\cf3 , level: \cf7 "$INDEX $NAME"\cf3 ),
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3          \cf8 BodyWeightExercise\cf3 .\cf8 Progression\cf3 (name: \cf7 "Deep Step-ups"\cf3 , level: \cf7 "$INDEX $NAME"\cf3 )])
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3 \}
+\f0\fs24 \cf0 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab864\pardirnatural\partightenfactor0
 
-\b0 \cf2 3x6-12 reps\
-	set is done when do both sides\
-if stall 2x then deload that lift by two steps\
+\fs48 \cf2 \
+Scapular Pulls\
+Arch Hangs\
+Negative Pullups\
+Pullups\
+Weighted Pullups\
 \
-add optional split squats\
+\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
+
+\f2\fs34 \cf3         \cf4 if\cf3  \cf4 let\cf3  apparatus = exercise.getApparatus() \{
+\f0\fs24 \cf0 \
+\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
+
+\f2\fs34 \cf4 \
 \
+extension\cf3  \cf8 Exercise\cf3  \{
+\f0\fs24 \cf0 \
+\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
+
+\f2\fs34 \cf3     \cf4 func\cf3  getInfo() -> \cf8 ExerciseInfo\cf3  \{
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     \cf4 func\cf3  getApparatus() -> \cf8 Apparatus\cf3 ? \{
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     \cf4 func\cf3  getBaseWeight() -> \cf5 Double\cf3 ? \{
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3 \
+    \cf4 func\cf3  getNextWeight() -> \cf5 Double\cf3 ? \{
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     \cf4 func\cf3  getPrevWeight() -> \cf5 Double\cf3 ? \{
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3 \
+    \cf4 func\cf3  getLastWeight() -> \cf5 Double\cf3 ? \{
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3     \cf4 func\cf3  getLastReps() -> \cf5 Int\cf3 ? \{
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3 \
+    \cf4 func\cf3  findDeloads(\cf4 _\cf3  weight: \cf5 Double\cf3 , \cf4 _\cf3  maxPercent: \cf5 Double\cf3 ) -> [(\cf5 String\cf3 , \cf5 Int\cf3 )] \{
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3 \
+            \cf4 switch\cf3  exercise.\cf8 type\cf3  \{
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3             \cf4 case\cf3  .\cf10 body\cf3 (\cf4 _\cf3 ): \cf4 break
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3             \cf4 case\cf3  .\cf10 progression\cf3 (\cf4 _\cf3 ): \cf4 break
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3             \cf4 case\cf3  .\cf10 weights\cf3 (\cf4 let\cf3  type):
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3                 \cf4 var\cf3  weight = \cf8 aweight\cf3 .\cf10 getBaseWorkingWeight\cf3 ()
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3                 \cf4 let\cf3  w = \cf8 Weight\cf3 (weight, type.\cf8 apparatus\cf3 )
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3                 weight = w.\cf10 nextWeight\cf3 ()
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3                 \cf10 setWorkingWeight\cf3 (weight)
+\f0\fs24 \cf0 \
+
+\f2\fs34 \cf3             \}
+\f0\fs24 \cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab864\pardirnatural\partightenfactor0
+
+\fs48 \cf2 \
 \
+* Add support for exercise progression\
+	- maybe we should have a progression type?\
+	- body weight\
+	- timed\
+	- make sure options works\
+	- settings\
+* Should be an error if other or otherName references self.\
+* Weighted pullups and chinups:\
+	http://relativestrengthadvantage.com/7-ways-to-add-resistance-to-pull-ups-chin-ups-and-dips/\
+* Work on my program:\
+	- medium bench needs rest at the end\
+	- only do 3 sets of chins?\
+	- add single ;eg deadlift?\
+		https://www.bodybuilding.com/exercises/single-leg-deadlift\
+		https://www.bodybuilding.com/exercises/romanian-deadlift-with-dumbbells\
+	- goal for chins should be 24\
+* Ask Kris to review the app\
 * Add the other programs listed on reddit	\
-	- db ppl\
-	- frankoman\
-	- strong lifts?\
 * Maybe also some of these programs:\
 	- 531?\
 	- juggernaut?\
@@ -134,7 +316,7 @@ add optional split squats\
 	- need a masters barbell version, maybe with some options\
 	  tp compensate for injuries\
 	- 
-\f2\fs34 \cf3 Coolcicada\cf3 \cb10 ?
+\f2\fs34 \cf3 Coolcicada\cf3 \cb11 ?
 \f0\fs48 \cf2 \cb1 \
 	- https://www.artofmanliness.com/articles/fitness-program-right/\
 * Might want to use a different default program\
@@ -261,7 +443,7 @@ cardio\
 \
 \pard\tx864\pardeftab864\pardirnatural\partightenfactor0
 
-\f2\fs36 \cf11 /// Masters program with cycles of 3x5, 3x3,and 3x1.
+\f2\fs36 \cf12 /// Masters program with cycles of 3x5, 3x3,and 3x1.
 \f0\fs24 \cf0 \
 \pard\tx864\pardeftab864\pardirnatural\partightenfactor0
 
@@ -294,32 +476,32 @@ cardio\
 \f2\fs36 \cf3         \cf6 // Heavy
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 dumbbell\cf3 (\cf7 "Dumbbell Bench"\cf3 , \cf7 "Dumbbell Bench Press"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: dumbbellWarmup, restMins: \cf9 4.0\cf3 ),
+\f2\fs36 \cf3         \cf10 dumbbell\cf3 (\cf7 "Dumbbell Bench"\cf3 , \cf7 "Dumbbell Bench Press"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: dumbbellWarmup, restMins: \cf9 4.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 dumbbell\cf3 (\cf7 "Split Squat"\cf3 ,    \cf7 "Dumbbell Single Leg Split Squat"\cf3 , \cf9 3\cf3 , minReps: \cf9 4\cf3 , maxReps: \cf9 8\cf3 , warmups: dumbbellWarmup, restMins: \cf9 3.5\cf3 ),
+\f2\fs36 \cf3         \cf10 dumbbell\cf3 (\cf7 "Split Squat"\cf3 ,    \cf7 "Dumbbell Single Leg Split Squat"\cf3 , \cf9 3\cf3 , minReps: \cf9 4\cf3 , maxReps: \cf9 8\cf3 , warmups: dumbbellWarmup, restMins: \cf9 3.5\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 dumbbell\cf3 (\cf7 "Dumbbell Flyes"\cf3 , \cf7 "Dumbbell Flyes"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: noWarmup, restMins: \cf9 3.0\cf3 ),
+\f2\fs36 \cf3         \cf10 dumbbell\cf3 (\cf7 "Dumbbell Flyes"\cf3 , \cf7 "Dumbbell Flyes"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: noWarmup, restMins: \cf9 3.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 barbell\cf3 (\cf7 "Deadlift"\cf3 ,        \cf7 "Deadlift"\cf3 , \cf9 1\cf3 , by: \cf9 5\cf3 , warmups: deadWarmup, useBumpers: \cf4 true\cf3 , restMins: \cf9 3.5\cf3 ),
+\f2\fs36 \cf3         \cf10 barbell\cf3 (\cf7 "Deadlift"\cf3 ,        \cf7 "Deadlift"\cf3 , \cf9 1\cf3 , by: \cf9 5\cf3 , warmups: deadWarmup, useBumpers: \cf4 true\cf3 , restMins: \cf9 3.5\cf3 ),
 \f0\fs24 \cf0 \
 \
 
 \f2\fs36 \cf3         \cf6 // Light
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 dumbbell\cf3 (\cf7 "Dumbbell OHP"\cf3 ,  \cf7 "Dumbbell Shoulder Press"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: dumbbellWarmup, restMins: \cf9 3.5\cf3 ),
+\f2\fs36 \cf3         \cf10 dumbbell\cf3 (\cf7 "Dumbbell OHP"\cf3 ,  \cf7 "Dumbbell Shoulder Press"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: dumbbellWarmup, restMins: \cf9 3.5\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Chinups"\cf3 ,     \cf7 "Chinup"\cf3 , requestedReps: \cf9 12\cf3 , targetReps: \cf9 30\cf3 , restMins: \cf9 3.5\cf3 ),
+\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf7 "Chinups"\cf3 ,     \cf7 "Chinup"\cf3 , requestedReps: \cf9 12\cf3 , targetReps: \cf9 30\cf3 , restMins: \cf9 3.5\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 dumbbell\cf3 (\cf7 "Farmer's Walk"\cf3 , \cf7 "Farmer's Walk"\cf3 , \cf9 2\cf3 , by: \cf9 1\cf3 , warmups: noWarmup, restMins: \cf9 3.0\cf3 ),
+\f2\fs36 \cf3         \cf10 dumbbell\cf3 (\cf7 "Farmer's Walk"\cf3 , \cf7 "Farmer's Walk"\cf3 , \cf9 2\cf3 , by: \cf9 1\cf3 , warmups: noWarmup, restMins: \cf9 3.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 barbell\cf3 (\cf7 "Static Hold"\cf3 ,    \cf7 "Static Hold"\cf3 , \cf9 3\cf3 , by: \cf9 1\cf3 , warmups: \cf4 nil\cf3 , restMins: \cf9 3.0\cf3 ),
+\f2\fs36 \cf3         \cf10 barbell\cf3 (\cf7 "Static Hold"\cf3 ,    \cf7 "Static Hold"\cf3 , \cf9 3\cf3 , by: \cf9 1\cf3 , warmups: \cf4 nil\cf3 , restMins: \cf9 3.0\cf3 ),
 \f0\fs24 \cf0 \
 \
 
@@ -336,34 +518,34 @@ cardio\
 \f0\fs24 \cf0 \
 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Foam Rolling"\cf3 ,            \cf7 "IT-Band Foam Roll"\cf3 ,         \cf9 1\cf3 , by: \cf9 15\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf7 "Foam Rolling"\cf3 ,            \cf7 "IT-Band Foam Roll"\cf3 ,         \cf9 1\cf3 , by: \cf9 15\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Shoulder Dislocates"\cf3 ,     \cf7 "Shoulder Dislocate"\cf3 ,        \cf9 1\cf3 , by: \cf9 12\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf7 "Shoulder Dislocates"\cf3 ,     \cf7 "Shoulder Dislocate"\cf3 ,        \cf9 1\cf3 , by: \cf9 12\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Bent-knee Iron Cross"\cf3 ,    \cf7 "Bent-knee Iron Cross"\cf3 ,      \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf7 "Bent-knee Iron Cross"\cf3 ,    \cf7 "Bent-knee Iron Cross"\cf3 ,      \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Roll-over into V-sit"\cf3 ,    \cf7 "Roll-over into V-sit"\cf3 ,      \cf9 1\cf3 , by: \cf9 15\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf7 "Roll-over into V-sit"\cf3 ,    \cf7 "Roll-over into V-sit"\cf3 ,      \cf9 1\cf3 , by: \cf9 15\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Rocking Frog Stretch"\cf3 ,    \cf7 "Rocking Frog Stretch"\cf3 ,      \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf7 "Rocking Frog Stretch"\cf3 ,    \cf7 "Rocking Frog Stretch"\cf3 ,      \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Fire Hydrant Hip Circle"\cf3 , \cf7 "Fire Hydrant Hip Circle"\cf3 ,   \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf7 "Fire Hydrant Hip Circle"\cf3 , \cf7 "Fire Hydrant Hip Circle"\cf3 ,   \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Mountain Climber"\cf3 ,        \cf7 "Mountain Climber"\cf3 ,          \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf7 "Mountain Climber"\cf3 ,        \cf7 "Mountain Climber"\cf3 ,          \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Cossack Squat"\cf3 ,           \cf7 "Cossack Squat"\cf3 ,             \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf7 "Cossack Squat"\cf3 ,           \cf7 "Cossack Squat"\cf3 ,             \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Piriformis Stretch"\cf3 ,      \cf7 "Seated Piriformis Stretch"\cf3 , \cf9 2\cf3 , secs: \cf9 30\cf3 ),
+\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf7 "Piriformis Stretch"\cf3 ,      \cf7 "Seated Piriformis Stretch"\cf3 , \cf9 2\cf3 , secs: \cf9 30\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Hip Flexor Stretch"\cf3 ,      \cf7 "Rear-foot-elevated Hip Flexor Stretch"\cf3 , \cf9 2\cf3 , secs: \cf9 30\cf3 )
+\f2\fs36 \cf3         \cf10 bodyWeight\cf3 (\cf7 "Hip Flexor Stretch"\cf3 ,      \cf7 "Rear-foot-elevated Hip Flexor Stretch"\cf3 , \cf9 2\cf3 , secs: \cf9 30\cf3 )
 \f0\fs24 \cf0 \
 
 \f2\fs36 \cf3     ]
@@ -396,7 +578,7 @@ cardio\
 \f2\fs36 \cf3     
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3     \cf4 let\cf3  tags: [\cf8 Program\cf3 .\cf8 Tags\cf3 ] = [.\cf12 intermediate\cf3 , .\cf12 strength\cf3 , .\cf12 barbell\cf3 , .\cf12 unisex\cf3 , .\cf12 threeDays\cf3 , .\cf12 age40s\cf3 , .\cf12 age50s\cf3 ]
+\f2\fs36 \cf3     \cf4 let\cf3  tags: [\cf8 Program\cf3 .\cf8 Tags\cf3 ] = [.\cf10 intermediate\cf3 , .\cf10 strength\cf3 , .\cf10 barbell\cf3 , .\cf10 unisex\cf3 , .\cf10 threeDays\cf3 , .\cf10 age40s\cf3 , .\cf10 age50s\cf3 ]
 \f0\fs24 \cf0 \
 
 \f2\fs36 \cf3     \cf4 let\cf3  description = \cf7 """

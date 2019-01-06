@@ -94,7 +94,43 @@ class Exercise: Storable {
         completed[workout.name] = Date()
         self.skipped[workout.name] = skipped
     }
+    
+    func errors(_ program: Program) -> [String] {
+        var problems: [String] = []
+        
+        switch type {
+        case .body(let type): problems += type.errors()
+        case .weights(let type): problems += type.errors()
+        }
+        
+        //        if let name = prevExercise, program.findExercise(name) == nil {
+        //            problems += ["exercise \(name) prevExercise (\(name)( is missing from the program"]
+        //        }
+        //        if let name = nextExercise, program.findExercise(name) == nil {
+        //            problems += ["exercise \(name) nextExercise (\(name)) is missing from the program"]
+        //        }
+        
+        return problems
+    }
+    
+    var name: String             // "Heavy Bench"
+    var formalName: String       // "Bench Press"
+    var type: Type
+    var main: Bool
+    
+    /// These are used for exercises that support progression. For example, progressively harder planks. Users
+    /// can use the Options screens to choose which version they want to perform.
+//    var prevExercise: String?
+//    var nextExercise: String?
+    
+    /// If true don't display the plan in UI.
+//    var hidden: Bool
+    
+    private var completed: [String: Date]
+    private var skipped: [String: Bool]
+}
 
+extension Exercise {
     func getInfo() -> ExerciseInfo {
         switch type {
         case .body(let type):
@@ -122,24 +158,114 @@ class Exercise: Storable {
         }
     }
     
-    func errors(_ program: Program) -> [String] {
-        var problems: [String] = []
-        
+    func getApparatus() -> Apparatus? {
         switch type {
-        case .body(let type): problems += type.errors()
-        case .weights(let type): problems += type.errors()
+        case .body(_):
+            break
+        case .weights(let type):
+            return type.apparatus
         }
-        
-        //        if let name = prevExercise, program.findExercise(name) == nil {
-        //            problems += ["exercise \(name) prevExercise (\(name)( is missing from the program"]
-        //        }
-        //        if let name = nextExercise, program.findExercise(name) == nil {
-        //            problems += ["exercise \(name) nextExercise (\(name)) is missing from the program"]
-        //        }
-        
-        return problems
+        return nil
     }
     
+    /// Returns the weight the user is expected to lift. This might be a training max, in which case, the user may only be asked
+    /// to lift a percentage of that.
+    func getBaseWeight() -> Double? {
+        switch type {
+        case .body(let type):
+            switch type.subtype {
+            case .maxReps(let subtype):
+                return subtype.weight
+            case .reps(let subtype):
+                return subtype.weight
+            case .timed(let subtype):
+                return subtype.weight
+            }
+        case .weights(let type):
+            switch type.subtype {
+            case .amrap(let subtype):
+                let weight = subtype.aweight.getBaseWorkingWeight()
+                let w = Weight(weight, type.apparatus)
+                return w.closest().weight
+            case .amrap1RM(let subtype):
+                let weight = subtype.aweight.getBaseWorkingWeight()
+                let w = Weight(weight, type.apparatus)
+                return w.closest().weight
+            case .cyclic(let subtype):
+                let weight = subtype.aweight.getBaseWorkingWeight()
+                let w = Weight(weight, type.apparatus)
+                return w.closest().weight
+            case .derived(let subtype):
+                if let other = currentProgram.findExercise(subtype.otherName) {
+                    return other.getBaseWeight()
+                }
+                return nil
+            case .emom(let subtype):
+                let weight = subtype.aweight.getBaseWorkingWeight()
+                let w = Weight(weight, type.apparatus)
+                return w.closest().weight
+            case .find(_):
+                return nil
+            case .timed(let subtype):
+                return subtype.weight
+            case .percent1RM(let subtype):
+                let (_, weight) = subtype.getRepsAndWeight()
+                return weight
+            case .reps(let subtype):
+                let weight = subtype.aweight.getBaseWorkingWeight()
+                let w = Weight(weight, type.apparatus)
+                return w.closest().weight
+            case .t1(let subtype):
+                let weight = subtype.aweight.getBaseWorkingWeight()
+                let w = Weight(weight, type.apparatus)
+                return w.closest().weight
+            case .t1LP(let subtype):
+                let weight = subtype.aweight.getBaseWorkingWeight()
+                let w = Weight(weight, type.apparatus)
+                return w.closest().weight
+            case .t2(let subtype):
+                let weight = subtype.aweight.getBaseWorkingWeight()
+                let w = Weight(weight, type.apparatus)
+                return w.closest().weight
+            case .t3(let subtype):
+                let weight = subtype.aweight.getBaseWorkingWeight()
+                let w = Weight(weight, type.apparatus)
+                return w.closest().weight
+            }
+        }
+    }
+    
+    /// Returns the next base weight.
+    func getNextWeight() -> Double? {
+        switch type {
+        case .body(_):           // these don't have an apparatus so we can't really find a next weight
+            break
+        case .weights(let type):
+            if let weight = getBaseWeight() {
+                let w = Weight(weight, type.apparatus)
+                return w.nextWeight()
+            }
+        }
+        
+        return nil
+    }
+    
+    /// Returns the previous base weight.
+    func getPrevWeight() -> Double? {
+        switch type {
+        case .body(_):           // these don't have an apparatus so we can't really find a next weight
+            break
+        case .weights(let type):
+            if let weight = getBaseWeight() {
+                let w = Weight(weight, type.apparatus)
+                return w.prevWeight()
+            }
+        }
+        
+        return nil
+    }
+
+    /// Returns the last weight the user was able to lift (so failed lifts don't count).
     func getLastWeight() -> Double? {
         var weight: Double? = nil
         let app = UIApplication.shared.delegate as! AppDelegate
@@ -204,7 +330,7 @@ class Exercise: Storable {
                     weight = result.liftedWeight
                 }
             }
-
+            
             if let w = weight {
                 if case let .dumbbells(weights: _, magnets: _, paired: paired) = type.apparatus, paired {
                     weight = 2 * w
@@ -215,6 +341,7 @@ class Exercise: Storable {
         return weight
     }
     
+    /// Returns the last reps the user was able to lift with (so failed lifts don't count).
     func getLastReps() -> Int? {
         let app = UIApplication.shared.delegate as! AppDelegate
         switch type {
@@ -284,7 +411,7 @@ class Exercise: Storable {
         return nil
     }
 
-    // For variable reps we don't change the current reps so this should be fine.
+    /// Returns a list of (label, number of down steps) for weights less than the specified weight and above maxPercent.
     func findDeloads(_ weight: Double, _ maxPercent: Double) -> [(String, Int)] {
         switch type {
         case .body(_):
@@ -293,6 +420,7 @@ class Exercise: Storable {
         case .weights(let type):
             var result: [(String, Int)] = []
             
+            // For variable reps we don't change the current reps so this should be fine.
             let currentWeight = Weight(weight, type.apparatus).closest().weight
             var newWeight = currentWeight
             for i in stride(from: -1, through: -8, by: -1) {
@@ -310,20 +438,4 @@ class Exercise: Storable {
             return result
         }
     }
-    
-    var name: String             // "Heavy Bench"
-    var formalName: String       // "Bench Press"
-    var type: Type
-    var main: Bool
-    
-    /// These are used for exercises that support progression. For example, progressively harder planks. Users
-    /// can use the Options screens to choose which version they want to perform.
-//    var prevExercise: String?
-//    var nextExercise: String?
-    
-    /// If true don't display the plan in UI.
-//    var hidden: Bool
-    
-    private var completed: [String: Date]
-    private var skipped: [String: Bool]
 }

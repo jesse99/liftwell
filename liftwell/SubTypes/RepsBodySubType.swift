@@ -109,7 +109,7 @@ class RepsBodySubType: ExerciseInfo {
             default: os_log("saved %@ subtype wasn't Reps", savedExercise.name)
             }
         case .weights(_):
-            assert(false)
+            break
         }
     }
 
@@ -298,90 +298,86 @@ class RepsBodySubType: ExerciseInfo {
     }
     
     private func presentFinalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        switch exercise.type {
-        case .body(_):
-            let (minReps, maxReps, _) = getBaseRepRange()
-            if let currenReps = workingReps, currenReps < maxReps {
-                let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-                let variableReps = minReps != maxReps
-                
-                let label4 = variableReps ? "4 reps" : advanceWeightLabel(exercise, weight, by: 4)
-                let label3 = variableReps ? "3 reps" : advanceWeightLabel(exercise, weight, by: 3)
-                let label2 = variableReps ? "2 reps" : advanceWeightLabel(exercise, weight, by: 2)
-                let label1 = variableReps ? "1 rep" : advanceWeightLabel(exercise, weight, by: 1)
-                let dlabel1 = variableReps ? "1 rep" : advanceWeightLabel(exercise, weight, by: -1)
-                let dlabel2 = variableReps ? "2 reps" : advanceWeightLabel(exercise, weight, by: -2)
-                let dlabel3 = variableReps ? "3 reps" : advanceWeightLabel(exercise, weight, by: -3)
-                
-                let advance4 = UIAlertAction(title: "Advance by \(label4)", style: .default) {_ in self.doAdvance(exercise, 4); completion()}
-                let advance3 = UIAlertAction(title: "Advance by \(label3)", style: .default) {_ in self.doAdvance(exercise, 3); completion()}
-                let advance2 = UIAlertAction(title: "Advance by \(label2)", style: .default) {_ in self.doAdvance(exercise, 2); completion()}
-                let advance = UIAlertAction(title: "Advance by \(label1)", style: .default) {_ in self.doAdvance(exercise, 1); completion()}
-                let maintain = UIAlertAction(title: "Maintain", style: .default) {_ in completion()}
-                let deload = UIAlertAction(title: "Deload by \(dlabel1)", style: .default) {_ in self.doAdvance(exercise, -1); completion()}
-                let deload2 = UIAlertAction(title: "Deload by \(dlabel2)", style: .default) {_ in self.doAdvance(exercise, -2); completion()}
-                let deload3 = UIAlertAction(title: "Deload by \(dlabel3)", style: .default) {_ in self.doAdvance(exercise, -3); completion()}
-                
-                switch tag {
-                case .veryEasy:
-                    if currenReps+3 < maxReps {
-                        alert.addAction(advance4)
-                    }
-                    if currenReps+2 < maxReps {
-                        alert.addAction(advance3)
-                    }
-                    if currenReps+1 < maxReps {
-                        alert.addAction(advance2)
-                        alert.preferredAction = advance2
-                    }
-                    
-                case .easy:
-                    if currenReps+3 < maxReps {
-                        alert.addAction(advance4)
-                    }
-                    if currenReps+2 < maxReps {
-                        alert.addAction(advance3)
-                    }
-                    if currenReps+1 < maxReps {
-                        alert.addAction(advance2)
-                        alert.preferredAction = advance2
-                    }
-                    if currenReps < maxReps {
-                        alert.addAction(advance)
-                    }
-                    alert.addAction(maintain)
-                    
-                case .normal:
-                    if currenReps+1 < maxReps {
-                        alert.addAction(advance2)
-                    }
-                    if currenReps < maxReps {
-                        alert.addAction(advance)
-                        alert.preferredAction = advance
-                    }
-                    alert.addAction(maintain)
-                    
-                case .hard:
-                    if currenReps < maxReps {
-                        alert.addAction(advance)
-                    }
-                    alert.addAction(maintain)
-                    alert.addAction(deload)
-                    alert.preferredAction = maintain
-                    
-                case .failed:
-                    alert.addAction(maintain)
-                    alert.addAction(deload)
-                    alert.addAction(deload2)
-                    alert.addAction(deload3)
-                    alert.preferredAction = deload
+        let (minReps, maxReps, _) = getBaseRepRange()
+        if let currenReps = workingReps, currenReps < maxReps {
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            let variableReps = minReps != maxReps
+            
+            let label4 = variableReps ? "4 reps" : advanceWeightLabel(exercise, weight, by: 4)
+            let label3 = variableReps ? "3 reps" : advanceWeightLabel(exercise, weight, by: 3)
+            let label2 = variableReps ? "2 reps" : advanceWeightLabel(exercise, weight, by: 2)
+            let label1 = variableReps ? "1 rep" : advanceWeightLabel(exercise, weight, by: 1)
+            let dlabel1 = variableReps ? "1 rep" : advanceWeightLabel(exercise, weight, by: -1)
+            let dlabel2 = variableReps ? "2 reps" : advanceWeightLabel(exercise, weight, by: -2)
+            let dlabel3 = variableReps ? "3 reps" : advanceWeightLabel(exercise, weight, by: -3)
+            
+            let advance4 = UIAlertAction(title: "Advance by \(label4)", style: .default) {_ in self.doAdvance(exercise, 4); completion()}
+            let advance3 = UIAlertAction(title: "Advance by \(label3)", style: .default) {_ in self.doAdvance(exercise, 3); completion()}
+            let advance2 = UIAlertAction(title: "Advance by \(label2)", style: .default) {_ in self.doAdvance(exercise, 2); completion()}
+            let advance = UIAlertAction(title: "Advance by \(label1)", style: .default) {_ in self.doAdvance(exercise, 1); completion()}
+            let maintain = UIAlertAction(title: "Maintain", style: .default) {_ in completion()}
+            let deload = UIAlertAction(title: "Deload by \(dlabel1)", style: .default) {_ in self.doAdvance(exercise, -1); completion()}
+            let deload2 = UIAlertAction(title: "Deload by \(dlabel2)", style: .default) {_ in self.doAdvance(exercise, -2); completion()}
+            let deload3 = UIAlertAction(title: "Deload by \(dlabel3)", style: .default) {_ in self.doAdvance(exercise, -3); completion()}
+            
+            switch tag {
+            case .veryEasy:
+                if currenReps+3 < maxReps {
+                    alert.addAction(advance4)
+                }
+                if currenReps+2 < maxReps {
+                    alert.addAction(advance3)
+                }
+                if currenReps+1 < maxReps {
+                    alert.addAction(advance2)
+                    alert.preferredAction = advance2
                 }
                 
-                view.present(alert, animated: true, completion: nil)
-            } else {
-                completion()
+            case .easy:
+                if currenReps+3 < maxReps {
+                    alert.addAction(advance4)
+                }
+                if currenReps+2 < maxReps {
+                    alert.addAction(advance3)
+                }
+                if currenReps+1 < maxReps {
+                    alert.addAction(advance2)
+                    alert.preferredAction = advance2
+                }
+                if currenReps < maxReps {
+                    alert.addAction(advance)
+                }
+                alert.addAction(maintain)
+                
+            case .normal:
+                if currenReps+1 < maxReps {
+                    alert.addAction(advance2)
+                }
+                if currenReps < maxReps {
+                    alert.addAction(advance)
+                    alert.preferredAction = advance
+                }
+                alert.addAction(maintain)
+                
+            case .hard:
+                if currenReps < maxReps {
+                    alert.addAction(advance)
+                }
+                alert.addAction(maintain)
+                alert.addAction(deload)
+                alert.preferredAction = maintain
+                
+            case .failed:
+                alert.addAction(maintain)
+                alert.addAction(deload)
+                alert.addAction(deload2)
+                alert.addAction(deload3)
+                alert.preferredAction = deload
             }
-        case .weights(_): assert(false); completion()
+            
+            view.present(alert, animated: true, completion: nil)
+        } else {
+            completion()
         }
     }
     

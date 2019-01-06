@@ -69,7 +69,7 @@ class DerivedSubType: ExerciseInfo {
     
     func errors() -> [String] {
         var errors = sets.errors()
-        if getOtherType() == nil {
+        if getOtherType(otherName) == nil {
             errors.append("\(otherName) isn't using an apparatus.")
         }
         return errors
@@ -122,7 +122,7 @@ class DerivedSubType: ExerciseInfo {
     }
     
     func sublabel(_ exercise: Exercise) -> String {
-        if let type = getOtherType(), let weight = otherWeight(), weight > 0.0 {
+        if let type = getOtherType(otherName), let weight = otherWeight(), weight > 0.0 {
             return sets.sublabel(type.apparatus, weight, nil)
         } else {
             return ""
@@ -166,7 +166,7 @@ class DerivedSubType: ExerciseInfo {
     
     // TODO: if AMRAP then should use AMRAP result, also history should show AMRAP
     func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ view: UIViewController, _ completion: @escaping () -> Void) {
-        if let type = getOtherType(), let baseWeight = otherWeight(), let last = sets.worksets.last {
+        if let type = getOtherType(otherName), let baseWeight = otherWeight(), let last = sets.worksets.last {
             let w = Weight(last.percent*baseWeight, type.apparatus).closest()
 
             var myResults = doGetResults(exercise) ?? []
@@ -205,7 +205,7 @@ class DerivedSubType: ExerciseInfo {
     }
     
     private func getActivities(_ exercise: Exercise) -> (Int, [Activity]) {
-        if let type = getOtherType(), let baseWeight = otherWeight() {
+        if let type = getOtherType(otherName), let baseWeight = otherWeight() {
             return sets.activities(baseWeight, type.apparatus, currentReps: nil)
         } else {
             return (0, [])
@@ -213,7 +213,7 @@ class DerivedSubType: ExerciseInfo {
     }
     
     private func otherWeight() -> Double? {
-        if let type = getOtherType() {
+        if let type = getOtherType(otherName) {
             switch type.subtype {
             case .amrap(let subtype):
                 return subtype.getBaseWorkingWeight()
@@ -248,7 +248,7 @@ class DerivedSubType: ExerciseInfo {
     }
     
     private func otherReps() -> Int? {
-        if let other = currentProgram.findExercise(otherName), let type = getOtherType() {
+        if let other = currentProgram.findExercise(otherName), let type = getOtherType(otherName) {
             switch type.subtype {
             case .amrap(_):
                 if let results = AMRAPSubType.results[other.formalName], let last = results.last {
@@ -304,8 +304,8 @@ class DerivedSubType: ExerciseInfo {
         return nil
     }
     
-    private func getOtherType() -> WeightsType? {
-        if let other = currentProgram.findExercise(otherName) {
+    private func getOtherType(_ name: String) -> WeightsType? {
+        if let other = currentProgram.findExercise(name) {
             switch other.type {     // type needs to be something that uses an apparatus
             case .weights(let type):
                 return type

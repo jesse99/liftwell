@@ -134,10 +134,8 @@ class TimedSubType: ExerciseInfo {
         var w = ""
         var d = ""
         if weight > 0 {
-            switch exercise.type {
-            case .body(_): w = Weight.friendlyUnitsStr(weight)
-            case .weights(let type):
-                let c = Weight(weight, type.apparatus).closest()
+            if let apparatus = exercise.getApparatus() {
+                let c = Weight(weight, apparatus).closest()
                 w = c.text
                 d = c.plates
             }
@@ -310,25 +308,22 @@ func makeHistoryFromLabels(_ labels: [String]) -> String {
 }
 
 func advanceWeightLabel(_ exercise: Exercise, _ weight: Double, by: Int) -> String {
-    switch exercise.type {
-    case .body(_):
-        assert(false)
-        abort()
-    case .weights(let type):
-        let currentWeight = Weight(weight, type.apparatus).closest().weight
+    if let apparatus = exercise.getApparatus() {
+        let currentWeight = Weight(weight, apparatus).closest().weight
         
         var newWeight = currentWeight
         if by > 0 {
             for _ in 0..<by {
-                newWeight = Weight(newWeight, type.apparatus).nextWeight()
+                newWeight = Weight(newWeight, apparatus).nextWeight()
             }
         } else {
             for _ in 0..<(-by) {
-                newWeight = Weight(newWeight, type.apparatus).prevWeight()
+                newWeight = Weight(newWeight, apparatus).prevWeight()
             }
         }
         let delta = newWeight - currentWeight
         
         return Weight.friendlyUnitsStr(delta)
     }
+    return ""
 }

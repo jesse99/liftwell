@@ -77,7 +77,7 @@ class BaseCyclicRepsSubType: BaseApparatusSubType, ExerciseInfo {
     func sync(_ program: Program, _ savedExercise: Exercise) {
         switch savedExercise.type {
         case .body(_):
-            os_log("saved %@ subtype wasn't weights", savedExercise.name)
+            break
         case .weights(let saved):
             switch saved.subtype {
             case .amrap1RM(let savedSubtype):
@@ -154,7 +154,7 @@ class BaseCyclicRepsSubType: BaseApparatusSubType, ExerciseInfo {
     func updated(_ exercise: Exercise) {
         let weight = aweight.getBaseWorkingWeight()
         switch exercise.type {
-        case .body(_): (numWarmups, activities) = cycles[cycleIndex].activities(weight, currentReps: workingReps)
+        case .body(_): assert(false)
         case .weights(let type): (numWarmups, activities) = cycles[cycleIndex].activities(weight, type.apparatus, currentReps: workingReps)
         }
     }
@@ -162,7 +162,7 @@ class BaseCyclicRepsSubType: BaseApparatusSubType, ExerciseInfo {
     func sublabel(_ exercise: Exercise) -> String {
         let weight = aweight.getBaseWorkingWeight()
         switch exercise.type {
-        case .body(_): return cycles[cycleIndex].sublabel(nil, weight, workingReps)
+        case .body(_): assert(false); return ""
         case .weights(let type): return cycles[cycleIndex].sublabel(type.apparatus, weight, workingReps)
         }
     }

@@ -94,7 +94,7 @@ class MaxRepsSubType: ExerciseInfo {
             default: os_log("saved %@ subtype wasn't maxReps", savedExercise.name)
             }
         case .weights(_):
-            os_log("saved %@ subtype wasn't body", savedExercise.name)
+            break
         }
     }
     
