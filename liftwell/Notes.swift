@@ -1641,6 +1641,15 @@ let builtInNotes: [String: String] = [
             "For Tennis Elbow (pain outside the elbow) it's recommended to repeat this with the arm held straight out."],
         links: ["Link": "http://www.exrx.net/WeightExercises/WristExtensors/DBReverseWristCurl.html", "Tennis Elbow": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2515258/table/t1-0541115/"]),
     
+    "Ring Ab Rollouts": createNote(
+        notes: [
+            "Keep your elbows straight.",
+            "Keep your hands as close together as you can.",
+            "Remain in hollow body position.",
+            "Moving the rings higher will make this easier.",
+            "Elevating your feet will make this harder."],
+        links: ["Link": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/core#wiki_ring_ab_rollouts", "Video": "https://www.youtube.com/watch?v=LBUfnmugKLw"]),
+    
     "Ring Dips": createNote(
         notes: [
             "Hold the rings with your palms (mostly) facing forward.",
@@ -2309,6 +2318,11 @@ let builtInNotes: [String: String] = [
             "Alternate between bringing each knee forward."],
         links: ["Progression": "http://www.instructables.com/id/How-to-achieve-the-hanging-dragon-flag/"]),
     
+    "Weighted Inverted Row": createNote(
+        notes: [
+            "Can use a belt with attached weight, a weight vest, or a plate on your chest/belly."],
+        links: ["Link": "https://old.reddit.com/r/bodyweightfitness/wiki/exercises/row#wiki_wide_rows"]),
+
     "Wide Rows": createNote(
         notes: [
             "Setup a pullup bar, a barbell, or rings. Use a grip at 1.5x shoulder width.",

@@ -106,34 +106,34 @@ func barbell(_ name: String, _ formalName: String, _ warmups: String, _ worksets
     return Exercise(name, formalName, .weights(type), main: main)
 }
 
-func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, secs: Int, targetSecs: Int? = nil, main: Bool = false) -> Exercise {
+func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, secs: Int, targetSecs: Int? = nil, main: Bool = false, prevExercise: String? = nil, nextExercise: String? = nil) -> Exercise {
     let subtype = TimedSubType(numSets: numSets, currentTime: secs, targetSecs: targetSecs)
     let type = BodyType(.timed(subtype))
-    return Exercise(name, formalName, .body(type), main: main)
+    return Exercise(name, formalName, .body(type), main: main, prevExercise: prevExercise, nextExercise: nextExercise)
 }
 
-func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, by: Int, restMins: Double = 0.0, main: Bool = false) -> Exercise {
+func bodyweight(_ name: String, _ formalName: String, _ numSets: Int, by: Int, restMins: Double = 0.0, main: Bool = false, prevExercise: String? = nil, nextExercise: String? = nil) -> Exercise {
     let rest = Int(restMins*60.0)
     let reps = Set(reps: by)
     let sets = Sets([], Array(repeating: reps, count: numSets), [])
     let subtype = RepsBodySubType(sets, restSecs: rest)
     let type = BodyType(.reps(subtype))
-    return Exercise(name, formalName, .body(type), main: main)
+    return Exercise(name, formalName, .body(type), main: main, prevExercise: prevExercise, nextExercise: nextExercise)
 }
 
-func bodyweight(_ name: String, _ formalName: String, _ worksets: String, restMins: Double, main: Bool = false) -> Exercise {
+func bodyweight(_ name: String, _ formalName: String, _ worksets: String, restMins: Double, main: Bool = false, prevExercise: String? = nil, nextExercise: String? = nil) -> Exercise {
     let rest = Int(restMins*60.0)
     let workSets = parseSets(worksets)
     let subtype = RepsBodySubType(Sets([], workSets, []), restSecs: rest)
     let type = BodyType(.reps(subtype))
-    return Exercise(name, formalName, .body(type), main: main)
+    return Exercise(name, formalName, .body(type), main: main, prevExercise: prevExercise, nextExercise: nextExercise)
 }
 
-func bodyweight(_ name: String, _ formalName: String, numSets: Int, startReps: Int, goalReps: Int, restMins: Double, restAtEnd: Bool = false, main: Bool = false) -> Exercise {
+func bodyweight(_ name: String, _ formalName: String, numSets: Int, startReps: Int, goalReps: Int, restMins: Double, restAtEnd: Bool = false, main: Bool = false, prevExercise: String? = nil, nextExercise: String? = nil) -> Exercise {
     let rest = Int(restMins*60.0)
     let subtype = MaxRepsSubType(numSets: numSets, startReps: startReps, goalReps: goalReps, restSecs: rest, restAtEnd: restAtEnd)
     let type = BodyType(.maxReps(subtype))
-    return Exercise(name, formalName, .body(type), main: main)
+    return Exercise(name, formalName, .body(type), main: main, prevExercise: prevExercise, nextExercise: nextExercise)
 }
 
 func cable(_ name: String, _ formalName: String, _ warmups: String, _ worksets: String, _ backoff: String = "", restMins: Double, main: Bool = false) -> Exercise {

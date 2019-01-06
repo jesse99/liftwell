@@ -4,16 +4,15 @@ import Foundation
 import UIKit
 
 class Exercise: Storable {
-    init(_ name: String, _ formalName: String, _ type: Type, main: Bool) {
+    init(_ name: String, _ formalName: String, _ type: Type, main: Bool, prevExercise: String? = nil, nextExercise: String? = nil) {
         self.name = name
         self.formalName = formalName
-//        self.nextExercise = nil
-//        self.prevExercise = nil
         self.type = type
         self.main = main
         self.completed = [:]
         self.skipped = [:]
-//        self.hidden = hidden
+        self.prevExercise = prevExercise
+        self.nextExercise = nextExercise
     }
     
     required init(from store: Store) {
@@ -21,7 +20,6 @@ class Exercise: Storable {
         self.formalName = store.getStr("formalName")
         self.type = store.getObj("type")
         self.main = store.getBool("main", ifMissing: false)
-//        self.hidden = store.getBool("hidden")
         
         self.completed = [:]
         self.skipped = [:]
@@ -39,16 +37,16 @@ class Exercise: Storable {
             }
         }
         
-//        if store.hasKey("nextExercise") {
-//            self.nextExercise = store.getStr("nextExercise")
-//        } else {
-//            self.nextExercise = nil
-//        }
-//        if store.hasKey("prevExercise") {
-//            self.prevExercise = store.getStr("prevExercise")
-//        } else {
-//            self.prevExercise = nil
-//        }
+        if store.hasKey("nextExercise") {
+            self.nextExercise = store.getStr("nextExercise")
+        } else {
+            self.nextExercise = nil
+        }
+        if store.hasKey("prevExercise") {
+            self.prevExercise = store.getStr("prevExercise")
+        } else {
+            self.prevExercise = nil
+        }
     }
     
     func save(_ store: Store) {
@@ -56,14 +54,13 @@ class Exercise: Storable {
         store.addStr("formalName", formalName)
         store.addObj("type", type)
         store.addBool("main", main)
-//        store.addBool("hidden", hidden)
         
-//        if let next = nextExercise {
-//            store.addStr("nextExercise", next)
-//        }
-//        if let prev = prevExercise {
-//            store.addStr("prevExercise", prev)
-//        }
+        if let next = nextExercise {
+            store.addStr("nextExercise", next)
+        }
+        if let prev = prevExercise {
+            store.addStr("prevExercise", prev)
+        }
         
         store.addStrArray("completed-names", Array(completed.keys))
         store.addDateArray("completed-dates", Array(completed.values))
@@ -103,12 +100,12 @@ class Exercise: Storable {
         case .weights(let type): problems += type.errors()
         }
         
-        //        if let name = prevExercise, program.findExercise(name) == nil {
-        //            problems += ["exercise \(name) prevExercise (\(name)( is missing from the program"]
-        //        }
-        //        if let name = nextExercise, program.findExercise(name) == nil {
-        //            problems += ["exercise \(name) nextExercise (\(name)) is missing from the program"]
-        //        }
+        if let name = prevExercise, program.findExercise(name) == nil {
+            problems += ["exercise \(name) prevExercise (\(name)( is missing from the program"]
+        }
+        if let name = nextExercise, program.findExercise(name) == nil {
+            problems += ["exercise \(name) nextExercise (\(name)) is missing from the program"]
+        }
         
         return problems
     }
@@ -119,12 +116,10 @@ class Exercise: Storable {
     var main: Bool
     
     /// These are used for exercises that support progression. For example, progressively harder planks. Users
-    /// can use the Options screens to choose which version they want to perform.
-//    var prevExercise: String?
-//    var nextExercise: String?
-    
-    /// If true don't display the plan in UI.
-//    var hidden: Bool
+    /// can use the Options screens to choose which version they want to perform. The inactive exercises are
+    /// automatically added to optional exercises.
+    var prevExercise: String?
+    var nextExercise: String?
     
     private var completed: [String: Date]
     private var skipped: [String: Bool]
