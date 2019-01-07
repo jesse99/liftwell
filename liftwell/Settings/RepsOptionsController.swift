@@ -8,8 +8,8 @@ struct RepsOptions {
     var rest: Int
     var aweight: ApparatusWeight?
     var reps: Int? = nil
-    var cycleIndex: Int? = nil
-    var apparatus: Apparatus? = nil
+    var cycleIndex: Int?
+    var apparatus: Apparatus?
 }
 
 class RepsOptionController: UIViewController {

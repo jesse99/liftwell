@@ -20,6 +20,33 @@ class WorkoutOptionsController: UIViewController, UITableViewDataSource, UITable
         self.workout = workout
         self.newOptional = Array(workout.optional)
         self.breadcrumb = "\(breadcrumb) • Options"
+        
+        progressionLabels = [:]
+        let app = UIApplication.shared.delegate as! AppDelegate
+        for name in workout.exercises {
+            if let exercise = app.program.findExercise(name), exercise.prevExercise == nil, exercise.nextExercise != nil {
+                initProgression(name)
+            }
+        }
+    }
+    
+    private func initProgression(_ first: String) {
+        var progression: [String] = []
+        
+        var name: String? = first
+        let app = UIApplication.shared.delegate as! AppDelegate
+        while name != nil {
+            if let exercise = app.program.findExercise(name!) {
+                progression.append(name!)
+                name = exercise.nextExercise
+            } else {
+                break
+            }
+        }
+        
+        for (index, name) in progression.enumerated() {
+            progressionLabels[name] = "\(index+1) of \(progression.count)"
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,25 +85,41 @@ class WorkoutOptionsController: UIViewController, UITableViewDataSource, UITable
         
         let index = path.item
         let name = workout.exercises[index]
+        let (color, suffix) = getLabel(name)
         
+        cell.textLabel!.text = "\(name)\(suffix)"
+        cell.textLabel!.setColor(color)
+        
+        return cell
+    }
+    
+    private func getLabel(_ name: String) -> (UIColor, String) {
         let app = UIApplication.shared.delegate as! AppDelegate
         if newOptional.contains(name) {
             if let exercise = app.program.findExercise(name), exercise.main {
-                cell.textLabel!.text = "\(name) (main, inactive)"
+                if let progress = progressionLabels[name] {
+                    return (UIColor.gray, " (\(progress))")
+                } else {
+                    return (UIColor.gray, " (main, inactive)")
+                }
             } else {
-                cell.textLabel!.text = "\(name) (inactive)"
+                if let progress = progressionLabels[name] {
+                    return (UIColor.gray, " (\(progress))")
+                } else {
+                    return (UIColor.gray, " (inactive)")
+                }
             }
-            cell.textLabel!.setColor(UIColor.gray)
         } else {
             if let exercise = app.program.findExercise(name), exercise.main {
-                cell.textLabel!.text = "\(name) (main)"
+                if let progress = progressionLabels[name] {
+                    return (UIColor.black, " (main, \(progress))")
+                } else {
+                    return (UIColor.black, " (main)")
+                }
             } else {
-                cell.textLabel!.text = name
+                return (UIColor.black, "")
             }
-            cell.textLabel!.setColor(UIColor.black)
         }
-        
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt path: IndexPath) {
@@ -88,6 +131,8 @@ class WorkoutOptionsController: UIViewController, UITableViewDataSource, UITable
         if newOptional.contains(name) {
             action = UIAlertAction(title: "Activate", style: .default) {_ in
                 if let i = self.newOptional.index(of: name) {
+                    self.deactivatePrev(name)
+                    self.deactivateNext(name)
                     self.newOptional.remove(at: i)
                     tableView.reloadData()
                 }
@@ -107,12 +152,41 @@ class WorkoutOptionsController: UIViewController, UITableViewDataSource, UITable
         present(alert, animated: true, completion: nil)
     }
     
+    private func deactivatePrev(_ current: String) {
+        let app = UIApplication.shared.delegate as! AppDelegate
+        
+        var name: String? = current
+        while let n = name, let exercise = app.program.findExercise(n) {
+            name = exercise.prevExercise
+            if let n = name, app.program.findExercise(n) != nil {
+                if !newOptional.contains(n) {
+                    newOptional.append(n)
+                }
+            }
+        }
+    }
+
+    private func deactivateNext(_ current: String) {
+        let app = UIApplication.shared.delegate as! AppDelegate
+        
+        var name: String? = current
+        while let n = name, let exercise = app.program.findExercise(n) {
+            name = exercise.nextExercise
+            if let n = name, app.program.findExercise(n) != nil {
+                if !newOptional.contains(n) {
+                    newOptional.append(n)
+                }
+            }
+        }
+    }
+    
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var breadcrumbLabel: UILabel!
     
     private var workout: Workout!
     private var newOptional: [String] = []
     private var breadcrumb = ""
+    private var progressionLabels: [String: String] = [:]        // "2 of 5"
 }
 
 

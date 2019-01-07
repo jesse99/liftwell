@@ -69,8 +69,7 @@ func BodyWeight() -> Program {
 
         bodyweight("Banded Pallof Press",    "Pallof Press",           "8-12".x(3), restMins: 1.5, main: true),
 
-        bodyweight("Reverse Hyperextension", "Reverse Hyperextension", "8-12".x(3), restMins: 1.5, main: true),
-]
+        bodyweight("Reverse Hyperextension", "Reverse Hyperextension", "8-12".x(3), restMins: 1.5, main: true)]
     
     let workouts = [
         Workout("Stretch", ["Yuri's Shoulder Band", "Squat Sky Reaches", "GMB Wrist Prep", "Deadbugs",
@@ -118,7 +117,7 @@ This is the recommended program from the [bodyweight fitness](https://old.reddit
 **Notes**
 * The Strength exercises come in pairs and triplets. To save time you can do one set of the first pair, wait 90s. do a set of the next pair, and repeat until you've done all the sets.
 * In each workout try to do better then your last workout.
-* Once you can do eight reps (or 30s) of a strength exercise use the Options screen to progress to a harder version of the exercise.
+* Once you can do eight reps (or 30s) of a strength exercise use the Options screen in the workout to progress to a harder version of the exercise.
 * Similarly once you progress on the Strength exercises use the Options screen in the Stretch workout to activate harder stretches.
 """
     return Program("Body Weight Fitness", workouts, exercises, tags, description)
