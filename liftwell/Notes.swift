@@ -440,7 +440,7 @@ let builtInNotes: [String: String] = [
             "Slowly lower back down.",
             "Difficulty can be lessened by doing negatives: jump to raised position and very slowly lower yourself.",
             "Difficulty can be increased by attaching plates to a belt."],
-        links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/chin-up", "Elbow Pain": "https://breakingmuscle.com/fitness/5-ways-to-end-elbow-pain-during-chin-ups"]),
+        links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/chin-up", "Weighted": "http://relativestrengthadvantage.com/7-ways-to-add-resistance-to-pull-ups-chin-ups-and-dips/", "Elbow Pain": "https://breakingmuscle.com/fitness/5-ways-to-end-elbow-pain-during-chin-ups"]),
     
     "Clam": createNote(
         notes: [
@@ -1523,7 +1523,7 @@ let builtInNotes: [String: String] = [
             "Slowly lower back down.",
             "Difficulty can be lessened by doing negatives: jump to raised position and very slowly lower yourself.",
             "Difficulty can be increased by attaching plates to a belt."],
-        links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/pullups", "Pullups": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/pullup", "Elbow Pain": "https://breakingmuscle.com/fitness/5-ways-to-end-elbow-pain-during-chin-ups"]),
+        links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/pullups", "Pullups": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/pullup", "Weighted": "http://relativestrengthadvantage.com/7-ways-to-add-resistance-to-pull-ups-chin-ups-and-dips/", "Elbow Pain": "https://breakingmuscle.com/fitness/5-ways-to-end-elbow-pain-during-chin-ups"]),
     
     "Pullup Negative": createNote(
         notes: [
