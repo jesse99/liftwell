@@ -71,6 +71,7 @@ func BodyWeight() -> Program {
 
         bodyweight("Reverse Hyperextension", "Reverse Hyperextension", "8-12".x(3), restMins: 1.5, main: true)]
     
+    // TODO: there are alternate progression paths we could support though that would start to make the Workout options screen messy
     let workouts = [
         Workout("Stretch", ["Yuri's Shoulder Band", "Squat Sky Reaches", "GMB Wrist Prep", "Deadbugs",
             "Arch Hang Warmup", "Support Hold Warmup", "Assisted Squat Warmup", "Squat Warmup", "Split Squat Warmup", "Bulgarian Split Squat Warmup", "Beginner Shrimp Squat Warmup", "Intermediate Shrimp Squat Warmup", "Advanced Shrimp Squat Warmup",
@@ -88,7 +89,7 @@ func BodyWeight() -> Program {
     let tags: [Program.Tags] = [.beginner, .strength, .minimal, .unisex, .threeDays, .ageUnder40, .age40s, .age50s]
     
     let description = """
-This is the recommended program from the [bodyweight fitness](https://old.reddit.com/r/bodyweightfitness/wiki/kb/recommended_routine) reddit. Do both the strech and strength workouts three times a week::
+This is the recommended program from the [bodyweight fitness](https://old.reddit.com/r/bodyweightfitness/wiki/kb/recommended_routine) reddit. Note that this does require a bit of equipment: a pullup bar, [bands](https://www.performbetter.com/First-Place-Superbands), and optionally parallel bars. Do both the stretch and strength workouts three times a week:
 
 **Stretch**
 * Yuri's Shoulder Band 5-10
@@ -101,18 +102,18 @@ This is the recommended program from the [bodyweight fitness](https://old.reddit
 * Easier Hinge (add an earlier Hinge once you can do Banded Nordic Curls)
 
 **Strength**
-* Pullup Progression 3x5-8
-* Squat Progression 3x5-8
+* [Pullup Progression](https://old.reddit.com/r/bodyweightfitness/wiki/exercises/pullup) 3x5-8
+* [Squat Progression](https://old.reddit.com/r/bodyweightfitness/wiki/exercises/squat) 3x5-8
 
-* Dip Progression 3x5-8
-* Hinge Progression 3x5-8
+* [Dip Progression](https://old.reddit.com/r/bodyweightfitness/wiki/exercises/dip) 3x5-8
+* [Hinge Progression](https://old.reddit.com/r/bodyweightfitness/wiki/exercises/hinge) 3x5-8
 
-* Row Progression 3x5-8
-* Pushup Progression 3x5-8
+* [Row Progression](https://old.reddit.com/r/bodyweightfitness/wiki/exercises/row) 3x5-8
+* [Pushup Progression](https://old.reddit.com/r/bodyweightfitness/wiki/exercises/pushup) 3x5-8
 
-* Anti-extension Progression 3x8-12
-* Anti-rotation Progression 3x8-12
-* Extension Progression 3x8-12
+* [Anti-extension Progression](https://www.reddit.com/r/bodyweightfitness/wiki/exercises/core#wiki_anti-extension) 3x8-12
+* [Anti-rotation Progression](https://www.reddit.com/r/bodyweightfitness/wiki/exercises/core#wiki_anti-rotation) 3x8-12
+* [Extension Progression](https://www.reddit.com/r/bodyweightfitness/wiki/exercises/core#wiki_extension) 3x8-12
 
 **Notes**
 * The Strength exercises come in pairs and triplets. To save time you can do one set of the first pair, wait 90s. do a set of the next pair, and repeat until you've done all the sets.
