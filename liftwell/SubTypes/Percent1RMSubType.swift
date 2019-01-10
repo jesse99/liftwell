@@ -90,7 +90,9 @@ class Percent1RMSubType: ExerciseInfo {
         if let last = originalSets.worksets.last, last.amrap {
             errors.append("Percent subtype doesn't support amrap sets.")
         }
-        if getOtherType(otherName) == nil {
+        if otherName == exercise.name {
+            errors.append("\(otherName) refers to its own exercise name.")
+        } else if getOtherType(otherName) == nil {
             errors.append("\(otherName) isn't using an apparatus.")
         }
         return errors
