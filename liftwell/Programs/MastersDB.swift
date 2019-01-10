@@ -12,7 +12,7 @@ func MastersDB() -> Program {
         dumbbell1("Kroc Row",        "Kroc Row",                        "10@50%",             "6-12".x(3, rest: .atEnd), restMins: 3.0, main: true),
 
         // Light
-        dumbbell1("Deadlift",        "Dumbbell Deadlift",       "10@50%",             "6-12".x(3, rest: .atEnd), restMins: 4.0, main: true),
+        //dumbbell1("Deadlift",        "Dumbbell Deadlift",       "10@50%",             "6-12".x(3, rest: .atEnd), restMins: 4.0, main: true),
         dumbbell2("Dumbbell OHP",    "Dumbbell Shoulder Press", "10@50% 3@70% 1@90%", "3-8".x(3, rest: .atEnd), restMins: 3.5, main: true),
         dumbbell2("Dumbbell Flyes",  "Dumbbell Flyes",          "10@50% ",            "6-12".x(3), restMins: 3.0),
         dumbbell2("Farmer's Walk",   "Farmer's Walk",           "",                   "1".x(2), restMins: 3.0),
@@ -36,7 +36,7 @@ func MastersDB() -> Program {
     
     let workouts = [
         Workout("Heavy", ["Heavy Bench", "Heavy Squat", "Chinups", "Back Extensions", "Kroc Row"], scheduled: true, optional: ["Back Extensions"]),
-        Workout("Light", ["Deadlift", "Dumbbell OHP", "Back Extensions", "Dumbbell Flyes", "Farmer's Walk", "Cable Crunches"], scheduled: true, optional: ["Farmer's Walk", "Cable Crunches"]),
+        Workout("Light", ["Dumbbell OHP", "Back Extensions", "Dumbbell Flyes", "Farmer's Walk", "Cable Crunches"], scheduled: true, optional: ["Farmer's Walk", "Cable Crunches"]),
         Workout("Medium", ["Medium Bench", "Medium Squat", "Chinups", "Kroc Row", "Farmer's Walk", "Dips"], scheduled: true, optional: ["Dips", "Farmer's Walk"]),
         
         Workout("Mobility", ["Foam Rolling", "Shoulder Dislocates", "Bent-knee Iron Cross", "Roll-over into V-sit", "Rocking Frog Stretch", "Fire Hydrant Hip Circle", "Mountain Climber", "Cossack Squat", "Piriformis Stretch", "Hip Flexor Stretch"], scheduled: false)]
@@ -54,7 +54,6 @@ This is a dumbbell only program for older lifters. It's based on programming pri
 * Kroc Row 3x6-12
 
 **Light**
-* Deadlift 3x6-12
 * Dumbbell OHP 3x5-10
 * Back Extensions 3x6-12
 * Dumbbell Flyes 3x6-12
