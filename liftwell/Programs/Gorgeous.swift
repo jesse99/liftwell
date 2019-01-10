@@ -160,8 +160,8 @@ func GorgeousGlutes3() -> Program {
         
         // C
         barbell("Hip Thrust (rest pause)", "Hip Thrust (rest pause)",  "", "10".x(3), restMins: 2.0, main: true),
-        dumbbell2("Step Ups",               "Step-ups",                 "", "8".x(3), restMins: 1.5, main: true),
-        barbell("Kettlebell Swing",        "Kettlebell Two Arm Swing", "", "20".x(3), restMins: 1.5),
+        dumbbell2("Step Ups",              "Step-ups",                 "", "8".x(3), restMins: 1.5, main: true),
+        bodyweight("Kettlebell Swing",     "Kettlebell Two Arm Swing", "20".x(3), restMins: 1.5),
         bodyweight("Side Lying Hip Raise", "Side Lying Hip Raise",     "15", restMins: 1.0)]
     
     let aExercises = ["Elevated Single-leg Hip Thrust (pause rep)", "Box Squat", "Single-leg Back Extension", "Cable Hip Abduction"]
