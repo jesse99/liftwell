@@ -104,7 +104,7 @@ class BaseCyclicRepsSubType: BaseApparatusSubType, ExerciseInfo {
         }
     }
     
-    func errors() -> [String] {
+    func errors(_ exercise: Exercise) -> [String] {
         var problems: [String] = []
         for sets in cycles {
             problems += sets.errors()

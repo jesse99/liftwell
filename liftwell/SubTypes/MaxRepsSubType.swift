@@ -98,7 +98,7 @@ class MaxRepsSubType: ExerciseInfo {
         }
     }
     
-    func errors() -> [String] {
+    func errors(_ exercise: Exercise) -> [String] {
         let problems: [String] = []
         return problems
     }

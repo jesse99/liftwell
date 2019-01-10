@@ -54,7 +54,7 @@ class FindWeightSubType: ExerciseInfo {
     func sync(_ program: Program, _ savedExercise: Exercise) {
     }
     
-    func errors() -> [String] {
+    func errors(_ exercise: Exercise) -> [String] {
         return []
     }
     

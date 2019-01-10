@@ -67,7 +67,7 @@ class DerivedSubType: ExerciseInfo {
         return result
     }
     
-    func errors() -> [String] {
+    func errors(_ exercise: Exercise) -> [String] {
         var errors = sets.errors()
         if getOtherType(otherName) == nil {
             errors.append("\(otherName) isn't using an apparatus.")

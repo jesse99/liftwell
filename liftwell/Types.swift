@@ -31,21 +31,21 @@ class WeightsType: Storable {
         self.subtype = subType
     }
     
-    func errors() -> [String] {
+    func errors(_ exercise: Exercise) -> [String] {
         switch subtype {
-        case .amrap(let subtype): return subtype.errors()
-        case .amrap1RM(let subtype): return subtype.errors()
-        case .cyclic(let subtype): return subtype.errors()
-        case .derived(let subtype): return subtype.errors()
-        case .emom(let subtype): return subtype.errors()
-        case .find(let subtype): return subtype.errors()
-        case .percent1RM(let subtype): return subtype.errors()
-        case .reps(let subtype): return subtype.errors()
-        case .t1(let subtype): return subtype.errors()
-        case .t1LP(let subtype): return subtype.errors()
-        case .t2(let subtype): return subtype.errors()
-        case .t3(let subtype): return subtype.errors()
-        case .timed(let subtype): return subtype.errors()
+        case .amrap(let subtype): return subtype.errors(exercise)
+        case .amrap1RM(let subtype): return subtype.errors(exercise)
+        case .cyclic(let subtype): return subtype.errors(exercise)
+        case .derived(let subtype): return subtype.errors(exercise)
+        case .emom(let subtype): return subtype.errors(exercise)
+        case .find(let subtype): return subtype.errors(exercise)
+        case .percent1RM(let subtype): return subtype.errors(exercise)
+        case .reps(let subtype): return subtype.errors(exercise)
+        case .t1(let subtype): return subtype.errors(exercise)
+        case .t1LP(let subtype): return subtype.errors(exercise)
+        case .t2(let subtype): return subtype.errors(exercise)
+        case .t3(let subtype): return subtype.errors(exercise)
+        case .timed(let subtype): return subtype.errors(exercise)
         }
     }
     
@@ -133,11 +133,11 @@ class BodyType: Storable {
         self.subtype = subType
     }
     
-    func errors() -> [String] {
+    func errors(_ exercise: Exercise) -> [String] {
         switch subtype {
-        case .maxReps(let subtype): return subtype.errors()
-        case .reps(let subtype): return subtype.errors()
-        case .timed(let subtype): return subtype.errors()
+        case .maxReps(let subtype): return subtype.errors(exercise)
+        case .reps(let subtype): return subtype.errors(exercise)
+        case .timed(let subtype): return subtype.errors(exercise)
         }
     }
     

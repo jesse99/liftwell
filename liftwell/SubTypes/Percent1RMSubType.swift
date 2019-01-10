@@ -81,7 +81,7 @@ class Percent1RMSubType: ExerciseInfo {
         return result
     }
     
-    func errors() -> [String] {
+    func errors(_ exercise: Exercise) -> [String] {
         var errors = originalSets.errors()
         let (min, max) = originalSets.repRange(currentReps: nil)
         if min == max {

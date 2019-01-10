@@ -24,8 +24,8 @@ class T1RepsSubType: BaseCyclicRepsSubType {
         return result
     }
     
-    override func errors() -> [String] {
-        var problems: [String] = super.errors()
+    override func errors(_ exercise: Exercise) -> [String] {
+        var problems: [String] = super.errors(exercise)
         var found = false
         for sets in cycles {
             for set in sets.worksets {

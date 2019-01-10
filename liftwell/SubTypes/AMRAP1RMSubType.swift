@@ -18,8 +18,8 @@ class AMRAP1RMSubType: BaseCyclicRepsSubType {
         super.init(from: store)
     }
     
-    override func errors() -> [String] {
-        var problems = super.errors()
+    override func errors(_ exercise: Exercise) -> [String] {
+        var problems = super.errors(exercise)
         let count = cycles.count {self.advancingCycle($0)}
         if count == 0 { // 2 would be goofy but, strictly speaking, not wrong
             problems.append("There should be a cycle to advance weight (which should have one AMRAP work set).")

@@ -67,8 +67,8 @@ class T1LPRepsSubType: BaseCyclicRepsSubType {
         return result
     }
     
-    override func errors() -> [String] {
-        var problems: [String] = super.errors()
+    override func errors(_ exercise: Exercise) -> [String] {
+        var problems: [String] = super.errors(exercise)
         for sets in cycles {
             if let last = sets.worksets.last, !last.amrap {
                 problems.append("Last set in each cycle should be AMRAP.")

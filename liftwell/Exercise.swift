@@ -96,8 +96,8 @@ class Exercise: Storable {
         var problems: [String] = []
         
         switch type {
-        case .body(let type): problems += type.errors()
-        case .weights(let type): problems += type.errors()
+        case .body(let type): problems += type.errors(self)
+        case .weights(let type): problems += type.errors(self)
         }
         
         if let name = prevExercise, program.findExercise(name) == nil {

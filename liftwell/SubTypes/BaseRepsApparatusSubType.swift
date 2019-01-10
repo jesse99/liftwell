@@ -72,7 +72,7 @@ class BaseRepsApparatusSubType: BaseApparatusSubType, ExerciseInfo {
         }
     }
     
-    func errors() -> [String] {
+    func errors(_ exercise: Exercise) -> [String] {
         return sets.errors()
     }
     

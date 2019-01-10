@@ -24,8 +24,8 @@ class AMRAPSubType: BaseRepsApparatusSubType {
         super.save(store)
     }
 
-    override func errors() -> [String] {
-        var problems: [String] = super.errors()
+    override func errors(_ exercise: Exercise) -> [String] {
+        var problems: [String] = super.errors(exercise)
         let (_, _, amrap) = getBaseRepRange()
         if amrap == nil {
             problems.append("Last work set should be AMRAP.")

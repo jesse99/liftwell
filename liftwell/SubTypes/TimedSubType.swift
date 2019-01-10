@@ -86,7 +86,7 @@ class TimedSubType: ExerciseInfo {
         }
     }
     
-    func errors() -> [String] {
+    func errors(_ exercise: Exercise) -> [String] {
         var problems: [String] = []
         if numSets <= 0 {
             problems += ["subtype.numSets should be greater than zero."]
