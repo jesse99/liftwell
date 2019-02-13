@@ -86,30 +86,14 @@ This should go on the program\
 
 \f2\fs36 \cf4 func\cf3  pairedPlates(\cf4 _\cf3  name: \cf5 String\cf3 , \cf4 _\cf3  formalName: \cf5 String\cf3 , \cf4 _\cf3  warmups: \cf5 String\cf3 , \cf4 _\cf3  worksets: \cf5 String\cf3 , \cf4 _\cf3  backoff: \cf5 String\cf3  = \cf7 ""\cf3 , restMins: \cf5 Double\cf3 , main: \cf5 Bool\cf3  = \cf4 false\cf3 ) -> \cf8 Exercise
 \f0\fs24 \cf0 \
-\pard\pardeftab720\partightenfactor0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab864\pardirnatural\partightenfactor0
 
 \fs48 \cf2 \
-\
-\pard\tx864\pardeftab864\pardirnatural\partightenfactor0
-
-\b \cf2 \
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab864\pardirnatural\partightenfactor0
-
-\b0 \cf2 collagen\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab864\pardirnatural\partightenfactor0
-
-\b \cf2 dental ins\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab864\pardirnatural\partightenfactor0
-
-\b0 \cf2 $100 apple\
-\
-\
 \
 \pard\tx816\pardeftab816\pardirnatural\partightenfactor0
 
 \f2\fs34 \cf4 class\cf3  Progression: \cf5 NSObject\cf3 , \cf5 NSCoding
 \f0\fs24 \cf0 \
-\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
 
 \f2\fs34 \cf3     \cf4 init\cf3 (name: \cf5 String\cf3 , formalName: \cf5 String\cf3 , level: \cf5 String\cf3 , numSets: \cf5 Int\cf3 ?, numReps: \cf5 Int\cf3 ?, lastReps: \cf5 Int\cf3 ?)
 \f0\fs24 \cf0 \
@@ -146,28 +130,22 @@ This should go on the program\
 
 \f2\fs34 \cf3     \cf4 var\cf3  lastReps: \cf5 Int\cf3 ?\
     \
-\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
 \cf4 class\cf3  BodyWeightExercise: \cf8 Exercise
 \f0\fs24 \cf0 \
-\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
 
 \f2\fs34 \cf3     \cf4 var\cf3  progression: [\cf8 Progression\cf3 ]
 \f0\fs24 \cf0 \
-\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
 
 \f2\fs34 \cf4 \
 class\cf3  BodyWeightSetting: \cf8 Setting
 \f0\fs24 \cf0 \
-\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
 
 \f2\fs34 \cf3     \cf4 var\cf3  progressionIndex: \cf5 Int
 \f0\fs24 \cf0 \
-\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
 
 \f2\fs34 \cf4 \
 class\cf3  BodyWeightResult: \cf8 ExerciseResult
 \f0\fs24 \cf0 \
-\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
 
 \f2\fs34 \cf3     \cf4 var\cf3  progressionIndex: \cf5 Int
 \f0\fs24 \cf0 \
@@ -181,7 +159,6 @@ class\cf3  BodyWeightResult: \cf8 ExerciseResult
 
 \f2\fs34 \cf4 func\cf3  squat() -> \cf8 Exercise
 \f0\fs24 \cf0 \
-\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
 
 \f2\fs34 \cf3 \{
 \f0\fs24 \cf0 \
@@ -216,13 +193,11 @@ Weighted Pullups\
 
 \f2\fs34 \cf3         \cf4 if\cf3  \cf4 let\cf3  apparatus = exercise.getApparatus() \{
 \f0\fs24 \cf0 \
-\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
 
 \f2\fs34 \cf4 \
 \
 extension\cf3  \cf8 Exercise\cf3  \{
 \f0\fs24 \cf0 \
-\pard\tx816\pardeftab816\pardirnatural\partightenfactor0
 
 \f2\fs34 \cf3     \cf4 func\cf3  getInfo() -> \cf8 ExerciseInfo\cf3  \{
 \f0\fs24 \cf0 \
@@ -252,14 +227,26 @@ extension\cf3  \cf8 Exercise\cf3  \{
 \f0\fs24 \cf0 \
 
 \f2\fs34 \cf3 \
-    
-\f0\fs24 \cf0 \
 \pard\pardeftab720\sl240\partightenfactor0
 
-\fs48 \cf2 \
+\f0\fs48 \cf2 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab864\pardirnatural\partightenfactor0
-\cf2 * Can we do something better with stuff like kettlebell swings?\
-	- find weight kinda suckeed\
+\cf2 notshown didnt work\
+\
+Bodyweight Move 1-5\
+https://old.reddit.com/r/bodyweightfitness/wiki/move\
+\
+suitable for beginners\
+can last up to 2 years\
+\
+Phase 1\
+https://www.reddit.com/r/bodyweightfitness/wiki/move/phase1\
+move to phase 2 when can do 30s in plank and reverse plank\
+run it for at least two weeks\
+pay close attention to form cues\
+\
+\
+\
 * Add the other programs listed on reddit	\
 * Ask Kris to review the app\
 * Maybe also some of these programs:\
@@ -274,7 +261,7 @@ extension\cf3  \cf8 Exercise\cf3  \{
 	- need a masters barbell version, maybe with some options\
 	  tp compensate for injuries\
 	- 
-\f2\fs34 \cf3 Coolcicada\cf3 \cb10 ?
+\f2\fs34 \cf3 Coolcicada\cb10 ?
 \f0\fs48 \cf2 \cb1 \
 	- https://www.artofmanliness.com/articles/fitness-program-right/\
 * Might want to use a different default program\
@@ -646,4 +633,12 @@ cardio\
 
 \f2\fs36 \cf3     \cf4 init\cf3 (minReps: \cf5 Int\cf3 , maxReps: \cf5 Int\cf3 , percent: \cf5 Double\cf3 , amrap: \cf5 Bool\cf3  = \cf4 false\cf3 , rest: \cf5 Bool\cf3  = \cf4 false\cf3 ) \{
 \f0\fs24 \cf0 \
+\
+\pard\tx864\pardeftab864\pardirnatural\partightenfactor0
+
+\fs44 \cf0 \
+\pard\tx864\pardeftab864\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \
+\
 }

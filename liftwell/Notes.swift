@@ -141,6 +141,12 @@ let builtInNotes: [String: String] = [
             "Keep your back straight at all times."],
         links: ["Video": "https://www.youtube.com/watch?v=HUXS3S2xSX4"]),
     
+    "Bent-legged Calf Stretch": createNote(
+        notes: [
+            "Place one foot on a flight of stairs so that just your toes are supported.",
+            "Bend the knee on that leg forward and hold."],
+        links: ["Image": "http://gymnastcare.com/wp-content/uploads/2014/01/stretching.png"]),
+    
     "Bar Pullover": createNote(
         notes: [
             "Do a pullup and as you come up bring your legs up and spin around the bar.",
@@ -175,6 +181,14 @@ let builtInNotes: [String: String] = [
             "Slowly lower the bar back down.",
             "Avoid using your biceps."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/barbell-shrug"]),
+    
+    "Bear Crawl": createNote(
+        notes: [
+            "Raise your butt high in the air and walk forward.",
+            "If space is limited 2-4 steps forward and backwards works.",
+            "Reach with your shoulders when moving forwards.",
+            "Push out with your shoulders when going backwards."],
+        links: ["Video": "https://gfycat.com/VagueEssentialGalapagosalbatross", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase1"]),
     
     "Beginner Shrimp Squat": createNote(
         notes: [
@@ -388,6 +402,15 @@ let builtInNotes: [String: String] = [
             "Elbows should be lowered to mind-thighs."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/cable-crunch"]),
     
+    "Cable Crossover": createNote(
+        notes: [
+            "Start with pulleys above your head.",
+            "Place one foot forward and bend slightly at the waist.",
+            "With a slight bend to your elbows, extend your arms straight in front of you in a wide arc until you feel a stretch in your chest.",
+            "Keep your torso straight: don't lean forward as you move your arms.",
+            "Keep your arms slightly bent: don't use them to push into the handles."],
+        links: ["Link": "https://www.bodybuilding.com/exercises/cable-crossover"]),
+    
     "Cable Hip Abduction": createNote(
         notes: [
             "Use an ankle cuff to attach a leg to a low pulley.",
@@ -432,6 +455,31 @@ let builtInNotes: [String: String] = [
             "Keep your arms straight the entire time.",
             "Bring your arms back behind your back."],
         links: ["Link": "https://www.youtube.com/watch?v=8lDC4Ri9zAQ&feature=youtu.be&t=4m22s"]),
+    
+    "Chest Wall Stretch": createNote(
+        notes: [
+            "Place a palm on a wall so that your arm is raised up at a 45 degree angle.",
+            "Turn your torso away from the wall to perform the stretch.",
+            "Can use your other hand to help pull your torso away."],
+        links: ["Video": "https://www.youtube.com/watch?v=PQ7tgOHj9vM&feature=youtu.be&t=30s", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase1"]),
+    
+    "Child's Pose": createNote(
+        notes: [
+            "Kneel down.",
+            "Extend your arms out and place your palms on the floor.",
+            "Keep your head inline with your torso.",
+            "Relax."],
+        links: ["Image": "http://i.imgur.com/UmHztrr.jpg"]),
+    
+    "Child's Pose with Lat Stretch": createNote(
+        notes: [
+            "Sit down, spread your knees at least three feet apart with your heels touching.",
+            "Walk your hands forward and then to the right.",
+            "Tilt your hands as if you were pushing a wall away.",
+            "Place your head on the mat.",
+            "Make the stretch more intense by looking up through the armpit that is towards the middle.",
+            "Repeat for the other side."],
+        links: ["Video": "https://www.youtube.com/watch?v=pJcobQf324o", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase1"]),
     
     "Chinup": createNote(
         notes: [
@@ -872,7 +920,17 @@ let builtInNotes: [String: String] = [
             "Use your toes to support yourself.",
             "Difficulty can be lessened by keeping your knees on the ground.",
             "Difficulty can be increased by raising a foot and/or hand off the ground or by elevating feet."],
-        links: ["Link": "http://www.exrx.net/WeightExercises/RectusAbdominis/BWFrontPlank.html", "Antranik": "https://www.youtube.com/watch?v=44ScXWFaVBs", "Alternative": "http://i.imgur.com/2D4Nd1R.jpg", "Progression": "http://www.instructables.com/id/How-to-achieve-the-hanging-dragon-flag/"]),
+        links: ["Link": "http://www.exrx.net/WeightExercises/RectusAbdominis/BWFrontPlank.html", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase1", "Antranik": "https://www.youtube.com/watch?v=44ScXWFaVBs", "Alternative": "http://i.imgur.com/2D4Nd1R.jpg", "Progression": "http://www.instructables.com/id/How-to-achieve-the-hanging-dragon-flag/"]),
+    
+    "Front Scale Leg Lifts": createNote(
+        notes: [
+            "Relax your shoukders, lock your legs, keep your back straight.",
+            "Extend your arms out to either side.",
+            "Point your toes and lift one leg off the ground.",
+            "Don't lean back.",
+            "Aim for raising your leg to a ninety degree angle.",
+            "Raise and lower your leg and, on the last lift, hold for a bit."],
+        links: ["Video": "https://www.youtube.com/watch?v=ilBByuwM8hk"]),
     
     "Front Squat": createNote(
         notes: [
@@ -924,7 +982,7 @@ let builtInNotes: [String: String] = [
             "Keep your knees out (can push them out at the bottom using your elbows)."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/goblet-squat"]),
     
-    "GMB Wrist Prep": createNote(
+    "GMB Wrist Prep": createNote(  
         notes: [
             "Finger Pulses: bounce fingers up and down.",
             "Palm Pulses: palms down, fingers opened, raise wrists up and down.",
@@ -976,6 +1034,17 @@ let builtInNotes: [String: String] = [
             "Keep your shoulder blades retracted and extend your arms out."],
         links: ["Link": "https://www.regularityfitness.com/hammer-strength-chest-press/"]),
     
+    "Hamstring Lunge Stretch": createNote(
+        notes: [
+            "Get on your hands and knees and extend your right leg out in front of you.",
+            "Support yourself with your left hand on the ground.",
+            "Wrap your right arm below your extended leg above the knee.",
+            "Lean your torso into the extended leg. Keep your back straight.",
+            "Slowly push your foot away.",
+            "Once your foor is extended as far as you are comfortable with you can enhance the stretch by driving your heel into the ground.",
+            "Repeat for the opposite side."],
+        links: ["Video": "https://www.youtube.com/watch?v=CrF2iMnn09w&feature=youtu.be", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase1"]),
+    
     "Hanging Dragon Flag": createNote(
         notes: [
             "Grab a pole with both hands.",
@@ -1009,6 +1078,17 @@ let builtInNotes: [String: String] = [
             "High bar depth is typically greater than low bar depth.",
             "If your neck gets sore the bar is in the wrong position."],
         links: ["Link": "https://squatuniversity.com/2016/03/18/how-to-perfect-the-high-bar-back-squat-2/", "Video": "https://www.youtube.com/watch?v=lUGpa_Wz2gs"]),
+    
+    "Hip Flexor Lunge Stretch": createNote(
+        notes: [
+            "Get on your hands and knees and extend your right leg out in front of you.",
+            "Make sure your extended foot is in front of your knee.",
+            "Square your hips by rotating your right hip back and your left hip forward.",
+            "Place one hand below your belly button and the other on your tail bone and use them to bring the front of your hips up and your backside down.",
+            "Bend the front knee.",
+            "Raise your hands above your head.",
+            "Repeat with the opposite side."],
+        links: ["Video": "https://www.youtube.com/watch?v=UGEpQ1BRx-4", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase1"]),
     
     "Hip Hinge with Dowel": createNote(
         notes: [
@@ -1631,8 +1711,9 @@ let builtInNotes: [String: String] = [
             "Lie on your back and raise your body up so that you are supported by just your palms and your feet.",
             "Straighten each leg out in turn.",
             "Pinch shoulder blades together.",
-            "Bring the hips up."],
-        links: ["Link": "https://www.youtube.com/watch?v=44ScXWFaVBs&feature=youtu.be&t=3m34s"]),
+            "Bring the hips up.",
+            "Keep your head in a neutral position. Don't look at your feet."],
+        links: ["Link": "https://www.youtube.com/watch?v=44ScXWFaVBs&feature=youtu.be&t=3m34s", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase1"]),
     
     "Reverse Wrist Curl": createNote(
         notes: [
@@ -1808,10 +1889,16 @@ let builtInNotes: [String: String] = [
     "Scapular Pulls": createNote(
         notes: [
             "Hang down from a pullup bar.",
-            "Use your arms to lift your shoulders upwards.",
-            "Keep your elbows straight.",
-            "At the top squeeze your shoulder blades together for 3-5s and slowly lower your body back down."],
+            "Keeping your arms straight."],
         links: ["Video": "https://www.youtube.com/watch?v=FgYoc4O-cio&feature=youtu.be&t=1m21s"]),
+    
+    "Scapular Rows": createNote(
+        notes: [
+            "Lay down and use a bar to elevate your torso above the ground.",
+            "Use your arms to lift your shoulders upwards.",
+            "Keeping your arms straight raise your torso by shrugging your shoulders forward.",
+            "Move slowly, pinch your shoulderblades together."],
+        links: ["Video": "https://www.youtube.com/watch?v=XzSNFureSCE", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase1"]),
     
     "Scapular Shrugs": createNote(
         notes: [
@@ -1819,7 +1906,7 @@ let builtInNotes: [String: String] = [
             "Push your shoulder blades back as much as possible.",
             "Push your shoulder blades forward as much as possible.",
             "Difficulty can be increased by doing this in a pushup position or by using a band."],
-        links: ["Link": "https://www.youtube.com/watch?v=akgQbxhrhOc"]),
+        links: ["Video": "https://www.youtube.com/watch?v=akgQbxhrhOc", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase1"]),
     
     "Seated Cable Row": createNote(
         notes: [
@@ -2164,7 +2251,7 @@ let builtInNotes: [String: String] = [
             "Knees out.",
             "Difficulty can be lessened by using a wider stance and by angling feet outward more.",
             "Work towards holding the squat for one minute for multiple reps."],
-        links: ["Link": "http://thirdworldsquats.com/", "Video": "https://vimeo.com/116283733"]),
+        links: ["Link": "http://thirdworldsquats.com/", "Video": "https://vimeo.com/116283733", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase1"]),
     
     "Tiger Tail Roller": createNote(
         notes: [
@@ -2296,6 +2383,15 @@ let builtInNotes: [String: String] = [
             "Difficulty can be lessened by starting with elbows further down.",
             "Work towards 8-10 reps."],
         links: ["Link": "https://www.gymnasticbodies.com/forum/topic/846-wall-extensions/"]),
+    
+    "Wall Extensions (floor)": createNote(
+        notes: [
+            "Lie down on the floor.",
+            "Keep your lower back touching the floor,",
+            "Start with your lower and upper arms forming a 90 degree angle.",
+            "If possible start with your elbows on the floor.",
+            "Move your arms up as far as possible but stop if your elbows begin to raise."],
+        links: ["Link": "https://www.gymnasticbodies.com/forum/topic/846-wall-extensions/", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase1"]),
     
     "Wall Handstand": createNote(
         notes: [
