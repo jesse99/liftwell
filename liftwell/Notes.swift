@@ -90,7 +90,7 @@ let builtInNotes: [String: String] = [
         notes: [
             "Use a chair or something else to support you as you squat.",
             "Reduce the use of the support over time."],
-        links: ["Link": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/squat", "Body Weight Squats": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/squat"]),
+        links: ["Link": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/squat", "Body Weight Squats": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/squat", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase2/squat"]),
     
     "Back Extension": createNote(
         notes: [
@@ -635,7 +635,7 @@ let builtInNotes: [String: String] = [
             "Keep your body in a straight line.",
             "Lock out arms and push shoulders forward.",
             "Keep elbows in, don't let them flare outwards from your torso."],
-        links: ["Link": "https://www.youtube.com/watch?v=_4EGPVJuqfA", "Pushups": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/pushup"]),
+        links: ["Link": "https://www.youtube.com/watch?v=_4EGPVJuqfA", "Pushups": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/pushup", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase2/pushup"]),
     
     "Dips": createNote(
         notes: [
@@ -913,6 +913,17 @@ let builtInNotes: [String: String] = [
             "Glue your legs together and point the toes."],
         links: ["Link": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/handstand", "Handstands": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/handstand"]),
     
+    "Frog Stance": createNote(
+        notes: [
+            "Use a yoga block, a small box, a think book, or a stair step to elevate your feet.",
+            "Stand on the block and squat down.",
+            "Keep your knees apart and place your hands on the ground, shoulder width apart.",
+            "Balance on your toes and lean forward.",
+            "As youur body moves forward allow your arms to bend at the elbows.",
+            "Once you can do that for 30s lift one foot off the ground towards your butt.",
+            "Once that is comfortable lean forward a bit more until the other foot comes off the ground."],
+        links: ["Video": "https://www.youtube.com/watch?v=Hml31hm-Zkg", "Notes": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase2"]),
+    
     "Front Plank": createNote(
         notes: [
             "Lie prone on a mat keeping elbows below shoulders.",
@@ -1141,7 +1152,18 @@ let builtInNotes: [String: String] = [
             "Keep your body straight.",
             "Arms should be straight at the bottom.",
             "Don't let your shoulders shrug up."],
-        links: ["Link": "https://www.youtube.com/watch?v=dvkIaarnf0g", "Body Weight Rows": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/row"]),
+        links: ["Link": "https://www.youtube.com/watch?v=dvkIaarnf0g", "Body Weight Rows": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/row", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase2/row"]),
+    
+    "Ido's Squat Routine": createNote(
+        notes: [
+            "1. Start with knee push, 10-20 reps per side: squat down and use your hands to push your knees out.",
+            "2. Hold knee out, 10-30s per side.",
+            "3. Sky reaches, 10-30 reps per side: hold an ankle with one hand and extend the other elbow as high as possible and raise arm skyward.",
+            "4. Static pause, 10-30s per side: sky reach with a pause at the top.",
+            "5. Budha Prayers, 10-30 reps: wedge knees apart with elbows and place hands together, Raise and lower hands, Optionally go fist to fist.",
+            "6. Squat Bows, 10-30 reps: place hands on top of each other with thumbs up. Lean forward until your head touches your hand. Optionally keep thumbs down.",
+            "7. Paused Bow, 10-30s."],
+        links: ["Video": "https://www.youtube.com/watch?v=lbozu0DPcYI", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase2"]),
     
     "Incline Bench Press": createNote(
         notes: [
@@ -1186,7 +1208,7 @@ let builtInNotes: [String: String] = [
             "Keep your body in a straight line.",
             "Lock out arms and push shoulders forward.",
             "Keep elbows in, don't let them flare outwards from your torso."],
-        links: ["Link": "https://www.youtube.com/watch?v=4dF1DOWzf20&feature=youtu.be&t=3m56s", "Pushups": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/pushup"]),
+        links: ["Link": "https://www.youtube.com/watch?v=4dF1DOWzf20&feature=youtu.be&t=3m56s", "Pushups": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/pushup", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase2/pushup"]),
     
     "Incline Rows": createNote(
         notes: [
@@ -1196,7 +1218,7 @@ let builtInNotes: [String: String] = [
             "Keep your body straight and elbows in.",
             "Arms should be straight at the bottom.",
             "Don't let your shoulders shrug up."],
-        links: ["Link": "https://www.youtube.com/watch?v=tDUWmbzs154", "Body Weight Rows": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/row"]),
+        links: ["Link": "https://www.youtube.com/watch?v=tDUWmbzs154", "Body Weight Rows": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/row", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase2/row"]),
     
     "Intermediate Shrimp Squat": createNote(
         notes: [
@@ -1633,7 +1655,7 @@ let builtInNotes: [String: String] = [
             "Keep body straight.",
             "Difficulty can be lessened by keeping knees on the floor or by placing hands on a support.",
             "Difficulty can be increased by placing feet on a bench."],
-        links: ["Link": "http://www.exrx.net/WeightExercises/PectoralSternal/BWPushup.html", "Antranik": "https://www.youtube.com/watch?v=4dF1DOWzf20&feature=youtu.be", "Pushups": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/pushup", "Inclined": "http://www.bodybuilding.com/exercises/detail/view/name/incline-push-up"]),
+        links: ["Link": "http://www.exrx.net/WeightExercises/PectoralSternal/BWPushup.html", "Antranik": "https://www.youtube.com/watch?v=4dF1DOWzf20&feature=youtu.be", "Pushups": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/pushup", "Inclined": "http://www.bodybuilding.com/exercises/detail/view/name/incline-push-up", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase2/pushup"]),
     
     "Pushup Plus": createNote(
         notes: [
@@ -1980,7 +2002,7 @@ let builtInNotes: [String: String] = [
             "Stand upright with your arms at your side.",
             "Roll shoulders forward, up to ears, back, and down.",
             "Difficulty can be increased by:\n1. Holding your hands straight out in front of you.\n2. Holding your hands straight up above your head.\n3. Crouching on your hands and knees with elbows locked.\n4. Sticking your butt in the air so that your torso and legs form a ninety degree angle."],
-        links: ["Link": "https://www.youtube.com/watch?v=H01oGIS1C_g"]),
+        links: ["Video": "https://www.youtube.com/watch?v=H01oGIS1C_g"]),
     
     "Side Bend (45 degree)": createNote(
         notes: [
@@ -2349,7 +2371,7 @@ let builtInNotes: [String: String] = [
             "Keep your body in a straight line.",
             "Lock out arms and push shoulders forward.",
             "Keep elbows in, don't let them flare outwards from your torso."],
-        links: ["Link": "https://www.youtube.com/watch?v=a6YHbXD2XlU", "Pushups": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/pushup"]),
+        links: ["Link": "https://www.youtube.com/watch?v=a6YHbXD2XlU", "Pushups": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/pushup", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase2/pushup"]),
     
     "Vertical Rows": createNote(
         notes: [
@@ -2357,7 +2379,7 @@ let builtInNotes: [String: String] = [
             "Keep your body straight and elbows in.",
             "Arms should be straight at the bottom.",
             "Don't let your shoulders shrug up."],
-        links: ["Link": "https://www.youtube.com/watch?v=e5fdh9_kH_Y", "Body Weight Rows": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/row"]),
+        links: ["Link": "https://www.youtube.com/watch?v=e5fdh9_kH_Y", "Body Weight Rows": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/row", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase2/row"]),
     
     "Walking Knee Hugs": createNote(
         notes: [
