@@ -62,7 +62,7 @@ let builtInNotes: [String: String] = [
             "Place hands behind you off the floor, lift chest up, raise legs off the floor.",
             "Remember to breathe.",
             "Difficulty can be increased by moving hands out in front of you."],
-        links: ["Link": "https://www.youtube.com/watch?v=44ScXWFaVBs&feature=youtu.be&t=3m34s"]),
+        links: ["Video": "https://www.youtube.com/watch?v=44ScXWFaVBs&feature=youtu.be&t=7m51s", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/pullup"]),
     
     "Arm & Leg Lift Front Plank": createNote(
         notes: [
@@ -619,7 +619,7 @@ let builtInNotes: [String: String] = [
             "Place all of your weight on that object and step up onto the object.",
             "Use your back leg as little as possible.",
             "Difficulty can be increased by using a higher object or holding a weight."],
-        links: ["Link": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/squat", "Body Weight Squats": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/squat"]),
+        links: ["Link": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/squat", "Body Weight Squats": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/squat", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/playground/deep-step-up"]),
     
     "Deficit Deadlift": createNote(
         notes: [
@@ -896,7 +896,7 @@ let builtInNotes: [String: String] = [
             "Leave your feet on the ground.",
             "Keep arms and legs straight.",
             "Don't shrug your shoulders up."],
-        links: ["Link": "https://www.youtube.com/watch?v=IUZJoSP66HI#t=40s", "L-sits": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/l-sit"]),
+        links: ["Link": "https://www.youtube.com/watch?v=IUZJoSP66HI#t=40s", "L-sits": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/l-sit", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/l-sit"]),
     
     "Forward Lunge Stretch": createNote(
         notes: [
@@ -1055,6 +1055,13 @@ let builtInNotes: [String: String] = [
             "Once your foor is extended as far as you are comfortable with you can enhance the stretch by driving your heel into the ground.",
             "Repeat for the opposite side."],
         links: ["Video": "https://www.youtube.com/watch?v=CrF2iMnn09w&feature=youtu.be", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase1"]),
+    
+    "Handstand": createNote(
+        notes: [
+            "Place hands on the ground, shoulder width apart, and with fingers spread.",
+            "Hands should point forward: not turned inward.",
+            "Keep a slight bend to elbows."],
+        links: ["Tutorial": "https://gmb.io/handstand/", "Wall Assisted": "https://www.womenshealthmag.com/fitness/a19918535/how-to-do-a-handstand/"]),
     
     "Hanging Dragon Flag": createNote(
         notes: [
@@ -1235,7 +1242,7 @@ let builtInNotes: [String: String] = [
             "Keep your heels on the ground and hang with arms fully extended.",
             "Flex your elbows and pull your chest to the bar.",
             "Difficulty can be lessened by bending your knees or by increasing the angle your torso forms to the ground."],
-        links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/inverted-row"]),
+        links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/inverted-row", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/row"]),
     
     "IT-Band Foam Roll": createNote(
         notes: [
@@ -1286,7 +1293,7 @@ let builtInNotes: [String: String] = [
             "Use your palms to raise your entire body off the floor keeping your legs extended out.",
             "Keep arms and legs straight.",
             "Don't shrug your shoulders up."],
-        links: ["Link": "https://www.youtube.com/watch?v=ek76IXnE9tE", "L-sits": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/l-sit"]),
+        links: ["Link": "https://www.youtube.com/watch?v=ek76IXnE9tE", "L-sits": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/l-sit", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/l-sit"]),
     
     "L-sit Pullup": createNote(
         notes: [
@@ -1470,7 +1477,7 @@ let builtInNotes: [String: String] = [
             "Work on extending your legs outward: either by tucking less or extending one leg straight out.",
             "Keep arms straight.",
             "Don't shrug your shoulders up."],
-        links: ["Link": "https://www.youtube.com/watch?v=IUZJoSP66HI#t=40s", "L-sits": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/l-sit"]),
+        links: ["Link": "https://www.youtube.com/watch?v=IUZJoSP66HI#t=40s", "L-sits": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/l-sit", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/l-sit"]),
     
     "One-Leg Foot Supported L-sit": createNote(
         notes: [
@@ -1480,7 +1487,7 @@ let builtInNotes: [String: String] = [
             "It's OK to alternate which foot is on the ground.",
             "Keep arms and legs straight.",
             "Don't shrug your shoulders up."],
-        links: ["Link": "https://www.youtube.com/watch?v=IUZJoSP66HI#t=40s", "L-sits": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/l-sit"]),
+        links: ["Link": "https://www.youtube.com/watch?v=IUZJoSP66HI#t=40s", "L-sits": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/l-sit", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/l-sit"]),
     
     "Overhead Press": createNote(
         notes: [
@@ -1604,7 +1611,7 @@ let builtInNotes: [String: String] = [
     "Pseudo Planche Pushups": createNote(
         notes: [
             "Pushup but with your body scooted forward."],
-        links: ["Video": "https://www.youtube.com/watch?v=Cdmg0CfMZeo"]),
+        links: ["Video": "https://www.youtube.com/watch?v=Cdmg0CfMZeo", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/pushup"]),
     
     "Pull Through": createNote(
         notes: [
@@ -1625,7 +1632,7 @@ let builtInNotes: [String: String] = [
             "Slowly lower back down.",
             "Difficulty can be lessened by doing negatives: jump to raised position and very slowly lower yourself.",
             "Difficulty can be increased by attaching plates to a belt."],
-        links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/pullups", "Pullups": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/pullup", "Weighted": "http://relativestrengthadvantage.com/7-ways-to-add-resistance-to-pull-ups-chin-ups-and-dips/", "Elbow Pain": "https://breakingmuscle.com/fitness/5-ways-to-end-elbow-pain-during-chin-ups"]),
+        links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/pullups", "Pullups": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/pullup", "Weighted": "http://relativestrengthadvantage.com/7-ways-to-add-resistance-to-pull-ups-chin-ups-and-dips/", "Elbow Pain": "https://breakingmuscle.com/fitness/5-ways-to-end-elbow-pain-during-chin-ups", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/pullup"]),
     
     "Pullup Negative": createNote(
         notes: [
@@ -1912,7 +1919,7 @@ let builtInNotes: [String: String] = [
         notes: [
             "Hang down from a pullup bar.",
             "Keeping your arms straight."],
-        links: ["Video": "https://www.youtube.com/watch?v=FgYoc4O-cio&feature=youtu.be&t=1m21s"]),
+        links: ["Video": "https://www.youtube.com/watch?v=FgYoc4O-cio&feature=youtu.be&t=1m21s", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/pullup"]),
     
     "Scapular Rows": createNote(
         notes: [
@@ -2328,8 +2335,9 @@ let builtInNotes: [String: String] = [
             "Sit with your legs tucked towards your chest.",
             "Use your palms to raise your entire body off the floor keeping your legs tucked to your chest.",
             "Keep arms straight.",
-            "Don't shrug your shoulders up."],
-        links: ["Link": "https://www.youtube.com/watch?v=IUZJoSP66HI#t=40s", "L-sits": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/l-sit"]),
+            "Don't shrug your shoulders up.",
+            "Easier version is to use a stool to do an elevated version"],
+        links: ["Link": "https://www.youtube.com/watch?v=IUZJoSP66HI#t=40s", "L-sits": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/l-sit", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/l-sit"]),
     
     "Turkish Get-Up": createNote(
         notes: [
@@ -2448,7 +2456,7 @@ let builtInNotes: [String: String] = [
             "Keep your body straight and elbows in.",
             "Arms should be straight at the bottom.",
             "Don't let your shoulders shrug up."],
-        links: ["Link": "https://www.youtube.com/watch?v=1yMRvsuk9Xg", "Body Weight Rows": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/row"]),
+        links: ["Link": "https://www.youtube.com/watch?v=1yMRvsuk9Xg", "Body Weight Rows": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/row", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/row"]),
     
     "Wrist Mobility": createNote(
         notes: [

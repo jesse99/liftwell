@@ -409,7 +409,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    let programs = [BestButt14(), BestButt58(), BestButt912(), BodyWeight(), Bootyful3a(), Bootyful3b(), Bootyful3c(), Bootyful14a(), Bootyful14b(), Bootyful14c(), BoringButBig(), CAP3(), DB_PPL(), FiveThreeOneBeginner(), GlutealGoddess1(), GlutealGoddess2(), GlutealGoddess3(), GorgeousGlutes1(), GorgeousGlutes2(), GorgeousGlutes3(), GZCL(), GZCLP3(), GZCLP4(), JackShit(), MastersDB(), Metallicadpa(), Monolith(), Move1(), Move2(), nSuns4(), nSuns5(), PHAT(), PhraksGreyskull(), PHUL(), Stopgap()]
+    let programs = [BestButt14(), BestButt58(), BestButt912(), BodyWeight(), Bootyful3a(), Bootyful3b(), Bootyful3c(), Bootyful14a(), Bootyful14b(), Bootyful14c(), BoringButBig(), CAP3(), DB_PPL(), FiveThreeOneBeginner(), GlutealGoddess1(), GlutealGoddess2(), GlutealGoddess3(), GorgeousGlutes1(), GorgeousGlutes2(), GorgeousGlutes3(), GZCL(), GZCLP3(), GZCLP4(), JackShit(), MastersDB(), Metallicadpa(), Monolith(), Move1(), Move2(), Move3(), nSuns4(), nSuns5(), PHAT(), PhraksGreyskull(), PHUL(), Stopgap()]
 
     var window: UIWindow?
     var program: Program!
