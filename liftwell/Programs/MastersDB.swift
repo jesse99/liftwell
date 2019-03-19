@@ -5,11 +5,11 @@ import Foundation
 func MastersDB() -> Program {
     let exercises = [
         // Heavy
-        dumbbell2("Heavy Bench",     "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "6-12".x(3, rest: .atEnd), restMins: 4.0, main: true),
-        dumbbell2("Heavy Squat",     "Dumbbell Single Leg Split Squat", "5@50% 3@75%",        "4-8".x(3, rest: .atEnd), restMins: 4.0, main: true),
-        bodyweight("Chinups",        "Chinup",                          numSets: 3, startReps: 5, goalReps: 24, restMins: 3.5, restAtEnd: true, main: true),
+        dumbbell2("Heavy Bench",     "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "5-10".x(3, rest: .atEnd), restMins: 4.0, main: true),
+        dumbbell2("Heavy Squat",     "Dumbbell Single Leg Split Squat", "5@50% 3@75%",        "4-7".x(3, rest: .atEnd), restMins: 4.0, main: true),
+        bodyweight("Chinups",        "Chinup",                          numSets: 3, startReps: 5, goalReps: 20, restMins: 3.5, restAtEnd: true, main: true),
         dumbbell1("Back Extensions", "Back Extensions",                 "10@50%",             "6-12".x(3, rest: .atEnd), restMins: 3.0, main: true),
-        dumbbell1("Kroc Row",        "Kroc Row",                        "10@50%",             "10-20".x(1, rest: .atEnd), restMins: 3.0, main: true),
+        dumbbell1("Kroc Row",        "Kroc Row",                        "10@50%",             "9-18".x(2, rest: .atEnd), restMins: 3.0, main: true),
 
         // Light
         //dumbbell1("Deadlift",        "Dumbbell Deadlift",       "10@50%",             "6-12".x(3, rest: .atEnd), restMins: 4.0, main: true),
@@ -19,8 +19,8 @@ func MastersDB() -> Program {
         cable("Cable Crunches",      "Cable Crunch",            "",                   "6-12".x(3), restMins: 3.0),
 
         // Medium
-        dumbbell2("Medium Bench",    "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "4-10".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Bench", restMins: 4.0),
-        dumbbell2("Medium Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75%",        "4-8".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Squat", restMins: 4.0),
+        dumbbell2("Medium Bench",    "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "4-8".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Bench", restMins: 4.0),
+        dumbbell2("Medium Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75%",        "3-6".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Squat", restMins: 4.0),
         bodyweight("Dips",           "Dips",                            numSets: 3, startReps: 10, goalReps: 36, restMins: 3.5, restAtEnd: false),
         
         bodyweight("Foam Rolling",            "IT-Band Foam Roll",         1, by: 15),
