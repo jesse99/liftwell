@@ -842,11 +842,12 @@ let builtInNotes: [String: String] = [
     
     "Face Pull": createNote(
         notes: [
-            "Use a high pulley with rope or a dual handle attachment.",
-            "Pull the weight directly to your face separating your hands as you go.",
-            "Pull until your hands are on either side of your head.",
-            "Keep upper arms parallel to the ground."],
-        links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/face-pull", "Proper Form": "http://seannal.com/articles/training/face-pulls-benefits-proper-form.php"]),
+            "Lift a pulley to your upper chest, use a rope or a dual handle attachment.",
+            "Grab the rope with a neutral grip (palms facing each other).",
+            "Keep your chest up, and your shoulders back and down.",
+            "Retract your shoulders as you begin to pull back.",
+            "Finish in a double bicep pose: upper arms horizontal, hands at upper head height."],
+        links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/face-pull", "Proper Form": "http://seannal.com/articles/training/face-pulls-benefits-proper-form.php", "Tips": "https://youtu.be/HSoHeSjvIdY"]),
     
     "Farmer's Walk": createNote(
         notes: [

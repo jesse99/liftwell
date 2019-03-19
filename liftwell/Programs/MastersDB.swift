@@ -17,6 +17,7 @@ func MastersDB() -> Program {
         cable("Cable Crossover",     "Cable Crossover",         "",                   "6-12".x(3), restMins: 3.0),
         dumbbell2("Farmer's Walk",   "Farmer's Walk",           "",                   "1".x(2), restMins: 3.0),
         cable("Cable Crunches",      "Cable Crunch",            "",                   "6-12".x(3), restMins: 3.0),
+        cable("Face Pull",           "Face Pull",               "",                   "6-12".x(3), restMins: 2.0),
 
         // Medium
         dumbbell2("Medium Bench",    "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "4-8".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Bench", restMins: 4.0),
@@ -36,7 +37,7 @@ func MastersDB() -> Program {
     
     let workouts = [
         Workout("Heavy", ["Heavy Bench", "Heavy Squat", "Chinups", "Back Extensions", "Kroc Row"], scheduled: true, optional: ["Back Extensions", "Kroc Row"]),
-        Workout("Light", ["Dumbbell OHP", "Back Extensions", "Cable Crossover", "Farmer's Walk", "Cable Crunches"], scheduled: true, optional: ["Farmer's Walk", "Cable Crunches"]),
+        Workout("Light", ["Dumbbell OHP", "Back Extensions", "Cable Crossover", "Farmer's Walk", "Cable Crunches", "Face Pull"], scheduled: true, optional: ["Farmer's Walk", "Cable Crunches"]),
         Workout("Medium", ["Medium Bench", "Medium Squat", "Chinups", "Kroc Row", "Farmer's Walk", "Dips"], scheduled: true, optional: ["Dips", "Farmer's Walk", "Kroc Row"]),
         
         Workout("Mobility", ["Foam Rolling", "Shoulder Dislocates", "Bent-knee Iron Cross", "Roll-over into V-sit", "Rocking Frog Stretch", "Fire Hydrant Hip Circle", "Mountain Climber", "Cossack Squat", "Piriformis Stretch", "Hip Flexor Stretch"], scheduled: false)]
@@ -51,12 +52,12 @@ This is a dumbbell only program for older lifters. It's based on programming pri
 * Dumbbell Bench 3x6-12
 * Bulgarian Split Squat 3x4-8
 * Chinups to 25 reps
-* Kroc Row 3x6-12
 
 **Light**
 * Dumbbell OHP 3x5-10
 * Back Extensions 3x6-12
 * Cable Crossover 3x6-12
+* Face Pull 3x6-12
 
 **Medium**  (should feel like you are working hard but in no danger of missing a rep)
 * Dumbbell Bench 3x10 @ 94%
