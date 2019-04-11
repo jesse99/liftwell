@@ -14,7 +14,7 @@ func MastersDB() -> Program {
         // Light
         //dumbbell1("Deadlift",        "Dumbbell Deadlift",       "10@50%",             "6-12".x(3, rest: .atEnd), restMins: 4.0, main: true),
         dumbbell2("Dumbbell OHP",    "Dumbbell Shoulder Press", "10@50% 3@70% 1@90%", "3-8".x(3, rest: .atEnd), restMins: 3.5, main: true),
-        cable("Cable Crossover",     "Cable Crossover",         "",                   "6-12".x(3), restMins: 3.0),
+        cable("Cable Crossover",     "Cable Crossover",         "",                   "5-10".x(3), restMins: 3.0),
         dumbbell2("Farmer's Walk",   "Farmer's Walk",           "",                   "1".x(2), restMins: 3.0),
         cable("Cable Crunches",      "Cable Crunch",            "",                   "6-12".x(3), restMins: 3.0),
         cable("Face Pull",           "Face Pull",               "",                   "6-12".x(3), restMins: 2.0),
