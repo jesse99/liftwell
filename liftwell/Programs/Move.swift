@@ -139,6 +139,29 @@ This is a bodyweight fitness [program](https://www.reddit.com/r/bodyweightfitnes
 
 func Move3() -> Program {
     let exercises: [Exercise] = [
+        // Warmup       https://www.youtube.com/watch?v=8lDC4Ri9zAQ
+        // 3 reps standing shoulder rolls
+        // 5-10 reps kneeling shoulder rolls
+        // 5-10 reps kneeling shoulder rolls (reverse direction)
+        // 5-10 scapular shrugs
+        // 5-10 cat/cow (or cat/camel)
+        // 5-10 straight arm overhead pull down
+        // 5-10 straight arm chest flyes
+        // 5-10 band dislocates
+        // 10-30 palm pulses
+        // 5-10? side to side palm rotations
+        // 10-30 side to side stretch
+        // 5-10? rear facing stretch
+        // 10-30 rear facing elbow rotations
+        // 10-30 front facing elbow rotations
+        // 5-10? backward stretch (palms down)
+        // 10-30 forward stretch
+        
+        // Stength Work
+        
+        // Stretching and Mobility
+        
+        
         // Stength and Body Control
         bodyweight("Plank",            "Front Plank",      1, secs: 10, targetSecs: 60),
         bodyweight("Reverse Plank",    "Reverse Plank",    1, secs: 10, targetSecs: 60),
@@ -198,28 +221,30 @@ func Move3() -> Program {
 This is a bodyweight fitness [program](https://www.reddit.com/r/bodyweightfitness/wiki/move) from reddit. It will help build strength but also has an emphasis on mobility and flexibility. It's suitable for beginners and can be run for two years or even longer. It's divided up into five phases. This is the [third phase](https://www.reddit.com/r/bodyweightfitness/wiki/move/phase3) and amps up the strength work:
 
 **Warmup**
+* Dynamic Stretches
 * Plank 10-60s
 * Reverse Plank 10-60s
 * Hollow Body Hold 10-60s
 * Arch Body Hold 10-60s
-* Side Plank 10-60s
+* Side Plank 10-60s (each side)
 
 **Stength Work**
 * Stomach to wall Handstand 5-10 mins
-* L-sit progression 3x5-8 (pair 1)
+* L-sit progression 3x5-8
+* Handstand Pushup progression 3x5-8 (pair 1)
 * Pullup progression 3x5-8
-* Pushup progression 3x5-8 (pair 2)
-* Row progression 3x5-8
+* Pushup progression 3x8-12 (pair 2)
+* Row progression 3x8-12
 * Step up left leg 3x5-8 (pair 3)
 * Step up right leg 3x5-8
 
 **Stretching and Mobility**
 * Child's Pose 30-60s
-* Child's Pose with Lat Stretch 30-60s (for each side)
+* Child's Pose with Lat Stretch 30-60s (each side)
 * Wall Extensions 1x10
-* Chest Wall Stretch 30-60s (for each side)
-* Calf Stretch 30-60s (for each side)
-* Hamstring Lunge 30-60s (for each side)
+* Chest Wall Stretch 30-60s (each side)
+* Calf Stretch 30-60s (each side)
+* Hamstring Lunge 30-60s (each side)
 * Leg Lifts 3x10 (alternate sides)
 * Ido's Squat Routine
 * Hip Flexor Stretch 30-60s
