@@ -10,6 +10,7 @@ func MastersDB() -> Program {
         bodyweight("Chinups",        "Chinup",                          numSets: 3, startReps: 5, goalReps: 20, restMins: 3.5, restAtEnd: true, main: true),
         dumbbell1("Back Extensions", "Back Extensions",                 "10@50%",             "6-12".x(3, rest: .atEnd), restMins: 3.0, main: true),
         dumbbell1("Kroc Row",        "Kroc Row",                        "10@50%",             "9-18".x(2, rest: .atEnd), restMins: 3.0, main: true),
+        cable("Lat Pulldown",        "Lat Pulldown",                    "10@50%",             "5-10".x(3, rest: .atEnd), restMins: 2.5),
 
         // Light
         //dumbbell1("Deadlift",        "Dumbbell Deadlift",       "10@50%",             "6-12".x(3, rest: .atEnd), restMins: 4.0, main: true),
@@ -36,9 +37,9 @@ func MastersDB() -> Program {
     ]
     
     let workouts = [
-        Workout("Heavy", ["Heavy Bench", "Heavy Squat", "Chinups", "Back Extensions", "Kroc Row"], scheduled: true, optional: ["Back Extensions", "Kroc Row"]),
+        Workout("Heavy", ["Heavy Bench", "Heavy Squat", "Chinups", "Lat Pulldown", "Back Extensions", "Kroc Row"], scheduled: true, optional: ["Back Extensions", "Kroc Row", "Lat Pulldown"]),
         Workout("Light", ["Dumbbell OHP", "Back Extensions", "Cable Crossover", "Farmer's Walk", "Cable Crunches", "Face Pull"], scheduled: true, optional: ["Farmer's Walk", "Cable Crunches"]),
-        Workout("Medium", ["Medium Bench", "Medium Squat", "Chinups", "Kroc Row", "Farmer's Walk", "Dips"], scheduled: true, optional: ["Dips", "Farmer's Walk", "Kroc Row"]),
+        Workout("Medium", ["Medium Bench", "Medium Squat", "Chinups", "Lat Pulldown", "Kroc Row", "Farmer's Walk", "Dips"], scheduled: true, optional: ["Dips", "Farmer's Walk", "Kroc Row", "Lat Pulldown"]),
         
         Workout("Mobility", ["Foam Rolling", "Shoulder Dislocates", "Bent-knee Iron Cross", "Roll-over into V-sit", "Rocking Frog Stretch", "Fire Hydrant Hip Circle", "Mountain Climber", "Cossack Squat", "Piriformis Stretch", "Hip Flexor Stretch"], scheduled: false)]
     
