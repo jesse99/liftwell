@@ -139,66 +139,61 @@ This is a bodyweight fitness [program](https://www.reddit.com/r/bodyweightfitnes
 
 func Move3() -> Program {
     let exercises: [Exercise] = [
-        // Warmup       https://www.youtube.com/watch?v=8lDC4Ri9zAQ
-        // 3 reps standing shoulder rolls
-        // 5-10 reps kneeling shoulder rolls
-        // 5-10 reps kneeling shoulder rolls (reverse direction)
-        // 5-10 scapular shrugs
-        // 5-10 cat/cow (or cat/camel)
-        // 5-10 straight arm overhead pull down
-        // 5-10 straight arm chest flyes
-        // 5-10 band dislocates
-        // 10-30 palm pulses
-        // 5-10? side to side palm rotations
-        // 10-30 side to side stretch
-        // 5-10? rear facing stretch
-        // 10-30 rear facing elbow rotations
-        // 10-30 front facing elbow rotations
-        // 5-10? backward stretch (palms down)
-        // 10-30 forward stretch
-        
-        // Stength Work
-        
-        // Stretching and Mobility
-        
-        
-        // Stength and Body Control
+        // Dynamic Stretches
+        bodyweight("Shoulder Rolls",          "Shoulder Rolls", "1".x(3), restMins: 0.0, main: false),
+        bodyweight("Kneeling Shoulder Rolls", "Kneeling Shoulder Rolls", "5-10".x(1), restMins: 0.0, main: false),
+        bodyweight("Reverse Kneeling Shoulder Rolls", "Kneeling Shoulder Rolls", "5-10".x(1), restMins: 0.0, main: false),
+        bodyweight("Scapular Shrugs",         "Scapular Shrugs", "5-10".x(1), restMins: 0.0, main: false),
+        bodyweight("Cat Camels",              "Cat Camels", "5-10".x(1), restMins: 0.0, main: false),
+        bodyweight("Overhead Pull Down",      "Overhead Pull Down (band)", "5-10".x(1), restMins: 0.0, main: false),
+        bodyweight("Band Pull Apart",         "Band Pull Apart", "5-10".x(1), restMins: 0.0, main: false),
+        bodyweight("Shoulder Dislocate",      "Shoulder Dislocate", "5-10".x(1), restMins: 0.0, main: false),
+        bodyweight("GMB Wrist Prep",          "GMB Wrist Prep", "10-30".x(1), restMins: 0.0, main: false),
+
+        // Warmup
         bodyweight("Plank",            "Front Plank",      1, secs: 10, targetSecs: 60),
         bodyweight("Reverse Plank",    "Reverse Plank",    1, secs: 10, targetSecs: 60),
         bodyweight("Hollow Body Hold", "Hollow Body Hold", 1, secs: 10, targetSecs: 60),
         bodyweight("Arch Body Hold",   "Arch Hold",        1, secs: 10, targetSecs: 60),
         bodyweight("Side Plank",       "Side Plank",       2, secs: 10, targetSecs: 60),
 
-        bodyweight("Handstand",  "Handstand",    1, secs: 5*60, targetSecs: 10*60),
-        
-        bodyweight("Foot Supported L-sit",         "Foot Supported L-sit",          3, secs: 10, targetSecs: 30, main: true,                              nextExercise: "One-Leg Foot Supported L-sit"),
-        bodyweight("One-Leg Foot Supported L-sit", "One-Leg Foot Supported L-sit",  3, secs: 10, targetSecs: 30, main: true, prevExercise: "Foot Supported L-sit", nextExercise: "Elevated Tuck L-Sit"),
-        bodyweight("Elevated Tuck L-Sit",          "Tuck L-sit",                    3, secs: 10, targetSecs: 30, main: true, prevExercise: "One-Leg Foot Supported L-sit",  nextExercise: "Tuck L-sit"),
-        bodyweight("Tuck L-sit",                   "Tuck L-sit",                    3, secs: 10, targetSecs: 30, main: true, prevExercise: "Elevated Tuck L-Sit", nextExercise: "One-Leg L-sit"),
-        bodyweight("One-Leg L-sit",                "One-Leg L-sit",                 3, secs: 10, targetSecs: 30, main: true, prevExercise: "Tuck L-sit",  nextExercise: "L-sit"),
-        bodyweight("L-sit",                        "L-sit",                         3, secs: 10, targetSecs: 30, main: true, prevExercise: "One-Leg L-sit"),
+        // Stength Work
+        bodyweight("Stomach to Wall Handstand",     "Handstand", 1, secs: 5*60, targetSecs: 10*60),
 
-        bodyweight("Scapular Pulls",    "Scapular Pulls", "5-8".x(3), restMins: 1.5, main: true,                                    nextExercise: "Arch Hangs"),
-        bodyweight("Arch Hangs",        "Arch Hangs",     "5-8".x(3), restMins: 1.5, main: true, prevExercise: "Scapular Pulls",    nextExercise: "Pull-up Negatives"),
-        bodyweight("Pull-up Negatives", "Pullup",         "5-8".x(3), restMins: 1.5, main: true, prevExercise: "Arch Hangs",        nextExercise: "Pullup"),
+        bodyweight("Foot Supported L-sit",         "Foot Supported L-sit", "5-8".x(3), restMins: 1.0, main: true, nextExercise: "One-Leg Foot Supported L-sit"),
+        bodyweight("One-Leg Foot Supported L-sit", "One-Leg Foot Supported L-sit", "5-8".x(3), restMins: 1.0, main: true, prevExercise: "Foot Supported L-sit", nextExercise: "Elevated Tuck L-Sit"),
+        bodyweight("Elevated Tuck L-Sit",          "Tuck L-sit", "5-8".x(3), restMins: 1.0, main: true, prevExercise: "One-Leg Foot Supported L-sit",  nextExercise: "Tuck L-sit"),
+        bodyweight("Tuck L-sit",                   "Tuck L-sit", "5-8".x(3), restMins: 1.0, main: true, prevExercise: "Elevated Tuck L-Sit", nextExercise: "One-Leg L-sit"),
+        bodyweight("One-Leg L-sit",                "One-Leg L-sit", "5-8".x(3), restMins: 1.0, main: true, prevExercise: "Tuck L-sit",  nextExercise: "L-sit"),
+        bodyweight("L-sit",                        "L-sit", "5-8".x(3), restMins: 1.0, main: true, prevExercise: "One-Leg L-sit"),
+
+        bodyweight("Dips",                      "Dips", "5-8".x(3), restMins: 1.0, main: true, nextExercise: "Pike Pushup"),
+        bodyweight("Pike Pushup",               "Pike Pushup", "5-8".x(3), restMins: 1.0, main: true, prevExercise: "Dips", nextExercise: "Elevated Pike Pushup"),
+        bodyweight("Elevated Pike Pushup",      "Pike Pushup", "5-8".x(3), restMins: 1.0, main: true, prevExercise: "Pike Pushup", nextExercise: "Negative Handstand Pushup"),
+        bodyweight("Negative Handstand Pushup", "Negative Handstand Pushup", "5-8".x(3), restMins: 1.0, main: true, prevExercise: "Elevated Pike Pushup", nextExercise: "Handstand Pushup"),
+        bodyweight("Handstand Pushup",          "Handstand Pushup", "5-8".x(3), restMins: 1.0, main: true, prevExercise: "Negative Handstand Pushup"),
+        
+        bodyweight("Scapular Pulls",    "Scapular Pulls", "5-8".x(3), restMins: 1.5, main: true, nextExercise: "Arch Hangs"),
+        bodyweight("Arch Hangs",        "Arch Hangs",     "5-8".x(3), restMins: 1.5, main: true, prevExercise: "Scapular Pulls", nextExercise: "Pull-up Negatives"),
+        bodyweight("Pull-up Negatives", "Pullup",         "5-8".x(3), restMins: 1.5, main: true, prevExercise: "Arch Hangs", nextExercise: "Pullup"),
         bodyweight("Pullup",            "Pullup",         "5-8".x(3), restMins: 1.5, main: true, prevExercise: "Pull-up Negatives", nextExercise: "Weighted Pull-ups"),
         bodyweight("Weighted Pull-ups", "Pullup",         "5-8".x(3), restMins: 1.5, main: true, prevExercise: "Pullup"),
 
-        bodyweight("Vertical Pushup",        "Vertical Pushup", "8-12".x(3), restMins: 1.5, main: true,                                  nextExercise: "Incline Pushup"),
+        bodyweight("Vertical Pushup",        "Vertical Pushup", "8-12".x(3), restMins: 1.5, main: true, nextExercise: "Incline Pushup"),
         bodyweight("Incline Pushup",         "Incline Pushup",  "8-12".x(3), restMins: 1.5, main: true, prevExercise: "Vertical Pushup", nextExercise: "Pushup"),
         bodyweight("Pushup",                 "Pushup",          "8-12".x(3), restMins: 1.5, main: true, prevExercise: "Incline Pushup",  nextExercise: "Diamond Pushup"),
-        bodyweight("Diamond Pushup",         "Diamond Pushup",  "8-12".x(3), restMins: 1.5, main: true, prevExercise: "Pushup",          nextExercise: "Pseudo Planche Pushups"),
+        bodyweight("Diamond Pushup",         "Diamond Pushup",  "8-12".x(3), restMins: 1.5, main: true, prevExercise: "Pushup", nextExercise: "Pseudo Planche Pushups"),
         bodyweight("Pseudo Planche Pushups", "Pseudo Planche Pushups", "8-12".x(3), restMins: 1.5, main: true, prevExercise: "Diamond Pushup"),
         
-        bodyweight("Vertical Rows",         "Vertical Rows",   "8-12".x(3), restMins: 1.5, main: true,                                nextExercise: "Incline Rows"),
+        bodyweight("Vertical Rows",         "Vertical Rows",   "8-12".x(3), restMins: 1.5, main: true, nextExercise: "Incline Rows"),
         bodyweight("Incline Rows",          "Incline Rows",    "8-12".x(3), restMins: 1.5, main: true, prevExercise: "Vertical Rows", nextExercise: "Horizontal Rows"),
-        bodyweight("Horizontal Rows",       "Horizontal Rows", "8-12".x(3), restMins: 1.5, main: true, prevExercise: "Vertical Rows", nextExercise: "Wide Rows"),
-        bodyweight("Wide Rows",             "Wide Rows",       "8-12".x(3), restMins: 1.5, main: true, prevExercise: "Vertical Rows", nextExercise: "Weighted Inverted Row"),
+        bodyweight("Horizontal Rows",       "Horizontal Rows", "8-12".x(3), restMins: 1.5, main: true, prevExercise: "Incline Rows", nextExercise: "Wide Rows"),
+        bodyweight("Wide Rows",             "Wide Rows",       "8-12".x(3), restMins: 1.5, main: true, prevExercise: "Horizontal Rows", nextExercise: "Weighted Inverted Row"),
         bodyweight("Weighted Inverted Row", "Inverted Row",    "8-12".x(3), restMins: 1.5, main: true, prevExercise: "Wide Rows"),
 
         bodyweight("Left Step-ups",  "Deep Step-ups", "5-8".x(3), restMins: 1.5, main: true),
         bodyweight("Right Step-ups", "Deep Step-ups", "5-8".x(3), restMins: 1.5, main: true),
-        
+
         // Stretching and Mobility
         bodyweight("Child's Pose",   "Child's Pose", 1, secs: 30, targetSecs: 60),
         bodyweight("Child's Pose with Lat Stretch",   "Child's Pose with Lat Stretch", 2, secs: 30, targetSecs: 60),
@@ -210,9 +205,14 @@ func Move3() -> Program {
         bodyweight("Ido's Squat Routine",   "Ido's Squat Routine", "1".x(1), restMins: 0.5),
         bodyweight("Hip Flexor Lunge Stretch",   "Hip Flexor Lunge Stretch", 2, secs: 30, targetSecs: 60)
         ]
+
+    
     let workouts = [
-        Workout("Warmup", ["Wrist Mobility", "Shoulder Shrug Circles", "Plank", "Reverse Plank", "Hollow Body Hold", "Frog Stance", "Vertical Pushup", "Incline Pushup", "Pushup", "Diamond Pushup", "Vertical Rows", "Incline Rows", "Horizontal Rows", "Assisted Squat", "Heel Supported Squat", "Squat", "Close Squat", "Bear Crawl"], scheduled: false, optional: ["Incline Pushup", "Pushup", "Diamond Pushup", "Incline Rows", "Horizontal Rows", "Heel Supported Squat", "Squat", "Close Squat"]),
-        Workout("Stength and Body Control", ["Wrist Mobility", "Shoulder Shrug Circles", "Plank", "Reverse Plank", "Hollow Body Hold", "Frog Stance", "Vertical Pushup", "Incline Pushup", "Pushup", "Diamond Pushup", "Vertical Rows", "Incline Rows", "Horizontal Rows", "Assisted Squat", "Heel Supported Squat", "Squat", "Close Squat", "Bear Crawl"], scheduled: false, optional: ["Incline Pushup", "Pushup", "Diamond Pushup", "Incline Rows", "Horizontal Rows", "Heel Supported Squat", "Squat", "Close Squat"]),
+        Workout("Warmup", ["Shoulder Rolls", "Kneeling Shoulder Rolls", "Reverse Kneeling Shoulder Rolls", "Scapular Shrugs", "Cat Camels", "Overhead Pull Down", "Band Pull Apart", "Shoulder Dislocate", "GMB Wrist Prep", "Plank", "Reverse Plank", "Hollow Body Hold", "Arch Body Hold", "Side Plank"], scheduled: false, optional: []),
+
+        Workout("Stength", ["Stomach to Wall Handstand", "Foot Supported L-sit", "One-Leg Foot Supported L-sit", "Elevated Tuck L-Sit", "Tuck L-sit", "One-Leg L-sit", "L-sit", "Dips", "Pike Pushup", "Elevated Pike Pushup", "Negative Handstand Pushup", "Handstand Pushup", "Scapular Pulls", "Arch Hangs", "Pull-up Negatives", "Pullup", "Weighted Pull-ups", "Vertical Pushup", "Incline Pushup", "Pushup", "Diamond Pushup", "Pseudo Planche Pushups", "Vertical Rows", "Incline Rows", "Horizontal Rows", "Wide Rows", "Weighted Inverted Row", "Left Step-ups", "Right Step-ups"],
+            scheduled: false, optional: ["One-Leg Foot Supported L-sit", "Elevated Tuck L-Sit", "Tuck L-sit", "One-Leg L-sit", "L-sit", "Pike Pushup", "Elevated Pike Pushup", "Negative Handstand Pushup", "Handstand Pushup", "Arch Hangs", "Pull-up Negatives", "Pullup", "Weighted Pull-ups", "Incline Pushup", "Pushup", "Diamond Pushup", "Pseudo Planche Pushups", "Incline Rows", "Horizontal Rows", "Wide Rows", "Weighted Inverted Row"]),
+        
         Workout("Stretching and Mobility", ["Child's Pose", "Child's Pose with Lat Stretch", "Wall Extensions", "Chest Wall Stretch", "Bent-legged Calf Stretch", "Hamstring Lunge Stretch", "Front Scale Leg Lifts", "Ido's Squat Routine", "Hip Flexor Lunge Stretch"], scheduled: false, optional: [])]
     
     let tags: [Program.Tags] = [.beginner, .strength, .minimal, .unisex, .threeDays, .ageUnder40, .age40s, .age50s]
@@ -220,8 +220,18 @@ func Move3() -> Program {
     let description = """
 This is a bodyweight fitness [program](https://www.reddit.com/r/bodyweightfitness/wiki/move) from reddit. It will help build strength but also has an emphasis on mobility and flexibility. It's suitable for beginners and can be run for two years or even longer. It's divided up into five phases. This is the [third phase](https://www.reddit.com/r/bodyweightfitness/wiki/move/phase3) and amps up the strength work:
 
+**Dynamic Stretches**
+* Shoulder Rolls 3
+* Kneeling Shoulder Rolls 5-10
+* Reverse Kneeling Shoulder Rolls 5-10
+* Scapular Shrugs 5-10
+* Cat Camels 5-10
+* Overhead Pull Down 5-10
+* Band Pull Apart 5-10
+* Shoulder Dislocate 5-10
+* GMB Wrist Prep 10-30
+
 **Warmup**
-* Dynamic Stretches
 * Plank 10-60s
 * Reverse Plank 10-60s
 * Hollow Body Hold 10-60s
@@ -229,7 +239,7 @@ This is a bodyweight fitness [program](https://www.reddit.com/r/bodyweightfitnes
 * Side Plank 10-60s (each side)
 
 **Stength Work**
-* Stomach to wall Handstand 5-10 mins
+* Stomach to Wall Handstand 5-10 min
 * L-sit progression 3x5-8
 * Handstand Pushup progression 3x5-8 (pair 1)
 * Pullup progression 3x5-8

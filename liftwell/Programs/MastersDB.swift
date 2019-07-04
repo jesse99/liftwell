@@ -11,6 +11,7 @@ func MastersDB() -> Program {
         dumbbell1("Back Extensions", "Back Extensions",                 "10@50%",             "6-12".x(3, rest: .atEnd), restMins: 3.0, main: true),
         dumbbell1("Kroc Row",        "Kroc Row",                        "10@50%",             "9-18".x(2, rest: .atEnd), restMins: 3.0, main: true),
         cable("Lat Pulldown",        "Lat Pulldown",                    "10@50%",             "5-10".x(3, rest: .atEnd), restMins: 2.5),
+        barbell("Smith Bench",       "Smith Machine Bench",             "10@50% 3@70% 1@90%", "4-8".x(3), restMins: 4.0, main: true),
 
         // Light
         //dumbbell1("Deadlift",        "Dumbbell Deadlift",       "10@50%",             "6-12".x(3, rest: .atEnd), restMins: 4.0, main: true),
@@ -19,12 +20,15 @@ func MastersDB() -> Program {
         dumbbell2("Farmer's Walk",   "Farmer's Walk",           "",                   "1".x(2), restMins: 3.0),
         cable("Cable Crunches",      "Cable Crunch",            "",                   "6-12".x(3), restMins: 3.0),
         cable("Face Pull",           "Face Pull",               "",                   "6-12".x(3), restMins: 2.0),
+        dumbbell1("Wrist Curl",      "Reverse Wrist Curl",      "",                   "6-12".x(2, rest: .atEnd), restMins: 2.0, main: false),
 
         // Medium
-        dumbbell2("Medium Bench",    "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "4-8".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Bench", restMins: 4.0),
+        dumbbell2("Medium Bench",    "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "4-8".x(2, rest: .atEnd), percent1RM: 0.94, other: "Smith Bench", restMins: 4.0),
+        barbell("Medium Smith Bench", "Smith Machine Bench",            "10@50% 3@70% 1@90%", "4-8".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Bench", restMins: 4.0),
         dumbbell2("Medium Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75%",        "3-6".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Squat", restMins: 4.0),
-        bodyweight("Dips",           "Dips",                            numSets: 3, startReps: 10, goalReps: 36, restMins: 3.5, restAtEnd: false),
-        
+        bodyweight("Dips",           "Dips",                            numSets: 3, startReps: 10, goalReps: 30, restMins: 3.5, restAtEnd: false),
+        cable("Cable Crunch",        "Cable Crunch",                    "",                   "6-12".x(3), restMins: 3.0),
+
         bodyweight("Foam Rolling",            "IT-Band Foam Roll",         1, by: 15),
         bodyweight("Shoulder Dislocates",     "Shoulder Dislocate",        1, by: 12),
         bodyweight("Bent-knee Iron Cross",    "Bent-knee Iron Cross",      1, by: 10),
@@ -37,9 +41,9 @@ func MastersDB() -> Program {
     ]
     
     let workouts = [
-        Workout("Heavy", ["Heavy Bench", "Heavy Squat", "Chinups", "Lat Pulldown", "Back Extensions", "Kroc Row"], scheduled: true, optional: ["Back Extensions", "Kroc Row", "Lat Pulldown"]),
-        Workout("Light", ["Dumbbell OHP", "Back Extensions", "Cable Crossover", "Farmer's Walk", "Cable Crunches", "Face Pull"], scheduled: true, optional: ["Farmer's Walk", "Cable Crunches"]),
-        Workout("Medium", ["Medium Bench", "Medium Squat", "Chinups", "Lat Pulldown", "Kroc Row", "Farmer's Walk", "Dips"], scheduled: true, optional: ["Dips", "Farmer's Walk", "Kroc Row", "Lat Pulldown"]),
+        Workout("Heavy", ["Heavy Bench", "Smith Bench", "Heavy Squat", "Dumbbell OHP", "Chinups", "Lat Pulldown", "Back Extensions", "Dips", "Kroc Row", "Wrist Curl"], scheduled: true, optional: ["Back Extensions", "Kroc Row", "Lat Pulldown", "Smith Bench", "Wrist Curl", "Dips"]),
+        Workout("Light", ["Dumbbell OHP", "Back Extensions", "Cable Crossover", "Farmer's Walk", "Kroc Row", "Cable Crunches", "Face Pull", "Wrist Curl"], scheduled: true, optional: ["Farmer's Walk", "Cable Crunches", "Wrist Curl", "Kroc Row"]),
+        Workout("Medium", ["Medium Bench", "Medium Smith Bench", "Medium Squat", "Dumbbell OHP", "Chinups", "Lat Pulldown", "Kroc Row", "Farmer's Walk", "Dips", "Back Extensions", "Cable Crunch", "Wrist Curl"], scheduled: true, optional: ["Dips", "Farmer's Walk", "Kroc Row", "Lat Pulldown", "Medium Smith Bench", "Back Extensions", "Dumbbell OHP", "Cable Crunch"]),
         
         Workout("Mobility", ["Foam Rolling", "Shoulder Dislocates", "Bent-knee Iron Cross", "Roll-over into V-sit", "Rocking Frog Stretch", "Fire Hydrant Hip Circle", "Mountain Climber", "Cossack Squat", "Piriformis Stretch", "Hip Flexor Stretch"], scheduled: false)]
     

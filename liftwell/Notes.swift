@@ -1062,7 +1062,13 @@ let builtInNotes: [String: String] = [
             "Place hands on the ground, shoulder width apart, and with fingers spread.",
             "Hands should point forward: not turned inward.",
             "Keep a slight bend to elbows."],
-        links: ["Tutorial": "https://gmb.io/handstand/", "Wall Assisted": "https://www.womenshealthmag.com/fitness/a19918535/how-to-do-a-handstand/"]),
+        links: ["Tutorial": "https://gmb.io/handstand/", "Wall Assisted": "https://www.womenshealthmag.com/fitness/a19918535/how-to-do-a-handstand/", "Progression": "https://www.artofmanliness.com/articles/build-ability-full-handstand/"]),
+    
+    "Handstand Pushup": createNote(
+        notes: [
+            "Get into a wall handstand about a foot from the wall. Hands should be shoulder width or a little wider,",
+            "Lower youself until your forehead touches the floor and raise yourself back up."],
+        links: ["Video": "https://www.youtube.com/watch?v=5Vs-hk74zOQ", "Progression": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase3/hspu"]),
     
     "Hanging Dragon Flag": createNote(
         notes: [
@@ -1280,6 +1286,14 @@ let builtInNotes: [String: String] = [
             "Knees can bend a bit."],
         links: ["Link": "http://www.exrx.net/WeightExercises/Kettlebell/KBTwoArmSwing.html"]),
     
+    "Kneeling Shoulder Rolls": createNote(
+        notes: [
+            "Get on your hands and knees.",
+            "Keep your elbows straight and your palms flat on the ground.",
+            "Roll shoulders forward, up to ears, back, and down.",
+            "Difficulty can be increased by assuming a plank position or a plank with your ass in the air."],
+        links: ["Video": "http://www.stretching-exercises.com/shoulders/shoulder-roll-exercise/"]),
+    
     "Kroc Row": createNote(
         notes: [
             "Bend at the waist and use one arm to grip a support, if using a bench place one knee on the bench.",
@@ -1438,6 +1452,13 @@ let builtInNotes: [String: String] = [
             "Bring one leg up and plant your foot outside your arm.",
             "Sink back leg down and repeat with other leg."],
         links: ["Video": "https://www.youtube.com/watch?v=flT4TIMYvzI", "Limber 11": "https://imgur.com/gallery/iEsaS"]),
+    
+    "Negative Handstand Pushup": createNote(
+        notes: [
+            "Get into a wall handstand about a foot from the wall. Hands should be shoulder width or a little wider,",
+            "Slowly lower youself (take up to 10s).",
+            "Once your forehead touches the floor roll out."],
+        links: ["Video": "https://www.youtube.com/watch?v=Lj2KZwbr_jo", "Progression": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase3/hspu"]),
     
     "Oblique Crunches": createNote(
         notes: [
@@ -2113,6 +2134,14 @@ let builtInNotes: [String: String] = [
             "Keep your hips up at all times."],
         links: ["Video": "https://www.youtube.com/watch?v=RmsTFCQ3Qig"]),
     
+    "Smith Machine Bench": createNote(
+        notes: [
+            "Plce the bar at a height that you can reach with arms almost fully extended while lying down.",
+            "Using a grip wider than shoulder width unrack the bar to start.",
+            "Lower the bar to middle chest, around nipples.",
+            "Raise the bar back up."],
+        links: ["Link": "https://www.bodybuilding.com/exercises/smith-machine-bench-press"]),
+
     "Smith Machine Shrug": createNote(
         notes: [
             "Set the bar height to be about the middle of your thighs.",

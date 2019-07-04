@@ -250,7 +250,7 @@ class MaxRepsSubType: ExerciseInfo {
         let reps = currentReps > 0 ? currentReps : startReps
         let expected = (reps - currentTotal)/(numSets - completed.count)
         let minReps = currentReps > 0 ? expected - 4 : 0
-        let maxReps = currentReps > 0 ? expected + 4 : expected + 8
+        let maxReps = currentReps > 0 ? expected + 6  : expected + 8
 
         var result: [Completion] = []
         for count in max(minReps, 0)...maxReps {
