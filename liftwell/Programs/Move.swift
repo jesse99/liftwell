@@ -56,7 +56,7 @@ This is a bodyweight fitness [program](https://www.reddit.com/r/bodyweightfitnes
 * But spend at least two weeks on this phase.
 * Do the above 3x a week.
 """
-    return Program("Body Weight Move 1", workouts, exercises, tags, description, maxWorkouts: nil, nextProgram: "Body Weight Move 2")
+    return Program("Body Weight Move 1", workouts, exercises, tags, description, maxWorkouts: 6, nextProgram: "Body Weight Move 2")
 }
 
 func Move2() -> Program {
@@ -134,7 +134,7 @@ This is a bodyweight fitness [program](https://www.reddit.com/r/bodyweightfitnes
 * This phase introduces progressions: do the hardest version of the exercise that you can do for 3 sets of 5 reps. Once you can do 8 reps move on to the next harder exercise.
 * Do the above 3x a week.
 """
-    return Program("Body Weight Move 2", workouts, exercises, tags, description, maxWorkouts: nil, nextProgram: "Body Weight Move 3")
+    return Program("Body Weight Move 2", workouts, exercises, tags, description, maxWorkouts: 4*3, nextProgram: "Body Weight Move 3")
 }
 
 func Move3() -> Program {

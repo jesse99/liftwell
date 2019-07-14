@@ -100,13 +100,6 @@ class Exercise: Storable {
         case .weights(let type): problems += type.errors(self)
         }
         
-        if let name = prevExercise, program.findExercise(name) == nil {
-            problems += ["exercise \(name) prevExercise (\(name)( is missing from the program"]
-        }
-        if let name = nextExercise, program.findExercise(name) == nil {
-            problems += ["exercise \(name) nextExercise (\(name)) is missing from the program"]
-        }
-        
         return problems
     }
     

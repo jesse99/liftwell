@@ -55,14 +55,52 @@ class Program: Storable {
             problems += w.errors(self)
         }
         
+        var nextExercises: [String: Exercise] = [:]
+        var prevExercises: [String: Exercise] = [:]
         for e in exercises {
             problems += e.errors(self)
+            
+            if let name = e.prevExercise {
+                if let f = findExercise(name) {
+                    prevExercises[e.name] = f
+                } else {
+                    problems += ["exercise \(e.name) prevExercise (\(name)( is missing from the program"]
+                }
+            }
+
+            if let name = e.nextExercise {
+                if let f = findExercise(name) {
+                    nextExercises[e.name] = f
+                } else {
+                    problems += ["exercise \(e.name) nextExercise (\(name)( is missing from the program"]
+                }
+            }
             
 //            if builtInNotes[e.formalName] == nil && customNotes[e.formalName] == nil {
 //                problems += ["exercise \(e.name) formalName (\(e.formalName)) is missing from notes"]
 //            }
         }
         
+        for (name, prev) in prevExercises {
+            if let next = prev.nextExercise {
+                if next != name {
+                    problems += ["exercise \(prev.name) nextExercise (\(next)( it isn't \(name)"]
+                }
+            } else {
+                problems += ["exercise \(prev.name) nextExercise (\(name)( is missing but \(name) has a prevExercise"]
+            }
+        }
+
+        for (name, next) in nextExercises {
+            if let prev = next.prevExercise {
+                if prev != name {
+                    problems += ["exercise \(next.name) prevExercise (\(prev)( it isn't \(name)"]
+                }
+            } else {
+                problems += ["exercise \(next.name) prevExercise (\(name)( is missing but \(name) has a nextExercise"]
+            }
+        }
+                
         if let n = maxWorkouts {
             if n < 0 {
                 problems += ["program.maxWorkouts is less than 0"]
