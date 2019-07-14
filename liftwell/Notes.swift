@@ -385,6 +385,13 @@ let builtInNotes: [String: String] = [
             "Keep your back straight."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/box-squat"]),
     
+    "Butcher's Block": createNote(
+        notes: [
+            "Kneel down and support your elbows on a chair or low box.",
+            "Grab a light bar and hold it behind your head.",
+            "Keep your back straight and your head down."],
+        links: ["Video": "https://www.youtube.com/watch?v=OhhaK3nDbbA"]),
+    
     "Burpees": createNote(
         notes: [
             "Drop to your hands and knees.",
@@ -555,6 +562,14 @@ let builtInNotes: [String: String] = [
             "Work towards doing this two minutes a day for each leg."],
         links: ["Link": "http://www.active.com/triathlon/articles/the-stretch-that-could-be-the-key-to-saving-your-knees", "Tips": "http://breakingmuscle.com/mobility-recovery/couch-stretch-small-but-important-ways-youre-doing-it-wrong", "Video": "https://www.youtube.com/watch?v=JawPBvtf7Qs"]),
     
+    "Cuban Rotation": createNote(
+        notes: [
+            "Hold a stick over head with your arms forming 90 degree angles.",
+            "Pull your shoulders back.",
+            "Slowly lower the stick until your forearms are parallel with the floor.",
+            "Keep your shoulders back."],
+        links: ["Video": "https://www.youtube.com/watch?v=ie54TYYmwFo"]),
+    
     "Deadbugs": createNote(
         notes: [
             "Lie on your back with arms held straight up and legs forming a 90 degree angle.",
@@ -680,7 +695,7 @@ let builtInNotes: [String: String] = [
             "Raise the dumbbells so that they lightly touch one another above your chest.",
             "After completing the set kick your legs up, place the weights on your thighs, and situp.",
             "Once you are sitting up you can place the weights on the floor."],
-        links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/dumbbell-bench-press", "Positioning": "http://truthofbuildingmuscle.com/barbell-vs-dumbbell-bench-press-which-one-is-better"]),
+        links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/dumbbell-bench-press", "Positioning": "https://www.youtube.com/watch?v=1XDxtAOAIrQ"]),
     
     "Dumbbell Bent Over Row": createNote(
         notes: [
@@ -874,6 +889,13 @@ let builtInNotes: [String: String] = [
             "Try and make the biggest circle you can."],
         links: ["Video": "https://www.youtube.com/watch?v=f-GRxDrMC4Y", "Limber 11": "https://imgur.com/gallery/iEsaS"]),
     
+    "Foam Roll Lats": createNote(
+        notes: [
+            "Place a foam roller under your arm pit.",
+            "Roll backwards a bit.",
+            "Roll back and forth."],
+        links: ["Link": "https://www.youtube.com/watch?v=mj0Ax-9FehY"]),
+    
     "Foam Roll Pec Stretch": createNote(
         notes: [
             "Lie down on top of a foam roller with the roller running length wise from your shoulders to your hips.",
@@ -1062,7 +1084,7 @@ let builtInNotes: [String: String] = [
             "Place hands on the ground, shoulder width apart, and with fingers spread.",
             "Hands should point forward: not turned inward.",
             "Keep a slight bend to elbows."],
-        links: ["Tutorial": "https://gmb.io/handstand/", "Wall Assisted": "https://www.womenshealthmag.com/fitness/a19918535/how-to-do-a-handstand/", "Progression": "https://www.artofmanliness.com/articles/build-ability-full-handstand/"]),
+        links: ["Tutorial": "https://gmb.io/handstand/", "Bailing": "https://www.youtube.com/watch?v=P_h4rUJnJTY", "Wall Assisted": "https://www.womenshealthmag.com/fitness/a19918535/how-to-do-a-handstand/", "Kicking Up": "https://www.youtube.com/watch?v=JcXy4wzCF50", "Progression1": "https://www.artofmanliness.com/articles/build-ability-full-handstand/", "Progression2": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase4/handstand"]),
     
     "Handstand Pushup": createNote(
         notes: [
@@ -1085,6 +1107,12 @@ let builtInNotes: [String: String] = [
             "Slowly lower your legs back down.",
             "Difficulty can be increased by holding a dumbbell between your feet."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/hanging-leg-raise"]),
+    
+    "Heel Pulls": createNote(
+        notes: [
+            "Get into a handstand with your toes touching a wall.",
+            "Squeeze your fingers into the ground and allow your toes to come off the wall."],
+        links: ["Video": "https://www.youtube.com/watch?v=OYehg2ruMN0", "Handstand Progression": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase4/handstand"]),
     
     "HIIT": createNote(
         notes: [
@@ -1334,6 +1362,15 @@ let builtInNotes: [String: String] = [
             "Touch the bar to chest keeping torso still.",
             "Squeeze shoulders together."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/wide-grip-lat-pulldown"]),
+    
+    "": createNote(
+        notes: [
+            "Raise your arm overhead and grab a door frame or other support.",
+            "Crouch down so that your arm straightens out.",
+            "Force your hip out so that your body forms a bow.",
+            "Try to take every bit of slack out.",
+            "Can also cycle between pulling your shoulder back and forth."],
+        links: ["Video": "https://www.youtube.com/watch?v=UYjABf_RAcM"]),
     
     "Leg Extensions": createNote(
         notes: [
@@ -1723,6 +1760,13 @@ let builtInNotes: [String: String] = [
             "Lift the bar off the pins just as if you were doing a deadlift.",
             "Weight should be even heavier than a deadlift so a mixed grip or straps are helpful."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/rack-pulls"]),
+    
+    "Rear Delt Band Pull Apart": createNote(
+        notes: [
+            "Start by holding a band overhead and pulling it apart to create some tension.",
+            "Slowly lower your arms until you notice that it is harder to hold the band apart.",
+            "Pull the band far apart and finish by pinching your shoulder blades together."],
+        links: ["Video": "https://www.youtube.com/watch?v=yLJhWWX9YT0"]),
     
     "Rear-foot-elevated Hip Flexor Stretch": createNote(
         notes: [
@@ -2266,6 +2310,15 @@ let builtInNotes: [String: String] = [
             "Like a normal deadlift except that the knees are only slightly bent and remain stationary."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/stiff-legged-barbell-deadlift"]),
     
+    "Stomach to Wall Handstand": createNote(
+        notes: [
+            "Toes are the only point that should be in contact with the wall.",
+            "Arms and legs are straight and locked.",
+            "Hands should be close together (closer than you initially think).",
+            "Push up through the shoulders, elevating your shoulder blades.",
+            "Squeeze your legs together and point your toes up."],
+        links: ["Video": "https://www.youtube.com/watch?v=m64XxmNHjfs", "Progression": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase4/handstand"]),
+    
     "Straight Leg Situp": createNote(
         notes: [
             "Lie on your back, optionally with your feet held in place.",
@@ -2320,12 +2373,27 @@ let builtInNotes: [String: String] = [
             "Spend 10-20 seconds on each muscle group."],
         links: ["Link": "https://www.tigertailusa.com/pages/how-to-roll"]),
     
+    "Toe Pulls": createNote(
+        notes: [
+            "Get into a handstand with your toes touching a wall.",
+            "Push your butt out, bring your toes off the wall, and re-balance."],
+        links: ["Video": "https://www.youtube.com/watch?v=J9-7QXCsPL0", "Handstand Progression": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase4/handstand"]),
+    
     "Trap Bar Deadlift": createNote(
         notes: [
             "Load up a hex bar, stand in the middle, and grap both handles.",
             "Lower your hips, look foreward, and keep chest up.",
             "Drive through your heels keeping back straight."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/trap-bar-deadlift"]),
+    
+    "Trap-3 Raise": createNote(
+        notes: [
+            "Hold a light weight with one hand.",
+            "Bend over about 45 degrees.",
+            "Allow your arm to hang free and retract your shoulder blade.",
+            "Raise your arm upwards until it is inline with your torso.",
+            "Keep your arm about 30 degrees away from your center line."],
+        links: ["Video": "https://www.youtube.com/watch?v=pHvTWgWyDWs"]),
     
     "Triceps Pushdown (rope)": createNote(
         notes: [
@@ -2464,7 +2532,7 @@ let builtInNotes: [String: String] = [
             "Put your feet up against a wall and do a plank hold.",
             "Don't allow your hips to sag: dig your soles hard into the wall.",
             "Work on getting your feet higher and higher."],
-        links: ["Link": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/handstand", "Handstands": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/handstand", "Progression": "http://www.instructables.com/id/How-to-achieve-the-hanging-dragon-flag/"]),
+        links: ["Video": "https://www.youtube.com/watch?v=6jm4R3K4sJA", "Link": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/handstand", "Handstands": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/handstand", "Handstand Progression": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase4/handstand", "Dragon Flag Progression": "http://www.instructables.com/id/How-to-achieve-the-hanging-dragon-flag/"]),
     
     "Wall March Plank": createNote(
         notes: [
@@ -2473,6 +2541,12 @@ let builtInNotes: [String: String] = [
             "Work on getting your feet higher and higher.",
             "Alternate between bringing each knee forward."],
         links: ["Progression": "http://www.instructables.com/id/How-to-achieve-the-hanging-dragon-flag/"]),
+    
+    "Wall Scissors": createNote(
+        notes: [
+            "Get into a full hand stand next to a wall.",
+            "Scissor one leg out and one leg in so that a toe touches the wall."],
+        links: ["Video": "https://www.youtube.com/watch?v=wspEkEzsZyQ", "Handstand Progression": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase4/handstand"]),
     
     "Weighted Inverted Row": createNote(
         notes: [

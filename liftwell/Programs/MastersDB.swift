@@ -23,8 +23,8 @@ func MastersDB() -> Program {
         dumbbell1("Wrist Curl",      "Reverse Wrist Curl",      "",                   "6-12".x(2, rest: .atEnd), restMins: 2.0, main: false),
 
         // Medium
-        dumbbell2("Medium Bench",    "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "4-8".x(2, rest: .atEnd), percent1RM: 0.94, other: "Smith Bench", restMins: 4.0),
-        barbell("Medium Smith Bench", "Smith Machine Bench",            "10@50% 3@70% 1@90%", "4-8".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Bench", restMins: 4.0),
+        dumbbell2("Medium Bench",    "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "4-8".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Bench", restMins: 4.0),
+        barbell("Medium Smith Bench", "Smith Machine Bench",            "10@50% 3@70% 1@90%", "4-8".x(2, rest: .atEnd), percent1RM: 0.94, other: "Smith Bench", restMins: 4.0),
         dumbbell2("Medium Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75%",        "3-6".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Squat", restMins: 4.0),
         bodyweight("Dips",           "Dips",                            numSets: 3, startReps: 10, goalReps: 30, restMins: 3.5, restAtEnd: false),
         cable("Cable Crunch",        "Cable Crunch",                    "",                   "6-12".x(3), restMins: 3.0),
