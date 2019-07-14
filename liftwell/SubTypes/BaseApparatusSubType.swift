@@ -179,11 +179,15 @@ class BaseApparatusSubType {
             let (minReps, maxReps, _) = getBaseRepRange()
             let variableReps = minReps != maxReps
             
+            let label6 = variableReps ? "6 reps" : advanceWeightLabel(exercise, weight, by: 6)
+            let label5 = variableReps ? "5 reps" : advanceWeightLabel(exercise, weight, by: 5)
             let label4 = variableReps ? "4 reps" : advanceWeightLabel(exercise, weight, by: 4)
             let label3 = variableReps ? "3 reps" : advanceWeightLabel(exercise, weight, by: 3)
             let label2 = variableReps ? "2 reps" : advanceWeightLabel(exercise, weight, by: 2)
             let label1 = variableReps ? "1 rep" : advanceWeightLabel(exercise, weight, by: 1)
             
+            let advance6 = UIAlertAction(title: "Advance by \(label6)", style: .default) {_ in self.doAdvance(exercise, apparatus, 6); completion()}
+            let advance5 = UIAlertAction(title: "Advance by \(label5)", style: .default) {_ in self.doAdvance(exercise, apparatus, 5); completion()}
             let advance4 = UIAlertAction(title: "Advance by \(label4)", style: .default) {_ in self.doAdvance(exercise, apparatus, 4); completion()}
             let advance3 = UIAlertAction(title: "Advance by \(label3)", style: .default) {_ in self.doAdvance(exercise, apparatus, 3); completion()}
             let advance2 = UIAlertAction(title: "Advance by \(label2)", style: .default) {_ in self.doAdvance(exercise, apparatus, 2); completion()}
@@ -192,10 +196,12 @@ class BaseApparatusSubType {
             
             switch tag {
             case .veryEasy:
+                alert.addAction(advance6)
+                alert.addAction(advance5)
                 alert.addAction(advance4)
                 alert.addAction(advance3)
                 alert.addAction(advance2)
-                alert.preferredAction = advance2
+                alert.preferredAction = advance3
                 
             case .easy:
                 alert.addAction(advance4)

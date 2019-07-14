@@ -6,7 +6,10 @@ import UIKit
 func getDifficultly(_ view: UIViewController, _ completion: @escaping (ResultTag) -> Void) {
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
     
-    var action = UIAlertAction(title: "Easy", style: .default) {_ in completion(.easy)}
+    var action = UIAlertAction(title: "Very Easy", style: .default) {_ in completion(.veryEasy)}
+    alert.addAction(action)
+    
+    action = UIAlertAction(title: "Easy", style: .default) {_ in completion(.easy)}
     alert.addAction(action)
     
     action = UIAlertAction(title: "Normal", style: .default) {_ in completion(.normal)}
