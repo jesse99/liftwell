@@ -506,6 +506,20 @@ let builtInNotes: [String: String] = [
             "Keep your feet touching."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/clam"]),
     
+    "Clean and Press": createNote(
+        notes: [
+            "Shoulder width stance with knees inside arms.",
+            "Keep back straight and bend knees and hips to grab the bar with arms fully extended.",
+            "Use a grip slightly wider than shoulder width with elbows pointed out to sides.",
+            "Bar should be close to shins and shoulders over or slightly past the bar.",
+            "Begin to pull by extending your knees and, at the same time, raising your shoulders.",
+            "As the bar passes your knees extend at the ankles, knees, and hips.",
+            "At max elevation your feet should clear the floor and you should enter a squatting position as you pull yourself under the bar (this is dependent upon the weight used).",
+            "Rack the bar across the front of your shoulders.",
+            "Stand up with the bar in the clean position.",
+            "Without moving your feet press the bar overhead."],
+        links: ["Link": "https://www.bodybuilding.com/exercises/clean-and-press"]),
+    
     "Close-Grip Bench Press": createNote(
         notes: [
             "Lay on a flat bench.",
@@ -777,6 +791,14 @@ let builtInNotes: [String: String] = [
             "Don't use your legs or lean backwards."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/dumbbell-one-arm-shoulder-press"]),
     
+    "Dumbbell Pullovers": createNote(
+        notes: [
+            "Grasp a dumbbell with both hands and position yourself with your shoulder blades on a bench.",
+            "Back should be straight and knees should be bent at ninety degrees.",
+            "Start with the dumbbell over your head.",
+            "Keep your arms straight and lower the dumbbell behind your head."],
+        links: ["Link": "https://www.muscleandstrength.com/exercises/dumbbell-pullover.html"]),
+    
     "Dumbbell Romanian Deadlift": createNote(
         notes: [
             "Stand straight up with a dumbbell in each hand.",
@@ -935,6 +957,17 @@ let builtInNotes: [String: String] = [
             "Lock out your elbows and knees.",
             "Glue your legs together and point the toes."],
         links: ["Link": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/handstand", "Handstands": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/handstand"]),
+    
+    "French Press": createNote(
+        notes: [
+            "Load a barbell or EZ-bar and place it on the ground.",
+            "Bend at the knees and grab the bar with palms facing down.",
+            "Set your hands 8-12 inches apart.",
+            "Stand up with your feet about shoulder width and a slight bend in your knees.",
+            "Start with the bar overhead and a slight bend in your elbows.",
+            "Lower the bar behind your head keeping your elbows in place.",
+            "Raise the bar back to the starting position."],
+        links: ["Link": "https://www.muscleandstrength.com/exercises/french-press.html"]),
     
     "Frog Stance": createNote(
         notes: [
@@ -2561,6 +2594,21 @@ let builtInNotes: [String: String] = [
             "Arms should be straight at the bottom.",
             "Don't let your shoulders shrug up."],
         links: ["Link": "https://www.youtube.com/watch?v=1yMRvsuk9Xg", "Body Weight Rows": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/row", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/row"]),
+    
+    "Wrist Curls": createNote(
+        notes: [
+            "xxx.",
+            "xxx.",
+            "xxx.",
+            "xxx.",
+            "xxx.",
+            "xxx.",
+            "xxx.",
+            "xxx.",
+            "xxx.",
+            "xxx.",
+            "xxx."],
+        links: ["Link": "https://www.muscleandstrength.com/exercises/one-arm-seated-dumbbell-wrist-curl.html"]),
     
     "Wrist Mobility": createNote(
         notes: [

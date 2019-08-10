@@ -5,17 +5,17 @@ import Foundation
 func MastersDB() -> Program {
     let exercises = [
         // Heavy
-        dumbbell2("Heavy Bench",     "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "5-10".x(3, rest: .atEnd), restMins: 4.0, main: true),
+        dumbbell2("Heavy Bench",     "Dumbbell Bench Press",            "8@50% 3@70% 1@90%", "5-10".x(3, rest: .atEnd), restMins: 4.0, main: true),
         dumbbell2("Heavy Squat",     "Dumbbell Single Leg Split Squat", "5@50% 3@75%",        "4-7".x(3, rest: .atEnd), restMins: 4.0, main: true),
         bodyweight("Chinups",        "Chinup",                          numSets: 3, startReps: 5, goalReps: 20, restMins: 3.5, restAtEnd: true, main: true),
-        dumbbell1("Back Extensions", "Back Extensions",                 "10@50%",             "6-12".x(3, rest: .atEnd), restMins: 3.0, main: true),
-        dumbbell1("Kroc Row",        "Kroc Row",                        "10@50%",             "9-18".x(2, rest: .atEnd), restMins: 3.0, main: true),
-        cable("Lat Pulldown",        "Lat Pulldown",                    "10@50%",             "5-10".x(3, rest: .atEnd), restMins: 2.5),
-        barbell("Smith Bench",       "Smith Machine Bench",             "10@50% 3@70% 1@90%", "4-8".x(3), restMins: 4.0, main: true),
+        dumbbell1("Back Extensions", "Back Extensions",                 "8@50%",             "6-12".x(3, rest: .atEnd), restMins: 3.0, main: true),
+        dumbbell1("Kroc Row",        "Kroc Row",                        "",                  "9-18".x(2, rest: .atEnd), restMins: 3.0, main: true),
+        cable("Lat Pulldown",        "Lat Pulldown",                    "8@60%",             "5-10".x(3, rest: .atEnd), restMins: 2.5),
+        barbell("Smith Bench",       "Smith Machine Bench",             "8@50% 3@70% 1@90%", "4-8".x(3), restMins: 4.0, main: true),
 
         // Light
         //dumbbell1("Deadlift",        "Dumbbell Deadlift",       "10@50%",             "6-12".x(3, rest: .atEnd), restMins: 4.0, main: true),
-        dumbbell2("Dumbbell OHP",    "Dumbbell Shoulder Press", "10@50% 3@70% 1@90%", "3-8".x(3, rest: .atEnd), restMins: 3.5, main: true),
+        dumbbell2("Dumbbell OHP",    "Dumbbell Shoulder Press", "8@50% 3@70% 1@90%", "3-8".x(3, rest: .atEnd), restMins: 3.5, main: true),
         cable("Cable Crossover",     "Cable Crossover",         "",                   "5-10".x(3), restMins: 3.0),
         dumbbell2("Farmer's Walk",   "Farmer's Walk",           "",                   "1".x(2), restMins: 3.0),
         cable("Cable Crunches",      "Cable Crunch",            "",                   "6-12".x(3), restMins: 3.0),
@@ -23,8 +23,8 @@ func MastersDB() -> Program {
         dumbbell1("Wrist Curl",      "Reverse Wrist Curl",      "",                   "6-12".x(2, rest: .atEnd), restMins: 2.0, main: false),
 
         // Medium
-        dumbbell2("Medium Bench",    "Dumbbell Bench Press",            "10@50% 3@70% 1@90%", "4-8".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Bench", restMins: 4.0),
-        barbell("Medium Smith Bench", "Smith Machine Bench",            "10@50% 3@70% 1@90%", "4-8".x(2, rest: .atEnd), percent1RM: 0.94, other: "Smith Bench", restMins: 4.0),
+        dumbbell2("Medium Bench",    "Dumbbell Bench Press",            "8@50% 3@70% 1@90%", "4-8".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Bench", restMins: 4.0),
+        barbell("Medium Smith Bench", "Smith Machine Bench",            "8@50% 3@70% 1@90%", "4-8".x(2, rest: .atEnd), percent1RM: 0.94, other: "Smith Bench", restMins: 4.0),
         dumbbell2("Medium Squat",    "Dumbbell Single Leg Split Squat", "5@50% 3@75%",        "3-6".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Squat", restMins: 4.0),
         bodyweight("Dips",           "Dips",                            numSets: 3, startReps: 10, goalReps: 30, restMins: 3.5, restAtEnd: false),
         cable("Cable Crunch",        "Cable Crunch",                    "",                   "6-12".x(3), restMins: 3.0),
