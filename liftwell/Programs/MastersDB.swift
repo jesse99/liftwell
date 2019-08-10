@@ -8,7 +8,7 @@ func MastersDB() -> Program {
         dumbbell2("Heavy Bench",     "Dumbbell Bench Press",            "8@50% 3@70% 1@90%", "5-10".x(3, rest: .atEnd), restMins: 4.0, main: true),
         dumbbell2("Heavy Squat",     "Dumbbell Single Leg Split Squat", "5@50% 3@75%",        "4-7".x(3, rest: .atEnd), restMins: 4.0, main: true),
         bodyweight("Chinups",        "Chinup",                          numSets: 3, startReps: 5, goalReps: 20, restMins: 3.5, restAtEnd: true, main: true),
-        dumbbell1("Back Extensions", "Back Extensions",                 "8@50%",             "6-12".x(3, rest: .atEnd), restMins: 3.0, main: true),
+        dumbbell1("Back Extensions", "Back Extensions",                 "8@50%",             "5-10".x(3, rest: .atEnd), restMins: 3.0, main: true),
         dumbbell1("Kroc Row",        "Kroc Row",                        "",                  "9-18".x(2, rest: .atEnd), restMins: 3.0, main: true),
         cable("Lat Pulldown",        "Lat Pulldown",                    "8@60%",             "5-10".x(3, rest: .atEnd), restMins: 2.5),
         barbell("Smith Bench",       "Smith Machine Bench",             "8@50% 3@70% 1@90%", "4-8".x(3), restMins: 4.0, main: true),
