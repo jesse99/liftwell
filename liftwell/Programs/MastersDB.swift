@@ -32,7 +32,7 @@ func MastersDB() -> Program {
         bodyweight("Foam Rolling",            "IT-Band Foam Roll",         1, by: 15),
         bodyweight("Shoulder Dislocates",     "Shoulder Dislocate",        1, by: 12),
         bodyweight("Bent-knee Iron Cross",    "Bent-knee Iron Cross",      1, by: 10),
-        bodyweight("Roll-over into V-sit",    "Roll-over into V-sit",      1, by: 15),
+        bodyweight("Roll-over into V-sit",    "Roll-over into V-sit",      1, by: 15), 
         bodyweight("Rocking Frog Stretch",    "Rocking Frog Stretch",      1, by: 10),
         bodyweight("Fire Hydrant Hip Circle", "Fire Hydrant Hip Circle",   1, by: 10),
         bodyweight("Mountain Climber",        "Mountain Climber",          1, by: 10),
@@ -49,14 +49,13 @@ func MastersDB() -> Program {
     
     let tags: [Program.Tags] = [.intermediate, .strength, .dumbbell, .unisex, .threeDays, .age40s, .age50s]
     
-    // TODO: add a barbell masters program and change the description to recommend that
     let description = """
 This is a dumbbell only program for older lifters. It's based on programming principles from the book [The Barbell Prescription: Strength Training for Life After 40](https://www.amazon.com/dp/B06Y4LXFCK/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1). The [Limber 11](https://imgur.com/gallery/iEsaS) stretches should ideally be done several times a week. It's a three day a week program and the days look like this:
 
 **Heavy** (should be a struggle to finish all the reps)
 * Dumbbell Bench 3x6-12
 * Bulgarian Split Squat 3x4-8
-* Chinups to 25 reps
+* Chinups 3 sets with a goal of 20 total reps
 
 **Light**
 * Dumbbell OHP 3x5-10
@@ -67,7 +66,7 @@ This is a dumbbell only program for older lifters. It's based on programming pri
 **Medium**  (should feel like you are working hard but in no danger of missing a rep)
 * Dumbbell Bench 3x10 @ 94%
 * Bulgarian Split Squat 3x6 @ 94%
-* Chinups to 25 reps
+* Chinups 3 sets with a goal of 20 total reps
 * Kroc Row 3x6-12
 
 **Limber 11**

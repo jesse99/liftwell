@@ -70,6 +70,7 @@
 		377AAA6421DADCC800BD661F /* Stopgap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA6321DADCC800BD661F /* Stopgap.swift */; };
 		377AAA6621DAE9E900BD661F /* DB_PPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA6521DAE9E900BD661F /* DB_PPL.swift */; };
 		377AAA6E21DF091300BD661F /* BodyWeightFitness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA6D21DF091300BD661F /* BodyWeightFitness.swift */; };
+		37A40D9A22FFA3CA004A17D0 /* MastersBarbell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A40D9922FFA3CA004A17D0 /* MastersBarbell.swift */; };
 		37AC02BE22DC06EF00EAA772 /* Arnold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AC02BD22DC06EF00EAA772 /* Arnold.swift */; };
 		37B4352121B2194000EDC53E /* BestButt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352021B2194000EDC53E /* BestButt.swift */; };
 		37B4352321B30D5B00EDC53E /* RepsBodySubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */; };
@@ -183,6 +184,7 @@
 		377AAA6321DADCC800BD661F /* Stopgap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopgap.swift; sourceTree = "<group>"; };
 		377AAA6521DAE9E900BD661F /* DB_PPL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB_PPL.swift; sourceTree = "<group>"; };
 		377AAA6D21DF091300BD661F /* BodyWeightFitness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyWeightFitness.swift; sourceTree = "<group>"; };
+		37A40D9922FFA3CA004A17D0 /* MastersBarbell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastersBarbell.swift; sourceTree = "<group>"; };
 		37AC02BD22DC06EF00EAA772 /* Arnold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arnold.swift; sourceTree = "<group>"; };
 		37B4352021B2194000EDC53E /* BestButt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestButt.swift; sourceTree = "<group>"; };
 		37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsBodySubType.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				37B4352821B382CD00EDC53E /* Gorgeous.swift */,
 				377AAA5921D68D0D00BD661F /* GZCL.swift */,
 				373CCFCE21AA309A00096291 /* GZCLP.swift */,
+				37A40D9922FFA3CA004A17D0 /* MastersBarbell.swift */,
 				37286858216842C8005F6FD0 /* MastersDB.swift */,
 				377AAA5D21D7DEB800BD661F /* Metallicadpa.swift */,
 				3720592721CB4D0B00641BE9 /* Monolith.swift */,
@@ -607,6 +610,7 @@
 				3728684B21631202005F6FD0 /* Store.swift in Sources */,
 				374D3EDA217BFBD100AC828D /* DateExtensionw.swift in Sources */,
 				37286849216311D3005F6FD0 /* Program.swift in Sources */,
+				37A40D9A22FFA3CA004A17D0 /* MastersBarbell.swift in Sources */,
 				37DE95FC219A4BA500D60101 /* PhraksGreyskull.swift in Sources */,
 				37E7BF05219750C40087E7FE /* HistoryTabController.swift in Sources */,
 				373CCFC921A9C4BA00096291 /* BaseCyclicRepsSubType.swift in Sources */,
