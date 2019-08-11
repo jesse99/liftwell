@@ -53,21 +53,21 @@ func MastersDB() -> Program {
 This is a dumbbell only program for older lifters. It's based on programming principles from the book [The Barbell Prescription: Strength Training for Life After 40](https://www.amazon.com/dp/B06Y4LXFCK/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1). The [Limber 11](https://imgur.com/gallery/iEsaS) stretches should ideally be done several times a week. It's a three day a week program and the days look like this:
 
 **Heavy** (should be a struggle to finish all the reps)
-* Dumbbell Bench 3x6-12
-* Bulgarian Split Squat 3x4-8
+* Dumbbell Bench 3x5-10
+* Bulgarian Split Squat 3x4-7
 * Chinups 3 sets with a goal of 20 total reps
 
 **Light**
-* Dumbbell OHP 3x5-10
-* Back Extensions 3x6-12
-* Cable Crossover 3x6-12
+* Dumbbell OHP 3x3-8
+* Back Extensions 3x5-10
+* Cable Crossover 3x5-10
 * Face Pull 3x6-12
 
 **Medium**  (should feel like you are working hard but in no danger of missing a rep)
-* Dumbbell Bench 3x10 @ 94%
-* Bulgarian Split Squat 3x6 @ 94%
+* Dumbbell Bench 3x4-8 @ 94%
+* Bulgarian Split Squat 3x3-6 @ 94%
 * Chinups 3 sets with a goal of 20 total reps
-* Kroc Row 3x6-12
+* Kroc Row 3x9-18
 
 **Limber 11**
 * Foam Rolling
