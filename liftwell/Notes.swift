@@ -345,7 +345,7 @@ let builtInNotes: [String: String] = [
             "Press using your heel to raise yourself back up.",
             "Repeat with the other leg",
             "Keep your torso upright."],
-        links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/bodyweight-walking-lunge"]),
+        links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/bodyweight-walking-lunge", "Video": "https://www.youtube.com/watch?v=L8fvypPrzzs"]),
     
     "Bottoms Up": createNote(
         notes: [
@@ -587,7 +587,7 @@ let builtInNotes: [String: String] = [
     "Deadbugs": createNote(
         notes: [
             "Lie on your back with arms held straight up and legs forming a 90 degree angle.",
-            "Extend one arm behind you and extemnd the opposite leg out.",
+            "Extend one arm behind you and extend the opposite leg out.",
             "Keep your core braced."],
         links: ["Link": "http://www.nick-e.com/deadbug/"]),
     
@@ -1673,6 +1673,16 @@ let builtInNotes: [String: String] = [
             "Drop into a full squat with the leg you are standing on.",
             "Stand and switch legs."],
         links: ["Link1": "http://ashotofadrenaline.net/pistol-squat/", "Link2": "http://breakingmuscle.com/strength-conditioning/whats-preventing-you-from-doing-pistol-squats-how-to-progress-pistols", "Video": "https://www.youtube.com/watch?v=It3yvU0fomI"]),
+    
+    "Plank Shoulder Taps": createNote(
+        notes: [
+            "Get into a plank position with youe hands directly under your shoulders.",
+            "Spread your legs wide.",
+            "Keep your head in a neutral position: don't look up.",
+            "Raise one hand and touch it to your opposite shoulder.",
+            "Keep your body as still as possible.",
+            "Difficulty can be increased by bringing your legs closer together."],
+        links: ["Video": "https://www.youtube.com/watch?v=LEZq7QZ8ySQ"]),
     
     "Power Clean": createNote(
         notes: [
