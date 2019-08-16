@@ -72,6 +72,7 @@
 		377AAA6E21DF091300BD661F /* BodyWeightFitness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AAA6D21DF091300BD661F /* BodyWeightFitness.swift */; };
 		37A40D9A22FFA3CA004A17D0 /* MastersBarbell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A40D9922FFA3CA004A17D0 /* MastersBarbell.swift */; };
 		37A40D9C2300D953004A17D0 /* BWFMinimalist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A40D9B2300D953004A17D0 /* BWFMinimalist.swift */; };
+		37A40D9E23063FAD004A17D0 /* NoExcuses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A40D9D23063FAD004A17D0 /* NoExcuses.swift */; };
 		37AC02BE22DC06EF00EAA772 /* Arnold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AC02BD22DC06EF00EAA772 /* Arnold.swift */; };
 		37B4352121B2194000EDC53E /* BestButt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352021B2194000EDC53E /* BestButt.swift */; };
 		37B4352321B30D5B00EDC53E /* RepsBodySubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */; };
@@ -187,6 +188,7 @@
 		377AAA6D21DF091300BD661F /* BodyWeightFitness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyWeightFitness.swift; sourceTree = "<group>"; };
 		37A40D9922FFA3CA004A17D0 /* MastersBarbell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastersBarbell.swift; sourceTree = "<group>"; };
 		37A40D9B2300D953004A17D0 /* BWFMinimalist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BWFMinimalist.swift; sourceTree = "<group>"; };
+		37A40D9D23063FAD004A17D0 /* NoExcuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoExcuses.swift; sourceTree = "<group>"; };
 		37AC02BD22DC06EF00EAA772 /* Arnold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arnold.swift; sourceTree = "<group>"; };
 		37B4352021B2194000EDC53E /* BestButt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestButt.swift; sourceTree = "<group>"; };
 		37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsBodySubType.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 				377AAA5D21D7DEB800BD661F /* Metallicadpa.swift */,
 				3720592721CB4D0B00641BE9 /* Monolith.swift */,
 				3769733E21EC3B0400F5F5E9 /* Move.swift */,
+				37A40D9D23063FAD004A17D0 /* NoExcuses.swift */,
 				3720592921CF19A500641BE9 /* nSuns.swift */,
 				377AAA6121D9353600BD661F /* PHAT.swift */,
 				37DE95FB219A4BA500D60101 /* PhraksGreyskull.swift */,
@@ -645,6 +648,7 @@
 				37DE95F8219A1E7600D60101 /* SAConfettiView.swift in Sources */,
 				37E7BF102197D8410087E7FE /* WorkoutDaysAchievement.swift in Sources */,
 				37EFD6E0217B710A00F60880 /* ExerciseInfo.swift in Sources */,
+				37A40D9E23063FAD004A17D0 /* NoExcuses.swift in Sources */,
 				37B4352921B382CD00EDC53E /* Gorgeous.swift in Sources */,
 				3728684E21631314005F6FD0 /* SequenceExtensions.swift in Sources */,
 				37A40D9C2300D953004A17D0 /* BWFMinimalist.swift in Sources */,
