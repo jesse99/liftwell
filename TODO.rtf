@@ -1,12 +1,14 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf400
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 AndaleMono;
-\f3\fswiss\fcharset0 Helvetica-Bold;}
+\f3\froman\fcharset0 Times-Roman;\f4\fswiss\fcharset0 Helvetica-Bold;}
 {\colortbl;\red255\green255\blue255;\red2\green2\blue2;\red0\green0\blue0;\red170\green13\blue145;
 \red92\green38\blue153;\red0\green116\blue0;\red196\green26\blue22;\red63\green110\blue116;\red28\green0\blue207;
-\red233\green233\blue233;\red162\green91\blue55;\red38\green71\blue75;}
+\red0\green0\blue233;\red255\green255\blue255;\red233\green233\blue233;\red162\green91\blue55;\red38\green71\blue75;
+}
 {\*\expandedcolortbl;;\csgenericrgb\c784\c784\c784;\csgenericrgb\c0\c0\c0;\csgenericrgb\c66500\c5200\c56900;
 \csgenericrgb\c35900\c14900\c60100;\csgenericrgb\c0\c45600\c0;\csgenericrgb\c77000\c10200\c8600;\csgenericrgb\c24700\c43100\c45600;\csgenericrgb\c11000\c0\c81000;
-\csgenericrgb\c91180\c91178\c91179;\csgenericrgb\c63573\c35812\c21460;\csgenericrgb\c14900\c27800\c29400;}
+\cssrgb\c0\c0\c93333;\csgenericrgb\c100000\c100000\c100000;\csgenericrgb\c91180\c91178\c91179;\csgenericrgb\c63573\c35812\c21460;\csgenericrgb\c14900\c27800\c29400;
+}
 \deftab864
 \pard\tx864\pardeftab864\pardirnatural\partightenfactor0
 {\field{\*\fldinst{HYPERLINK "https://codewithchris.com/ios-tab-bar-app/"}}{\fldrslt 
@@ -232,14 +234,41 @@ extension\cf3  \cf8 Exercise\cf3  \{
 \
 \
 \
-\pard\pardeftab720\partightenfactor0
+\pard\pardeftab720\sl280\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://www.t-nation.com/training/rebuild-yourself-with-complexes"}}{\fldrslt 
+\f3 \cf10 \expnd0\expndtw0\kerning0
+\ul \ulc10 \outl0\strokewidth0 \strokec10 https://www.t-nation.com/training/rebuild-yourself-with-complexes}}
+\f3 \cf10 \expnd0\expndtw0\kerning0
+\ul \ulc10 \outl0\strokewidth0 \strokec10 \
+\
+\pard\pardeftab720\sl280\partightenfactor0
 
-\fs48 \cf2 * Add the other programs listed on reddit	:\
-	- beginner conditioning\
+\f0\fs48 \cf2 \kerning1\expnd0\expndtw0 \ulnone \outl0\strokewidth0 do all lifts back to back: barbell should not leave your hands until the complex is completed\
+rest after complex is complete\
+can do up to 5 sets\
+\
+* Find Weight part doesn\'92t have fixed subtitle:\
+	- probably don\'92t want to even have that\
+	- maybe we can fix a weight to start with\
+* Finish up No Excuses\
+* Add the other programs listed on reddit	:\
+\pard\pardeftab720\partightenfactor0
+\cf2 	- beginner conditioning\
+		complex A8\
+		complex B8\
+		complex C8\
+		complex F8\
 	- maybe circuits\
 	- intermediate dumbbell? \
-* Sort tags in workouts list\
-* See what kind of coverage there is:\
+* Getting a problem on startup:\
+\pard\tx624\pardeftab624\pardirnatural\partightenfactor0
+
+\f2\fs26 \cf3 	2019-08-17 10:43:23.718434-0700 liftwell[63660:18748248] Expected variable reps, e.g. 4-8.\
+	2019-08-17 10:43:23.718554-0700 liftwell[63660:18748248] Expected variable reps, e.g. 4-8.\cb11 \
+
+\f0\fs48 \cf2 \cb1 * Sort tags in workouts list\
+\pard\pardeftab720\partightenfactor0
+\cf2 * See what kind of coverage there is:\
 	- hypertrophy vs strength\
 	- equipment\
 	- ages\
@@ -255,7 +284,7 @@ extension\cf3  \cf8 Exercise\cf3  \{
 	- madcow?\
 	- texas?\
 	- 
-\f2\fs34 \cf3 Coolcicada\cb10 ?
+\f2\fs34 \cf3 Coolcicada\cb12 ?
 \f0\fs48 \cf2 \cb1 \
 	- https://www.artofmanliness.com/articles/fitness-program-right/\
 * Might want to use a different default program\
@@ -301,48 +330,48 @@ may want a button in settings screen to deload\
 \
 Strong Lifts\
 	
-\f3\b reps:
+\f4\b reps:
 \f0\b0  5@0%, 5@50%, 5@65%, 5@75%, 5@100%, R, 5@100%, R, 5@100%\
 	
-\f3\b advance:
+\f4\b advance:
 \f0\b0  "If did all the sets with good form."\
 	
-\f3\b deload:
+\f4\b deload:
 \f0\b0  (nil, "If stalled more than 3x in a row.", 10%)  would need a deload flag\
 \
 \
 AMRAP\
 	
-\f3\b reps:
+\f4\b reps:
 \f0\b0  5@0% 5@50% 5@65% 5@75% 5@85% R 5@85% R 5+@85%\
 	
-\f3\b advance x2:
+\f4\b advance x2:
 \f0\b0  "If did twice the minimum number of reps."\
 	
-\f3\b advance:
+\f4\b advance:
 \f0\b0  "If did more than the minimum number of reps with good form."\
 	
-\f3\b deload:
+\f4\b deload:
 \f0\b0  (nil, "If not able to do the minimum nunber of reps.", 10%)  \
 \
 \
 531 beginner\
 	
-\f3\b reps:
+\f4\b reps:
 \f0\b0  5@0% 5@50% 5@65% 5@75% 5+@85% 5@65%/\
 	5@0%, 5@55%, 3@70%, 3@80%, 3+@90%, 3@70%/\
 	5@0%, 5@60%, 5@75%, 3@85%, 1+@95%, 5@75%  are the rep ranges right?\
 	\
 	
-\f3\b advance:
+\f4\b advance:
 \f0\b0  "Advance if you were able to do the minimum reps in each cycle with good form."\
 	
-\f3\b deload:
+\f4\b deload:
 \f0\b0  (15, "A deload is recommended.", 10%)  would need a deload flag\
 \
 Variable Reps\
 	
-\f3\b reps:
+\f4\b reps:
 \f0\b0  5, R, 5, R, 5\
 	might want regress x1 and x2 buttons\
 	\
@@ -353,7 +382,7 @@ percent of\
 \
 Max Rep Sets\
 	
-\f3\b reps:
+\f4\b reps:
 \f0\b0  *, R, *, R, *\
 \
 \
@@ -384,7 +413,7 @@ cardio\
 \
 \pard\tx864\pardeftab864\pardirnatural\partightenfactor0
 
-\f2\fs36 \cf11 /// Masters program with cycles of 3x5, 3x3,and 3x1.
+\f2\fs36 \cf13 /// Masters program with cycles of 3x5, 3x3,and 3x1.
 \f0\fs24 \cf0 \
 \pard\tx864\pardeftab864\pardirnatural\partightenfactor0
 
@@ -417,32 +446,32 @@ cardio\
 \f2\fs36 \cf3         \cf6 // Heavy
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 dumbbell\cf3 (\cf7 "Dumbbell Bench"\cf3 , \cf7 "Dumbbell Bench Press"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: dumbbellWarmup, restMins: \cf9 4.0\cf3 ),
+\f2\fs36 \cf3         \cf14 dumbbell\cf3 (\cf7 "Dumbbell Bench"\cf3 , \cf7 "Dumbbell Bench Press"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: dumbbellWarmup, restMins: \cf9 4.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 dumbbell\cf3 (\cf7 "Split Squat"\cf3 ,    \cf7 "Dumbbell Single Leg Split Squat"\cf3 , \cf9 3\cf3 , minReps: \cf9 4\cf3 , maxReps: \cf9 8\cf3 , warmups: dumbbellWarmup, restMins: \cf9 3.5\cf3 ),
+\f2\fs36 \cf3         \cf14 dumbbell\cf3 (\cf7 "Split Squat"\cf3 ,    \cf7 "Dumbbell Single Leg Split Squat"\cf3 , \cf9 3\cf3 , minReps: \cf9 4\cf3 , maxReps: \cf9 8\cf3 , warmups: dumbbellWarmup, restMins: \cf9 3.5\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 dumbbell\cf3 (\cf7 "Dumbbell Flyes"\cf3 , \cf7 "Dumbbell Flyes"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: noWarmup, restMins: \cf9 3.0\cf3 ),
+\f2\fs36 \cf3         \cf14 dumbbell\cf3 (\cf7 "Dumbbell Flyes"\cf3 , \cf7 "Dumbbell Flyes"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: noWarmup, restMins: \cf9 3.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 barbell\cf3 (\cf7 "Deadlift"\cf3 ,        \cf7 "Deadlift"\cf3 , \cf9 1\cf3 , by: \cf9 5\cf3 , warmups: deadWarmup, useBumpers: \cf4 true\cf3 , restMins: \cf9 3.5\cf3 ),
+\f2\fs36 \cf3         \cf14 barbell\cf3 (\cf7 "Deadlift"\cf3 ,        \cf7 "Deadlift"\cf3 , \cf9 1\cf3 , by: \cf9 5\cf3 , warmups: deadWarmup, useBumpers: \cf4 true\cf3 , restMins: \cf9 3.5\cf3 ),
 \f0\fs24 \cf0 \
 \
 
 \f2\fs36 \cf3         \cf6 // Light
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 dumbbell\cf3 (\cf7 "Dumbbell OHP"\cf3 ,  \cf7 "Dumbbell Shoulder Press"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: dumbbellWarmup, restMins: \cf9 3.5\cf3 ),
+\f2\fs36 \cf3         \cf14 dumbbell\cf3 (\cf7 "Dumbbell OHP"\cf3 ,  \cf7 "Dumbbell Shoulder Press"\cf3 , \cf9 3\cf3 , minReps: \cf9 5\cf3 , maxReps: \cf9 10\cf3 , warmups: dumbbellWarmup, restMins: \cf9 3.5\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Chinups"\cf3 ,     \cf7 "Chinup"\cf3 , requestedReps: \cf9 12\cf3 , targetReps: \cf9 30\cf3 , restMins: \cf9 3.5\cf3 ),
+\f2\fs36 \cf3         \cf14 bodyWeight\cf3 (\cf7 "Chinups"\cf3 ,     \cf7 "Chinup"\cf3 , requestedReps: \cf9 12\cf3 , targetReps: \cf9 30\cf3 , restMins: \cf9 3.5\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 dumbbell\cf3 (\cf7 "Farmer's Walk"\cf3 , \cf7 "Farmer's Walk"\cf3 , \cf9 2\cf3 , by: \cf9 1\cf3 , warmups: noWarmup, restMins: \cf9 3.0\cf3 ),
+\f2\fs36 \cf3         \cf14 dumbbell\cf3 (\cf7 "Farmer's Walk"\cf3 , \cf7 "Farmer's Walk"\cf3 , \cf9 2\cf3 , by: \cf9 1\cf3 , warmups: noWarmup, restMins: \cf9 3.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 barbell\cf3 (\cf7 "Static Hold"\cf3 ,    \cf7 "Static Hold"\cf3 , \cf9 3\cf3 , by: \cf9 1\cf3 , warmups: \cf4 nil\cf3 , restMins: \cf9 3.0\cf3 ),
+\f2\fs36 \cf3         \cf14 barbell\cf3 (\cf7 "Static Hold"\cf3 ,    \cf7 "Static Hold"\cf3 , \cf9 3\cf3 , by: \cf9 1\cf3 , warmups: \cf4 nil\cf3 , restMins: \cf9 3.0\cf3 ),
 \f0\fs24 \cf0 \
 \
 
@@ -459,34 +488,34 @@ cardio\
 \f0\fs24 \cf0 \
 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Foam Rolling"\cf3 ,            \cf7 "IT-Band Foam Roll"\cf3 ,         \cf9 1\cf3 , by: \cf9 15\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf14 bodyWeight\cf3 (\cf7 "Foam Rolling"\cf3 ,            \cf7 "IT-Band Foam Roll"\cf3 ,         \cf9 1\cf3 , by: \cf9 15\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Shoulder Dislocates"\cf3 ,     \cf7 "Shoulder Dislocate"\cf3 ,        \cf9 1\cf3 , by: \cf9 12\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf14 bodyWeight\cf3 (\cf7 "Shoulder Dislocates"\cf3 ,     \cf7 "Shoulder Dislocate"\cf3 ,        \cf9 1\cf3 , by: \cf9 12\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Bent-knee Iron Cross"\cf3 ,    \cf7 "Bent-knee Iron Cross"\cf3 ,      \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf14 bodyWeight\cf3 (\cf7 "Bent-knee Iron Cross"\cf3 ,    \cf7 "Bent-knee Iron Cross"\cf3 ,      \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Roll-over into V-sit"\cf3 ,    \cf7 "Roll-over into V-sit"\cf3 ,      \cf9 1\cf3 , by: \cf9 15\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf14 bodyWeight\cf3 (\cf7 "Roll-over into V-sit"\cf3 ,    \cf7 "Roll-over into V-sit"\cf3 ,      \cf9 1\cf3 , by: \cf9 15\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Rocking Frog Stretch"\cf3 ,    \cf7 "Rocking Frog Stretch"\cf3 ,      \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf14 bodyWeight\cf3 (\cf7 "Rocking Frog Stretch"\cf3 ,    \cf7 "Rocking Frog Stretch"\cf3 ,      \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Fire Hydrant Hip Circle"\cf3 , \cf7 "Fire Hydrant Hip Circle"\cf3 ,   \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf14 bodyWeight\cf3 (\cf7 "Fire Hydrant Hip Circle"\cf3 , \cf7 "Fire Hydrant Hip Circle"\cf3 ,   \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Mountain Climber"\cf3 ,        \cf7 "Mountain Climber"\cf3 ,          \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf14 bodyWeight\cf3 (\cf7 "Mountain Climber"\cf3 ,        \cf7 "Mountain Climber"\cf3 ,          \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Cossack Squat"\cf3 ,           \cf7 "Cossack Squat"\cf3 ,             \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
+\f2\fs36 \cf3         \cf14 bodyWeight\cf3 (\cf7 "Cossack Squat"\cf3 ,           \cf7 "Cossack Squat"\cf3 ,             \cf9 1\cf3 , by: \cf9 10\cf3 , restMins: \cf9 0.0\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Piriformis Stretch"\cf3 ,      \cf7 "Seated Piriformis Stretch"\cf3 , \cf9 2\cf3 , secs: \cf9 30\cf3 ),
+\f2\fs36 \cf3         \cf14 bodyWeight\cf3 (\cf7 "Piriformis Stretch"\cf3 ,      \cf7 "Seated Piriformis Stretch"\cf3 , \cf9 2\cf3 , secs: \cf9 30\cf3 ),
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3         \cf12 bodyWeight\cf3 (\cf7 "Hip Flexor Stretch"\cf3 ,      \cf7 "Rear-foot-elevated Hip Flexor Stretch"\cf3 , \cf9 2\cf3 , secs: \cf9 30\cf3 )
+\f2\fs36 \cf3         \cf14 bodyWeight\cf3 (\cf7 "Hip Flexor Stretch"\cf3 ,      \cf7 "Rear-foot-elevated Hip Flexor Stretch"\cf3 , \cf9 2\cf3 , secs: \cf9 30\cf3 )
 \f0\fs24 \cf0 \
 
 \f2\fs36 \cf3     ]
@@ -519,7 +548,7 @@ cardio\
 \f2\fs36 \cf3     
 \f0\fs24 \cf0 \
 
-\f2\fs36 \cf3     \cf4 let\cf3  tags: [\cf8 Program\cf3 .\cf8 Tags\cf3 ] = [.\cf12 intermediate\cf3 , .\cf12 strength\cf3 , .\cf12 barbell\cf3 , .\cf12 unisex\cf3 , .\cf12 threeDays\cf3 , .\cf12 age40s\cf3 , .\cf12 age50s\cf3 ]
+\f2\fs36 \cf3     \cf4 let\cf3  tags: [\cf8 Program\cf3 .\cf8 Tags\cf3 ] = [.\cf14 intermediate\cf3 , .\cf14 strength\cf3 , .\cf14 barbell\cf3 , .\cf14 unisex\cf3 , .\cf14 threeDays\cf3 , .\cf14 age40s\cf3 , .\cf14 age50s\cf3 ]
 \f0\fs24 \cf0 \
 
 \f2\fs36 \cf3     \cf4 let\cf3  description = \cf7 """

@@ -10,7 +10,7 @@ struct Activity: Storable {
     var title: String
     
     /// "60% of 300 lbs"
-    let subtitle: String
+    var subtitle: String
     
     /// "5 reps @ 220 lbs"
     let amount: String

@@ -9,19 +9,41 @@ import os.log
 class RepsApparatusSubType: BaseRepsApparatusSubType {
     private typealias `Self` = RepsApparatusSubType
     
-    override init(_ sets: Sets, restSecs: Int, trainingMaxPercent: Double? = nil) {
+    init(_ sets: Sets, restSecs: Int, trainingMaxPercent: Double? = nil, fixedSubTitle: String? = nil) {
         super.init(sets, restSecs: restSecs, trainingMaxPercent: trainingMaxPercent)
+        self.fixedSubTitle = fixedSubTitle
     }
     
     required init(from store: Store) {
         super.init(from: store)
+
+        if store.hasKey("fixedSubTitle") {
+            fixedSubTitle = store.getStr("fixedSubTitle")
+        } else {
+            self.fixedSubTitle = nil
+        }
     }
     
+    override func save(_ store: Store) {
+        if let title = fixedSubTitle {
+            store.addStr("fixedSubTitle", title)
+        }
+        super.save(store)
+    }
+
     override func clone() -> ExerciseInfo {
         let store = Store()
         store.addObj("self", self)
         let result: Self = store.getObj("self")
         return result
+    }
+    
+    override func current(_ exercise: Exercise) -> Activity {
+        var activity = super.current(exercise)
+        if let title = fixedSubTitle {
+            activity.subtitle = title
+        }
+        return activity
     }
     
     override func doFinalize(_ exercise: Exercise, _ tag: ResultTag, _ reps: Int, _ view: UIViewController, _ completion: @escaping () -> Void) {
@@ -48,5 +70,7 @@ class RepsApparatusSubType: BaseRepsApparatusSubType {
     }
 
     static var results: [String: [RepsResult]] = [:]
+    
+    var fixedSubTitle: String? = nil
 }
 

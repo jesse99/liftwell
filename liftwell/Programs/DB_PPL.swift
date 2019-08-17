@@ -9,7 +9,7 @@ func DB_PPL() -> Program {
     
     let exercises = [
         // Push
-        dumbbell2("Bench Press",      "Dumbbell Bench Press",     warmup, sets, restMins: 1.5, main: true),
+        dumbbell2("Bench Press",      "Dumbbell Bench Press",     warmup, sets, restMins: 1.5, fixedSubTitle: "Alpha, Beta, Gama", main: true),
         dumbbell2("Incline Flyes",    "Dumbbell Incline Flyes",   "", sets, restMins: 1.5),
         dumbbell2("Arnold Press",     "Arnold Press",             "", sets, restMins: 1.5),
         dumbbell1("Skull Crushers",   "Skull Crushers",           "", sets, restMins: 1.5),

@@ -249,6 +249,14 @@ let builtInNotes: [String: String] = [
             "Bring dumbbells to your sides while keeping torso stationary."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/bent-over-two-dumbbell-row"]),
     
+    "Bike Sprints": createNote(
+        notes: [
+            "Use as much resistance as possible.",
+            "Sprint for 15-30 seconds.",
+            "Rest for 30-45 seconds.",
+            "Do 5-8 sets"],
+        links: ["Link": "https://www.t-nation.com/training/4-dumbest-forms-of-cardio"]),
+    
     "Bird-dog": createNote(
         notes: [
             "Kneel with your hands and feet shoulder width apart.",
@@ -1830,6 +1838,13 @@ let builtInNotes: [String: String] = [
             "Lower the kettlebell and row the other one."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/alternating-renegade-row"]),
     
+    "Rest": createNote(
+        notes: [
+            "For conditioning 30-90 seconds.",
+            "For hypertrophy 1-2 minutes.",
+            "For strength 3-5 minutes."],
+        links: ["Link": "https://livehealthy.chron.com/much-time-rest-before-lifting-weights-again-2499.html"]),
+    
     "Reverse Flyes": createNote(
         notes: [
             "Lie face down on an incline bench.",
@@ -2282,6 +2297,16 @@ let builtInNotes: [String: String] = [
             "Lower your hips into a squat while pushing shoulders and chest up.",
             "Raise your hips back to the starting position keeping your hands on your toes."],
         links: ["Link": "https://www.exercise.com/exercises/sumo-squat-to-stand"]),
+    
+    "Stack Complex": createNote(
+        notes: [
+            "[Push Press](https://www.stack.com/a/dumbbell-push-press)",
+            "[Front Squat](https://www.bodybuilding.com/exercises/dumbbell-front-squat)",
+            "[Romanian Deadlift](http://www.bodybuilding.com/exercises/detail/view/name/romanian-deadlift-with-dumbbells)",
+            "[Bent-over Row](http://www.bodybuilding.com/exercises/detail/view/name/bent-over-two-dumbbell-row)",
+            "[Elevated Pushups](https://www.youtube.com/watch?v=8enS53b5OFw)",
+            "[Bike Sprints](https://www.t-nation.com/training/4-dumbest-forms-of-cardio)"],
+        links: ["Link": "https://www.stack.com/a/a-dumbbell-complex-workout-to-build-muscle-and-quickly-shed-fat"]),
     
     "Standing Calf Raises": createNote(
         notes: [

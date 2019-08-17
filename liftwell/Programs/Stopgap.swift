@@ -46,7 +46,7 @@ This is a [program](https://old.reddit.com/r/Fitness/comments/zc0uy/a_beginner_d
 
 **Notes**
 * If your lightest dumbbell is too heavy you can begin with empty hands.
-* if you stall on a lift three times in a row lower the weight by two steps.
+* If you stall on a lift three times in a row lower the weight by two steps.
 * There are some optional exercises you can swap in using the Options button in workouts.
 * Progression is easier with 2.5 pound magnets.
 """
