@@ -20,6 +20,16 @@ private func createNote(notes: [String], links: [String: String]) -> String {
 // dumbbell. And there are programs that do odd things like turning a cable seated row into a
 // timed exercise by having users do as many reps as possible within a time window.
 let builtInNotes: [String: String] = [
+    "A8": createNote(
+        notes: [
+            "[Row](http://stronglifts.com/barbell-row)",
+            "[Power Clean](https://experiencelife.com/article/learn-to-power-clean)",
+            "[Front Squat](http://www.bodybuilding.com/exercises/detail/view/name/front-barbell-squat)",
+            "[Military Press](http://www.bodybuilding.com/exercises/detail/view/name/standing-military-press)",
+            "[Back Squat](http://strengtheory.com/how-to-squat)",
+            "[Good Morning](http://www.bodybuilding.com/exercises/detail/view/name/good-morning)"],
+        links: ["Link": "https://www.t-nation.com/training/rebuild-yourself-with-complexes"]),
+    
     "Ab Wheel Rollout": createNote(
         notes: [
             "Hold the ab wheel with both hands and kneel on the floor.",
@@ -1404,7 +1414,7 @@ let builtInNotes: [String: String] = [
             "Squeeze shoulders together."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/wide-grip-lat-pulldown"]),
     
-    "": createNote(
+    "Lat Stretch": createNote(
         notes: [
             "Raise your arm overhead and grab a door frame or other support.",
             "Crouch down so that your arm straightens out.",

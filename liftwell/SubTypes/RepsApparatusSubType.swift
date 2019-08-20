@@ -24,6 +24,11 @@ class RepsApparatusSubType: BaseRepsApparatusSubType {
         }
     }
     
+    override func needToFindWeight() -> Bool {
+        let weight = getBaseWorkingWeight()
+        return weight == 0 && fixedSubTitle == nil  // currently fixedSubTitle is only used by complexes where it doesn;t make much sense to have the user try and find a weight to use
+    }
+    
     override func save(_ store: Store) {
         if let title = fixedSubTitle {
             store.addStr("fixedSubTitle", title)
@@ -71,6 +76,6 @@ class RepsApparatusSubType: BaseRepsApparatusSubType {
 
     static var results: [String: [RepsResult]] = [:]
     
-    var fixedSubTitle: String? = nil
+    private var fixedSubTitle: String? = nil
 }
 

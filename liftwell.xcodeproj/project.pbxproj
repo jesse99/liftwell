@@ -74,6 +74,7 @@
 		37A40D9C2300D953004A17D0 /* BWFMinimalist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A40D9B2300D953004A17D0 /* BWFMinimalist.swift */; };
 		37A40D9E23063FAD004A17D0 /* NoExcuses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A40D9D23063FAD004A17D0 /* NoExcuses.swift */; };
 		37A40DA023086AE3004A17D0 /* StackComplex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A40D9F23086AE3004A17D0 /* StackComplex.swift */; };
+		37A40DA2230A27FC004A17D0 /* DanJohnComplexes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A40DA1230A27FC004A17D0 /* DanJohnComplexes.swift */; };
 		37AC02BE22DC06EF00EAA772 /* Arnold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AC02BD22DC06EF00EAA772 /* Arnold.swift */; };
 		37B4352121B2194000EDC53E /* BestButt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352021B2194000EDC53E /* BestButt.swift */; };
 		37B4352321B30D5B00EDC53E /* RepsBodySubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */; };
@@ -191,6 +192,7 @@
 		37A40D9B2300D953004A17D0 /* BWFMinimalist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BWFMinimalist.swift; sourceTree = "<group>"; };
 		37A40D9D23063FAD004A17D0 /* NoExcuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoExcuses.swift; sourceTree = "<group>"; };
 		37A40D9F23086AE3004A17D0 /* StackComplex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackComplex.swift; sourceTree = "<group>"; };
+		37A40DA1230A27FC004A17D0 /* DanJohnComplexes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanJohnComplexes.swift; sourceTree = "<group>"; };
 		37AC02BD22DC06EF00EAA772 /* Arnold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arnold.swift; sourceTree = "<group>"; };
 		37B4352021B2194000EDC53E /* BestButt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestButt.swift; sourceTree = "<group>"; };
 		37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsBodySubType.swift; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				37B4352421B34CEF00EDC53E /* Bootyful.swift */,
 				37A40D9B2300D953004A17D0 /* BWFMinimalist.swift */,
 				3720592F21D156F600641BE9 /* CAP3.swift */,
+				37A40DA1230A27FC004A17D0 /* DanJohnComplexes.swift */,
 				377AAA6521DAE9E900BD661F /* DB_PPL.swift */,
 				3747BAAA21C6C91000AE79DA /* FiveThreeOne.swift */,
 				37DE95FF219D1D3300D60101 /* FiveThreeOneBeginner.swift */,
@@ -663,6 +666,7 @@
 				37E7BF142198A83F0087E7FE /* LiftTotalAchievement.swift in Sources */,
 				374FE953218BD0DD00CFC284 /* NotesController.swift in Sources */,
 				3728685021631462005F6FD0 /* Exercise.swift in Sources */,
+				37A40DA2230A27FC004A17D0 /* DanJohnComplexes.swift in Sources */,
 				37286863216A6C42005F6FD0 /* RepsParser.swift in Sources */,
 				37EFD6DE217A679F00F60880 /* Sets.swift in Sources */,
 				37E7BF03219750AF0087E7FE /* AchievementsTabController.swift in Sources */,

@@ -32,12 +32,13 @@ class TimedSubType: ExerciseInfo {
         var currentTime: Int
     }
     
-    init(numSets: Int, currentTime: Int, targetSecs: Int?) {
+    init(numSets: Int, currentTime: Int, targetSecs: Int?, fixedSubTitle: String? = nil) {
         self.weight = 0.0
         self.currentTime = currentTime
         
         self.numSets = numSets
         self.targetTime = targetSecs
+        self.fixedSubTitle = fixedSubTitle
     }
     
     required init(from store: Store) {
@@ -51,6 +52,12 @@ class TimedSubType: ExerciseInfo {
         self.currentWorkout = store.getStr("currentWorkout")
         self.activities = store.getObjArray("activities")
         self.index = store.getInt("index")
+
+        if store.hasKey("fixedSubTitle") {
+            fixedSubTitle = store.getStr("fixedSubTitle")
+        } else {
+            self.fixedSubTitle = nil
+        }
     }
     
     func save(_ store: Store) {
@@ -63,6 +70,10 @@ class TimedSubType: ExerciseInfo {
         store.addStr("currentWorkout", currentWorkout)
         store.addObjArray("activities", activities)
         store.addInt("index", index)
+
+        if let title = fixedSubTitle {
+            store.addStr("fixedSubTitle", title)
+        }
     }
     
     func sync(_ program: Program, _ savedExercise: Exercise) {
@@ -199,7 +210,11 @@ class TimedSubType: ExerciseInfo {
     }
     
     func current(_ exercise: Exercise) -> Activity {
-        return index < activities.count ? activities[index] : activities.last!
+        var activity = index < activities.count ? activities[index] : activities.last!
+        if let title = fixedSubTitle {
+            activity.subtitle = title
+        }
+        return activity
     }
     
     func restSecs() -> RestTime {
@@ -243,6 +258,7 @@ class TimedSubType: ExerciseInfo {
     private var activities: [Activity] = []
     private var currentWorkout = ""
     private var index: Int = 0
+    private var fixedSubTitle: String? = nil
 }
 
 func addStrDict(_ store: Store, _ key: String, _ value: [String: [Storable]]) {
