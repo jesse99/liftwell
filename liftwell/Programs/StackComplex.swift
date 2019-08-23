@@ -29,3 +29,28 @@ This is a program from [Stack](https://www.stack.com/a/a-dumbbell-complex-workou
     return Program("Stack DB Complex", workouts, exercises, tags, description)
 }
 
+func PerryComplex() -> Program {
+    let exercises = [
+        dumbbell2("Complex", "Perry Complex", "", "6".x(5), restMins: 0.75, fixedSubTitle: "Squat, Lunge, Row, Curl&Press")]
+    
+    let workouts = [
+        Workout("Complex", ["Complex"], scheduled: false, optional: [])]
+    
+    let tags: [Program.Tags] = [.beginner, .conditioning, .dumbbell, .unisex, .threeDays, .ageUnder40, .age40s, .age50s]
+    
+    let description = """
+This is a program from [Marc Perry](https://www.builtlean.com/2012/04/10/dumbbell-complex/). It's a complex which means each exercise is done with the same set of weights, the weights should not leave your hands until a set is done, and you should aim for not resting until a set is finished.
+
+**Workout**
+* DB Front Squat 6 reps
+* DB Forward Lunges 6 reps
+* DB Bent-over Row 6 reps
+* DB Curl & Press 6 reps
+
+**Notes**
+* Start with a weight that you can do for 10-15 reps for the hardest exercise.
+* If your grip becomes a problem you can use straps.
+"""
+    return Program("Perry DB Complex", workouts, exercises, tags, description)
+}
+

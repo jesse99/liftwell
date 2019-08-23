@@ -1695,6 +1695,10 @@ let builtInNotes: [String: String] = [
             "Torso remain parallel to the floor and have minimal movement."],
         links: ["Stronglifts": "http://stronglifts.com/barbell-row/", "Video": "https://www.youtube.com/watch?v=Weu9HMHdiDA"]),
     
+    "Perry Complex": createNote(
+        notes: [],
+        links: ["Link": "https://www.builtlean.com/2012/04/10/dumbbell-complex"]),
+    
     "Pike Pushup": createNote(
         notes: [
             "Lay face down on the floor.",
