@@ -102,6 +102,16 @@ let builtInNotes: [String: String] = [
             "Reduce the use of the support over time."],
         links: ["Link": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/squat", "Body Weight Squats": "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/squat", "Cues": "https://www.reddit.com/r/bodyweightfitness/wiki/move/phase2/squat"]),
     
+    "B8": createNote(
+        notes: [
+            "[Deadlift](http://stronglifts.com/deadlift)",
+            "[Clean-grip High Pull](https://www.t-nation.com/training/clean-high-pull)",
+            "[Clean-grip Snatch](https://www.catalystathletics.com/exercise/383/Clean-Grip-Snatch/)",
+            "[Back Squats](http://strengtheory.com/how-to-squat)",
+            "[Good Morning](http://www.bodybuilding.com/exercises/detail/view/name/good-morning)",
+            "[Rows](http://stronglifts.com/barbell-row)"],
+        links: ["Link": "https://www.t-nation.com/training/rebuild-yourself-with-complexes"]),
+    
     "Back Extension": createNote(
         notes: [
             "Lie face down on a hyperextension bench.",
@@ -417,6 +427,16 @@ let builtInNotes: [String: String] = [
             "Pull your legs foreward and jump into the air.",
             "Repeat."],
         links: ["Link": "https://www.youtube.com/watch?v=qNLiCX8gYWo"]),
+    
+    "C8": createNote(
+        notes: [
+            "[Hang Snatch](https://www.bodybuilding.com/exercises/hang-snatch)",
+            "[Overhead Squat](https://barbend.com/overhead-squat/)",
+            "[Back Squat](http://strengtheory.com/how-to-squat)",
+            "[Good Morning](http://www.bodybuilding.com/exercises/detail/view/name/good-morning)",
+            "[Rows](http://stronglifts.com/barbell-row)",
+            "[Deadlift](http://stronglifts.com/deadlift)"],
+        links: ["Link": "https://www.t-nation.com/training/rebuild-yourself-with-complexes"]),
     
     "Cable Crunch": createNote(
         notes: [
@@ -895,6 +915,16 @@ let builtInNotes: [String: String] = [
             "Contract your abs to raise your torso."],
         links: ["Link": "http://www.exrx.net/WeightExercises/Obliques/WTSideCrunchOnBall.html"]),
     
+    "F8": createNote(
+        notes: [
+            "[Overhead Squat](https://barbend.com/overhead-squat)",
+            "[Back Squat](http://strengtheory.com/how-to-squat)",
+            "[Good Morning](http://www.bodybuilding.com/exercises/detail/view/name/good-morning)",
+            "[Front Squat](http://www.bodybuilding.com/exercises/detail/view/name/front-barbell-squat)",
+            "[Rows](http://stronglifts.com/barbell-row)",
+            "[Deadlift](http://stronglifts.com/deadlift)"],
+        links: ["Link": "https://www.t-nation.com/training/rebuild-yourself-with-complexes"]),
+
     "Face Pull": createNote(
         notes: [
             "Lift a pulley to your upper chest, use a rope or a dual handle attachment.",
