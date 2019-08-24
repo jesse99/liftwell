@@ -5,21 +5,21 @@ import Foundation
 func MastersBarbell() -> Program {
     let exercises = [
         // Heavy
-        barbell("Heavy Bench",  "Bench Press",   "8@0% 5@50% 3@75% 1@90%", "5".x(3, rest: .atEnd), restMins: 4.0, main: true),
-        barbell("Heavy Squat",  "Low bar Squat", "5@0% 5@50% 3@75% 1@90%", "5".x(3, rest: .atEnd), restMins: 4.0, main: true),
-        barbell("Deadlift",     "Deadlift",      "5@0% 5@50% 3@75% 1@90%", "5".x(1), restMins: 4.0, bumpers: defaultBumpers(), main: true),
+        barbell("Heavy Bench",  "Bench Press",   "8@0% 5@50% 3@75% 1@90%", "5@100% R 5@100% R 5@100% R", restMins: 4.0, main: true),
+        barbell("Heavy Squat",  "Low bar Squat", "5@0% 5@50% 3@75% 1@90%", "5@100% R 5@100% R 5@100% R", restMins: 4.0, main: true),
+        barbell("Deadlift",     "Deadlift",      "5@0% 5@50% 3@75% 1@90%", "5@100% R", restMins: 4.0, bumpers: defaultBumpers(), main: true),
         dumbbell1("Back Extensions", "Back Extensions", "8@50%",           "5-10".x(3, rest: .atEnd), restMins: 3.0),
 
         // Light
-        barbell("OHP",          "Overhead Press", "8@0% 5@50% 3@75% 1@90%", "5".x(3, rest: .atEnd), restMins: 3.5, main: true),
+        barbell("OHP",          "Overhead Press", "8@0% 5@50% 3@75% 1@90%", "5@100% R 5@100% R 5@100% R", restMins: 3.5, main: true),
         bodyweight("Chinups",   "Chinup",         numSets: 3, startReps: 5, goalReps: 20, restMins: 3.5, restAtEnd: true, main: true),
         cable("Lat Pulldown",   "Lat Pulldown",   "8@60%",             "5-10".x(3, rest: .atEnd), restMins: 2.5),
         cable("Cable Crunches", "Cable Crunch",   "",                  "6-12".x(3), restMins: 3.0),
         cable("Face Pull",      "Face Pull",      "",                  "6-12".x(3), restMins: 2.0),
         
         // Medium
-        barbell("Medium Bench", "Bench Press",    "8@0% 5@50% 3@75% 1@90%", "5".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Bench", restMins: 4.0),
-        barbell("Medium Squat", "Low bar Squat",  "5@0% 5@50% 3@75% 1@90%", "5".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Squat", restMins: 4.0),
+        barbell("Medium Bench", "Bench Press",    "8@0% 5@50% 3@75% 1@90%", "5-5".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Bench", restMins: 4.0),
+        barbell("Medium Squat", "Low bar Squat",  "5@0% 5@50% 3@75% 1@90%", "5@100% R 5@100% R", percent1RM: 0.94, other: "Heavy Squat", restMins: 4.0),
         // Chinups
         dumbbell1("Kroc Row",   "Kroc Row",       "",                        "9-18".x(2, rest: .atEnd), restMins: 3.0, main: true),
         bodyweight("Dips",      "Dips",           numSets: 3, startReps: 10, goalReps: 30, restMins: 3.5, restAtEnd: false),

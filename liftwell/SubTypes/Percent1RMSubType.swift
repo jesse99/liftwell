@@ -83,10 +83,10 @@ class Percent1RMSubType: ExerciseInfo {
     
     func errors(_ exercise: Exercise) -> [String] {
         var errors = originalSets.errors()
-        let (min, max) = originalSets.repRange(currentReps: nil)
-        if min == max {
-            errors.append("Expected variable reps, e.g. 4-8.")
-        }
+//        let (min, max) = originalSets.repRange(currentReps: nil)
+//        if min == max {
+//            errors.append("Expected variable reps, e.g. 4-8.")
+//        }
         if let last = originalSets.worksets.last, last.amrap {
             errors.append("Percent subtype doesn't support amrap sets.")
         }

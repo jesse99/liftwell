@@ -232,7 +232,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 controller = next
             }
             
-            if controller != nil {
+            if controller != nil && UIApplication.shared.applicationState == .active {
                 let alert = UIAlertController(title: "Assertion failed", message: message, preferredStyle: .actionSheet)
                 
                 let action = UIAlertAction(title: "OK", style: .default, handler: {(_) in Swift.assert(false, message)})
