@@ -426,7 +426,7 @@ let builtInNotes: [String: String] = [
             "Stretch out your legs so that they are fully extended behind you.",
             "Pull your legs foreward and jump into the air.",
             "Repeat."],
-        links: ["Link": "https://www.youtube.com/watch?v=qNLiCX8gYWo"]),
+        links: ["Link": "https://www.youtube.com/watch?v=qNLiCX8gYWo", "Variations": "https://www.bodybuilding.com/content/burpee-conditioning-no-more-nonsense.html"]),
     
     "C8": createNote(
         notes: [
@@ -2688,17 +2688,11 @@ let builtInNotes: [String: String] = [
     
     "Wrist Curls": createNote(
         notes: [
-            "xxx.",
-            "xxx.",
-            "xxx.",
-            "xxx.",
-            "xxx.",
-            "xxx.",
-            "xxx.",
-            "xxx.",
-            "xxx.",
-            "xxx.",
-            "xxx."],
+            "Sit down on the end of a bench and grab a dumbbell with your palm facing up.",
+            "Rest your forearm on your thigh so that the dumbbell is just off the end of your leg.",
+            "Drop the dumbbell as far as it will go.",
+            "Slowly raise the dumbbell up as far as it will go.",
+            "Bend only at the wrist."],
         links: ["Link": "https://www.muscleandstrength.com/exercises/one-arm-seated-dumbbell-wrist-curl.html"]),
     
     "Wrist Mobility": createNote(
