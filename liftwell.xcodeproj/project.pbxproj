@@ -75,6 +75,7 @@
 		37A40D9E23063FAD004A17D0 /* NoExcuses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A40D9D23063FAD004A17D0 /* NoExcuses.swift */; };
 		37A40DA023086AE3004A17D0 /* StackComplex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A40D9F23086AE3004A17D0 /* StackComplex.swift */; };
 		37A40DA2230A27FC004A17D0 /* DanJohnComplexes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A40DA1230A27FC004A17D0 /* DanJohnComplexes.swift */; };
+		37A40DA42310B99D004A17D0 /* DBCircuit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A40DA32310B99D004A17D0 /* DBCircuit.swift */; };
 		37AC02BE22DC06EF00EAA772 /* Arnold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AC02BD22DC06EF00EAA772 /* Arnold.swift */; };
 		37B4352121B2194000EDC53E /* BestButt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352021B2194000EDC53E /* BestButt.swift */; };
 		37B4352321B30D5B00EDC53E /* RepsBodySubType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */; };
@@ -193,6 +194,7 @@
 		37A40D9D23063FAD004A17D0 /* NoExcuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoExcuses.swift; sourceTree = "<group>"; };
 		37A40D9F23086AE3004A17D0 /* StackComplex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackComplex.swift; sourceTree = "<group>"; };
 		37A40DA1230A27FC004A17D0 /* DanJohnComplexes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanJohnComplexes.swift; sourceTree = "<group>"; };
+		37A40DA32310B99D004A17D0 /* DBCircuit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBCircuit.swift; sourceTree = "<group>"; };
 		37AC02BD22DC06EF00EAA772 /* Arnold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arnold.swift; sourceTree = "<group>"; };
 		37B4352021B2194000EDC53E /* BestButt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestButt.swift; sourceTree = "<group>"; };
 		37B4352221B30D5B00EDC53E /* RepsBodySubType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsBodySubType.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				37A40D9B2300D953004A17D0 /* BWFMinimalist.swift */,
 				3720592F21D156F600641BE9 /* CAP3.swift */,
 				37A40DA1230A27FC004A17D0 /* DanJohnComplexes.swift */,
+				37A40DA32310B99D004A17D0 /* DBCircuit.swift */,
 				377AAA6521DAE9E900BD661F /* DB_PPL.swift */,
 				3747BAAA21C6C91000AE79DA /* FiveThreeOne.swift */,
 				37DE95FF219D1D3300D60101 /* FiveThreeOneBeginner.swift */,
@@ -683,6 +686,7 @@
 				373CCFBD21A7900E00096291 /* MaxRepsSubType.swift in Sources */,
 				377AAA6421DADCC800BD661F /* Stopgap.swift in Sources */,
 				37286828216259AE005F6FD0 /* WorkoutsTabController.swift in Sources */,
+				37A40DA42310B99D004A17D0 /* DBCircuit.swift in Sources */,
 				373CCFC521A7B22800096291 /* SubTypeHelpers.swift in Sources */,
 				37B4352521B34CEF00EDC53E /* Bootyful.swift in Sources */,
 				37B4352121B2194000EDC53E /* BestButt.swift in Sources */,

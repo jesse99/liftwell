@@ -4,7 +4,7 @@ import Foundation
 
 func DanJohnA8() -> Program {
     let exercises = [
-        barbell("Complex", "A8", "", "8".x(5), restMins: 0.0, fixedSubTitle: "Row, Clean, F Squat, Press, Squat, Morn"),
+        barbell("Complex", "A8", "", "8".x(5), restMins: 1.0, fixedSubTitle: "Row, Clean, F Squat, Press, Squat, Morn"),
     ]
     
     let workouts = [
@@ -31,7 +31,7 @@ This is a program by [Dan John](https://www.t-nation.com/training/rebuild-yourse
 
 func DanJohnB8() -> Program {
     let exercises = [
-        barbell("Complex", "B8", "", "8".x(5), restMins: 0.0, fixedSubTitle: "Deadlift, Pull, Snatch, Squat, Morning, Row"),
+        barbell("Complex", "B8", "", "8".x(5), restMins: 1.0, fixedSubTitle: "Deadlift, Pull, Snatch, Squat, Morning, Row"),
     ]
     
     let workouts = [
@@ -58,7 +58,7 @@ This is a program by [Dan John](https://www.t-nation.com/training/rebuild-yourse
 
 func DanJohnC8() -> Program {
     let exercises = [
-        barbell("Complex", "C8", "", "8".x(5), restMins: 0.0, fixedSubTitle: "Snatch, O Squat, Squat, Morn, Row, Dead"),
+        barbell("Complex", "C8", "", "8".x(5), restMins: 1.0, fixedSubTitle: "Snatch, O Squat, Squat, Morn, Row, Dead"),
     ]
     
     let workouts = [
@@ -85,7 +85,7 @@ This is a program by [Dan John](https://www.t-nation.com/training/rebuild-yourse
 
 func DanJohnF8() -> Program {
     let exercises = [
-        barbell("Complex", "F8", "", "8".x(5), restMins: 0.0, fixedSubTitle: "O Squat, Squat, Morn, F Squat, Row, Dead"),
+        barbell("Complex", "F8", "", "8".x(5), restMins: 1.0, fixedSubTitle: "O Squat, Squat, Morn, F Squat, Row, Dead"),
     ]
     
     let workouts = [

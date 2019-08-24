@@ -535,6 +535,18 @@ let builtInNotes: [String: String] = [
             "Difficulty can be increased by attaching plates to a belt."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/chin-up", "Weighted": "http://relativestrengthadvantage.com/7-ways-to-add-resistance-to-pull-ups-chin-ups-and-dips/", "Elbow Pain": "https://breakingmuscle.com/fitness/5-ways-to-end-elbow-pain-during-chin-ups"]),
     
+    "Circuit1": createNote(
+        notes: [],
+        links: ["Link": "https://experiencelife.com/article/the-dumbbell-complex-workout"]),
+    
+    "Circuit2": createNote(
+        notes: [],
+        links: ["Link": "https://experiencelife.com/article/the-dumbbell-complex-workout"]),
+    
+    "Circuit3": createNote(
+        notes: [],
+        links: ["Link": "https://experiencelife.com/article/the-dumbbell-complex-workout"]),
+    
     "Clam": createNote(
         notes: [
             "Lay on your side.",

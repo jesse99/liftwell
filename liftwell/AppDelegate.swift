@@ -409,7 +409,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    let programs = [BestButt14(), BestButt58(), BestButt912(), BodyWeight(), Bootyful3a(), Bootyful3b(), Bootyful3c(), Bootyful14a(), Bootyful14b(), Bootyful14c(), BoringButBig(), BWFMinimalist(), CAP3(), DanJohnA8(), DanJohnB8(), DanJohnC8(), DanJohnF8(), DB_PPL(), FiveThreeOneBeginner(), GlutealGoddess1(), GlutealGoddess2(), GlutealGoddess3(), GorgeousGlutes1(), GorgeousGlutes2(), GorgeousGlutes3(), GZCL(), GZCLP3(), GZCLP4(), JackShit(), MastersBarbell(), MastersDB(), Metallicadpa(), Monolith(), Move1(), Move2(), Move3(), Move4(), nSuns4(), NoExcuses(), nSuns5(), PerryComplex(), PHAT(), PhraksGreyskull(), PHUL(), StackComplex(), Stopgap()]
+    let programs = [BestButt14(), BestButt58(), BestButt912(), BodyWeight(), Bootyful3a(), Bootyful3b(), Bootyful3c(), Bootyful14a(), Bootyful14b(), Bootyful14c(), BoringButBig(), BWFMinimalist(), CAP3(), DanJohnA8(), DanJohnB8(), DanJohnC8(), DanJohnF8(), DBCircuit(), DB_PPL(), FiveThreeOneBeginner(), GlutealGoddess1(), GlutealGoddess2(), GlutealGoddess3(), GorgeousGlutes1(), GorgeousGlutes2(), GorgeousGlutes3(), GZCL(), GZCLP3(), GZCLP4(), JackShit(), MastersBarbell(), MastersDB(), Metallicadpa(), Monolith(), Move1(), Move2(), Move3(), Move4(), nSuns4(), NoExcuses(), nSuns5(), PerryComplex(), PHAT(), PhraksGreyskull(), PHUL(), StackComplex(), Stopgap()]
 
     var window: UIWindow?
     var program: Program!
