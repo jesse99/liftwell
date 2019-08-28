@@ -49,7 +49,7 @@ class ProgramsTabControllerController: UIViewController, UITableViewDataSource, 
         let color = programs[index].name == app.program.name ? UIColor.blue : UIColor.black  // TODO: use targetColor
         cell.textLabel!.setColor(color)
         
-        let tags = programs[index].tags.map {tagToString($0)}
+        let tags = programs[index].tags.map {tagToString($0)}.sorted()
         cell.detailTextLabel!.text = tags.joined(separator: ", ")
         
         return cell
