@@ -83,7 +83,7 @@ class BaseApparatusSubType {
         
         let (min, max, _) = getBaseRepRange()  // need to be sure and check this in case the program has changed
         if min < max {
-            workingReps = savedSubtype.workingReps
+            workingReps = savedSubtype.workingReps ?? min
         } else {
             workingReps = nil
         }
@@ -212,6 +212,7 @@ class BaseApparatusSubType {
                 alert.preferredAction = advance2
                 
             case .normal:
+                alert.addAction(advance3)
                 alert.addAction(advance2)
                 alert.addAction(advance)
                 alert.addAction(maintain)
