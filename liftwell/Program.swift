@@ -4,6 +4,7 @@ import Foundation
 import os.log
 
 let anyAge = [Program.Tags.ageUnder40, Program.Tags.age40s, Program.Tags.age50s]
+let anyDays = [Program.Tags.threeDays, Program.Tags.fourDays, Program.Tags.fiveDays, Program.Tags.sixDays]
 
 class Program: Storable {
     enum Tags {

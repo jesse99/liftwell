@@ -10,7 +10,7 @@ func DanJohnA8() -> Program {
     let workouts = [
         Workout("Complex", ["Complex"], scheduled: false, optional: [])]
     
-    let tags: [Program.Tags] = [.intermediate, .conditioning, .barbell, .unisex, .threeDays, .fourDays, .fiveDays, .sixDays, .ageUnder40, .age40s]
+    let tags: [Program.Tags] = [.intermediate, .conditioning, .barbell, .unisex, .ageUnder40, .age40s] + anyDays
     
     let description = """
 This is a program by [Dan John](https://www.t-nation.com/training/rebuild-yourself-with-complexes). It's a complex which means each exercise is done with the same set of weights, the weights should not leave your hands until a set is done, and you should aim for not resting until a set is finished.
@@ -37,7 +37,7 @@ func DanJohnB8() -> Program {
     let workouts = [
         Workout("Complex", ["Complex"], scheduled: false, optional: [])]
     
-    let tags: [Program.Tags] = [.intermediate, .conditioning, .barbell, .unisex, .threeDays, .fourDays, .fiveDays, .sixDays, .ageUnder40, .age40s]
+    let tags: [Program.Tags] = [.intermediate, .conditioning, .barbell, .unisex, .ageUnder40, .age40s] + anyDays
     
     let description = """
 This is a program by [Dan John](https://www.t-nation.com/training/rebuild-yourself-with-complexes). It's a complex which means each exercise is done with the same set of weights, the weights should not leave your hands until a set is done, and you should aim for not resting until a set is finished.
@@ -64,7 +64,7 @@ func DanJohnC8() -> Program {
     let workouts = [
         Workout("Complex", ["Complex"], scheduled: false, optional: [])]
     
-    let tags: [Program.Tags] = [.intermediate, .conditioning, .barbell, .unisex, .threeDays, .fourDays, .fiveDays, .sixDays, .ageUnder40, .age40s]
+    let tags: [Program.Tags] = [.intermediate, .conditioning, .barbell, .unisex, .ageUnder40, .age40s] + anyDays
     
     let description = """
 This is a program by [Dan John](https://www.t-nation.com/training/rebuild-yourself-with-complexes). It's a complex which means each exercise is done with the same set of weights, the weights should not leave your hands until a set is done, and you should aim for not resting until a set is finished.
@@ -91,7 +91,7 @@ func DanJohnF8() -> Program {
     let workouts = [
         Workout("Complex", ["Complex"], scheduled: false, optional: [])]
     
-    let tags: [Program.Tags] = [.intermediate, .conditioning, .barbell, .unisex, .threeDays, .fourDays, .fiveDays, .sixDays, .ageUnder40, .age40s]
+    let tags: [Program.Tags] = [.intermediate, .conditioning, .barbell, .unisex, .ageUnder40, .age40s] + anyDays
     
     let description = """
 This is a program by [Dan John](https://www.t-nation.com/training/rebuild-yourself-with-complexes). It's a complex which means each exercise is done with the same set of weights, the weights should not leave your hands until a set is done, and you should aim for not resting until a set is finished.

@@ -106,7 +106,7 @@ class ProgramsTabControllerController: UIViewController, UITableViewDataSource, 
     }
     
     @IBAction func daysPressed(_ sender: Any) {
-        let alert = createAlert("Any Number of Days", [.threeDays, .fourDays, .fiveDays, .sixDays])
+        let alert = createAlert("Any Number of Days",  anyDays)
         self.present(alert, animated: true, completion: nil)
     }
     

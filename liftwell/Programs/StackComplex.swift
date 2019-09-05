@@ -36,7 +36,7 @@ func PerryComplex() -> Program {
     let workouts = [
         Workout("Complex", ["Complex"], scheduled: false, optional: [])]
     
-    let tags: [Program.Tags] = [.beginner, .conditioning, .dumbbell, .unisex, .threeDays, .fourDays, .fiveDays, .sixDays] + anyAge
+    let tags: [Program.Tags] = [.beginner, .conditioning, .dumbbell, .unisex] + anyAge + anyDays
     
     let description = """
 This is a program from [Marc Perry](https://www.builtlean.com/2012/04/10/dumbbell-complex/). It's a complex which means each exercise is done with the same set of weights, the weights should not leave your hands until a set is done, and you should aim for not resting until a set is finished.
