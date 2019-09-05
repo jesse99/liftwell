@@ -26,7 +26,7 @@ func NoExcuses() -> Program {
     let workouts = [
         Workout("Workout", ["Burpees 1", "Pullups 1", "Squats 1", "Pushups 1", "Burpees 2", "Pullups 2", "Squats 2", "Pushups 2", "Burpees 3","Pullups 3", "Squats 3", "Pushups 3", "Burpees 4", "Pullups 4", "Squats 4", "Pushups 4"], scheduled: true, optional: [])]
     
-    let tags: [Program.Tags] = [.beginner, .conditioning, .minimal, .unisex, .threeDays, .fourDays, .fiveDays, .sixDays, .ageUnder40, .age40s, .age50s]
+    let tags: [Program.Tags] = [.beginner, .conditioning, .minimal, .unisex, .threeDays, .fourDays, .fiveDays, .sixDays] + anyAge
     
     let description = """
 This is a body-weight program by [Ross Enamait](http://rosstraining.com/blog/no-excuses/). It can be performed from one to three times a week:

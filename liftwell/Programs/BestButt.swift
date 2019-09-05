@@ -52,7 +52,7 @@ func BestButt14() -> Program {
         Workout("B", bExercises, scheduled: true, optional: []),
         Workout("C", cExercises, scheduled: true, optional: [])]
     
-    let tags: [Program.Tags] = [.beginner, .hypertrophy, .minimal, .threeDays, .female, .ageUnder40, .age40s, .age50s]
+    let tags: [Program.Tags] = [.beginner, .hypertrophy, .minimal, .threeDays, .female] + anyAge
     let description = """
 This is the weeks 1-4 of the at home beginner program from [Strong Curves: A Woman's Guide to Building a Better Butt and Body](https://www.amazon.com/Strong-Curves-Womans-Building-Better-ebook/dp/B00C4XI0QM/ref=sr_1_1?ie=UTF8&qid=1516764374&sr=8-1&keywords=strong+curves) by Bret Contreras. The program is as follows:
 
@@ -143,7 +143,7 @@ func BestButt58() -> Program {
         Workout("B", bExercises, scheduled: true, optional: []),
         Workout("C", cExercises, scheduled: true, optional: [])]
     
-    let tags: [Program.Tags] = [.beginner, .hypertrophy, .minimal, .threeDays, .female, .ageUnder40, .age40s, .age50s]
+    let tags: [Program.Tags] = [.beginner, .hypertrophy, .minimal, .threeDays, .female] + anyAge
     let description = """
 This is weeks 5-8 of the at home beginner program from [Strong Curves: A Woman's Guide to Building a Better Butt and Body](https://www.amazon.com/Strong-Curves-Womans-Building-Better-ebook/dp/B00C4XI0QM/ref=sr_1_1?ie=UTF8&qid=1516764374&sr=8-1&keywords=strong+curves) by Bret Contreras. The program is as follows::
 
@@ -233,7 +233,7 @@ func BestButt912() -> Program {
         Workout("B", bExercises, scheduled: true, optional: []),
         Workout("C", cExercises, scheduled: true, optional: [])]
     
-    let tags: [Program.Tags] = [.beginner, .hypertrophy, .minimal, .threeDays, .female, .ageUnder40, .age40s, .age50s]
+    let tags: [Program.Tags] = [.beginner, .hypertrophy, .minimal, .threeDays, .female] + anyAge
     let description = """
 This is weeks 9-12 of the at home beginner program from [Strong Curves: A Woman's Guide to Building a Better Butt and Body](https://www.amazon.com/Strong-Curves-Womans-Building-Better-ebook/dp/B00C4XI0QM/ref=sr_1_1?ie=UTF8&qid=1516764374&sr=8-1&keywords=strong+curves) by Bret Contreras. The program is as follows:
 

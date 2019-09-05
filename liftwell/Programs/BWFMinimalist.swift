@@ -41,7 +41,7 @@ func BWFMinimalist() -> Program {
     let workouts = [
         Workout("Workout", ["Walking Lunge", "Vertical Pushup", "Incline Pushup", "Full Pushup", "Diamond Pushup", "Pseudo Planche", "Vertical Rows", "Incline Rows", "Horz Rows", "Wide Rows", "Weighted Inverted Rows", "Shoulder Taps", "Bird-dog", "Deadbugs", "Romanian Deadlift", "Single Legged Deadlift", "Banded Nordic Curl Negatives", "Banded Nordic Curl", "Nordic Curls", "Assisted Squat", "Squat", "Split Squat", "Bulgarian Split Squat", "Beginner Shrimp Squat", "Intermediate Shrimp Squat", "Advanced Shrimp Squat", "Weighted Shrimp Squat"], scheduled: false, optional: ["Incline Pushup", "Full Pushup", "Diamond Pushup", "Pseudo Planche", "Incline Rows", "Horz Rows", "Wide Rows", "Weighted Inverted Rows", "Bird-dog", "Deadbugs", "Romanian Deadlift", "Single Legged Deadlift", "Banded Nordic Curl Negatives", "Banded Nordic Curl", "Nordic Curls", "Assisted Squat", "Squat", "Split Squat", "Bulgarian Split Squat", "Beginner Shrimp Squat", "Intermediate Shrimp Squat", "Advanced Shrimp Squat", "Weighted Shrimp Squat"])]
     
-    let tags: [Program.Tags] = [.beginner, .strength, .minimal, .unisex, .threeDays, .fourDays, .fiveDays, .sixDays, .ageUnder40, .age40s, .age50s]
+    let tags: [Program.Tags] = [.beginner, .strength, .minimal, .unisex, .threeDays, .fourDays, .fiveDays, .sixDays] + anyAge
     
     let description = """
 This is a bare bones program from the [bodyweight fitness](https://old.reddit.com/r/bodyweightfitness/wiki/minroutine) reddit. You can do this program every day, but if you want to gain strength it's best to do it three times a week with a day of rest between each workout. Do 2-6 circuits of the following exercises:

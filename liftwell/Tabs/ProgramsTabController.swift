@@ -121,7 +121,7 @@ class ProgramsTabControllerController: UIViewController, UITableViewDataSource, 
     }
     
     @IBAction func agePressed(_ sender: Any) {
-        let alert = createAlert("Any Age", [.ageUnder40, .age40s, .age50s])
+        let alert = createAlert("Any Age",  anyAge)
         self.present(alert, animated: true, completion: nil)
     }
     

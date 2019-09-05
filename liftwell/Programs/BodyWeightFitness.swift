@@ -86,7 +86,7 @@ func BodyWeight() -> Program {
             "Plank", "Ring Ab Rollouts",
             "Banded Pallof Press", "Reverse Hyperextension"], scheduled: false, optional: ["Arch Hangs", "Negative Pullups", "Pullups", "Weighted Pullups", "Squat", "Split Squat", "Bulgarian Split Squat", "Beginner Shrimp Squat", "Intermediate Shrimp Squat", "Advanced Shrimp Squat", "Weighted Shrimp Squat", "Support Hold", "Negative Dips", "Dips", "Weighted Dips", "Romanian Deadlift", "Single Legged Deadlift", "Banded Nordic Curl Negatives", "Banded Nordic Curl", "Nordic Curls", "Incline Rows", "Horz Rows", "Wide Rows", "Weighted Inverted Rows", "Incline Pushup", "Full Pushup", "Diamond Pushup", "Pseudo Planche", "Ring Ab Rollouts"])]
     
-    let tags: [Program.Tags] = [.beginner, .strength, .minimal, .unisex, .threeDays, .ageUnder40, .age40s, .age50s]
+    let tags: [Program.Tags] = [.beginner, .strength, .minimal, .unisex, .threeDays] + anyAge
     
     let description = """
 This is the recommended program from the [bodyweight fitness](https://old.reddit.com/r/bodyweightfitness/wiki/kb/recommended_routine) reddit. Note that this does require a bit of equipment: a pullup bar, [bands](https://www.performbetter.com/First-Place-Superbands), and optionally parallel bars. Do both the stretch and strength workouts three times a week:

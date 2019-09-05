@@ -3,6 +3,8 @@
 import Foundation
 import os.log
 
+let anyAge = [Program.Tags.ageUnder40, Program.Tags.age40s, Program.Tags.age50s]
+
 class Program: Storable {
     enum Tags {
         case beginner       // weight is expected to increase each workout

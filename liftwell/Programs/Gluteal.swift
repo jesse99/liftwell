@@ -62,7 +62,7 @@ func GlutealGoddess1() -> Program {
         Workout("B warmup", strongCurvesBWarmup, scheduled: false, optional: []),
         ]
     
-    let tags: [Program.Tags] = [.intermediate, .hypertrophy, .gym, .threeDays, .female, .ageUnder40, .age40s, .age50s]
+    let tags: [Program.Tags] = [.intermediate, .hypertrophy, .gym, .threeDays, .female] + anyAge
     let description = """
 This is the weeks 1-4 of the intermediate program from [Strong Curves: A Woman's Guide to Building a Better Butt and Body](https://www.amazon.com/Strong-Curves-Womans-Building-Better-ebook/dp/B00C4XI0QM/ref=sr_1_1?ie=UTF8&qid=1516764374&sr=8-1&keywords=strong+curves). The program is as follows (Bret recommends warmups, and they are part of the program, but there are a lot so they aren't listed here):
 
@@ -157,7 +157,7 @@ func GlutealGoddess2() -> Program {
         Workout("B warmup", strongCurvesBWarmup, scheduled: false, optional: []),
         ]
     
-    let tags: [Program.Tags] = [.intermediate, .hypertrophy, .gym, .threeDays, .female, .ageUnder40, .age40s, .age50s]
+    let tags: [Program.Tags] = [.intermediate, .hypertrophy, .gym, .threeDays, .female] + anyAge
     let description = """
 This is the 3 days/week version of weeks 5-8 of the intermediate program from [Strong Curves: A Woman's Guide to Building a Better Butt and Body](https://www.amazon.com/Strong-Curves-Womans-Building-Better-ebook/dp/B00C4XI0QM/ref=sr_1_1?ie=UTF8&qid=1516764374&sr=8-1&keywords=strong+curves) by Bret Contreras. The program is as follows (Bret recommends warmups, and they are part of the program, but there are a lot so they aren't listed here):
 
@@ -252,7 +252,7 @@ func GlutealGoddess3() -> Program {
         Workout("B warmup", strongCurvesBWarmup, scheduled: false, optional: []),
         ]
     
-    let tags: [Program.Tags] = [.intermediate, .hypertrophy, .gym, .threeDays, .female, .ageUnder40, .age40s, .age50s]
+    let tags: [Program.Tags] = [.intermediate, .hypertrophy, .gym, .threeDays, .female] + anyAge
     let description = """
 This is the 3 days/week version of weeks 9-12 of the intermediate program from [Strong Curves: A Woman's Guide to Building a Better Butt and Body](https://www.amazon.com/Strong-Curves-Womans-Building-Better-ebook/dp/B00C4XI0QM/ref=sr_1_1?ie=UTF8&qid=1516764374&sr=8-1&keywords=strong+curves) by Bret Contreras. The program is as follows (Bret recommends warmups, and they are part of the program, but there are a lot so they aren't listed here):
 
