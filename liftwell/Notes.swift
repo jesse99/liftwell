@@ -2417,7 +2417,7 @@ let builtInNotes: [String: String] = [
             "Use chalk.",
             "Setup inside a power rack with the pins set above your knees.",
             "When starting to grip the bar position your hands so that the calluses on your palm are just above the bar and then wrap your fingers and thumb around the bar.",
-            "Grip the bar tightly.",
+            "Grip the bar as tight as you can.",
             "Lift the bar off the pins just as if you were doing a deadlift."],
         links: ["Link": "http://jasonferruggia.com/mythbusting-improve-grip-strength-deadlifting/", "Grip": "https://stronglifts.com/deadlift/grip/"]),
     
