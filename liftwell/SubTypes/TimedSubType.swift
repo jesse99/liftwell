@@ -149,6 +149,8 @@ class TimedSubType: ExerciseInfo {
                 let c = Weight(weight, apparatus).closest()
                 w = c.text
                 d = c.plates
+            } else {
+                w = Weight.friendlyUnitsStr(weight)
             }
         }
         
