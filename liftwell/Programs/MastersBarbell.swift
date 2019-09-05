@@ -23,6 +23,7 @@ func MastersBarbell() -> Program {
         // Chinups
         dumbbell1("Kroc Row",   "Kroc Row",       "",                        "9-18".x(2), restMins: 3.0, main: true),
         bodyweight("Dips",      "Dips",           numSets: 3, startReps: 10, goalReps: 30, restMins: 3.5, restAtEnd: false),
+        barbell("Static Hold",  "Static Hold",    "", "5".x(3), restMins: 3.0),
 
         bodyweight("Foam Rolling",            "IT-Band Foam Roll",         1, by: 15),
         bodyweight("Shoulder Dislocates",     "Shoulder Dislocate",        1, by: 12),
@@ -36,9 +37,9 @@ func MastersBarbell() -> Program {
     ]
     
     let workouts = [
-        Workout("Heavy", ["Heavy Bench", "Heavy Squat", "Deadlift", "Back Extensions"], scheduled: true, optional: ["Back Extensions"]),
-        Workout("Light", ["OHP", "Chinups", "Lat Pulldown", "Cable Crunches", "Face Pull"], scheduled: true, optional: ["Lat Pulldown"]),
-        Workout("Medium", ["Medium Bench", "Medium Squat", "Chinups", "Lat Pulldown", "Kroc Row", "Dips"], scheduled: true, optional: ["Lat Pulldown", "Dips"]),
+        Workout("Heavy", ["Heavy Squat", "Heavy Bench", "Deadlift", "Back Extensions"], scheduled: true, optional: ["Back Extensions"]),
+        Workout("Light", ["OHP", "Chinups", "Lat Pulldown", "Cable Crunches", "Face Pull", "Static Hold"], scheduled: true, optional: ["Lat Pulldown", "Static Hold"]),
+        Workout("Medium", ["Medium Squat", "Medium Bench", "Chinups", "Lat Pulldown", "Kroc Row", "Dips", "Static Hold"], scheduled: true, optional: ["Lat Pulldown", "Dips", "Static Hold"]),
         
         Workout("Mobility", ["Foam Rolling", "Shoulder Dislocates", "Bent-knee Iron Cross", "Roll-over into V-sit", "Rocking Frog Stretch", "Fire Hydrant Hip Circle", "Mountain Climber", "Cossack Squat", "Piriformis Stretch", "Hip Flexor Stretch"], scheduled: false)]
     
