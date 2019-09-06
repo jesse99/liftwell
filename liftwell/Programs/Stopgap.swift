@@ -27,7 +27,7 @@ func Stopgap() -> Program {
         Workout("A", ["Split Squat", "Lunge", "Bench Press", "Floor Press", "Deadlift", "Dips", "Plank"], scheduled: true, optional: ["Lunge", "Floor Press", "Dips"]),
         Workout("B", ["Split Squat", "Lunge", "Seated OHP", "Z Press", "Row", "Chinups", "Plank"], scheduled: true, optional: ["Lunge", "Z Press", "Chinups"])]
     
-    let tags: [Program.Tags] = [.beginner, .strength, .dumbbell, .unisex, .threeDays] + anyAge
+    let tags: [Program.Tags] = [.beginner, .strength, .dumbbell, .threeDays] + anyAge + anySex
     
     let description = """
 This is a [program](https://old.reddit.com/r/Fitness/comments/zc0uy/a_beginner_dumbbell_program_the_dumbbell_stopgap/) for people who lack access to barbells. It's three days a week where workouts alternate between the A and B days:

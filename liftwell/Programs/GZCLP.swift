@@ -150,7 +150,7 @@ func GZCLP4() -> Program {
         Workout("Bench",    ["T1 Bench",    "T2 Squat",    "T3 Lat Pulldown"], scheduled: true),
         Workout("Deadlift", ["T1 Deadlift", "T2 OHP",      "T3 Dumbbell Row"], scheduled: true)]
     
-    let tags: [Program.Tags] = [.beginner, .strength, .barbell, .unisex, .fourDays, .ageUnder40]
+    let tags: [Program.Tags] = [.beginner, .strength, .barbell, .fourDays, .ageUnder40] + anySex
     
     let description = """
 \(details)
@@ -217,7 +217,7 @@ func GZCLP3() -> Program {
         Workout("Deadlift6", ["T1 Deadlift", "T2 OHP",      "T3 Dumbbell Row"], scheduled: true)
 ]
     
-    let tags: [Program.Tags] = [.beginner, .strength, .barbell, .unisex, .threeDays, .ageUnder40]
+    let tags: [Program.Tags] = [.beginner, .strength, .barbell, .threeDays, .ageUnder40] + anySex
     
     let description = """
 \(details)

@@ -20,7 +20,7 @@ func PhraksGreyskull() -> Program {
         Workout("2B", ["Chinups", "OHP", "Deadlift"], scheduled: true, optional: []),
         Workout("2C", ["Rows", "Bench Press", "Squat"], scheduled: true)]
     
-    let tags: [Program.Tags] = [.beginner, .strength, .barbell, .unisex, .threeDays, .ageUnder40, .age40s]
+    let tags: [Program.Tags] = [.beginner, .strength, .barbell, .threeDays, .ageUnder40, .age40s] + anySex
     
     let description = """
 This is the [beginner program](https://old.reddit.com/r/Fitness/wiki/phraks-gslp) recommended by reddit/fitness. After three months (or if you are already familiar with bench press, overhead

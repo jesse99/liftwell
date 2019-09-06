@@ -5,6 +5,7 @@ import os.log
 
 let anyAge = [Program.Tags.ageUnder40, Program.Tags.age40s, Program.Tags.age50s]
 let anyDays = [Program.Tags.threeDays, Program.Tags.fourDays, Program.Tags.fiveDays, Program.Tags.sixDays]
+let anySex = [Program.Tags.male, Program.Tags.female]
 
 class Program: Storable {
     enum Tags {
@@ -26,7 +27,7 @@ class Program: Storable {
         case fiveDays
         case sixDays
         
-        case unisex
+        case male
         case female
         
         case ageUnder40
@@ -154,10 +155,6 @@ class Program: Storable {
         
         if tags.contains(.dumbbell) && tags.contains(.minimal) {
             problems += ["program.tags has both dumbbell and minimal"]
-        }
-        
-        if tags.contains(.unisex) && tags.contains(.female) {
-            problems += ["program.tags has both unisex and female"]
         }
         
         return problems
@@ -311,7 +308,8 @@ extension Program.Tags: Storable {
         case "dumbbell": self = .dumbbell
         case "minimal": self = .minimal
             
-        case "unisex": self = .unisex
+        case "unisex": self = .male
+        case "male": self = .male
         case "female": self = .female
             
         case "ageUnder40": self = .ageUnder40
@@ -342,7 +340,7 @@ extension Program.Tags: Storable {
         case .dumbbell: store.addStr("tag", "dumbbell")
         case .minimal: store.addStr("tag", "minimal")
             
-        case .unisex: store.addStr("tag", "unisex")
+        case .male: store.addStr("tag", "male")
         case .female: store.addStr("tag", "female")
             
         case .ageUnder40: store.addStr("tag", "ageUnder40")

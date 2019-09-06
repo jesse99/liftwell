@@ -27,7 +27,7 @@ func Move1() -> Program {
         Workout("Strength and Body Control", ["Wrist Mobility", "Scapular Shrugs", "Scapular Rows", "Plank", "Reverse Plank", "Bear Crawl", "Sitting Squat"], scheduled: false, optional: []),
         Workout("Stretching and Mobility", ["Child's Pose", "Child's Pose with Lat Stretch", "Wall Extensions (floor)", "Chest Wall Stretch", "Bent-legged Calf Stretch", "Hamstring Lunge Stretch", "Front Scale Leg Lifts", "Hip Flexor Lunge Stretch"], scheduled: false, optional: [])]
     
-    let tags: [Program.Tags] = [.beginner, .strength, .minimal, .unisex, .threeDays] + anyAge
+    let tags: [Program.Tags] = [.beginner, .strength, .minimal, .threeDays] + anyAge + anySex
     
     let description = """
 This is a bodyweight fitness [program](https://www.reddit.com/r/bodyweightfitness/wiki/move) from reddit. It will help build strength but also has an emphasis on mobility and flexibility. It's suitable for beginners and can be run for two years or even longer. It's divided up into five phases. The [first phase](https://www.reddit.com/r/bodyweightfitness/wiki/move/phase1) looks like this:
@@ -101,7 +101,7 @@ func Move2() -> Program {
         Workout("Strength and Body Control", ["Wrist Mobility", "Shoulder Shrug Circles", "Plank", "Reverse Plank", "Hollow Body Hold", "Frog Stance", "Vertical Pushup", "Incline Pushup", "Pushup", "Diamond Pushup", "Vertical Rows", "Incline Rows", "Horizontal Rows", "Assisted Squat", "Heel Supported Squat", "Squat", "Close Squat", "Bear Crawl"], scheduled: false, optional: ["Incline Pushup", "Pushup", "Diamond Pushup", "Incline Rows", "Horizontal Rows", "Heel Supported Squat", "Squat", "Close Squat"]),
         Workout("Stretching and Mobility", ["Child's Pose", "Child's Pose with Lat Stretch", "Wall Extensions", "Chest Wall Stretch", "Bent-legged Calf Stretch", "Hamstring Lunge Stretch", "Front Scale Leg Lifts", "Ido's Squat Routine", "Hip Flexor Lunge Stretch"], scheduled: false, optional: [])]
     
-    let tags: [Program.Tags] = [.beginner, .strength, .minimal, .unisex, .threeDays] + anyAge
+    let tags: [Program.Tags] = [.beginner, .strength, .minimal, .threeDays] + anyAge + anySex
     
     let description = """
 This is a bodyweight fitness [program](https://www.reddit.com/r/bodyweightfitness/wiki/move) from reddit. It will help build strength but also has an emphasis on mobility and flexibility. It's suitable for beginners and can be run for two years or even longer. It's divided up into five phases. This is the [second phase](https://www.reddit.com/r/bodyweightfitness/wiki/move/phase2) and is where skill work begins:
@@ -215,7 +215,7 @@ func Move3() -> Program {
         
         Workout("Stretching and Mobility", ["Child's Pose", "Child's Pose with Lat Stretch", "Wall Extensions", "Chest Wall Stretch", "Bent-legged Calf Stretch", "Hamstring Lunge Stretch", "Front Scale Leg Lifts", "Ido's Squat Routine", "Hip Flexor Lunge Stretch"], scheduled: false, optional: [])]
     
-    let tags: [Program.Tags] = [.beginner, .strength, .minimal, .unisex, .threeDays] + anyAge
+    let tags: [Program.Tags] = [.beginner, .strength, .minimal, .threeDays] + anyAge + anySex
     
     let description = """
 This is a bodyweight fitness [program](https://www.reddit.com/r/bodyweightfitness/wiki/move) from reddit. It will help build strength but also has an emphasis on mobility and flexibility. It's suitable for beginners and can be run for two years or even longer. It's divided up into five phases. This is the [third phase](https://www.reddit.com/r/bodyweightfitness/wiki/move/phase3) and amps up the strength work:
@@ -363,7 +363,7 @@ func Move4() -> Program {
         
         Workout("Handstand and Mobility", ["Foam Roll Lats", "Yuri's Shoulder Band", "Rear Delt Band Pull Apart", "Trap-3 Raise", "Cuban Rotation", "Pec Stretch", "Lat Stretch", "Butcher's Block", "Hollow Body Hold 2", "Wall Plank", "Learn to Bail", "Stomach to Wall", "Wall Scissors", "Heel Pulls", "Toe Pulls", "Freestanding Practice", "Kick Up", "Bent-legged Calf Stretch", "Hamstring Lunge Stretch", "Front Scale Leg Lifts", "Ido's Squat Routine", "Hip Flexor Lunge Stretch"], scheduled: false, optional: ["Learn to Bail", "Stomach to Wall", "Wall Scissors", "Heel Pulls", "Toe Pulls", "Freestanding Practice", "Kick Up"])]
     
-    let tags: [Program.Tags] = [.beginner, .strength, .minimal, .unisex, .threeDays] + anyAge
+    let tags: [Program.Tags] = [.beginner, .strength, .minimal, .threeDays] + anyAge + anySex
     
     let description = """
 This is a bodyweight fitness [program](https://www.reddit.com/r/bodyweightfitness/wiki/move) from reddit. It will help build strength but also has an emphasis on mobility and flexibility. It's suitable for beginners and can be run for two years or even longer. It's divided up into five phases. This is the [fourth phase](https://www.reddit.com/r/bodyweightfitness/wiki/move/phase4) and switches to six days a week: do the strength workouts 3x a week and in between do Handstand and Mobility.

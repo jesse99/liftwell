@@ -106,7 +106,7 @@ class ProgramsTabControllerController: UIViewController, UITableViewDataSource, 
     }
     
     @IBAction func daysPressed(_ sender: Any) {
-        let alert = createAlert("Any Number of Days",  anyDays)
+        let alert = createAlert("Any Number of Days", anyDays)
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -116,12 +116,12 @@ class ProgramsTabControllerController: UIViewController, UITableViewDataSource, 
     }
     
     @IBAction func sexPressed(_ sender: Any) {
-        let alert = createAlert("Any Sex", [.unisex, .female])
+        let alert = createAlert("Any Sex", anySex)
         self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func agePressed(_ sender: Any) {
-        let alert = createAlert("Any Age",  anyAge)
+        let alert = createAlert("Any Age", anyAge)
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -177,7 +177,7 @@ class ProgramsTabControllerController: UIViewController, UITableViewDataSource, 
             case .fourDays:     daysText = tagToString(tag)
             case .fiveDays:     daysText = tagToString(tag)
             case .sixDays:      daysText = tagToString(tag)
-            case .unisex:       sexText = tagToString(tag)
+            case .male:         sexText = tagToString(tag)
             case .female:       sexText = tagToString(tag)
             case .ageUnder40:   ageText = tagToString(tag)
             case .age40s:       ageText = tagToString(tag)
@@ -213,7 +213,7 @@ class ProgramsTabControllerController: UIViewController, UITableViewDataSource, 
         case .fourDays:     return "4 Days/Week"
         case .fiveDays:     return "5 Days/Week"
         case .sixDays:      return "6 Days/Week"
-        case .unisex:       return "Unisex"
+        case .male:         return "Male"
         case .female:       return "Female"
         case .ageUnder40:   return "Under 40"
         case .age40s:       return "40s"
@@ -237,7 +237,7 @@ class ProgramsTabControllerController: UIViewController, UITableViewDataSource, 
         case "4 Days/Week":     return .fourDays
         case "5 Days/Week":     return .fiveDays
         case "6 Days/Week":     return .sixDays
-        case "Unisex":          return .unisex
+        case "Male":            return .male
         case "Female":          return .female
         case "Under 40":        return .ageUnder40
         case "40s":             return .age40s
@@ -255,7 +255,7 @@ class ProgramsTabControllerController: UIViewController, UITableViewDataSource, 
     
     @IBOutlet private var tableView: UITableView!
     
-    private var tags: Swift.Set<Program.Tags> = [.beginner, .unisex, .ageUnder40]
+    private var tags: Swift.Set<Program.Tags> = [.beginner, .strength, .threeDays, .ageUnder40]
     private var programs: [Program] = []
 }
 

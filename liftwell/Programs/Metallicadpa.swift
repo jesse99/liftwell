@@ -49,7 +49,7 @@ func Metallicadpa() -> Program {
         Workout("Push 2", ["OHP", "Volume Bench", "DB Incline Press", "Triceps Pushdown", "Lateral Raise 1", "Skull Crushers", "Lateral Raise 2"], scheduled: true, optional: []),
         Workout("Leg 2",  ["Squat", "Romanian Deadlift", "Leg Press", "Leg Curls", "Calf Raises"], scheduled: true)]
     
-    let tags: [Program.Tags] = [.beginner, .hypertrophy, .barbell, .unisex, .sixDays, .ageUnder40]
+    let tags: [Program.Tags] = [.beginner, .hypertrophy, .barbell, .sixDays, .ageUnder40] + anySex
     
     let description = """
 This is a Push/Pull/Legs (PPL) [beginner program](http://archive.li/gMUfM). PPL programs are similar to the classic body part splits (e.g. chest, arms, back, legs) but are more balanced and have less less overlap between days. This is a six day a week program:

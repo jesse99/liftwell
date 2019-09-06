@@ -139,7 +139,7 @@ func GZCL() -> Program {
       
         Workout("OHP",      ["T1 OHP",      "T2 Incline Bench", "T2 DB OHP",  "T3 Chinups", "T3 Curls", "T3 Arnold Press", "T3 Face Pull", "T3 Lateral Raise"], scheduled: true, optional: ["T2 DB OHP", "T3 Chinups", "T3 Face Pull", "T3 Curls"])]
     
-    let tags: [Program.Tags] = [.advanced, .strength, .barbell, .unisex, .threeDays, .fourDays, .ageUnder40]
+    let tags: [Program.Tags] = [.advanced, .strength, .barbell, .threeDays, .fourDays, .ageUnder40] + anySex
     
     let description = """
 [GZCL](http://swoleateveryheight.blogspot.com/2014/07/the-gzcl-method-simplified_13.html) from Cody Lefever isn't really a program but more of a template describing how to organize your [workouts](http://swoleateveryheight.blogspot.com/2012/11/the-gzcl-method-for-powerlifting.html). The workouts are organized into tiers:

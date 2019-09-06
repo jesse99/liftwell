@@ -114,7 +114,7 @@ func Monolith() -> Program {
         Workout("Deadlift", ["Deadlift", "Bench Press", "Kroc Row", "Preacher Curl"], scheduled: true, optional: []),
         Workout("Volume",   ["Squat", "OHP", "Weighted Chins", "Face Pull", "Barbell Shrug"], scheduled: true, optional: [])]
     
-    let tags: [Program.Tags] = [.advanced, .hypertrophy, .barbell, .unisex, .threeDays, .ageUnder40]
+    let tags: [Program.Tags] = [.advanced, .hypertrophy, .barbell, .threeDays, .ageUnder40] + anySex
     
     let description = """
 This is a [program](https://jimwendler.com/blogs/jimwendler-com/101078918-building-the-monolith-5-3-1-for-size) by Jim Wendler focused on getting bigger. It's normally run for only six weeks because it is very demanding. If you run this program you should also do cardio 3-4 times a week. You'll also need to eat a **lot**, see the link for details. In addition recovery needs to be on point: don't run this program if you're not able to get adequate rest, make sure you stretch, and also massages are recommended.

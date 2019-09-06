@@ -28,7 +28,7 @@ func JackShit() -> Program {
         Workout("Bench",    ["Bench Press"], scheduled: true, optional: []),
         Workout("Squat",    ["Squat"], scheduled: true, optional: [])]
     
-    let tags: [Program.Tags] = [.intermediate, .strength, .barbell, .unisex, .threeDays, .fourDays, .ageUnder40, .age40s]
+    let tags: [Program.Tags] = [.intermediate, .strength, .barbell, .threeDays, .fourDays, .ageUnder40, .age40s] + anySex
     
     let description = """
 This is a program from [5/3/1: The Simplest and Most Effective Training System for Raw Strength](https://www.amazon.com/Simplest-Effective-Training-System-Strength-ebook/dp/B00AJ8CIQM/ref=sr_1_1?ie=UTF8&qid=1544983677&sr=8-1&keywords=5%2F3%2F1) by Jim Wendler. There are many variations of 5/3/1 (especially in his later books) but this is a good one if you are very time constrained. It can be run as a three day or four day a week program.
@@ -98,7 +98,7 @@ func BoringButBig() -> Program {
         Workout("Bench",    ["Bench Press", "Kroc Row", "Chinups", "Dips", "Dumbbell Bench", "Incline Bench"], scheduled: true, optional: ["Chinups", "Dips", "Dumbbell Bench", "Incline Bench"]),
         Workout("Squat",    ["Squat", "Leg Curl", "Ab Wheel", "Back Extensions", "Barbell Shrug", "Chinups"], scheduled: true, optional: ["Ab Wheel", "Back Extensions", "Barbell Shrug", "Chinups"])]
     
-    let tags: [Program.Tags] = [.intermediate, .strength, .barbell, .unisex, .threeDays, .fourDays, .ageUnder40, .age40s]
+    let tags: [Program.Tags] = [.intermediate, .strength, .barbell, .threeDays, .fourDays, .ageUnder40, .age40s] + anySex
     
     let description = """
 This is a program from [5/3/1: The Simplest and Most Effective Training System for Raw Strength](https://www.amazon.com/Simplest-Effective-Training-System-Strength-ebook/dp/B00AJ8CIQM/ref=sr_1_1?ie=UTF8&qid=1544983677&sr=8-1&keywords=5%2F3%2F1) by Jim Wendler. There are many variations of 5/3/1 (especially in his later books) but this is one of the more popular ones. It can be run as a three day or four day a week program.

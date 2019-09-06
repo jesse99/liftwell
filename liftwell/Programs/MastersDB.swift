@@ -47,7 +47,7 @@ func MastersDB() -> Program {
         
         Workout("Mobility", ["Foam Rolling", "Shoulder Dislocates", "Bent-knee Iron Cross", "Roll-over into V-sit", "Rocking Frog Stretch", "Fire Hydrant Hip Circle", "Mountain Climber", "Cossack Squat", "Piriformis Stretch", "Hip Flexor Stretch"], scheduled: false)]
     
-    let tags: [Program.Tags] = [.intermediate, .strength, .dumbbell, .unisex, .threeDays, .age40s, .age50s]
+    let tags: [Program.Tags] = [.intermediate, .strength, .dumbbell, .threeDays, .age40s, .age50s] + anySex
     
     let description = """
 This is a dumbbell only program for older lifters. It's based on programming principles from the book [The Barbell Prescription: Strength Training for Life After 40](https://www.amazon.com/dp/B06Y4LXFCK/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1). The [Limber 11](https://imgur.com/gallery/iEsaS) stretches should ideally be done several times a week. It's a three day a week program and the days look like this:

@@ -62,7 +62,7 @@ func nSuns4() -> Program {
         Workout("Deadlift", ["Deadlift", "Front Squat", "Cable Crunch", "Back Extensions", "Good Morning", "Ab Wheel", "Seated Cable Row"], scheduled: true, optional: ["Good Morning", "Ab Wheel", "Seated Cable Row"]),
         ]
     
-    let tags: [Program.Tags] = [.intermediate, .strength, .barbell, .unisex, .fourDays, .ageUnder40, .age40s]
+    let tags: [Program.Tags] = [.intermediate, .strength, .barbell, .fourDays, .ageUnder40, .age40s] + anySex
     
     let description = """
     This is a popular [program](http://archive.is/2017.01.27-015129/https://www.reddit.com/r/Fitness/comments/5icyza/2_suns531lp_tdee_calculator_and_other_items_all/) from [reddit](https://www.reddit.com/r/nSuns/) with weekly progression. \(programSuffix)
@@ -113,7 +113,7 @@ func nSuns5() -> Program {
         Workout("Deadlift", ["Deadlift", "Front Squat", "Cable Crunch", "Back Extensions", "Good Morning", "Ab Wheel", "Seated Cable Row"], scheduled: true, optional: ["Good Morning", "Ab Wheel", "Seated Cable Row"]),
         Workout("Bench", ["Bench", "CG Bench", "Chinups", "Kroc Row", "Barbell Shrug", "Face Pull", "Preacher Curl", "Dips", "Back Extensions"], scheduled: true, optional: ["Barbell Shrug", "Face Pull", "Preacher Curl", "Dips", "Back Extensions"])]
     
-    let tags: [Program.Tags] = [.intermediate, .strength, .barbell, .unisex, .fiveDays, .ageUnder40, .age40s]
+    let tags: [Program.Tags] = [.intermediate, .strength, .barbell, .fiveDays, .ageUnder40, .age40s] + anySex
     
     let description = """
 This is a popular [program](http://archive.is/2017.01.27-015129/https://www.reddit.com/r/Fitness/comments/5icyza/2_suns531lp_tdee_calculator_and_other_items_all/) from [reddit](https://www.reddit.com/r/nSuns/) with weekly progression. \(programSuffix)

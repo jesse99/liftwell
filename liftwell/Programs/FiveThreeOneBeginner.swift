@@ -62,7 +62,7 @@ func FiveThreeOneBeginner() -> Program {
         
         Workout("C", ["Bench Press", "Squat", "Dumbbell OHP", "Split Squat",    "Ab Wheel Rollout", "Back Extensions", "Cable Crunch", "Dips", "Dumbbell Bench", "Dumbbell Lunge", "Kettlebell Snatch", "Kettlebell Swing", "Pushup", "Reverse Hyper", "Spell Caster", "Step-ups", "Triceps Pushdown"], scheduled: true, optional: ["Ab Wheel Rollout", "Back Extensions", "Cable Crunch", "Dips", "Dumbbell Bench", "Dumbbell Lunge", "Kettlebell Snatch", "Kettlebell Swing", "Pushup", "Reverse Hyper", "Spell Caster", "Step-ups", "Triceps Pushdown"])]
     
-    let tags: [Program.Tags] = [.beginner, .strength, .barbell, .unisex, .threeDays, .ageUnder40, .age40s]
+    let tags: [Program.Tags] = [.beginner, .strength, .barbell, .threeDays, .ageUnder40, .age40s] + anySex
     
     // TODO: this did call for re-checking the training max after every third cycle. If we do this we should ask the user if he really wants
     // to do that and we'll need to make sure that this can be edited.

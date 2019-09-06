@@ -150,7 +150,7 @@ func CAP3() -> Program {
         Workout("Back, Abs, & Triceps 2", ["Band Pull Apart", "Shoulder Dislocates", "Deadlift", "Pendlay Row", "Deficit Deadlift", "Paused Deadlift", "Seated Cable Row"], scheduled: true, optional: ["Deficit Deadlift", "Paused Deadlift", "Seated Cable Row"]),
         Workout("Shoulders & Legs 2",     ["Band Pull Apart", "Shoulder Dislocates", "Foam Rolling", "Bent-knee Iron Cross", "Roll-over into V-sit", "Rocking Frog Stretch", "Fire Hydrant Hip Circle", "Mountain Climber", "Cossack Squat", "Piriformis Stretch", "Split Squat", "OHP", "DB Seated OHP", "DB 1-Arm OHP", "Z Press"], scheduled: true, optional: ["DB Seated OHP", "DB 1-Arm OHP", "Z Press"])]
     
-    let tags: [Program.Tags] = [.advanced, .strength, .barbell, .unisex, .fourDays, .fiveDays, .sixDays, .ageUnder40]
+    let tags: [Program.Tags] = [.advanced, .strength, .barbell, .fourDays, .fiveDays, .sixDays, .ageUnder40] + anySex
     
     let description = """
 This is a [program](http://archive.is/2017.01.27-015129/https://www.reddit.com/r/Fitness/comments/5icyza/2_suns531lp_tdee_calculator_and_other_items_all/#selection-2147.0-2147.13) from [reddit](https://www.reddit.com/r/nSuns/) with weekly progression. Each day has a main lift, an associated secondary lift, and assistence lifts. The main lift weights go up every three weeks if you're able to complete all the required reps. Secondary lifts are similar but go up each time your estimated 1RM increases or after three weeks if you were able to complete all the requried reps.

@@ -48,7 +48,7 @@ func PHUL() -> Program {
         Workout("Upper Hypertrophy", ["Incline Bench", "DB Flyes", "Cable Row", "Kroc Row", "Lateral Raise", "DB Curl", "Tricep Ext"], scheduled: true),
         Workout("Lower Hypertrophy", ["Front Squat", "Barbell Lunge", "Leg Extension", "Leg Press", "Calf Raise", "Calf Press"], scheduled: true)]
     
-    let tags: [Program.Tags] = [.intermediate, .hypertrophy, .barbell, .unisex, .fourDays, .ageUnder40, .age40s]
+    let tags: [Program.Tags] = [.intermediate, .hypertrophy, .barbell, .fourDays, .male, .ageUnder40, .age40s]
     
     let description = """
 This is a [Power Hypertrophy Upper Lower](https://www.muscleandstrength.com/workouts/phul-workout) workout. It's a mix between a pure strength program and a body building program:

@@ -39,7 +39,7 @@ func DB_PPL() -> Program {
         Workout("Legs 2", ["Goblet Squat", "Split Squat", "Lunge", "Romanian Deadlift", "Calf Raise"], scheduled: true, optional: ["Split Squat"]),
         ]
     
-    let tags: [Program.Tags] = [.beginner, .hypertrophy, .dumbbell, .unisex, .threeDays] + anyAge
+    let tags: [Program.Tags] = [.beginner, .hypertrophy, .dumbbell, .threeDays] + anyAge + anySex
     
     let description = """
 This is a [program](https://old.reddit.com/r/Fitness/comments/2e79y4/dumbbell_ppl_proposed_alternative_to_dumbbell/) for people who lack access to barbells. It's a three days a week program:

@@ -73,7 +73,7 @@ func PHAT() -> Program {
         
         Workout("Chest and Arms", ["Speed DB Bench", "Incline DB Press", "Hammer Press", "Incline Cable Flyes", "Preacher Curls", "Concentration Curls", "Spider Curls", "Skullcrushers 2", "Cable Pressdown", "Cable Kickbacks"], scheduled: true)]
     
-    let tags: [Program.Tags] = [.intermediate, .hypertrophy, .barbell, .unisex, .fiveDays, .ageUnder40]
+    let tags: [Program.Tags] = [.intermediate, .hypertrophy, .barbell, .fiveDays, .male, .ageUnder40]
     
     let description = """
 [Power Hypertrophy Adaptive Training](http://www.simplyshredded.com/mega-feature-layne-norton-training-series-full-powerhypertrophy-routine-updated-2011.html) by Layne Norton. This is a five day a week program:

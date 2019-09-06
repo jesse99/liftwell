@@ -63,7 +63,7 @@ func Arnold1() -> Program {
     
         Workout("Legs and Lower Back 6", ["Speed DB Bench", "Incline DB Press", "Hammer Press", "Incline Cable Flyes", "Preacher Curls", "Concentration Curls", "Spider Curls", "Skullcrushers 2", "Cable Pressdown", "Cable Kickbacks"], scheduled: true)]
     
-    let tags: [Program.Tags] = [.advanced, .hypertrophy, .barbell, .unisex, .sixDays, .ageUnder40]
+    let tags: [Program.Tags] = [.advanced, .hypertrophy, .barbell, .sixDays, .ageUnder40] + anySex
     
     let description = """
 High volume and frquency [workout](https://www.muscleandstrength.com/workouts/arnold-schwarzenegger-volume-workout-routines) from the New Encyclopedia of Modern Bodybuilding by Arnold Schwarzenegger and Bill Dobbins. This is a six day a week program and this version trains each body part twice a week:
