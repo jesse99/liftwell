@@ -49,8 +49,24 @@ class ProgramsTabControllerController: UIViewController, UITableViewDataSource, 
         let color = programs[index].name == app.program.name ? UIColor.blue : UIColor.black  // TODO: use targetColor
         cell.textLabel!.setColor(color)
         
-        let tags = programs[index].tags.map {tagToString($0)}.sorted()
-        cell.detailTextLabel!.text = tags.joined(separator: ", ")
+        var labels: [String] = []
+        var tags = programs[index].tags
+        if tags.isStrictSuperset(of: anySex) {
+            labels.append("Any Sex")
+            tags = tags.subtracting(anySex)
+        }
+        if tags.isStrictSuperset(of: anyDays) {
+            labels.append("Any Days")
+            tags = tags.subtracting(anyDays)
+        }
+        if tags.isStrictSuperset(of: anyAge) {
+            labels.append("Any Age")
+            tags = tags.subtracting(anyAge)
+        }
+        labels.append(contentsOf: tags.map {tagToString($0)})
+        labels = labels.sorted()
+        
+        cell.detailTextLabel!.text = labels.joined(separator: ", ")
         
         return cell
     }
