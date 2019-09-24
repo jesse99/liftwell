@@ -23,7 +23,7 @@ func MastersBarbell() -> Program {
         // Chinups
         dumbbell1("Kroc Row",   "Kroc Row",       "",                        "9-18".x(2), restMins: 3.0, main: true),
         bodyweight("Dips",      "Dips",           numSets: 3, startReps: 10, goalReps: 30, restMins: 3.5, restAtEnd: false),
-        barbell("Static Hold",  "Static Hold",    "", "5".x(3), restMins: 3.0),
+        barbell("Static Hold",  "Static Hold",    "", "5".x(2), restMins: 2.5),
 
         bodyweight("Foam Rolling",            "IT-Band Foam Roll",         1, by: 15),
         bodyweight("Shoulder Dislocates",     "Shoulder Dislocate",        1, by: 12),
