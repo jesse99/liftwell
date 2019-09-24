@@ -1901,6 +1901,14 @@ let builtInNotes: [String: String] = [
             "For strength 3-5 minutes."],
         links: ["Link": "https://livehealthy.chron.com/much-time-rest-before-lifting-weights-again-2499.html"]),
     
+    "Reverse Crunch": createNote(
+        notes: [
+            "Lie on your back with your legs fully extended and your arms at your sides.",
+            "Raise your legs so that your thighs are perpendicular to the floor and your calfs are parallel to the floor.",
+            "Inhale, roll backwards, and bring your knees to your chest.",
+            "Roll back to the original position where your legs were off the floor."],
+        links: ["Link": "https://www.bodybuilding.com/exercises/reverse-crunch"]),
+    
     "Reverse Flyes": createNote(
         notes: [
             "Lie face down on an incline bench.",
