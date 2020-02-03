@@ -833,6 +833,13 @@ let builtInNotes: [String: String] = [
             "Lift the weight up and then back down."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/one-arm-dumbbell-bench-press"]),
     
+    "Dumbbell One Arm Row": createNote(
+        notes: [
+            "Hinge forward until your torso is roughly parallel with the ground.",
+            "Pull the weight back until your elbow is behind your body and your shoulder blade is retracted.",
+            "Don't use your other arm to brace."],
+        links: ["Link": "https://www.muscleandstrength.com/exercises/one-arm-dumbbell-row.html"]),
+    
     "Dumbbell One Arm Shoulder Press": createNote(
         notes: [
             "Stand straight up with feet shoulder width apart.",
@@ -1622,6 +1629,17 @@ let builtInNotes: [String: String] = [
             "Kick the leg with the cuff backwards as high as it will comfortably go."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/one-legged-cable-kickback"]),
     
+    "One-Leg DB Calf Raises": createNote(
+        notes: [
+            "Hold a dumbbell in one hand.",
+            "With your leg on that side place the balls of your foot on a step.",
+            "Hook your other leg behind the foot on the step.",
+            "Drop your heel as far as possible.",
+            "Keep your body straight, eyes forward, and raise your heel as far as possible.",
+            "Pause and slowly lower your heel as far as possible.",
+            "You can use your arm on the other side to support yourself.",],
+        links: ["Link": "https://www.muscleandstrength.com/exercises/standing-one-leg-calf-raise-with-dumbbell.html"]),
+    
     "One-Leg L-sit": createNote(
         notes: [
             "Sit with your legs tucked towards your chest.",
@@ -1915,6 +1933,15 @@ let builtInNotes: [String: String] = [
             "Grab two dumbbells and angle your hands so that your palms face each other.",
             "Keeping a slight bend to your elbows bring the dumbbells from in front of you to behind your back."],
         links: ["Link": "http://www.bodybuilding.com/exercises/detail/view/name/reverse-flyes"]),
+    
+    "Reverse Grip Wrist Curl": createNote(
+        notes: [
+            "Grasp a barbell around shoulder width apart with your palms facing down.",
+            "Stand straight up with your back straight and arms extended.",
+            "The bar should not be touching your body.",
+            "Keeping your eyes forward, elbows tucked in, slowly curl the bar up.",
+            "Slowly lower the bar back down."],
+        links: ["Link": "https://www.muscleandstrength.com/exercises/reverse-barbell-curl.html"]),
     
     "Reverse Hyperextension": createNote(
         notes: [

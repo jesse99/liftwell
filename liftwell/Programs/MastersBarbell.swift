@@ -9,6 +9,7 @@ func MastersBarbell() -> Program {
         barbell("Heavy Squat",  "Low bar Squat", "5@0% 5@50% 3@75% 1@90%", "3-5".x(3, rest: .atEnd), restMins: 4.0, main: true),
         barbell("Deadlift",     "Deadlift",      "5@0% 5@50% 3@75% 1@90%", "3-5".x(1), restMins: 4.0, bumpers: defaultBumpers(), main: true),
         dumbbell1("Back Extensions", "Back Extensions", "8@50%",           "5-10".x(3, rest: .atEnd), restMins: 3.0),
+        machine("Machine Leg Press", "Leg Press",    "5@50% 3@75%", "6-12".x(3), restMins: 3.0),
 
         // Light
         barbell("OHP",          "Overhead Press", "8@0% 5@50% 3@75% 1@90%", "3-5".x(3, rest: .atEnd), restMins: 3.5, main: true),
@@ -16,9 +17,11 @@ func MastersBarbell() -> Program {
         cable("Lat Pulldown",   "Lat Pulldown",   "8@60%",             "5-10".x(3, rest: .atEnd), restMins: 2.5),
         cable("Cable Crunches", "Cable Crunch",   "",                  "6-12".x(3, rest: .atEnd), restMins: 3.0),
         cable("Face Pull",      "Face Pull",      "",                  "6-12".x(3), restMins: 2.0),
-        
+        dumbbell2("DB Flyes",   "Dumbbell Flyes", "5@50% 3@75%", "6-12".x(3), restMins: 3.0),
+
         // Medium
         barbell("Medium Bench", "Bench Press",    "8@0% 5@50% 3@75% 1@90%", "4-6".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Bench", restMins: 4.0),
+        barbell("Medium OHP", "Overhead Press",    "8@0% 5@50% 3@75% 1@90%", "4-6".x(2, rest: .atEnd), percent1RM: 0.94, other: "OHP", restMins: 3.5),
         barbell("Medium Squat", "Low bar Squat",  "5@0% 5@50% 3@75% 1@90%", "4-6".x(2, rest: .atEnd), percent1RM: 0.94, other: "Heavy Squat", restMins: 4.0),
         // Chinups
         dumbbell1("Kroc Row",   "Kroc Row",       "",                        "9-18".x(2), restMins: 3.0, main: true),
@@ -37,9 +40,9 @@ func MastersBarbell() -> Program {
     ]
     
     let workouts = [
-        Workout("Heavy", ["Heavy Squat", "Heavy Bench", "Deadlift", "Back Extensions"], scheduled: true, optional: ["Back Extensions"]),
-        Workout("Light", ["OHP", "Chinups", "Lat Pulldown", "Cable Crunches", "Face Pull", "Static Hold"], scheduled: true, optional: ["Lat Pulldown", "Static Hold"]),
-        Workout("Medium", ["Medium Squat", "Medium Bench", "Chinups", "Lat Pulldown", "Kroc Row", "Dips", "Static Hold"], scheduled: true, optional: ["Lat Pulldown", "Dips", "Static Hold"]),
+        Workout("Heavy", ["Heavy Squat", "Machine Leg Press", "Heavy Bench", "OHP", "Deadlift", "Back Extensions"], scheduled: true, optional: ["Back Extensions", "Machine Leg Press", "OHP"]),
+        Workout("Light", ["OHP", "Chinups", "DB Flyes", "Lat Pulldown", "Cable Crunches", "Face Pull", "Static Hold"], scheduled: true, optional: ["Lat Pulldown", "Static Hold", "DB Flyes"]),
+        Workout("Medium", ["Medium Squat", "Machine Leg Press", "Medium Bench", "Medium OHP", "Chinups", "Lat Pulldown", "Kroc Row", "Dips", "Cable Crunches", "Static Hold"], scheduled: true, optional: ["Lat Pulldown", "Dips", "Cable Crunches", "Static Hold", "Machine Leg Press", "Medium OHP"]),
         
         Workout("Mobility", ["Foam Rolling", "Shoulder Dislocates", "Bent-knee Iron Cross", "Roll-over into V-sit", "Rocking Frog Stretch", "Fire Hydrant Hip Circle", "Mountain Climber", "Cossack Squat", "Piriformis Stretch", "Hip Flexor Stretch"], scheduled: false)]
     
